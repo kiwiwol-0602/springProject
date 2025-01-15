@@ -188,6 +188,12 @@
 		}
 		
 	</style>
+	<script type="text/javascript">
+	
+		function selectCategory(category) {
+			location.href='${ctp}/shop/shopMainList?category='+category;
+		}
+	</script>
 </head>
 <body>
 <div class="navbar-container">
@@ -250,8 +256,10 @@
 	  </li>
 	   -->
 	  <li class="nav-item">
-	  	<a href="${ctp}/shop/shopMainList" class="main-menu">Jewelry</a>
+	  	<a href="javascript:selectCategory('Jewelry')" class="main-menu">Jewelry</a>
 	  	<div class="sub-menu">
+	  	
+	  	
 	  	<hr/>
 	      <div class="subMenu-section">
 	        <h4>All Collections</h4>
