@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.javaGroupS7.dao.MemberDAO">
+	
+	<!-- select -->
+	<select id="getMemberIdDuplicationCheck" resultType="com.spring.javaGroupS7.vo.CustomerVO">
+		select * from customer where mid = #{mid};
+	</select>
+	
+	<select id="getDuplicateEmailExist" resultType="Integer">
+		select count(*) > 0 from customer where email = #{email};
+	</select>
+	
+	<select id="getMemberIdCheck" resultType="com.spring.javaGroupS7.vo.CustomerVO">
+		select * from customer where userDel != 'OK' and mid = #{mid};
+	</select>
+	
+	<select id="getFindIdCheck" resultType="com.spring.javaGroupS7.vo.CustomerVO">
+		select * from customer where name = #{name} and (email = #{email} or tel = #{tel}) limit 1;
+	</select>
+	 
+	<select id="getInforCheck" resultType="int">
+		select idx from customer where mid = #{mid} and email = #{email};
+	</select>
+	
+	<select id="getUserList" resultType="com.spring.javaGroupS7.vo.CustomerVO">
+		select * from customer <if test="level != 999"> where level = #{level} </if>;
+	</select>
+	 
+	 
+	 
+	 
+	<!-- insert -->
+	<insert id="setMemberJoin">
+		insert into customer values (default, #{vo.mid}, #{vo.pwd}, #{vo.name}, #{vo.tel}, #{vo.email}, 
+					#{vo.resident}, #{vo.address}, #{vo.gender}, #{vo.birthday}, default, default, default, #{vo.level},
+					default, default, default, default, default);
+	</insert>
+	
+	<insert id="setKakaoMemberInput">
+		insert into customer (mid, name, email, pwd, level) values (#{mid}, #{name},#{email},#{imsiPwd},1);
+	</insert>
+	
+	<!-- update -->
+	
+	<update id="setimsiPwd">
+		update customer set pwd = #{pwd} where mid = #{mid} and email = #{email};
+	</update>
+	
+	<update id="setMemberDatePointUpdate">
+		update customer 
+		set visitCnt=visitCnt+1, 
+				lastDate=now(), 
+				todayCnt=#{todayCnt}, 
+				point = case when todayCnt &lt; 6 then point + 50 else point end
+		where mid = #{mid};
+	</update>
+	
+	<update id="setMemberDelete">
+		update customer set userDel = 'OK', level = 99 where mid = #{mid};
+	</update>
+	
+	<update id="setMemberUpdate">
+		update customer set  
+					<if test="vo.pwd != null and vo.pwd != ''">pwd = #{vo.pwd},</if> 
+					name = #{vo.name}, tel = #{vo.tel}, email = #{vo.email}, resident = #{vo.resident}, 
+					address = #{vo.address}, gender = #{vo.gender}, birthday = #{vo.birthday}, 
+					<if test="vo.photo != null and vo.photo != ''">photo = #{vo.photo},</if> 
+					userInfor = #{vo.userInfor}
+		where mid = #{vo.mid};
+	</update>
+	
+	
+	
+	
+	<!-- delete -->
+	<delete id="setMemberDeleteOk">
+		delete from customer where mid = #{mid};
+	</delete>
+	
+
+</mapper>
