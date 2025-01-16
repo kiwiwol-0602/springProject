@@ -16,12 +16,12 @@ public class ShopServiceImpl implements ShopService {
 	ShopDAO shopDAO;
 
 	@Override
-	public List<ProductVO> getProductList(String categoryName, String category) {
-		return shopDAO.getProductList(categoryName, category);
+	public List<ProductVO> getProductList(String categoryName, String category, String categoryTop) {
+		return shopDAO.getProductList(categoryName, category, categoryTop);
 	}
 
 	@Override
-	public List<CategorySubVO> getCategoryList(String categoryName, String category) {
-		return shopDAO.getCategoryList(categoryName, category);
+	public List<CategorySubVO> getCategoryList(String categoryName, String category, String categoryTop) {
+		return shopDAO.getCategoryList(categoryName, category, categoryTop);
 	}
 }

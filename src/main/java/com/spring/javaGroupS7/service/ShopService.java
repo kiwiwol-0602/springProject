@@ -7,8 +7,8 @@ import com.spring.javaGroupS7.vo.ProductVO;
 
 public interface ShopService {
 
-	List<ProductVO> getProductList(String categoryName, String category);
+	List<ProductVO> getProductList(String categoryName, String category, String categoryTop);
 
-	List<CategorySubVO> getCategoryList(String categoryName, String category);
+	List<CategorySubVO> getCategoryList(String categoryName, String category, String categoryTop);
 
 }

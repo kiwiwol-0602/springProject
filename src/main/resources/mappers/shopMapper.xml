@@ -4,10 +4,16 @@
 	
 	<!-- select -->
 	<select id="getProductList" resultType="com.spring.javaGroupS7.vo.ProductVO">
-		select * from product where ${categoryName} = #{category};
+		select * from product where 
+			<if test="categoryName == 'baseName'">${categoryName} = #{category} and mainName = #{categoryTop};</if>
+			<if test="categoryName == 'subName'">${categoryName} = #{category} and baseName = #{categoryTop};</if>
+			
 	</select>
 	<select id="getCategoryList" resultType="com.spring.javaGroupS7.vo.CategorySubVO">
-		select * from categorySub where ${categoryName} = #{category}<if test="categoryName == 'mainName'"> group by baseName</if>;
+		select * from categorySub where
+			<if test="categoryName == 'mainName'">${categoryName} = #{category} group by baseName;</if>
+			<if test="categoryName == 'baseName'">${categoryName} = #{category} group by subName;</if>
+			
 	</select>
 	 
 	<!-- insert -->

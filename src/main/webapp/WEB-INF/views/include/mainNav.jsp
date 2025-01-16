@@ -218,8 +218,8 @@
 	<script type="text/javascript">
 		'use strict'
 		var ctp = '${ctp}';
-		function selectCategory(categoryName, category) {
-			location.href = ctp+'/shop/shopMainList?categoryName='+categoryName+'&category='+category;
+		function selectCategory(categoryName, category, categoryTop) {
+			location.href = ctp+'/shop/shopMainList?categoryName='+categoryName+'&category='+category+'&categoryTop='+categoryTop;
 		}
 		
 		// 페이지네이션 스크립트 추가
@@ -325,7 +325,7 @@
 	      -->
 	      <!-- Bracelets -->
 	      <div class="subMenu-section">
-	        <h4 onclick="selectCategory('baseName','Bracelets')">Bracelets</h4>
+	        <h4 onclick="selectCategory('baseName','Bracelets','Jewelry')">Bracelets</h4>
 	        <ul class="detail-menu bracelets">
 	        	<div class="pagination-controls">
       	      <button class="pagination-button prev-button" onclick="goToPreviousPage('.bracelets')"> &lt; </button>
@@ -399,7 +399,7 @@
 	      
 	      <!-- Rings -->
 	      <div class="subMenu-section">
-	        <h4 onclick="selectCategory('baseName','Rings')">Rings</h4>
+	        <h4 onclick="selectCategory('baseName','Rings','Jewelry')">Rings</h4>
 	        <ul class="detail-menu rings">
 	        	<div class="pagination-controls">
       	      <button class="pagination-button prev-button" onclick="goToPreviousPage('.rings')"> &lt; </button>
@@ -480,7 +480,7 @@
 	      
 	      <!-- Necklaces -->
 	      <div class="subMenu-section">
-	        <h4 onclick="selectCategory('baseName','Necklaces')">Necklaces</h4>
+	        <h4 onclick="selectCategory('baseName','Necklaces','Jewelry')">Necklaces</h4>
 	        <ul class="detail-menu necklaces">
 	        	<div class="pagination-controls">
       	      <button class="pagination-button prev-button" onclick="goToPreviousPage('.necklaces')"> &lt; </button>
@@ -574,7 +574,7 @@
 	      
 	      <!-- Earrings -->
 	       <div class="subMenu-section">
-	        <h4 onclick="selectCategory('baseName','Earrings')">Earrings</h4>
+	        <h4 onclick="selectCategory('baseName','Earrings','Jewelry')">Earrings</h4>
 	        <ul class="detail-menu earrings">
 	        	<div class="pagination-controls">
       	      <button class="pagination-button prev-button" onclick="goToPreviousPage('.earrings')"> &lt; </button>
@@ -656,7 +656,7 @@
 	      
 	      <!-- Engagement rings -->
 	       <div class="subMenu-section">
-	        <h4 onclick="selectCategory('baseName','Engagement rings')">Engagement rings</h4>
+	        <h4 onclick="selectCategory('baseName','Engagement rings','Jewelry')">Engagement rings</h4>
 	        <ul class="detail-menu engagementRings">
 	        	<div class="pagination-controls">
       	      <button class="pagination-button prev-button" onclick="goToPreviousPage('.engagementRings')"> &lt; </button>
@@ -708,7 +708,7 @@
 	      
 	      <!-- Wedding bands -->
 	       <div class="subMenu-section">
-	        <h4 onclick="selectCategory('baseName','Wedding bands')">Wedding bands</h4>
+	        <h4 onclick="selectCategory('baseName','Wedding bands','Jewelry')">Wedding bands</h4>
 	        <ul class="detail-menu weddingBands">
 	        	<div class="pagination-controls">
       	      <button class="pagination-button prev-button" onclick="goToPreviousPage('.weddingBands')"> &lt; </button>
@@ -790,7 +790,7 @@
 	  	<div class="sub-menu">
 		  	<hr/>
 				<div class="subMenu-section">
-					<h4 onclick="selectCategory('baseName','Watches')">Watches</h4>
+					<h4 onclick="selectCategory('baseName','Watches','Watches')">Watches</h4>
 					<ul class="detail-menu watches">
 						<div class="pagination-controls">
 					    <button class="pagination-button prev-button" onclick="goToPreviousPage('.watches')"> &lt; </button>

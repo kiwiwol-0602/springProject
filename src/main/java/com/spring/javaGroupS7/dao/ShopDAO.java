@@ -9,8 +9,8 @@ import com.spring.javaGroupS7.vo.ProductVO;
 
 public interface ShopDAO {
 
-	List<ProductVO> getProductList(@Param("categoryName") String categoryName, @Param("category") String category);
+	List<ProductVO> getProductList(@Param("categoryName") String categoryName, @Param("category") String category, @Param("categoryTop") String categoryTop);
 
-	List<CategorySubVO> getCategoryList(@Param("categoryName") String categoryName, @Param("category") String category);
+	List<CategorySubVO> getCategoryList(@Param("categoryName") String categoryName, @Param("category") String category, @Param("categoryTop") String categoryTop);
 
 }
