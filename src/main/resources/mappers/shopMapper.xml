@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.javaGroupS7.dao.ShopDAO">
+	
+	<!-- select -->
+	<select id="getProductList" resultType="com.spring.javaGroupS7.vo.ProductVO">
+		select * from product where ${categoryName} = #{category};
+	</select>
+	<select id="getCategoryList" resultType="com.spring.javaGroupS7.vo.CategorySubVO">
+		select * from categorySub where ${categoryName} = #{category}<if test="categoryName == 'mainName'"> group by baseName</if>;
+	</select>
+	 
+	<!-- insert -->
+	
+	<!-- update -->
+	
+	
+
+</mapper>

@@ -27,6 +27,13 @@
 	    font-style: normal;
 		}
 		
+		@font-face { /*고운돋움 - 깔끔하고 얇음*/
+    font-family: 'GowunDodum-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+		
 		@font-face {
     font-family: 'Gyeonggi_Title_Medium'; /* 경기천년제목 */ 
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-3@1.0/Title_Medium.woff') format('woff');
