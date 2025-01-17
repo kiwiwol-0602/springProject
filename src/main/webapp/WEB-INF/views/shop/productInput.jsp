@@ -411,16 +411,42 @@
 						url  : "${ctp}/shop/categoryBase",
 						data : {categoryName : categoryName},
 						success:function(data){
-						/* 	
-							const str = `<option value=''>중분류</option> `+ 
-				            data.map(item => `<option value='${item.baseName}'>${item.baseName}</option>`);
-									$("#baseCategory").html(str) */
+							var str = "";
+							str += "<option value=''>중분류</option>";
+							for(var i=0; i<data.length; i++) {
+								str += "<option value='"+data[i].baseName+"'>"+data[i].baseName+"</option>";
+							}
+							$("#baseCategory").html(str);
 						},
 						error : function() {
 							alert("전송오류");
 						}
 					});
 				}
+				
+				function categorySubChange() {
+			    	var mainCategory = myform.mainCategory.value;
+			    	var baseCategory = myform.baseCategory.value;
+						$.ajax({
+							type : "post",
+							url  : "${ctp}/shop/categorySub",
+							data : {
+								mainCategory : mainCategory,
+								baseCategory : baseCategory
+							},
+							success:function(data) {
+								var str = "";
+								str += "<option value=''>소분류</option>";
+								for(var i=0; i<data.length; i++) {
+									str += "<option value='"+data[i].subName+"'>"+data[i].subName+"</option>";
+								}
+								$("#subCategory").html(str);
+							},
+							error : function() {
+								alert("전송오류");
+							}
+						});
+			  	}
   </script>
 </head>
 <body>

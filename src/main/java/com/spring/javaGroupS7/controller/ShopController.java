@@ -56,7 +56,16 @@ public class ShopController {
 		) {
 		System.out.println("mainName"+categoryName);
 		ArrayList<ProductVO> res = shopService.getCategoryBase(categoryName);
-		System.out.println(res);
+		return res;
+	}
+	
+	@ResponseBody
+	@PostMapping("/categorySub")
+	public ArrayList<ProductVO> ccategorySubGet(
+			@RequestParam(defaultValue = "", required = false) String mainCategory,
+			@RequestParam(defaultValue = "", required = false) String baseCategory
+			) {
+		ArrayList<ProductVO> res = shopService.getCategorySub(mainCategory, baseCategory);
 		return res;
 	}
 	

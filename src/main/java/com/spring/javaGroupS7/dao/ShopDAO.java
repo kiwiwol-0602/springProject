@@ -22,4 +22,6 @@ public interface ShopDAO {
 
 	ArrayList<ProductVO> getCategoryBase(@Param("mainName") String mainName);
 
+	ArrayList<ProductVO> getCategorySub(@Param("mainName") String mainName, @Param("baseName") String baseName);
+
 }

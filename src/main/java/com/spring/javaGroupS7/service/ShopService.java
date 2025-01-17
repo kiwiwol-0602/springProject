@@ -20,4 +20,6 @@ public interface ShopService {
 
 	ArrayList<ProductVO> getCategoryBase(String mainName);
 
+	ArrayList<ProductVO> getCategorySub(String mainName, String baseName);
+
 }

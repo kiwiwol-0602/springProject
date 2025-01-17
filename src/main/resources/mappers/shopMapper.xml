@@ -30,11 +30,15 @@
 	</select>
 	
 	<select id="getCategoryMain" resultType="com.spring.javaGroupS7.vo.ProductVO">
-		select * from categoryMain; 
+		select * from categoryMain order by mainCode; 
 	</select>
 	
 	<select id="getCategoryBase" resultType="com.spring.javaGroupS7.vo.ProductVO">
 		select * from categoryBase where mainName = #{mainName};
+	</select>
+	
+	<select id="getCategorySub" resultType="com.spring.javaGroupS7.vo.ProductVO">
+		select * from categorySub where mainName = #{mainName} and baseName = #{baseName};
 	</select>
 	 
 	<!-- insert -->

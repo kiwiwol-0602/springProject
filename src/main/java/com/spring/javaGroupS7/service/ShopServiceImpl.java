@@ -45,4 +45,9 @@ public class ShopServiceImpl implements ShopService {
 	public ArrayList<ProductVO> getCategoryBase(String mainName) {
 		return shopDAO.getCategoryBase(mainName);
 	}
+
+	@Override
+	public ArrayList<ProductVO> getCategorySub(String mainName, String baseName) {
+		return shopDAO.getCategorySub(mainName, baseName);
+	}
 }
