@@ -142,13 +142,13 @@ function logout() {
       </c:if>
       <c:if test="${!empty sMid}">
      		<a href="javascript:logout()" class="icon" title="Logout"><i class="fa-solid fa-user"></i></a>
-     		<a href="${ctp}/member/customerPage" class="icon" title="MyPage"><i class="fa-regular fa-file-lines"></i></a>
+     		<a href="${ctp}/member/userPage" class="icon" title="MyPage"><i class="fa-regular fa-file-lines"></i></a>
      		<!-- 
      		<c:if test="${sLevel == 0}">
      			<a href="#" class="icon" title="MyPage"><i class="fa-regular fa-file-lines"></i></a>
      		</c:if>
      		<c:if test="${sLevel == 1}">
-     			<a href="${ctp}/member/customerPage" class="icon" title="MyPage"><i class="fa-regular fa-file-lines"></i></a>
+     			<a href="${ctp}/member/userPage" class="icon" title="MyPage"><i class="fa-regular fa-file-lines"></i></a>
      		</c:if>
      		 -->
       </c:if>

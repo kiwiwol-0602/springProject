@@ -31,7 +31,7 @@
   		object-fit: cover;
   	}
   	
-  	.mainList .container .title::before {
+  	.mainList .container .titleImg::before {
   		content: '';
   		position: absolute;
   		top: 25%;
@@ -62,7 +62,7 @@
   	.mainList .container .title ul li{
   		display: inline;
   		margin: 15px 30px 15px 0;
-  		font-size: 20px;
+  		font-size: 18px;
   	}
   	.mainList .container .title ul li a{
 			text-decoration: none;
@@ -131,24 +131,29 @@
 		<div class="container">
 			<div class="channel">
 				<div>
-					<c:if test="${categoryName eq 'mainName'}">Home > ${categorySubVOS[0].mainName}</c:if>
-					<c:if test="${categoryName eq 'baseName'}">Home > ${categorySubVOS[0].mainName} > ${categorySubVOS[0].baseName}</c:if>
-					<c:if test="${categoryName eq 'subName'}">Home > ${categorySubVOS[0].mainName} > ${categorySubVOS[0].baseName} > ${categorySubVOS[0].subName}</c:if>
+					<c:if test="${categoryName eq 'mainName'}">Home > ${categorySuvVO.mainName}</c:if>
+					<c:if test="${categoryName eq 'baseName'}">Home > ${categorySuvVO.mainName} > ${categorySuvVO.baseName}</c:if>
+					<c:if test="${categoryName eq 'subName'}">Home > ${categorySuvVO.mainName} > ${categorySuvVO.baseName} > ${categorySuvVO.subName}</c:if>
 				</div>
 			</div>
 			<div class="title">
-				<div class="titleImg">
-					<c:set var="categoryPhoto" value="${fn:replace(category,' ','')}"/>
-					<img src="${ctp}/shop/${categoryName}/${categoryPhoto}.jpg">
+				<c:if test="${!(categoryName eq 'subName')}">
+					<div class="titleImg">
+						<c:set var="categoryPhoto" value="${fn:replace(category,' ','')}"/>
+						<img src="${ctp}/shop/${categoryName}/${categoryPhoto}.jpg">
+					</div>
+					<h1>${category}</h1>
+				</c:if>
+				<div>
+					<input type="button" value="상품등록" onclick="location.href='${ctp}/shop/productInput'">
 				</div>
-				<h1>${category}</h1>
 				<ul class="category-list">
-					<c:forEach var="categoryVo" items="${categorySubVOS}">
+					<c:forEach var="csVOS" items="${categorySubVOS}">
 						<c:if test="${categoryName eq 'mainName'}">
-							<li class="main-category"><a href="javascript:selectCategory('baseName','${categoryVo.baseName}')">${categoryVo.baseName}</a></li>
+							<li class="main-category"><a href="javascript:selectCategory('baseName','${csVOS.baseName}','${csVOS.mainName}')">${csVOS.baseName}</a></li>
 						</c:if>
 						<c:if test="${categoryName eq 'baseName'}">
-							<li class="sub-category"><a href="javascript:selectCategory('subName','${categoryVo.subName}')">${categoryVo.subName}</a></li>
+							<li class="sub-category"><a href="javascript:selectCategory('subName','${csVOS.subName}','${csVOS.baseName}')">${csVOS.subName}</a></li>
 						</c:if>
 					</c:forEach>
 				</ul>
@@ -156,17 +161,18 @@
 			</div>
 			<div class="itemList">
 				<c:forEach var="vo" items="${vos}">
-					<div class="card">
-						<div class="img">
-							<img src="${ctp}/shop/${vo.thumbnail}">
+					<a href="${ctp}/shop/productContent?idx=${vo.idx}">
+						<div class="card">
+							<div class="img">
+								<img src="${ctp}/shop/${vo.thumbnail}">
+							</div>
+							<div class="text">
+								<h2 style="font-size: 15px;">${vo.productName}</h2>
+								<p>${vo.price}</p>
+								<button><i class="fas fa-check"></i>구매하기</button>
+							</div>
 						</div>
-						<div class="text">
-							<h2>${vo.productName}</h2>
-							<p>${vo.productCode}</p>
-							<p>${vo.price}</p>
-							<button><i class="fas fa-check"></i>구매하기</button>
-						</div>
-					</div>
+					</a>
 				</c:forEach>
 			</div>
 		</div>

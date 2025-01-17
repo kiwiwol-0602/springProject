@@ -24,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.javaGroupS7.common.JavaGroupProvide;
 import com.spring.javaGroupS7.service.MemberService;
-import com.spring.javaGroupS7.vo.CustomerVO;
+import com.spring.javaGroupS7.vo.UserVO;
 
 @Controller
 @RequestMapping("/member")
@@ -62,7 +62,7 @@ public class MemberController {
 			@RequestParam(defaultValue = "", required = false) String idSave
 		) {
 		
-		CustomerVO vo = memberService.getMemberIdCheck(mid);
+		UserVO vo = memberService.getMemberIdCheck(mid);
 
 		if(vo != null) {
 			if(passwordEncoder.matches(pwd, vo.getPwd())) {
@@ -141,9 +141,9 @@ public class MemberController {
 		
 		if(!duplicateEmail) { 
 			// 신규회원인지에 대한 체크하기....
-			CustomerVO CustomerVo = memberService.getMemberIdCheck(mid);
+			UserVO userVO = memberService.getMemberIdCheck(mid);
 			
-			if(CustomerVo != null) return "redirect:/message/memberIdSameCheck";
+			if(userVO != null) return "redirect:/message/memberIdSameCheck";
 		
 			// 임시 비밀번호 발급처리
 			String pwd = UUID.randomUUID().toString().substring(0, 8);
@@ -184,7 +184,7 @@ public class MemberController {
 		}
 			// 로그인 인증완료시 세션처리
 			
-			CustomerVO vo = memberService.getMemberIdCheck(mid);
+			UserVO vo = memberService.getMemberIdCheck(mid);
 			
 			String strLevel = "";
 			if(vo.getLevel() == 0) strLevel = "관리자";
@@ -244,7 +244,7 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping(value = "/memberIdDuplicationCheck")
 	public String memberIdDuplicationCheckPost(String mid) {
-		CustomerVO vo = memberService.getMemberIdDuplicationCheck(mid);
+		UserVO vo = memberService.getMemberIdDuplicationCheck(mid);
 		String str = "0";
 		if(vo != null) str = "1";
 		return str;
@@ -303,7 +303,7 @@ public class MemberController {
 	
 	// 회원가입
 	@PostMapping(value = "/memberJoin")
-	public String memberJoinPost(CustomerVO vo) {
+	public String memberJoinPost(UserVO vo) {
 		vo.setPwd(passwordEncoder.encode(vo.getPwd()));
 		
 		int res = memberService.setMemberJoin(vo);
@@ -325,7 +325,7 @@ public class MemberController {
 			@RequestParam(defaultValue = "", required = false) String tel
 			) {
 		
-		CustomerVO vo = memberService.getFindIdCheck(name, email, tel);
+		UserVO vo = memberService.getFindIdCheck(name, email, tel);
 		
 		model.addAttribute("vo",vo);
 		
@@ -408,13 +408,13 @@ public class MemberController {
 	}
 	
 	// 마이페이지(고객)
-	@GetMapping(value="/customerPage")
-	public String customerPageGet(Model model, HttpSession session) {
+	@GetMapping(value="/userPage")
+	public String userPageGet(Model model, HttpSession session) {
 		String mid = (String) session.getAttribute("sMid");
-		CustomerVO vo = memberService.getMemberIdCheck(mid);
+		UserVO vo = memberService.getMemberIdCheck(mid);
 		model.addAttribute("vo", vo);
 		
-		return "member/customerPage";
+		return "member/userPage";
 	}
 	
 	// 회원 탈퇴 신청
@@ -441,7 +441,7 @@ public class MemberController {
 	@GetMapping(value = "/memberUpdate")
 	public String memberUpdateGet(Model model, HttpSession session) {
 		String mid = (String) session.getAttribute("sMid");
-		CustomerVO vo = memberService.getMemberIdCheck(mid);
+		UserVO vo = memberService.getMemberIdCheck(mid);
 		
 		if(vo.getTel() != null && vo.getTel() != "") {
 			String[] tels = vo.getTel().split("-");
@@ -470,7 +470,7 @@ public class MemberController {
 	public String pwdCheckPost(@RequestParam(defaultValue = "", required = false) String mid, 
 			@RequestParam(defaultValue = "", required = false) String currentPwd
 		) {
-		CustomerVO vo = memberService.getMemberIdCheck(mid);
+		UserVO vo = memberService.getMemberIdCheck(mid);
 		
 		if(passwordEncoder.matches(currentPwd, vo.getPwd())) {
 			return "1";
@@ -482,7 +482,7 @@ public class MemberController {
 	
 	
 	@PostMapping(value = "/memberUpdate")
-	public String memberUpdatePost(Model model, HttpSession session, CustomerVO vo,
+	public String memberUpdatePost(Model model, HttpSession session, UserVO vo,
 			@RequestParam(defaultValue = "", required = false) MultipartFile fName
 		) {
 		System.out.println("vo : " + vo);

@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.javaGroupS7.common.JavaGroupProvide;
 import com.spring.javaGroupS7.dao.MemberDAO;
-import com.spring.javaGroupS7.vo.CustomerVO;
+import com.spring.javaGroupS7.vo.UserVO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -24,12 +24,12 @@ public class MemberServiceImpl implements MemberService {
 	JavaGroupProvide javaGroupProvide;
 
 	@Override
-	public CustomerVO getMemberIdDuplicationCheck(String mid) {
+	public UserVO getMemberIdDuplicationCheck(String mid) {
 		return memberDAO.getMemberIdDuplicationCheck(mid);
 	}
 
 	@Override
-	public int setMemberJoin(CustomerVO vo) {
+	public int setMemberJoin(UserVO vo) {
 		String birthdayStr = vo.getBirthday();
 		String genderStr = vo.getGender();
 		
@@ -78,7 +78,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public CustomerVO getMemberIdCheck(String mid) {
+	public UserVO getMemberIdCheck(String mid) {
 		return memberDAO.getMemberIdCheck(mid);
 	}
 
@@ -89,7 +89,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public CustomerVO getFindIdCheck(String name, String email, String tel) {
+	public UserVO getFindIdCheck(String name, String email, String tel) {
 		return memberDAO.getFindIdCheck(name, email, tel);
 	}
 
@@ -115,7 +115,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int setMemberUpdate(CustomerVO vo, MultipartFile fName) {
+	public int setMemberUpdate(UserVO vo, MultipartFile fName) {
 		
 		String birthdayStr = vo.getBirthday();
 		String genderStr = vo.getGender();
@@ -191,7 +191,7 @@ public class MemberServiceImpl implements MemberService {
 
 
 	@Override
-	public List<CustomerVO> getUserList(int level) {
+	public List<UserVO> getUserList(int level) {
 		return memberDAO.getUserList(level);
 	}
 

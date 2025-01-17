@@ -13,15 +13,17 @@
  	-->
  
  	<!-- tiles레이아웃을 적용할경우의 화면() -->
- 	<definition name="layoutYes" template="/WEB-INF/views/layout/baseLayout.jsp">
- 		<put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
+ 	<definition name="adminLayout" template="/WEB-INF/views/layout/adminLayout.jsp">
  		<put-attribute name="nav" value="/WEB-INF/views/layout/nav.jsp" />
  	</definition>
- 	<definition name="admin/*" extends="layoutYes">
+ 	<definition name="admin/*" extends="adminLayout">
  		<put-attribute name="body" value="/WEB-INF/views/admin/{1}.jsp" />
  	</definition>
- 	<definition name="admin/*/*" extends="layoutYes">
+ 	<definition name="admin/*/*" extends="adminLayout">
  		<put-attribute name="body" value="/WEB-INF/views/admin/{1}/{2}.jsp" />
+ 	</definition>
+ 	<definition name="shop/productInput" extends="adminLayout">
+ 		<put-attribute name="body" value="/WEB-INF/views/shop/productInput.jsp" />
  	</definition>
  
  </tiles-definitions>

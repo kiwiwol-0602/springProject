@@ -4,16 +4,37 @@
 	
 	<!-- select -->
 	<select id="getProductList" resultType="com.spring.javaGroupS7.vo.ProductVO">
-		select * from product where 
-			<if test="categoryName == 'baseName'">${categoryName} = #{category} and mainName = #{categoryTop};</if>
-			<if test="categoryName == 'subName'">${categoryName} = #{category} and baseName = #{categoryTop};</if>
-			
+		select * from product
+			<where>
+				<if test="categoryName == 'baseName'">baseName = #{category} and mainName = #{categoryTop}</if>
+				<if test="categoryName == 'subName'">subName = #{category} and baseName = #{categoryTop}</if>
+			</where> 
 	</select>
+	
 	<select id="getCategoryList" resultType="com.spring.javaGroupS7.vo.CategorySubVO">
 		select * from categorySub where
-			<if test="categoryName == 'mainName'">${categoryName} = #{category} group by baseName;</if>
-			<if test="categoryName == 'baseName'">${categoryName} = #{category} group by subName;</if>
-			
+			<if test="categoryName == 'mainName'">${categoryName} = #{category} group by baseName</if>
+			<if test="categoryName == 'baseName'">${categoryName} = #{category} and mainName = #{categoryTop} group by subName</if>
+			<if test="categoryName == 'subName'">${categoryName} = #{category} and baseName = #{categoryTop}</if>
+	</select>
+	
+	<select id="getCategoryIndex" resultType="com.spring.javaGroupS7.vo.CategorySubVO">
+		select * from categorySub where
+			<if test="categoryName == 'mainName'">${categoryName} = #{category} limit 1</if>
+			<if test="categoryName == 'baseName'">${categoryName} = #{category} and mainName = #{categoryTop} limit 1</if>
+			<if test="categoryName == 'subName'">${categoryName} = #{category} and baseName = #{categoryTop} limit 1</if>
+	</select>
+	
+	<select id="getProduct" resultType="com.spring.javaGroupS7.vo.ProductVO">
+		select * from product where idx = #{idx};
+	</select>
+	
+	<select id="getCategoryMain" resultType="com.spring.javaGroupS7.vo.ProductVO">
+		select * from categoryMain; 
+	</select>
+	
+	<select id="getCategoryBase" resultType="com.spring.javaGroupS7.vo.ProductVO">
+		select * from categoryBase where mainName = #{mainName};
 	</select>
 	 
 	<!-- insert -->

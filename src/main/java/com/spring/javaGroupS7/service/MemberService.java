@@ -5,21 +5,21 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.spring.javaGroupS7.vo.CustomerVO;
+import com.spring.javaGroupS7.vo.UserVO;
 
 public interface MemberService {
 
-	CustomerVO getMemberIdDuplicationCheck(String mid);
+	UserVO getMemberIdDuplicationCheck(String mid);
 
-	int setMemberJoin(CustomerVO vo);
+	int setMemberJoin(UserVO vo);
 
 	boolean getDuplicateEmailExist(String email);
 
-	CustomerVO getMemberIdCheck(String mid);
+	UserVO getMemberIdCheck(String mid);
 
 	void setMemberDatePointUpdate(String mid, int todayCnt);
 
-	CustomerVO getFindIdCheck(String name, String email, String tel);
+	UserVO getFindIdCheck(String name, String email, String tel);
 
 	int getInforCheck(String mid, String email);
 
@@ -29,9 +29,9 @@ public interface MemberService {
 
 	int setMemberDelete(String mid);
 
-	int setMemberUpdate(CustomerVO vo, MultipartFile fName);
+	int setMemberUpdate(UserVO vo, MultipartFile fName);
 
-	List<CustomerVO> getUserList(int level);
+	List<UserVO> getUserList(int level);
 
 	int setMemberDeleteOk(String mid);
 

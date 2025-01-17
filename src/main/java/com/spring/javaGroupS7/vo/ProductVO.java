@@ -24,6 +24,11 @@ public class ProductVO {
 	private String wDate;
 	private String status;
 	private String display;
+	
+	private String mainCode;
+	private String baseCode;
+	private String subCode;
+	
 
 
 }

@@ -3,7 +3,7 @@ package com.spring.javaGroupS7.vo;
 import lombok.Data;
 
 @Data
-	public class CustomerVO {
+	public class UserVO {
 		private int idx;
 		private String mid;
 		private String pwd;

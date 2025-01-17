@@ -3,28 +3,28 @@
 <mapper namespace="com.spring.javaGroupS7.dao.MemberDAO">
 	
 	<!-- select -->
-	<select id="getMemberIdDuplicationCheck" resultType="com.spring.javaGroupS7.vo.CustomerVO">
-		select * from customer where mid = #{mid};
+	<select id="getMemberIdDuplicationCheck" resultType="com.spring.javaGroupS7.vo.UserVO">
+		select * from users where mid = #{mid};
 	</select>
 	
 	<select id="getDuplicateEmailExist" resultType="Integer">
-		select count(*) > 0 from customer where email = #{email};
+		select count(*) > 0 from users where email = #{email};
 	</select>
 	
-	<select id="getMemberIdCheck" resultType="com.spring.javaGroupS7.vo.CustomerVO">
-		select * from customer where userDel != 'OK' and mid = #{mid};
+	<select id="getMemberIdCheck" resultType="com.spring.javaGroupS7.vo.UserVO">
+		select * from users where userDel != 'OK' and mid = #{mid};
 	</select>
 	
-	<select id="getFindIdCheck" resultType="com.spring.javaGroupS7.vo.CustomerVO">
-		select * from customer where name = #{name} and (email = #{email} or tel = #{tel}) limit 1;
+	<select id="getFindIdCheck" resultType="com.spring.javaGroupS7.vo.UserVO">
+		select * from users where name = #{name} and (email = #{email} or tel = #{tel}) limit 1;
 	</select>
 	 
 	<select id="getInforCheck" resultType="int">
-		select idx from customer where mid = #{mid} and email = #{email};
+		select idx from users where mid = #{mid} and email = #{email};
 	</select>
 	
-	<select id="getUserList" resultType="com.spring.javaGroupS7.vo.CustomerVO">
-		select * from customer <if test="level != 999"> where level = #{level} </if>;
+	<select id="getUserList" resultType="com.spring.javaGroupS7.vo.UserVO">
+		select * from users <if test="level != 999"> where level = #{level} </if>;
 	</select>
 	 
 	 
@@ -32,23 +32,23 @@
 	 
 	<!-- insert -->
 	<insert id="setMemberJoin">
-		insert into customer values (default, #{vo.mid}, #{vo.pwd}, #{vo.name}, #{vo.tel}, #{vo.email}, 
+		insert into users values (default, #{vo.mid}, #{vo.pwd}, #{vo.name}, #{vo.tel}, #{vo.email}, 
 					#{vo.resident}, #{vo.address}, #{vo.gender}, #{vo.birthday}, default, default, default, #{vo.level},
 					default, default, default, default, default);
 	</insert>
 	
 	<insert id="setKakaoMemberInput">
-		insert into customer (mid, name, email, pwd, level) values (#{mid}, #{name},#{email},#{imsiPwd},1);
+		insert into users (mid, name, email, pwd, level) values (#{mid}, #{name},#{email},#{imsiPwd},1);
 	</insert>
 	
 	<!-- update -->
 	
 	<update id="setimsiPwd">
-		update customer set pwd = #{pwd} where mid = #{mid} and email = #{email};
+		update users set pwd = #{pwd} where mid = #{mid} and email = #{email};
 	</update>
 	
 	<update id="setMemberDatePointUpdate">
-		update customer 
+		update users 
 		set visitCnt=visitCnt+1, 
 				lastDate=now(), 
 				todayCnt=#{todayCnt}, 
@@ -57,11 +57,11 @@
 	</update>
 	
 	<update id="setMemberDelete">
-		update customer set userDel = 'OK', level = 99 where mid = #{mid};
+		update users set userDel = 'OK', level = 99 where mid = #{mid};
 	</update>
 	
 	<update id="setMemberUpdate">
-		update customer set  
+		update users set  
 					<if test="vo.pwd != null and vo.pwd != ''">pwd = #{vo.pwd},</if> 
 					name = #{vo.name}, tel = #{vo.tel}, email = #{vo.email}, resident = #{vo.resident}, 
 					address = #{vo.address}, gender = #{vo.gender}, birthday = #{vo.birthday}, 
@@ -75,7 +75,7 @@
 	
 	<!-- delete -->
 	<delete id="setMemberDeleteOk">
-		delete from customer where mid = #{mid};
+		delete from users where mid = #{mid};
 	</delete>
 	
 

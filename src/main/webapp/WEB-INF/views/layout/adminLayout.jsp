@@ -10,9 +10,6 @@
   <title>관리자 | LUMI</title>
   <jsp:include page="/WEB-INF/views/include/bs5.jsp" />
   <style type="text/css">
-  	.adminHeader{
-  		height: 10%;
-  	}
   	.adminNav{
   		float: left;
   		width: 17%;
@@ -29,7 +26,6 @@
   </style>
 </head>
 <body>
-<div class="adminHeader"><tiles:insertAttribute name="header"/></div>
 <div class="adminNav"><tiles:insertAttribute name="nav"/></div>
 <div class="adminBody"><tiles:insertAttribute name="body"/></div>
 </body>

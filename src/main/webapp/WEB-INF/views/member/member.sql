@@ -1,6 +1,6 @@
 show tables;
 
-create table customer (
+create table users (
 	idx         int             not null auto_increment,         /*   회원 고유번호 */
   mid         varchar(30)     not null,                        /*   회원 아이디(중복불허) */
   pwd         varchar(100)    not null,                        /*   회원 비밀번호 (암호화처리) */
@@ -25,10 +25,10 @@ create table customer (
   unique key(mid)
 );
 
-drop table customer;
+drop table users;
 
-insert into customer values(default, 'admin', '1234', '관리자', '010-1234-5678', 'admin@naver.com', '123456-3', '청주', '관리', '2024-11-11',default, default, default, 0, default, default, default, default, default);
+insert into users values(default, 'admin', '1234', '관리자', '010-1234-5678', 'admin@naver.com', '123456-3', '청주', '관리', '2024-11-11',default, default, default, 0, default, default, default, default, default);
 
-ALTER TABLE customer auto_increment = 1;
+ALTER TABLE users auto_increment = 1;
 
-select * from customer where name ='관리자' and (email = '' or tel = '010-1234-5678');
+select * from users where name ='관리자' and (email = '' or tel = '010-1234-5678');

@@ -41,7 +41,7 @@ public class MessageController {
 		}
 		else if(msgFlag.equals("memberUpdateOk")) {
 			model.addAttribute("message", "정보가 수정되었습니다.");
-			model.addAttribute("url", "member/customerPage");
+			model.addAttribute("url", "member/userPage");
 		}
 		else if(msgFlag.equals("memberUpdateNo")) {
 			model.addAttribute("message", "정보 수정 중 오류가 발생했습니다.\\n확인 후 다시 시도해주세요.");

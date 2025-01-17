@@ -786,7 +786,7 @@ input[type="radio"] {
 						<table class="table table-borderless">
 						  <tr style="vertical-align: middle;">
 						    <td style="vertical-align: middle;">
-						      <button type="button" onclick="location.href='${ctp}/member/customerPage';" class="cancel-btn">취소</button>
+						      <button type="button" onclick="location.href='${ctp}/member/userPage';" class="cancel-btn">취소</button>
 						      <button type="button" onclick="updateCheck()" class="update-btn">회원정보수정</button>
 						    </td>
 						  </tr>

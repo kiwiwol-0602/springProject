@@ -331,61 +331,61 @@
       	      <button class="pagination-button prev-button" onclick="goToPreviousPage('.bracelets')"> &lt; </button>
   			    </div>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','LOVE','Bracelets')">
 	          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          	<div>LOVE</div>
 	          	</a>
 	          </li>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','저스트엥끌루','Bracelets')">
 	          		<div><img src="${ctp}/shop/bracelets/저스트엥끌루.jpg" width="200px" height="200px;"></div>
 	          		<div>저스트엥끌루</div>
 	          	</a>
 	          </li>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','트리니티','Bracelets')">
 	         			<div><img src="${ctp}/shop/bracelets/트리니티.jpg" width="200px" height="200px;"></div>
 	          		<div>트리니티</div>
 	          	</a>
 	          </li>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','팬더','Bracelets')">
 	          	<div><img src="${ctp}/shop/bracelets/팬더.jpg" width="200px" height="200px;"></div>
 	          		<div>팬더</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','클래쉬','Bracelets')">
 		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>클래쉬</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','다이아몬드','Bracelets')">
 		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>다이아몬드</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','다무르','Bracelets')">
 		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>다무르</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','에크루','Bracelets')">
 		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>에크루</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','링크','Bracelets')">
 		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>링크</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','칵투스','Bracelets')">
 		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>칵투스</div>
 	          	</a>
@@ -405,67 +405,67 @@
       	      <button class="pagination-button prev-button" onclick="goToPreviousPage('.rings')"> &lt; </button>
   			    </div>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','LOVE','Rings')">
 	          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          	<div>LOVE</div>
 	          	</a>
 	          </li>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','저스트엥끌루','Rings')">
 	          		<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>저스트엥끌루</div>
 	          	</a>
 	          </li>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','트리니티','Rings')">
 	         			<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>트리니티</div>
 	          	</a>
 	          </li>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','클래쉬','Rings')">
 	          		<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>클래쉬</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','팬더','Rings')">
 		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>팬더</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','그랑드카페','Rings')">
 		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>그랑드카페</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','다이아몬드','Rings')">
 		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>다이아몬드</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','에크루','Rings')">
 		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>에크루</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','마이용팬더','Rings')">
 		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>마이용팬더</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','파우나앤플로라','Rings')">
 		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>파우나앤플로라</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','레베를랭고','Rings')">
 		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>레베를랭고</div>
 	          	</a>
@@ -486,79 +486,79 @@
       	      <button class="pagination-button prev-button" onclick="goToPreviousPage('.necklaces')"> &lt; </button>
   			    </div>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','LOVE','Necklaces')">
 	          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          	<div>LOVE</div>
 	          	</a>
 	          </li>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','저스트엥끌루','Necklaces')">
 	          		<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>저스트엥끌루</div>
 	          	</a>
 	          </li>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','클래쉬','Necklaces')">
 	         			<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>클래쉬</div>
 	          	</a>
 	          </li>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','팬더','Necklaces')">
 	          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>팬더</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','아그라프','Necklaces')">
 		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>아그라프</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','C끌떼','Necklaces')">
 		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>C끌떼</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','다이아몬드','Necklaces')">
 		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>다이아몬드</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','트리니티','Necklaces')">
 		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>트리니티</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','그랑드카페','Necklaces')">
 		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>그랑드카페</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','다무르','Necklaces')">
 		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>다무르</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','레베를랭고','Necklaces')">
 		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>레베를랭고</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','파우나앤플로라','Necklaces')">
 		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>파우나앤플로라</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','링크','Necklaces')">
 		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>링크</div>
 	          	</a>
@@ -580,67 +580,67 @@
       	      <button class="pagination-button prev-button" onclick="goToPreviousPage('.earrings')"> &lt; </button>
   			    </div>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','LOVE','Earrings')">
 	          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          	<div>LOVE</div>
 	          	</a>
 	          </li>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','저스트엥끌루','Earrings')">
 	          		<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>저스트엥끌루</div>
 	          	</a>
 	          </li>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','트리니티','Earrings')">
 	         			<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>트리니티</div>
 	          	</a>
 	          </li>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','클래쉬','Earrings')">
 	          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>클래쉬</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','팬더','Earrings')">
 		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>팬더</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','그랑드카페','Earrings')">
 		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>그랑드카페</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','다이아몬드','Earrings')">
 		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>다이아몬드</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','C끌떼','Earrings')">
 		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>C끌떼</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','칵투스','Earrings')">
 		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>칵투스</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','다무르','Earrings')">
 		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>다무르</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','파우나앤플로라','Earrings')">
 		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>파우나앤플로라</div>
 	          	</a>
@@ -662,37 +662,37 @@
       	      <button class="pagination-button prev-button" onclick="goToPreviousPage('.engagementRings')"> &lt; </button>
   			    </div>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','LOVE','Engagement rings')">
 	          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          	<div>LOVE</div>
 	          	</a>
 	          </li>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','솔리테어','Engagement rings')">
 	          		<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>솔리테어</div>
 	          	</a>
 	          </li>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','에땅셀','Engagement rings')">
 	         			<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>에땅셀</div>
 	          	</a>
 	          </li>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','발레린','Engagement rings')">
 	          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>발레린</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','데스티네','Engagement rings')">
 		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>데스티네</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','트리니티루반','Engagement rings')">
 		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>트리니티루반</div>
 	          	</a>
@@ -714,61 +714,61 @@
       	      <button class="pagination-button prev-button" onclick="goToPreviousPage('.weddingBands')"> &lt; </button>
   			    </div>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','LOVE','Wedding bands')">
 	          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          	<div>LOVE</div>
 	          	</a>
 	          </li>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','솔리테어','Wedding bands')">
 	          		<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>솔리테어</div>
 	          	</a>
 	          </li>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','C끌떼','Wedding bands')">
 	         			<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>C끌떼</div>
 	          	</a>
 	          </li>
 	          <li>
-	          	<a href="#">
+	          	<a href="javascript:selectCategory('subName','에땅셀','Wedding bands')">
 	          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>에땅셀</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','다무르','Wedding bands')">
 		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>다무르</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','데스티네','Wedding bands')">
 		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>데스티네</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','트리니티루반','Wedding bands')">
 		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>트리니티루반</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','발레린','Wedding bands')">
 		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>발레린</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','루이방돔','Wedding bands')">
 		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>루이방돔</div>
 	          	</a>
 	          </li>
 	          <li>
-		          <a href="#">
+		          <a href="javascript:selectCategory('subName','마이용팬더','Wedding bands')">
 		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 	          		<div>마이용팬더</div>
 	          	</a>
@@ -796,67 +796,67 @@
 					    <button class="pagination-button prev-button" onclick="goToPreviousPage('.watches')"> &lt; </button>
 						</div>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','탱크','Watches')">
 							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 							<div>탱크</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','베누아','Watches')">
 								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>베누아</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','팬더','Watches')">
 								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>팬더</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','발롱','Watches')">
 							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>발롱</div>
 							</a>
 						</li>
 						<li>
-						  <a href="#">
+						  <a href="javascript:selectCategory('subName','산토스','Watches')">
 						  <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>산토스</div>
 							</a>
 						</li>
 						<li>
-						  <a href="#">
+						  <a href="javascript:selectCategory('subName','롱드','Watches')">
 						  <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>롱드</div>
 							</a>
 						</li>
 						<li>
-						  <a href="#">
+						  <a href="javascript:selectCategory('subName','파샤','Watches')">
 						  <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>파샤</div>
 							</a>
 						</li>
 						<li>
-						  <a href="#">
+						  <a href="javascript:selectCategory('subName','프리베','Watches')">
 						  	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>프리베</div>
 							</a>
 						</li>
 						<li>
-						  <a href="#">
+						  <a href="javascript:selectCategory('subName','리플렉션','Watches')">
 						  	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>리플렉션</div>
 							</a>
 						</li>
 						<li>
-						  <a href="#">
+						  <a href="javascript:selectCategory('subName','팬더','Watches')">
 						  	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>팬더</div>
 							</a>
 						</li>
 						<li>
-						  <a href="#">
+						  <a href="javascript:selectCategory('subName','클래쉬','Watches')">
 						  	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>클래쉬</div>
 							</a>
@@ -878,43 +878,43 @@
 	  		<hr/>
 	  		<!-- Bags -->
 	  		<div class="subMenu-section">
-					<h4 onclick="selectCategory('baseName','Bags')">Bags</h4>
+					<h4 onclick="selectCategory('baseName','Bags', 'Bags and Accessories')">Bags</h4>
 					<ul class="detail-menu bags">
 						<div class="pagination-controls">
 					    <button class="pagination-button prev-button" onclick="goToPreviousPage('.bags')"> &lt; </button>
 						</div>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','핸드백','Bags')">
 							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 							<div>핸드백</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','숄더백','Bags')">
 								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>숄더백</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','토트백','Bags')">
 								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>토트백</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','미니백','Bags')">
 							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>미니백</div>
 							</a>
 						</li>
 						<li>
-						  <a href="#">
+						  <a href="javascript:selectCategory('subName','이브닝백','Bags')">
 						  <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>이브닝백</div>
 							</a>
 						</li>
 						<li>
-						  <a href="#">
+						  <a href="javascript:selectCategory('subName','비지니스백','Bags')">
 						  <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>비지니스백</div>
 							</a>
@@ -929,31 +929,31 @@
 
 				<!-- Leather goods -->
 	  		<div class="subMenu-section">
-					<h4 onclick="selectCategory('baseName','Leather goods')">Leather goods</h4>
+					<h4 onclick="selectCategory('baseName','Leather goods', 'Bags and Accessories')">Leather goods</h4>
 					<ul class="detail-menu leatherGoods">
 						<div class="pagination-controls">
 					    <button class="pagination-button prev-button" onclick="goToPreviousPage('.leatherGoods')"> &lt; </button>
 						</div>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','벨트','Leather goods')">
 							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 							<div>벨트</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','카드홀더','Leather goods')">
 								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>카드홀더</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','키케이스','Leather goods')">
 								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>키케이스</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','지갑','Leather goods')">
 							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>지갑</div>
 							</a>
@@ -967,43 +967,43 @@
 
 				<!-- Accessories -->
 	  		<div class="subMenu-section">
-					<h4 onclick="selectCategory('baseName','Accessories')">Accessories</h4>
+					<h4 onclick="selectCategory('baseName','Accessories', 'Bags and Accessories')">Accessories</h4>
 					<ul class="detail-menu accessories">
 						<div class="pagination-controls">
 					    <button class="pagination-button prev-button" onclick="goToPreviousPage('.accessories')"> &lt; </button>
 						</div>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','커프링크스','Accessories')">
 							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 							<div>커프링크스</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','스카프','Accessories')">
 								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>스카프</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','키링','Accessories')">
 								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>키링</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','머니클립','Accessories')">
 							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>머니클립</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','라이터','Accessories')">
 							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>라이터</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','선글라스','Accessories')">
 							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>선글라스</div>
 							</a>
@@ -1024,37 +1024,37 @@
 	  	
 				<!-- Fragrances -->
 	  		<div class="subMenu-section">
-					<h4 onclick="selectCategory('baseName','Fragrances')">Fragrances</h4>
+					<h4 onclick="selectCategory('baseName','Fragrances','Fragrances')">Fragrances</h4>
 					<ul class="detail-menu fragrances">
 						<div class="pagination-controls">
 					    <button class="pagination-button prev-button" onclick="goToPreviousPage('.fragrances')"> &lt; </button>
 						</div>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','라펜더','Fragrances')">
 							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 							<div>라펜더</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','파샤','Fragrances')">
 								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>파샤</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','베제볼레','Fragrances')">
 								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>베제볼레</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','데클라라시옹','Fragrances')">
 							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>데클라라시옹</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','리비에르','Fragrances')">
 							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>리비에르</div>
 							</a>
@@ -1068,31 +1068,31 @@
 	  	
 				<!-- High Perfumery -->
 	  		<div class="subMenu-section">
-					<h4 onclick="selectCategory('baseName','High Perfumery')">High Perfumery</h4>
+					<h4 onclick="selectCategory('baseName','High Perfumery','Fragrances')">High Perfumery</h4>
 					<ul class="detail-menu highPerfumery">
 						<div class="pagination-controls">
 					    <button class="pagination-button prev-button" onclick="goToPreviousPage('.highPerfumery')"> &lt; </button>
 						</div>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','레제르','High Perfumery')">
 							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 							<div>레제르</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','보야제즈','High Perfumery')">
 								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>보야제즈</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','레줴퓌르','High Perfumery')">
 								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>레줴퓌르</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','레네쎄세르아','High Perfumery')">
 							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>레네쎄세르아</div>
 							</a>
@@ -1106,10 +1106,10 @@
 	  	
 				<!-- Scented Candle -->
 	  		<div class="subMenu-section">
-					<h4 onclick="selectCategory('baseName','Scented Candle')">Scented Candle</h4>
+					<h4 onclick="selectCategory('baseName','Scented Candle','Fragrances')">Scented Candle</h4>
 					<ul class="detail-menu scentedCandle">
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','레제크랭','Scented Candle')">
 							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 							<div>레제크랭</div>
 							</a>
@@ -1127,23 +1127,23 @@
 	  	<div class="sub-menu">
 	  		<hr/>
 	  	
-				<!-- Fragrances -->
+				<!-- Stationery -->
 	  		<div class="subMenu-section">
-					<h4 onclick="selectCategory('baseName','Writing & Stationery')">Writing & Stationery</h4>
+					<h4 onclick="selectCategory('baseName','Stationery', 'Art of Living')">Stationery</h4>
 					<ul class="detail-menu writing">
 						<div class="pagination-controls">
 					    <button class="pagination-button prev-button" onclick="goToPreviousPage('.writing')"> &lt; </button>
 						</div>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','필기구','Stationery')">
 							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 							<div>필기구</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','노트북','Stationery')">
 								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
-								<div>필기구</div>
+								<div>노트북</div>
 							</a>
 						</li>
 						<div class="pagination-controls">
@@ -1153,45 +1153,45 @@
   			</div>		  	
   			
 
-				<!-- Fragrances -->
+				<!-- Home -->
 	  		<div class="subMenu-section">
-					<h4 onclick="selectCategory('baseName','Home')">Home</h4>
+					<h4 onclick="selectCategory('baseName','Home', 'Art of Living')">Home</h4>
 					<ul class="detail-menu home">
 						<div class="pagination-controls">
 					    <button class="pagination-button prev-button" onclick="goToPreviousPage('.home')"> &lt; </button>
 						</div>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','쿠션','Home')">
 							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 							<div>쿠션</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','블랭킷','Home')">
 								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>블랭킷</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','테이블웨어','Home')">
 								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>테이블웨어</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','오브제','Home')">
 							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>오브제</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','게임','Home')">
 							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>게임</div>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="javascript:selectCategory('subName','베이비기프트','Home')">
 							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
 								<div>베이비기프트</div>
 							</a>
