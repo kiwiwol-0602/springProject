@@ -49,6 +49,12 @@ public class ShopController {
 		return "shop/productInput";
 	}
 	
+	@PostMapping("/productInput")
+	public void productInputPost() {
+//		System.out.println("ProductVO : "+vo);
+		System.out.println("??????????????");
+	}
+	
 	@ResponseBody
 	@PostMapping("/categoryBase")
 	public ArrayList<ProductVO> categoryBaseGet(
@@ -62,10 +68,10 @@ public class ShopController {
 	@ResponseBody
 	@PostMapping("/categorySub")
 	public ArrayList<ProductVO> ccategorySubGet(
-			@RequestParam(defaultValue = "", required = false) String mainCategory,
-			@RequestParam(defaultValue = "", required = false) String baseCategory
+			@RequestParam(defaultValue = "", required = false) String mainName,
+			@RequestParam(defaultValue = "", required = false) String baseName
 			) {
-		ArrayList<ProductVO> res = shopService.getCategorySub(mainCategory, baseCategory);
+		ArrayList<ProductVO> res = shopService.getCategorySub(mainName, baseName);
 		return res;
 	}
 	
