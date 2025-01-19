@@ -40,8 +40,43 @@
 	<select id="getCategorySub" resultType="com.spring.javaGroupS7.vo.ProductVO">
 		select * from categorySub where mainName = #{mainName} and baseName = #{baseName};
 	</select>
-	 
+	
+	<select id="getProductMaxIdx" resultType="com.spring.javaGroupS7.vo.ProductVO">
+		select * from product order by idx desc limit 1;
+	</select>
+	
+	<select id="getProductCode"	resultType="String">
+		SELECT CONCAT(
+    categorymain.mainCode, '-',
+    LPAD(CAST(categorybase.baseCode AS CHAR), 2, '0'), '-',
+    LPAD(CAST(categorysub.subCode AS CHAR), 2, '0'), '-',
+    LPAD(#{maxIdx}, 3, '0')) AS productCode
+		FROM categorymain
+		JOIN categorybase ON categorymain.mainName = categorybase.mainName
+		JOIN categorysub ON categorybase.baseName = categorysub.baseName
+		WHERE categorymain.mainName = #{mainName}
+		AND categorybase.baseName = #{baseName}
+		AND categorysub.subName = #{subName};
+	</select>
+	<!--  
+	<select id="getCategoryProductNameOne" resultType="com.spring.javaGroupS.vo.ProductVO">
+    select * from product where productName = #{productName}; 
+  </select>
+  
+  <select id="getCategoryProductNameOneVO" resultType="com.spring.javaGroupS.vo.ProductVO">
+    select * from product where productCode = #{vo.productName}; 
+  </select>
+	 -->
 	<!-- insert -->
+	<insert id="setProductInput">
+		insert into product value 
+			(
+				#{vo.idx},#{vo.productCode},#{vo.productName},#{vo.subName},#{vo.subCode},#{vo.baseName},#{vo.mainName},
+				#{vo.price},#{vo.discount},#{vo.pay},#{vo.thumbnail},#{vo.titleImg},#{vo.fName},
+				#{vo.fSName},#{vo.fSize},#{vo.content},default,default,default,default,default
+			);
+	</insert>
+	
 	
 	<!-- update -->
 	

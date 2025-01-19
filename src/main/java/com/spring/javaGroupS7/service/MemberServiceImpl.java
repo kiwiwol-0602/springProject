@@ -122,7 +122,6 @@ public class MemberServiceImpl implements MemberService {
 		String birthday = "";
 		String gender = "";
 		
-		System.out.println("service fName.isEmpty():" + fName.isEmpty());
 		
 		if(!fName.isEmpty()) {
 			String imsi = RandomStringUtils.randomAlphanumeric(4);
@@ -130,7 +129,7 @@ public class MemberServiceImpl implements MemberService {
 			//서버로 전송되어온 파일의 정보를 읽어온다.
 			String oFileName = fName.getOriginalFilename();
 			String sFileName = vo.getMid() + "_" + imsi + "_" + oFileName;
-			String savePath = "/data/member/";
+			String savePath = "member";
 			
 			if(vo.getPhoto() != "noimage.jpg" && sFileName != vo.getPhoto()) {
 				javaGroupProvide.deleteFile(vo.getPhoto(),savePath);

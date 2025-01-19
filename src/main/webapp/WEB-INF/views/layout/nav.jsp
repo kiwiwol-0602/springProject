@@ -137,7 +137,7 @@ function toggleMenu(element) {
             <h5 onclick="toggleMenu(this)">상품관리</h5>
         <div class="w3-bar-block">
             <a href="${ctp}/shop/productInput" class="w3-bar-item w3-button">상품등록</a>
-            <a href="#" class="w3-bar-item w3-button">옵션관리</a>
+            <a href="${ctp}/shop/productOption" class="w3-bar-item w3-button">옵션관리</a>
             <a href="#" class="w3-bar-item w3-button">상품리스트</a>
         </div>
         </div>

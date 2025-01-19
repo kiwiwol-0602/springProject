@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.javaGroupS7.service.ShopService;
 import com.spring.javaGroupS7.vo.CategoryBaseVO;
@@ -49,19 +50,27 @@ public class ShopController {
 		return "shop/productInput";
 	}
 	
-	@PostMapping("/productInput")
-	public void productInputPost() {
+//	@PostMapping("/productInput")
+//	public void productInputPost(ProductVO vo) {
 //		System.out.println("ProductVO : "+vo);
-		System.out.println("??????????????");
+//		//System.out.println("??????????????");
+//	}
+	
+	@PostMapping("/productInput")
+	public String productInputPost(MultipartFile file1, MultipartFile file2, ProductVO vo) {
+		System.out.println(vo);
+		int res = shopService.setProductInput(file1, file2, vo);
+		
+		if(res != 0) return "redirect:/message/productInputOk";
+		return "redirect:/message/productInputNo";
 	}
 	
 	@ResponseBody
 	@PostMapping("/categoryBase")
 	public ArrayList<ProductVO> categoryBaseGet(
-			@RequestParam(defaultValue = "", required = false) String categoryName
+			@RequestParam(defaultValue = "", required = false) String mainName
 		) {
-		System.out.println("mainName"+categoryName);
-		ArrayList<ProductVO> res = shopService.getCategoryBase(categoryName);
+		ArrayList<ProductVO> res = shopService.getCategoryBase(mainName);
 		return res;
 	}
 	
@@ -75,7 +84,6 @@ public class ShopController {
 		return res;
 	}
 	
-	
 	@GetMapping("/productContent")
 	public String productContentGet(Model model, int idx) {
 		System.out.println("idx"+idx);
@@ -83,5 +91,20 @@ public class ShopController {
 		
 		model.addAttribute("vo", vo);
 		return "shop/productContent";
+	}
+	
+	@GetMapping("/productOption")
+	public String productOptionGet(Model model,
+			@RequestParam(name="productName", defaultValue = "", required=false) String productName) {
+		/*
+		if(productName.equals("")) {
+		}
+		else {
+			ProductVO imsiVO = shopService.getCategoryProductNameOne(productName);
+			ProductVO productVO = shopService.getCategoryProductNameOneVO(imsiVO);
+			model.addAttribute("productVO", productVO);
+		}
+		*/
+		return "shop/productOption";
 	}
 }

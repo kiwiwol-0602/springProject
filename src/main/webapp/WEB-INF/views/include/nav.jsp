@@ -79,7 +79,7 @@
 	    background-color: white;
 	    text-align:center;
 	    margin:0.5% 0 0 0;
-	    padding:0.5% 3%;
+	    padding:0.5% 20%;
 	    border-top: 1px solid #ddd;
 	    z-index: 101;
 		}
@@ -133,11 +133,9 @@
 	    left: 0;
 	    width: 100%;
 	    list-style: none;
-	    justify-content: space-around !important;
 	    flex-direction: row;
 	    text-align: center;
-	    font-weight: bold;
-	    background-color: transparent;
+	    background-color: white;
 	    z-index: 102;
 		}
 		.detail-menu ul {

@@ -24,4 +24,14 @@ public interface ShopDAO {
 
 	ArrayList<ProductVO> getCategorySub(@Param("mainName") String mainName, @Param("baseName") String baseName);
 
+	ProductVO getProductMaxIdx();
+
+	int setProductInput(@Param("vo") ProductVO vo);
+
+	String getProductCode(@Param("mainName") String mainName, @Param("baseName") String baseName, @Param("subName") String subName, @Param("maxIdx") int maxIdx);
+
+	ProductVO getCategoryProductNameOne(@Param("productName") String productName);
+
+	ProductVO getCategoryProductNameOneVO(@Param("imsiVO") ProductVO imsiVO);
+
 }

@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="ctp/main/favicon.png">
-	<title>상품페이지 | LUMI</title>
+  <link rel="icon" href="${ctp}/main/favicon.png">
+	<title>${vo.productName} | LUMI</title>
   <jsp:include page="/WEB-INF/views/include/bs5.jsp" />
 	<jsp:include page="/WEB-INF/views/include/fonts.jsp" />
 	<style type="text/css">
@@ -22,7 +22,7 @@
 	#content-form {
 		display: flex;
     flex-direction: row;
-    max-width: 85%;
+    max-width: 78%;
     margin: 3% auto;
     padding-top: 8%;
     gap: 30px;
@@ -135,7 +135,11 @@
 		.icon-circle:hover {
 	    transform: scale(1.1);
 	    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
-		}	
+		}
+		#productOption {
+			border-radius: 0 !important;
+			border: 1px solid black !important;
+		}
 	</style>
 	<script type="text/javascript">
 	  function toggleLike(idx, btn) {
@@ -204,29 +208,34 @@
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<jsp:include page="/WEB-INF/views/include/nav.jsp"/>
 	<div id="content-form" class="container">
-  <table id="content-table" style="width: 85%; margin: 0 auto; border-collapse: collapse;">
+  <table id="content-table" style="width: 100%; margin: 0 auto; border-collapse: collapse;">
 	  <!-- 이미지와 제품 정보 -->
+	  <tr>
+	  	<td style="padding: 10px;">
+				<div>Home > ${vo.mainName} > ${vo.baseName} > ${vo.subName}</div>
+	  	</td>
+	  </tr>
 	  <tr>
 	    <td style="width: 50%; vertical-align: top; padding: 10px;">
 	      <div class="main-img">
 	        <div class="image-container" onmouseover="showHoverImage(this)" onmouseout="showDefaultImage(this)">
 			      <!-- 기본 이미지 -->
-			      <img src="${ctp}/images/shop/${vo.thumbnail}" alt="Thumbnail" class="default-img">
+			      <img src="${ctp}/product/${vo.titleImg}" alt="Thumbnail" class="default-img">
 			      <!-- Hover 시 표시할 이미지 -->
-			      <img src="${ctp}/images/shop/${vo.titleImg}" alt="Hover Image" class="hover-img" style="display: none;">
+			      <img src="${ctp}/product/${vo.thumbnail}" alt="Hover Image" class="hover-img" style="display: none;">
 			    </div>
 	      </div>
 	    </td>
 	    <td style="width: 50%; vertical-align: top; padding: 10px;">
-	      <div class="product-info">
-	      	<p><br/></p>
-	        <div class="input-group" style="text-align: center;">
-	          <div class="company input-group-prepend">${vo.baseName}</div>
-	          <div class="trash company"> / </div>
-	          <div class="category input-group-append">${vo.subName}</div>
-	        </div>
-	        <h2>${vo.productName}</h2>
-	        <p class="price"><fmt:formatNumber value="${vo.price}" pattern="#,##0"/> 원</p>
+	        <h2 style="font-size: 1.8em;">${vo.productName}</h2>
+	        <p class="price" style="font-size: 1.4em; color: gray;"><fmt:formatNumber value="${vo.price}" pattern="#,##0"/> 원</p>
+        	<p class="discount" style="font-size: 1.2em; color: red;">${vo.discount}%</p>
+        	<p class="pay" style="font-size: 1.5em;"><fmt:formatNumber value="${vo.pay}" pattern="#,##0"/> 원</p>
+        	<select id="productOption" name="productOption" class="form-select" style="flex: 8;" required>
+						<option value="">옵션</option>
+						<option value=""></option>
+					</select>
+        	
 	        <button type="button" onclick="buy()" class="btn btn-outline-secondary">구매하기</button>
 	        <button type="button" onclick="cartCheck()" class="btn btn-outline-secondary">장바구니 담기</button><br/><br/><br/><br/>
 		      <div class="additional-info" style="padding: 20px; background-color: #fff; border: 1px solid #ddd;">
@@ -237,15 +246,14 @@
 		        <h3>제품 사진 관련 안내</h3>
 		        <p>위의 사진들은 모니터에 따라 약간의 색상 차이가 발생될 수 있습니다.</p>
 		      </div>
-	      </div>
 	    </td>
 	  </tr>
 	  <!-- 보조 이미지 -->
 	  <tr>
 	    <td colspan="2" style="padding: 10px; text-align: center;">
-	      <div class="sub-img">
-	        <img src="${ctp}/images/shop/${vo.titleImg}" alt="보조 이미지" style="width: 100%; max-width: 600px; border-radius: 8px;">
-	      </div>
+	      <div id="content" class="text-center"><br/>
+			    ${vo.content}
+			  </div>
 	    </td>
 	  </tr>
 	  <!-- 추천상품 더보기 -->

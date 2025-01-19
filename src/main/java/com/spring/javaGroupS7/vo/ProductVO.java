@@ -26,8 +26,8 @@ public class ProductVO {
 	private String display;
 	
 	private String mainCode;
-	private String baseCode;
-	private String subCode;
+	private int baseCode;
+	private int subCode;
 	
 
 

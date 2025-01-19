@@ -47,6 +47,14 @@ public class MessageController {
 			model.addAttribute("message", "정보 수정 중 오류가 발생했습니다.\\n확인 후 다시 시도해주세요.");
 			model.addAttribute("url", "member/memberUpdate");
 		}
+		else if(msgFlag.equals("productInputOk")) {
+			model.addAttribute("message", "상품이 등록되었습니다.");
+			model.addAttribute("url", "admin/admin");
+		}
+		else if(msgFlag.equals("productInputNo")) {
+			model.addAttribute("message", "상품 등록 중 오류가 발생했습니다.");
+			model.addAttribute("url", "shop/productInput");
+		}
 		
 		return "include/message";
 	}

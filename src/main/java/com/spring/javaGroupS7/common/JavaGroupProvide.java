@@ -2,10 +2,12 @@ package com.spring.javaGroupS7.common;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.mail.MessagingException;
@@ -33,7 +35,7 @@ public class JavaGroupProvide {
 	JavaMailSender mailSender;
 	
 	
-//메일 전송하기(이메일주소, 제목, 내용)
+	//메일 전송하기(이메일주소, 제목, 내용)
 	public void mailSend(String toMail, String title, String mailFlag, String photoName, HttpServletRequest request) throws MessagingException {
 		String content = "";
 		
@@ -60,11 +62,11 @@ public class JavaGroupProvide {
 		mailSender.send(message);
 	}
 	
-// 파일 서버 저장
+	// 파일 서버 저장
 	@SuppressWarnings("unused")
 	public void writeFile(MultipartFile fName, String sFileName, String savePath) throws IOException {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-		String realPath = request.getSession().getServletContext().getRealPath("/resources"+savePath);
+		String realPath = request.getSession().getServletContext().getRealPath("/resources/data/"+savePath+"/");
 		
 		FileOutputStream fos = new FileOutputStream(realPath + sFileName);
 		
@@ -74,10 +76,11 @@ public class JavaGroupProvide {
 		fos.flush();
 		fos.close();
 	}
-
+	
+	// 파일삭제
 	public void deleteFile(String file, String savePath) {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-		String realPath = request.getSession().getServletContext().getRealPath("/resources"+savePath);
+		String realPath = request.getSession().getServletContext().getRealPath("/resources/data/"+savePath+"/");
 		File fName = new File(realPath + file);
 		
 		if(fName.exists()) {
@@ -85,7 +88,65 @@ public class JavaGroupProvide {
 		}
 	}
 	
-
+	// 파일이름 중복방지
+	public String saveFileName(String originalFilename) {
+		Date date = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmss");
+    String saveFileName = sdf.format(date) + "_" + originalFilename;
+		return saveFileName;
+	}
+	
+	//ckeditor 파일등록 시 폴더명 길이 상관없이 파일 올리는 법
+	public void imgCheck(String content, String folderName) {
+    HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+    String realPath = request.getSession().getServletContext().getRealPath("/resources/data/");
+    String imgs[] = content.split("<img ");
+    ArrayList<String> img = new ArrayList<String>();
+    
+    for(int i = 0; i< imgs.length; i++) {
+	    if(imgs[i].contains("src")) {
+	      imgs[i] = imgs[i].substring(imgs[i].indexOf("src=\""));    // src="/javaGroupS/data/ckeditor/241213145233_파일명.jpg" style="height:225px; width:225px" /></p>\r\n
+	      imgs[i] = imgs[i].substring(0, imgs[i].lastIndexOf("\"")); // src="/javaGroupS/data/ckeditor/241213145233_파일명.jpg" style="height:225px; width:225px" />
+	      
+	      String temp1 = imgs[i].substring(0, imgs[i].lastIndexOf(".")); // src="/javaGroupS/data/ckeditor/241213145233_파일명
+	      temp1 = temp1.substring(temp1.lastIndexOf("/")+1);  //  241213145233_파일명
+	      
+	      String temp2 = imgs[i].substring(imgs[i].lastIndexOf("."));  // .jpg" style="height:225px; width:225px" /></p>
+	      temp2 = temp2.substring(0, temp2.indexOf("\""));  // .jpg
+	      
+	      img.add(temp1 + temp2);  // 241213145233_파일명 + .jpg
+	    }
+    }
+    
+    for(int i = 0; i < img.size(); i++) {
+	    String origFilePath = realPath + "ckeditor/" + img.get(i);
+	    String copyFilePath = realPath +  folderName + "/" + img.get(i);
+	    fileCopyCheck(origFilePath, copyFilePath);
+    }
+	}
+	// 파일 복사처리
+	private void fileCopyCheck(String origFilePath, String copyFilePath) {
+    try {
+//    File file = new File(origFilePath);
+//    FileInputStream fis = new FileInputStream(file);
+	    FileInputStream fis = new FileInputStream(new File(origFilePath));
+	    FileOutputStream fos = new FileOutputStream(new File(copyFilePath));
+	    
+	    byte[] bytes = new byte[2048];
+	    int cnt = 0;
+	    while((cnt=fis.read(bytes)) != -1) {
+	        fos.write(bytes, 0, cnt);
+	    }
+	    fos.flush();
+	    fos.close();
+	    fis.close();
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+	}
+	
 	
 	
 	

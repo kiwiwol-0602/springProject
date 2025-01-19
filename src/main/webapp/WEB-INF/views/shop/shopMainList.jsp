@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -8,7 +9,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="${ctp}/main/favicon.png">
-	<title>상품페이지 | LUMI</title>
+	<title>
+		<c:if test="${categoryName eq 'mainName'}">${categorySuvVO.mainName}</c:if>
+		<c:if test="${categoryName eq 'baseName'}">${categorySuvVO.baseName}</c:if>
+		<c:if test="${categoryName eq 'subName'}">${categorySuvVO.subName}</c:if>
+	 	| LUMI
+	 </title>
   <jsp:include page="/WEB-INF/views/include/bs5.jsp" />
 	<jsp:include page="/WEB-INF/views/include/fonts.jsp" />
   <style type="text/css">
@@ -77,33 +83,77 @@
   	.mainList .container .itemList{
 			display: flex;
 			flex-wrap: wrap;
-			justify-content: space-between;
+			justify-content: flex-start;
+			padding-left: 2.5%;
+			gap: 10px;
+			width: 100%;
   	}
   	.mainList .container .itemList .card{
+  		display: flex;
+      flex-direction: column;
+      border: 1px solid white;
+/*       border: 1px solid #eee; */
+      width: 280px; /* 4개씩 배치 */
+   		height: 385px;
+  		/*height: 420px;*/
+  		position: relative;
+  		margin-left: 10px;
+  	}
+	 .mainList .container .itemList .card:hover {
   		border: 1px solid #eee;
-  		border-radius: 5px;
-  		height: 350px;
-  		width: 250px;
-  		padding: 5px;
-  		margin-bottom: 10px;
-  	}
+  		border-radius: 0;
+    }
+    .mainList .container .itemList .card .img {
+		  display: flex;
+		  justify-content: center; /* 수평 가운데 정렬 */
+		  width: 100%;
+		  height: 250px; /* 카드 높이에 맞게 이미지 영역 설정 */
+		}
   	.mainList .container .itemList .card img{
-  		height: 200;
-  		width: 250px;
+  		padding-top: 15px;
+  		width: 90%;
+  		height: 250px;
   	}
+  	.mainList .container .itemList .card .text {
+      padding: 10px;
+      text-align: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .mainList .container .itemList .card .text h2 {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin: 0;
+      color: #333;
+      padding: 0 10%;
+      height: 30px;
+    }
   	.mainList .container .itemList .card .text p{
-  		font-size: 14px;
+  		font-size: 1.2rem;
+  		font-size: 16px;
   		opacity: .8;
+  		margin-top: 10px;
+  		margin-bottom: 5px;;
+  		padding: 0 10%;
   	}
   	.mainList .container .itemList .card .text button{
   		background-color: black;
   		color: white;
   		border: 2px solid white;
-  		border-radius: 5px;
-  		padding: 5px 10px;
+  		border-radius: 0;
+  		padding: 10px 20px;
+  		width: 90%;
   		font-size: 10px;
   		transition: .5s ease;
+		  opacity: 0;
+  		visibility: hidden;
   	}
+  	/* 카드에 마우스 호버시 버튼 보이기 */
+		.mainList .container .itemList .card:hover .text button {
+		  opacity: 1;
+		  visibility: visible;
+		}
   	.mainList .container .itemList .card .text button:hover{
   		background: transparent;
   		color: black;
@@ -117,11 +167,6 @@
   	
   </style>
   <script type="text/javascript">
-	  'use strict'
-		var ctp = '${ctp}';
-		function selectCategory(categoryName, category) {
-			location.href = ctp+'/shop/shopMainList?categoryName='+categoryName+'&category='+category;
-		}
   </script>
 </head>
 <body>
@@ -144,9 +189,6 @@
 					</div>
 					<h1>${category}</h1>
 				</c:if>
-				<div>
-					<input type="button" value="상품등록" onclick="location.href='${ctp}/shop/productInput'">
-				</div>
 				<ul class="category-list">
 					<c:forEach var="csVOS" items="${categorySubVOS}">
 						<c:if test="${categoryName eq 'mainName'}">
@@ -161,15 +203,16 @@
 			</div>
 			<div class="itemList">
 				<c:forEach var="vo" items="${vos}">
-					<a href="${ctp}/shop/productContent?idx=${vo.idx}">
+					<a href="${ctp}/shop/productContent?idx=${vo.idx}" style="text-decoration: none;">
 						<div class="card">
 							<div class="img">
-								<img src="${ctp}/shop/${vo.thumbnail}">
+								<img src="${ctp}/product/${vo.thumbnail}">
 							</div>
 							<div class="text">
 								<h2 style="font-size: 15px;">${vo.productName}</h2>
-								<p>${vo.price}</p>
-								<button><i class="fas fa-check"></i>구매하기</button>
+								<p><fmt:formatNumber value="${vo.price}" type="number" groupingUsed="true" /> 원</p>
+								<button>구매하기</button>
+								<!-- <button>장바구니</button> -->
 							</div>
 						</div>
 					</a>

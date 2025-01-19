@@ -3,6 +3,8 @@ package com.spring.javaGroupS7.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.spring.javaGroupS7.vo.CategorySubVO;
 import com.spring.javaGroupS7.vo.ProductVO;
 
@@ -21,5 +23,12 @@ public interface ShopService {
 	ArrayList<ProductVO> getCategoryBase(String mainName);
 
 	ArrayList<ProductVO> getCategorySub(String mainName, String baseName);
+
+	int setProductInput(MultipartFile file1, MultipartFile file2, ProductVO vo);
+
+	ProductVO getCategoryProductNameOne(String productName);
+
+	ProductVO getCategoryProductNameOneVO(ProductVO imsiVO);
+
 
 }

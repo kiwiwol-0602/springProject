@@ -17,10 +17,15 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<!-- <resources mapping="/resources/**" location="/resources/" /> -->
 	<resources mapping="/js/**" location="/resources/js/" />
+	
 	<resources mapping="/css/**" location="/resources/css/" />
+	
 	<resources mapping="/ckeditor/**" location="/resources/ckeditor/" />
+	
 	<resources mapping="/data/**" location="/resources/data/" />
 	<resources mapping="/member/**" location="/resources/data/member/" />
+	<resources mapping="/product/**" location="/resources/data/shop/product/" />
+	
 	<resources mapping="/images/**" location="/resources/images/" />
 	<resources mapping="/main/**" location="/resources/images/main/" />
 	<resources mapping="/shop/**" location="/resources/images/shop/" />

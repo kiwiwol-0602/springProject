@@ -25,5 +25,8 @@
  	<definition name="shop/productInput" extends="adminLayout">
  		<put-attribute name="body" value="/WEB-INF/views/shop/productInput.jsp" />
  	</definition>
+ 	<definition name="shop/productOption" extends="adminLayout">
+ 		<put-attribute name="body" value="/WEB-INF/views/shop/productOption.jsp" />
+ 	</definition>
  
  </tiles-definitions>
