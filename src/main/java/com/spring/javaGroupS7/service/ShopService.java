@@ -30,5 +30,11 @@ public interface ShopService {
 
 	ProductVO getCategoryProductNameOneVO(ProductVO imsiVO);
 
+	List<ProductVO> ProductListAll();
+
+	int setProductUpdate(MultipartFile file1, MultipartFile file2, ProductVO vo);
+
+	int setProductDelete(int idx);
+
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.spring.javaGroupS7.pagination.PageProcess;
 import com.spring.javaGroupS7.service.AdminService;
 import com.spring.javaGroupS7.service.MemberService;
 import com.spring.javaGroupS7.service.ShopService;
@@ -29,14 +30,17 @@ public class AdminController {
 	MemberService memberService;
 	@Autowired
 	ShopService shopService;
+	@Autowired
+	PageProcess pageProcess;
 	
 	@GetMapping("/admin")
 	public String adminGet(Model model, HttpSession session) {
 		String mid = (String) session.getAttribute("sMid");
 		UserVO vo = memberService.getMemberIdCheck(mid);
-		model.addAttribute("vo",vo);
+		model.addAttribute("adminVO",vo);
 		return "admin/admin";
 	}
+	
 	@GetMapping("/userList")
 	public String userListGet(Model model,
 			@RequestParam(defaultValue = "999", required = false) int level
@@ -46,6 +50,13 @@ public class AdminController {
 		return "admin/userList";
 	}
 	
-	
+	@GetMapping("/productList")
+	public String productListGet(Model model,
+			@RequestParam(defaultValue = "1") int pag,
+			@RequestParam(defaultValue = "10") int pageSize
+		) {
+		pageProcess.totRecCnt(model, pag, pageSize, "product", "");
+		return "admin/productList";
+	}
 	
 }

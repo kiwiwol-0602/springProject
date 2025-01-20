@@ -84,7 +84,6 @@
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: flex-start;
-			padding-left: 2.5%;
 			gap: 10px;
 			width: 100%;
   	}
@@ -97,7 +96,6 @@
    		height: 385px;
   		/*height: 420px;*/
   		position: relative;
-  		margin-left: 10px;
   	}
 	 .mainList .container .itemList .card:hover {
   		border: 1px solid #eee;

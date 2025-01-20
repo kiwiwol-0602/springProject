@@ -34,4 +34,12 @@ public interface ShopDAO {
 
 	ProductVO getCategoryProductNameOneVO(@Param("imsiVO") ProductVO imsiVO);
 
+	List<ProductVO> ProductListAll();
+
+	String getExistingContent(@Param("idx") int idx);
+
+	int setProductUpdate(@Param("vo") ProductVO vo);
+
+	int setProductDelete(@Param("idx") int idx);
+
 }

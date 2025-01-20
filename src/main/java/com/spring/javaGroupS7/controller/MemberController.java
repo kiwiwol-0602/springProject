@@ -216,21 +216,6 @@ public class MemberController {
 			return "redirect:/message/memberLoginOk?mid="+vo.getMid();
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	//로그아웃
 	@GetMapping(value = "memberLogout")
 	public String memberLogoutGet(HttpSession session) {
@@ -477,9 +462,6 @@ public class MemberController {
 		}
 		return "0";
 	}
-	
-	
-	
 	
 	@PostMapping(value = "/memberUpdate")
 	public String memberUpdatePost(Model model, HttpSession session, UserVO vo,

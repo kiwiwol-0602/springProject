@@ -9,6 +9,9 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -124,6 +127,7 @@ public class JavaGroupProvide {
 	    fileCopyCheck(origFilePath, copyFilePath);
     }
 	}
+	
 	// 파일 복사처리
 	private void fileCopyCheck(String origFilePath, String copyFilePath) {
     try {
@@ -147,7 +151,15 @@ public class JavaGroupProvide {
     }
 	}
 	
-	
-	
+	// 이미지 경로 추출
+	public List<String> extractImagePaths(String content) {
+		List<String> imagePaths = new ArrayList<>();
+    Pattern pattern = Pattern.compile("<img[^>]+src=[\"']?([^\"'>]+)[\"']?");
+    Matcher matcher = pattern.matcher(content);
+    while (matcher.find()) {
+        imagePaths.add(matcher.group(1));
+    }
+    return imagePaths;
+	}
 	
 }

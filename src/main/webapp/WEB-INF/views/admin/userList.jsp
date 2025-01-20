@@ -53,7 +53,7 @@
     }
   </style>
   <script type="text/javascript">
-  
+  'use strict'
   
   // 등급별 조회
   function levelViewCheck() {

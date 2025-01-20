@@ -58,7 +58,6 @@ public class ShopController {
 	
 	@PostMapping("/productInput")
 	public String productInputPost(MultipartFile file1, MultipartFile file2, ProductVO vo) {
-		System.out.println(vo);
 		int res = shopService.setProductInput(file1, file2, vo);
 		
 		if(res != 0) return "redirect:/message/productInputOk";
@@ -86,7 +85,6 @@ public class ShopController {
 	
 	@GetMapping("/productContent")
 	public String productContentGet(Model model, int idx) {
-		System.out.println("idx"+idx);
 		ProductVO vo = shopService.getProduct(idx);
 		
 		model.addAttribute("vo", vo);
@@ -95,7 +93,8 @@ public class ShopController {
 	
 	@GetMapping("/productOption")
 	public String productOptionGet(Model model,
-			@RequestParam(name="productName", defaultValue = "", required=false) String productName) {
+			@RequestParam(name="productName", defaultValue = "", required=false) String productName
+		) {
 		/*
 		if(productName.equals("")) {
 		}
@@ -106,5 +105,50 @@ public class ShopController {
 		}
 		*/
 		return "shop/productOption";
+	}
+	
+	// 상품 수정 폼
+	@GetMapping("/productUpdate")
+	public String productUpdateGet(Model model,
+			@RequestParam(name="idx", defaultValue = "0", required=false) int idx
+		) {
+		
+		ProductVO vo = shopService.getProduct(idx);
+		ArrayList<ProductVO> mainVos = shopService.getCategoryMain();
+		ArrayList<ProductVO> baseVos = shopService.getCategoryBase(vo.getMainName());
+		ArrayList<ProductVO> subVos = shopService.getCategorySub(vo.getMainName(), vo.getBaseName());
+		
+		model.addAttribute("vo",vo);
+		model.addAttribute("mainVos",mainVos);
+		model.addAttribute("baseVos",baseVos);
+		model.addAttribute("subVos",subVos);
+		
+		return "shop/productUpdate";
+	}
+	
+	// 상품 수정
+	@PostMapping("/productUpdate")
+	public String productUpdatePost(MultipartFile file1, MultipartFile file2, ProductVO vo) {
+		System.out.println("file1 : "+file1);
+		System.out.println("file2 : "+file2);
+		System.out.println("vo : "+vo);
+		int res = shopService.setProductUpdate(file1, file2, vo);
+		
+		if(res != 0) return "redirect:/message/productUpdateOk";
+		return "redirect:/message/productUpdateNo?idx="+vo.getIdx();
+		
+	}
+	
+	// 상품 삭제
+	@ResponseBody
+	@PostMapping("/productDelete")
+	public String productDeletePost(@RequestParam("idx") int[] idx) {
+		int res = 0;
+		System.out.println("idx : "+idx);
+	  for (int productIdx : idx) {
+	  	System.out.println("productIdx : "+productIdx);
+	  	res += shopService.setProductDelete(productIdx);
+	  }
+		return res+"";
 	}
 }

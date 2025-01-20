@@ -22,11 +22,15 @@
  	<definition name="admin/*/*" extends="adminLayout">
  		<put-attribute name="body" value="/WEB-INF/views/admin/{1}/{2}.jsp" />
  	</definition>
+ 	
  	<definition name="shop/productInput" extends="adminLayout">
  		<put-attribute name="body" value="/WEB-INF/views/shop/productInput.jsp" />
  	</definition>
  	<definition name="shop/productOption" extends="adminLayout">
  		<put-attribute name="body" value="/WEB-INF/views/shop/productOption.jsp" />
+ 	</definition>
+ 	<definition name="shop/productUpdate" extends="adminLayout">
+ 		<put-attribute name="body" value="/WEB-INF/views/shop/productUpdate.jsp" />
  	</definition>
  
  </tiles-definitions>

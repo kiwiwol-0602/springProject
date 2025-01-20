@@ -6,9 +6,14 @@
 	<select id="getProductList" resultType="com.spring.javaGroupS7.vo.ProductVO">
 		select * from product
 			<where>
-				<if test="categoryName == 'baseName'">baseName = #{category} and mainName = #{categoryTop}</if>
+				<if test="categoryName == 'mainName'">mainName = #{category} order by baseName</if>
+				<if test="categoryName == 'baseName'">baseName = #{category} and mainName = #{categoryTop} order by subName</if>
 				<if test="categoryName == 'subName'">subName = #{category} and baseName = #{categoryTop}</if>
 			</where> 
+	</select>
+	
+	<select id="ProductListAll" resultType="com.spring.javaGroupS7.vo.ProductVO">
+		select * from product;
 	</select>
 	
 	<select id="getCategoryList" resultType="com.spring.javaGroupS7.vo.CategorySubVO">
@@ -67,6 +72,15 @@
     select * from product where productCode = #{vo.productName}; 
   </select>
 	 -->
+	 
+	 <select id="getExistingContent" resultType="String">
+	 	select content from product where idx = #{idx};
+	 </select>
+	 
+	 
+	 
+	 
+	 
 	<!-- insert -->
 	<insert id="setProductInput">
 		insert into product value 
@@ -79,6 +93,21 @@
 	
 	
 	<!-- update -->
+	
+	<update id="setProductUpdate">
+		update product set
+			productName = #{vo.productName}, subName = #{vo.subName}, baseName = #{vo.baseName}, mainName = #{vo.mainName}, 
+			price = #{vo.price}, discount = #{vo.discount}, pay = #{vo.pay}, thumbnail = #{vo.thumbnail}, 
+			titleImg = #{vo.titleImg}, content = #{vo.content}, wDate = now(), status = #{vo.status}, display = #{vo.display}
+		where idx = #{vo.idx};
+	</update>
+	
+	
+	<!-- delete -->
+	<delete id="setProductDelete">
+		delete from product where idx = #{idx};
+	</delete>
+	
 	
 	
 

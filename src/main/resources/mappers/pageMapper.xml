@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.javaGroupS7.dao.PageDAO">
+
+	<select id="getTotRecCnt" resultType="int">
+        select count(*) from ${type}
+        <if test='type == "user" and user != "admin"'> where userDel != 'OK'</if>;
+    </select>
+    
+   <select id="List" resultType="map">
+       select * from ${type}
+       <if test='type == "user" and user != "admin"'>where userDel != 'OK'</if>
+       limit #{startIndexNo}, #{pageSize}
+   </select>
+
+
+
+</mapper>

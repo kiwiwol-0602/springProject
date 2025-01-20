@@ -111,10 +111,10 @@ function toggleMenu(element) {
     <span class="logo"><a href="${ctp}/admin/admin" target="_top">LUMI</a></span>
     <div class="w3-container w3-row">
         <div class="w3-col s4">
-            <img src="${ctp}/member/${vo.photo}" class="w3-circle w3-margin-right" style="width:46px">
+            <img src="${ctp}/member/${adminVO.photo}" class="w3-circle w3-margin-right" style="width:46px">
         </div>
         <div class="w3-col s8 w3-bar">
-            <span>${vo.mid} <strong>${vo.name}</strong></span><br>
+            <span>${adminVO.mid} <strong>${adminVO.name}</strong></span><br>
             <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
             <a href="#" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
             <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
@@ -138,7 +138,7 @@ function toggleMenu(element) {
         <div class="w3-bar-block">
             <a href="${ctp}/shop/productInput" class="w3-bar-item w3-button">상품등록</a>
             <a href="${ctp}/shop/productOption" class="w3-bar-item w3-button">옵션관리</a>
-            <a href="#" class="w3-bar-item w3-button">상품리스트</a>
+            <a href="${ctp}/admin/productList" class="w3-bar-item w3-button">상품리스트</a>
         </div>
         </div>
 

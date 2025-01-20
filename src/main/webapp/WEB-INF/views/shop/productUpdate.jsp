@@ -326,12 +326,12 @@
 <body>
 	<form id="myform" method="post" enctype="multipart/form-data">
 		<div id="productIput">
-			<h1>상품 등록</h1>
+			<h1>상품 수정</h1>
 			
 			<!-- 상품명 -->
 			<div class="form-group">
 				<label for="productName" class="section-title">상품명</label>
-				<input type="text" class="form-control" id="productName" name="productName" required>
+				<input type="text" class="form-control" value="${vo.productName}" id="productName" name="productName" required>
 			</div>
 			<hr>
 			<!-- 카테고리  -->
@@ -344,7 +344,7 @@
 						<select id="mainName" name="mainName" class="form-select" onchange="categoryBaseChange()" style="flex: 8;" required>
 							<option value="">대분류</option>
 							<c:forEach var="mainVO" items="${mainVos}">
-								<option value="${mainVO.mainName}">${mainVO.mainName}</option>
+								<option value="${mainVO.mainName}"<c:if test="${mainVO.mainName eq vo.mainName}">selected</c:if>>${mainVO.mainName}</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -353,6 +353,9 @@
 						<input type="text" value="중분류" disabled class="form-control" style="text-align: center; flex: 2;">
 						<select id="baseName" name="baseName" class="form-select" onchange="categorySubChange()" style="flex: 8;" required>
 							<option value="">중분류</option>
+							<c:forEach var="baseVO" items="${baseVos}">
+								<option value="${baseVO.baseName}"<c:if test="${baseVO.baseName eq vo.baseName}">selected</c:if>>${baseVO.baseName}</option>
+							</c:forEach>
 						</select>
 					</div>
 					<!-- 소분류 -->
@@ -360,6 +363,9 @@
 						<input type="text" value="소분류" disabled class="form-control" style="text-align: center; flex: 2;">
 						<select id="subName" name="subName" class="form-select" style="flex: 8;" required>
 							<option value="">소분류</option>
+							<c:forEach var="subVO" items="${subVos}">
+								<option value="${subVO.subName}"<c:if test="${subVO.subName eq vo.subName}">selected</c:if>>${subVO.subName}</option>
+							</c:forEach>
 						</select>
 					</div>
 				</div>
@@ -372,17 +378,17 @@
 				<div class="input-group price-group" style="display: flex; gap: 20px;">
 					<!-- 판매가 (price)-->
 					<div class="input-group price-group" style="flex: 1;">
-						<input type="text" class="form-control" id="price" name="price" placeholder="판매가" oninput="finalpay()" style="flex: 9;" required>
+						<input type="text" class="form-control" id="price" name="price" value="${vo.price}" placeholder="판매가" oninput="finalpay()" style="flex: 9;" required>
 						<input type="text" value="원" disabled class="form-control" style="text-align: center; flex: 1;">
 					</div>
 					<!-- 할인 (discount)-->
 					<div class="input-group price-group" style="flex: 1;">
-						<input type="text" class="form-control" id="discount" name="discount" placeholder="할인율" oninput="finalpay()" style="flex: 9;" required>
+						<input type="text" class="form-control" id="discount" name="discount" value="${vo.discount}" placeholder="할인율" oninput="finalpay()" style="flex: 9;" required>
 						<input type="text" value="%" disabled class="form-control" style="text-align: center; flex: 1;">
 					</div>
 					<!-- 최종 판매가 (pay)-->
 					<div class="input-group price-group" style="flex: 1;">
-						<input type="text" class="form-control" id="pay" name="pay" placeholder="최종 판매가" style="flex: 9;" readonly>
+						<input type="text" class="form-control" id="pay" name="pay" value="${vo.pay}" placeholder="최종 판매가" style="flex: 9;" readonly>
 						<input type="text" value="원" disabled class="form-control" style="text-align: center; flex: 1;">
 					</div>
 				</div>
@@ -396,17 +402,17 @@
 					<div class="image-upload-column">
 						<div class="section-title" style="font-size: 17px; color: gray; margin-top: 10px;">썸네일이미지</div>
 						<label for="file1" class="image-upload-container">
-							<img id="preview1" class="image-preview" style="display:none;">
+							<img id="preview1" src="${ctp}/product/${vo.thumbnail}" class="image-preview">
 							<div class="plus-icon"><i class="fa-solid fa-plus"></i></div>
-							<input type="file" name="file1" id="file1" onchange="handleImageChange(event, 'preview1')">
+							<input type="file" name="file1" id="file1" value="${vo.thumbnail}" onchange="handleImageChange(event, 'preview1')">
 						</label>
 					</div>
 					<div class="image-upload-column">
 						<div class="section-title" style="font-size: 17px; color: gray; margin-top: 10px;">대표이미지</div>
 						<label for="file2" class="image-upload-container">
-							<img id="preview2" class="image-preview" style="display:none;">
+							<img id="preview2" src="${ctp}/product/${vo.titleImg}" class="image-preview">
 							<div class="plus-icon"><i class="fa-solid fa-plus"></i></div>
-							<input type="file" name="file2" id="file2" onchange="handleImageChange(event, 'preview2')">
+							<input type="file" name="file2" id="file2" value="${ctp}/product/${vo.titleImg}" onchange="handleImageChange(event, 'preview2')">
 						</label>
 					</div>
 				</div>
@@ -414,7 +420,7 @@
 			<hr>
 			<div class="form-group">
 				<label for="content" class="section-title mb-2">상세설명</label>
-				<textarea id="content" name="content" rows="5" class="form-control" required></textarea>
+				<textarea id="content" name="content" rows="5" class="form-control" required>${vo.content}</textarea>
 				<script>
 				 		CKEDITOR.replace("content",{
 				    	uploadUrl:"${ctp}/imageUpload",
@@ -424,7 +430,32 @@
 				</script>
 			</div>
 			<hr>
-			<button type="button" class="blackLine-btn" onclick="fCheck()">상품 등록</button>
+			<div class="form-group">
+		    <label class="section-title">판매 상태</label>
+		    <div class="radio-group" style="display: flex; align-items: center; gap: 20px; font-size:16px; margin-top: 10px;">
+	        <div class="form-check">
+	          <input type="radio" id="statusOK" name="status" value="OK" class="form-check-input" ${vo.status == 'OK' ? 'checked' : ''}>
+	          <label for="statusOK" class="form-check-label">판매중</label>
+	        </div>
+	        <div class="form-check">
+	          <input type="radio" id="statusSoldOut" name="status" value="Sold Out" class="form-check-input" ${vo.status == 'Sold Out' ? 'checked' : ''}>
+	          <label for="statusSoldOut" class="form-check-label">품절</label>
+	        </div>
+		    </div>
+			</div>
+			<hr>
+			<div class="form-group">
+		    <label class="section-title">진열 상태</label>
+  			<div class="form-group" style="display: flex; align-items: center; gap: 10px; font-size:16px; margin-top: 10px;">
+	    		<span>OFF</span>
+		    	<span class="form-check form-switch">
+        		<input class="form-check-input" type="checkbox" id="displayON" name="display" value="ON" ${vo.display == 'ON' ? 'checked' : ''}>
+          	<label for="displayON" class="form-check-label">ON</label>
+        	</span>
+	    	</div>
+			</div>
+			<hr>
+			<button type="button" class="blackLine-btn" onclick="fCheck()">상품 수정</button>
 		</div>
 	</form>
 </body>

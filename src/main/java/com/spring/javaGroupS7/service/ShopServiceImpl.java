@@ -142,4 +142,120 @@ public class ShopServiceImpl implements ShopService {
 	public ProductVO getCategoryProductNameOneVO(ProductVO imsiVO) {
 		return shopDAO.getCategoryProductNameOneVO(imsiVO);
 	}
+
+	@Override
+	public List<ProductVO> ProductListAll() {
+		return shopDAO.ProductListAll();
+	}
+
+	@Override
+	public int setProductUpdate(MultipartFile file1, MultipartFile file2, ProductVO vo) {
+		int res = 0;
+		
+		try {
+			if(!file1.isEmpty()) {
+				String oFileName = file1.getOriginalFilename();
+				String sFileName = "s_"+javaGroupProvide.saveFileName(oFileName);
+				String savePath = "shop/product";
+				
+				if(vo.getThumbnail() != "noimage.jpg" && sFileName != vo.getThumbnail()) {
+					javaGroupProvide.deleteFile(vo.getThumbnail(),savePath);
+				}
+				
+				javaGroupProvide.writeFile(file1, sFileName, savePath);
+				vo.setThumbnail(sFileName);
+				System.out.println("sFileName : "+sFileName);
+			}
+			else {
+				return res;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("vo.getThumbnail() : "+vo.getThumbnail());
+		
+		
+		
+		try {
+			if(!file2.isEmpty()) {
+				String oFileName = file2.getOriginalFilename();
+				String sFileName = javaGroupProvide.saveFileName(oFileName);
+				String savePath = "shop/product";
+				
+				if(vo.getTitleImg() != "noimage.jpg" && sFileName != vo.getTitleImg()) {
+					javaGroupProvide.deleteFile(vo.getTitleImg(),savePath);
+				}
+				
+				javaGroupProvide.writeFile(file2, sFileName, savePath);
+				vo.setTitleImg(sFileName);
+				System.out.println("sFileName : "+sFileName);
+			}
+			else {
+				return res;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("vo.getTitleImg() : "+vo.getTitleImg());
+		
+		//ckeditor img
+		String content = vo.getContent();
+		
+		System.out.println("content : "+content);
+		
+		if(content != null && !content.isEmpty()) {
+			String existingContent = shopDAO.getExistingContent(vo.getIdx());
+			System.out.println("existingContent : "+existingContent);
+			if(existingContent !=null && !existingContent.isEmpty()) {
+				List<String> existingImgs = javaGroupProvide.extractImagePaths(existingContent);
+				System.out.println("existingImgs : "+existingImgs);
+				for(String imgPath : existingImgs) {
+					javaGroupProvide.deleteFile(imgPath, "shop/product");
+				}
+			}
+			javaGroupProvide.imgCheck(content,"shop/product");
+			vo.setContent(content.replace("/data/ckeditor/", "/data/shop/product/"));
+			System.out.println("content : "+content);
+		}
+		
+		String display = vo.getDisplay();
+		System.out.println("display : "+display);
+		if(display == null || display.trim().isEmpty()) {
+			display = "OFF";
+		}
+		vo.setDisplay(display);
+		System.out.println("display : "+display);
+		
+		System.out.println("service productVO" + vo);
+		
+		res = shopDAO.setProductUpdate(vo);
+		
+		return res;
+	}
+
+	@Override
+	public int setProductDelete(int idx) {
+		ProductVO vo = shopDAO.getProduct(idx);
+		String savePath = "shop/product";
+		String existingContent = shopDAO.getExistingContent(idx);
+		
+		//썸네일 삭제 (noimg 뺴고)
+		if(vo.getThumbnail() != "noimage.jpg") {
+			javaGroupProvide.deleteFile(vo.getThumbnail(),savePath);
+		}
+		//타이틀 삭제 (noimg 뺴고)
+		if(vo.getTitleImg() != "noimage.jpg") {
+			javaGroupProvide.deleteFile(vo.getTitleImg(),savePath);
+		}
+		//content 이미지 삭제 (noimg 뺴고)
+		if(existingContent !=null && !existingContent.isEmpty()) {
+			List<String> existingImgs = javaGroupProvide.extractImagePaths(existingContent);
+			for(String imgPath : existingImgs) {
+				javaGroupProvide.deleteFile(imgPath, savePath);
+			}
+		}
+		
+		
+		return shopDAO.setProductDelete(idx);
+	}
 }

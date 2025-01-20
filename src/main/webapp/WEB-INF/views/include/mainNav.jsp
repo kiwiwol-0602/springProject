@@ -337,9 +337,9 @@
 	          	</a>
 	          </li>
 	          <li>
-	          	<a href="javascript:selectCategory('subName','저스트엥끌루','Bracelets')">
-	          		<div><img src="${ctp}/shop/bracelets/저스트엥끌루.jpg" width="200px" height="200px;"></div>
-	          		<div>저스트엥끌루</div>
+	          	<a href="javascript:selectCategory('subName','저스트앵끌루','Bracelets')">
+	          		<div><img src="${ctp}/shop/bracelets/저스트앵끌루.jpg" width="200px" height="200px;"></div>
+	          		<div>저스트앵끌루</div>
 	          	</a>
 	          </li>
 	          <li>
@@ -411,9 +411,9 @@
 	          	</a>
 	          </li>
 	          <li>
-	          	<a href="javascript:selectCategory('subName','저스트엥끌루','Rings')">
+	          	<a href="javascript:selectCategory('subName','저스트앵끌루','Rings')">
 	          		<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
-	          		<div>저스트엥끌루</div>
+	          		<div>저스트앵끌루</div>
 	          	</a>
 	          </li>
 	          <li>
@@ -492,9 +492,9 @@
 	          	</a>
 	          </li>
 	          <li>
-	          	<a href="javascript:selectCategory('subName','저스트엥끌루','Necklaces')">
+	          	<a href="javascript:selectCategory('subName','저스트앵끌루','Necklaces')">
 	          		<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
-	          		<div>저스트엥끌루</div>
+	          		<div>저스트앵끌루</div>
 	          	</a>
 	          </li>
 	          <li>
@@ -586,9 +586,9 @@
 	          	</a>
 	          </li>
 	          <li>
-	          	<a href="javascript:selectCategory('subName','저스트엥끌루','Earrings')">
+	          	<a href="javascript:selectCategory('subName','저스트앵끌루','Earrings')">
 	          		<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
-	          		<div>저스트엥끌루</div>
+	          		<div>저스트앵끌루</div>
 	          	</a>
 	          </li>
 	          <li>

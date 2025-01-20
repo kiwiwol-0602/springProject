@@ -145,11 +145,9 @@ public class MemberServiceImpl implements MemberService {
 			}
 		}
 		
-		System.out.println("getPwd 서비스 값 부여전: " + vo.getPwd());
 		// 비밀번호처리
 		if(vo.getPwd() != null && !vo.getPwd().equals("")) {
 			vo.setPwd(passwordEncoder.encode(vo.getPwd()));
-			System.out.println("getPwd 서비스 값 부여 후: " + vo.getPwd());
 		}
 		
 		// 성별 변환	
