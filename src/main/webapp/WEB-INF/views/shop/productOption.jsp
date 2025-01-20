@@ -12,19 +12,91 @@
   <jsp:include page="/WEB-INF/views/include/bs5.jsp" />
 	<jsp:include page="/WEB-INF/views/include/fonts.jsp" />
 	<style type="text/css">
-		body {
+			body {
 			font-family: Arial, sans-serif;
 			background-color: #f4f7f6;
 			color: #333;
 			margin: 0;
 			padding: 0;
 		}
+		#productOption {
+			width: 77%;
+			margin: 0 auto 3% auto;
+			background-color: #fff;
+			padding: 80px;
+			box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+		}
+		h2 {
+			text-align: center;
+			color: #2c3e50;
+			font-size: 28px;
+			margin-bottom: 30px;
+		}
+		.section-title {
+			margin-top: 30px; 
+			font-size: 18px;
+			font-weight: bold;
+			color: #2c3e50;
+		}
+		.form-group {
+			margin-bottom: 30px;
+		}
+		.form-control {
+			width: 100%;
+			padding: 10px;
+			margin: 10px 0;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			font-size: 16px;
+		}
+		.form-select {
+			width: 100%;
+			padding: 10px;
+			margin: 10px 0;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			font-size: 16px;
+			height: 46px;
+		}
+		
+		.blackLine-btn {
+			background-color: #fff;
+			color: #3D3B3B;
+			border: 1px solid #333;
+			border-radius: 5px;
+			padding: 7px 20px;
+			font-size: 15px;
+			font-weight: 400;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			width: 300px;;
+		}
+		.blackLine-btn:hover {
+			background-color: #eee;
+			border-color: #666;
+			transform: translateY(-2px);
+		}
+		.blackLine-btn:active {
+			background-color: #ccc;
+			border-color: #555;
+			transform: translateY(0);
+		}
+		.blackLine-btn:focus {
+			outline: none;
+			box-shadow: 0 0 0 2px rgba(138, 124, 102, 0.7);
+		}
+		.table {
+			border-bottom-color: white;
+			color: gray;
+		}
+		
 		
 	</style>
 	  <script>
   	'use strict';
     let cnt = 1;
     
+    /*
     // 옵션항목 추가
     function addOption() {
     	let strOption = "";
@@ -46,7 +118,6 @@
     
     // 옵션항목 삭제
     function removeOption(test) {
-    	/* $("#"+test).remove(); */
     	$("#"+test.id).remove();
     }
     
@@ -78,65 +149,63 @@
     		myform.submit();
     	}
     }
-    
-    // 상품 입력창에서 대분류 선택(Change)시 중분류가져와서 중분류 선택박스에 뿌리기
+    */
     function categoryMainChange() {
-    	var categoryMainCode = myform.categoryMainCode.value;
-			$.ajax({
-				type : "post",
-				url  : "${ctp}/dbShop/categoryMiddleName",
-				data : {categoryMainCode : categoryMainCode},
-				success:function(data) {
-					var str = "";
-					str += "<option value=''>중분류</option>";
-					for(var i=0; i<data.length; i++) {
-						str += "<option value='"+data[i].categoryMiddleCode+"'>"+data[i].categoryMiddleName+"</option>";
-					}
-					$("#categoryMiddleCode").html(str);
-				},
-				error : function() {
-					alert("전송오류!");
-				}
-			});
-  	}
-    
-    // 상품 입력창에서 중분류 선택(Change)시 소분류가져와서 소분류 선택박스에 뿌리기
-    function categoryMiddleChange() {
-    	var categoryMainCode = myform.categoryMainCode.value;
-    	var categoryMiddleCode = myform.categoryMiddleCode.value;
-			$.ajax({
-				type : "post",
-				url  : "${ctp}/dbShop/categorySubName",
-				data : {
-					categoryMainCode : categoryMainCode,
-					categoryMiddleCode : categoryMiddleCode
-				},
-				success:function(data) {
-					var str = "";
-					str += "<option value=''>소분류</option>";
-					for(var i=0; i<data.length; i++) {
-						str += "<option value='"+data[i].categorySubCode+"'>"+data[i].categorySubName+"</option>";
-					}
-					$("#categorySubCode").html(str);
-				},
-				error : function() {
-					alert("전송오류!");
-				}
-			});
-  	}    
+		var mainName = document.getElementById("mainName").value;
+		$.ajax({
+			type: "post",
+			url: "${ctp}/shop/categoryBase",
+			data: { mainName: mainName },
+			success: function(data) {
+				var strSub = "<option value=''>소분류</option>";
+				var strBase = "<option value=''>중분류</option>";
+				data.forEach(function(item) {
+					strBase += "<option value='" + item.baseName + "'>" + item.baseName + "</option>";
+				});
+				$("#baseName").html(strBase);
+				$("#subName").html(strSub);
+			},
+			error: function() {
+				alert("전송오류");
+			}
+		});
+	}
+	
+	function categoryBaseChange() {
+		var mainName = myform.mainName.value;
+		var baseName = myform.baseName.value;
+		$.ajax({
+			type: "post",
+			url: "${ctp}/shop/categorySub",
+			data: {
+				mainName: mainName,
+				baseName: baseName
+			},
+			success: function(data) {
+				var str = "<option value=''>소분류</option>";
+				data.forEach(function(item) {
+					str += "<option value='" + item.subName + "'>" + item.subName + "</option>";
+				});
+				$("#subName").html(str);
+			},
+			error: function() {
+				alert("전송오류");
+			}
+		});
+	}
     
     // 상품 입력창에서 소분류 선택(Change)시 해당 상품들을 가져와서 품목 선택박스에 뿌리기
     function categorySubChange() {
-    	var categoryMainCode = myform.categoryMainCode.value;
-    	var categoryMiddleCode = myform.categoryMiddleCode.value;
-    	var categorySubCode = myform.categorySubCode.value;
+    	var mainName = myform.mainName.value;
+    	var baseName = myform.baseName.value;
+    	var subName = myform.subName.value;
 			$.ajax({
 				type : "post",
-				url  : "${ctp}/dbShop/categoryProductName",
+				url  : "${ctp}/shop/categoryProductName",
 				data : {
-					categoryMainCode : categoryMainCode,
-					categoryMiddleCode : categoryMiddleCode,
-					categorySubCode : categorySubCode
+					mainName : mainName,
+					baseName : baseName,
+					subName : subName
 				},
 				success:function(data) {
 					var str = "";
@@ -161,19 +230,19 @@
     	
     	$.ajax({
     		type:"post",
-    		url : "${ctp}/dbShop/getProductInfor",
+    		url : "${ctp}/shop/productInfor",
     		data: {productName : productName},
     		success:function(vo) {
-    			let str = '<hr/>';
-    			str += '<table class="table table-bordered">';
-    			str += '<tr><th>대분류명</th><td>'+vo.categoryMainName+'</td>';
-    			str += '<td rowspan="6" class="text-center"><img src="${ctp}/product/'+vo.fsname+'" width="160px"/></td></tr>';
-    			str += '<tr><th>중분류명</th><td>'+vo.categoryMiddleName+'</td></tr>';
-    			str += '<tr><th>소분류명</th><td>'+vo.categorySubName+'</td></tr>';
+    			let str = '<br/>';
+    			str += '<table class="table">';
+    			str += '<tr><th>대분류명</th><td>'+vo.mainName+'</td>';
+    			str += '<td rowspan="6" class="text-center"><img src="${ctp}/product/'+vo.thumbnail+'" width="250px"/></td></tr>';
+    			str += '<tr><th>중분류명</th><td>'+vo.baseName+'</td></tr>';
+    			str += '<tr><th>소분류명</th><td>'+vo.subName+'</td></tr>';
     			str += '<tr><th>상 품 명</th><td>'+vo.productName+'</td></tr>';
-    			str += '<tr><th>상품제목</th><td>'+vo.detail+'</td></tr>';
-    			str += '<tr><th>상품가격</th><td>'+numberWithCommas(vo.mainPrice)+'원</td></tr>';
-    			str += '<tr><td colspan="3" class="text-center"><input type="button" value="등록된옵션보기(삭제)" onclick="optoinShow('+vo.idx+')" class="btn btn-info btn-sm"/></td></tr>';
+    			str += '<tr><th>상품가격</th><td>'+numberWithCommas(vo.price)+'원</td></tr>';
+    			str += '<tr><th>판매가격</th><td>'+numberWithCommas(vo.pay)+'원</td></tr>';
+    			str += '<tr><td colspan="3" class="text-center"><input type="button" value="등록된 옵션" onclick="optoinShow('+vo.idx+')" class="blackLine-btn"/></td></tr>';
     			str += '</table>';
     			str += '<hr/>';
     			str += '<div id="optionDemo"></div>';
@@ -190,7 +259,7 @@
     function optoinShow(productIdx) {
     	$.ajax({
     		type : "post",
-    		url  : "${ctp}/dbShop/getOptionList",
+    		url  : "${ctp}/shop/getOptionList",
     		data : {productIdx : productIdx},
     		success:function(vos) {
     			let str = '';
@@ -202,7 +271,7 @@
 	    			}
     			}
     			else {
-    				str = "<div class='text-center'><font color='red'>현 상품에 등록된 옵션이 없습니다.</font></div>";
+    				str = "<div class='text-center'><font color='red'>상품에 등록된 옵션이 없습니다.</font></div>";
     			}
 					$("#optionDemo").html(str);
     		},
@@ -245,39 +314,50 @@
 </head>
 <body>
 <p><br/></p>
-<div class="container">
-  <h2>상품에 따른 옵션 등록</h2>
+<div class="container" id="productOption">
+  <h2>상품 옵션 등록</h2>
   <form name="myform" method="post">
+  	<!-- 카테고리  -->
+			<div class="form-group">
+				<div class="section-title">카테고리</div>
+				<div class="input-group" style="display: flex; gap: 20px;">
+					<!-- 대분류 -->
+					<div class="input-group" style="flex: 1;">
+						<input type="text" value="대분류" disabled class="form-control" style="text-align: center; flex: 2;">
+						<select id="mainName" name="mainName" class="form-select" onchange="categoryMainChange()" style="flex: 8;" required>
+							<option value="">대분류</option>
+							<c:forEach var="mainVO" items="${mainVos}">
+								<option value="${mainVO.mainName}">${mainVO.mainName}</option>
+							</c:forEach>
+							 <c:if test="${!empty productVO}"><option value="${productVO.mainName}" selected>${productVO.mainName}</option></c:if>
+						</select>
+					</div>
+					<!-- 중분류 -->
+					<div class="input-group" style="flex: 1;">
+						<input type="text" value="중분류" disabled class="form-control" style="text-align: center; flex: 2;">
+						<select id="baseName" name="baseName" class="form-select" onchange="categoryBaseChange()" style="flex: 8;" required>
+							<option value="">중분류</option>
+							<c:if test="${!empty productVO}"><option value="${productVO.baseName}" selected>${productVO.baseName}</option></c:if>
+						</select>
+					</div>
+					<!-- 소분류 -->
+					<div class="input-group" style="flex: 1;">
+						<input type="text" value="소분류" disabled class="form-control" style="text-align: center; flex: 2;">
+						<select id="subName" name="subName" class="form-select" onchange="categorySubChange()" style="flex: 8;" required>
+							<option value="">소분류</option>
+							<c:if test="${!empty productVO}"><option value="${productVO.subName}" selected>${productVO.subName}</option></c:if>
+						</select>
+					</div>
+				</div>
+			</div>
+			<hr>
+  
     <div class="form-group">
-      <label for="categoryMainCode">대분류</label>
-      <select id="categoryMainCode" name="categoryMainCode" class="form-control" onchange="categoryMainChange()">
-        <option value="">대분류를 선택하세요</option>
-        <c:forEach var="mainVo" items="${mainVos}">
-        	<option value="${mainVo.categoryMainCode}">${mainVo.categoryMainName}</option>
-        </c:forEach>
-        <c:if test="${!empty productVO}"><option value="${productVO.categoryMainCode}" selected>${productVO.categoryMainName}</option></c:if>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="categoryMiddleCode">중분류</label>
-      <select id="categoryMiddleCode" name="categoryMiddleCode" class="form-control" onchange="categoryMiddleChange()">
-        <option value="">중분류명</option>
-        <c:if test="${!empty productVO}"><option value="${productVO.categoryMiddleCode}" selected>${productVO.categoryMiddleName}</option></c:if>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="categorySubCode">소분류</label>
-      <select id="categorySubCode" name="categorySubCode" class="form-control" onchange="categorySubChange()">
-        <option value="">소분류명</option>
-        <c:if test="${!empty productVO}"><option value="${productVO.categorySubCode}" selected>${productVO.categorySubName}</option></c:if>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="productName">상품명(모델명)</label>
+      <label for="productName" class="section-title">상품명(모델명)</label>
       <!-- <select name="productName" id="productName" class="form-control" onchange="productNameCheck('')"> -->
-      <select name="productCode" id="productName" class="form-control" onchange="productNameCheck('')">
+      <select name="productCode" id="productName" class="form-select" onchange="productNameCheck('')">
         <option value="">상품선택</option>
-        <c:if test="${!empty productVO}"><option value="${productVO.productCode}" selected>${productVO.productName}</option></c:if>
+        <c:if test="${!empty productVO}"><option value="${productVO.productName}" selected>${productVO.productName}</option></c:if>
         <%-- <c:if test="${!empty productVO}"><option value="${productVO.productName}" selected>${productVO.productName}</option></c:if> --%>
       </select>
       <div id="demo"></div>

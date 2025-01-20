@@ -32,7 +32,7 @@ public interface ShopDAO {
 
 	ProductVO getCategoryProductNameOne(@Param("productName") String productName);
 
-	ProductVO getCategoryProductNameOneVO(@Param("imsiVO") ProductVO imsiVO);
+	ProductVO getCategoryProductNameOneVO(@Param("vo") ProductVO imsiVO);
 
 	List<ProductVO> ProductListAll();
 
@@ -41,5 +41,9 @@ public interface ShopDAO {
 	int setProductUpdate(@Param("vo") ProductVO vo);
 
 	int setProductDelete(@Param("idx") int idx);
+
+	List<ProductVO> getCategoryProductName(@Param("mainName") String mainName, @Param("baseName") String baseName, @Param("subName") String subName);
+
+	ProductVO productInforGet(@Param("productName") String productName);
 
 }

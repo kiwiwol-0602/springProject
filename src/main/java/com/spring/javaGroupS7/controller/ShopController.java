@@ -95,17 +95,47 @@ public class ShopController {
 	public String productOptionGet(Model model,
 			@RequestParam(name="productName", defaultValue = "", required=false) String productName
 		) {
-		/*
+		
 		if(productName.equals("")) {
+			List<ProductVO> mainVos = shopService.getCategoryMain();
+			model.addAttribute("mainVos",mainVos);
 		}
 		else {
 			ProductVO imsiVO = shopService.getCategoryProductNameOne(productName);
 			ProductVO productVO = shopService.getCategoryProductNameOneVO(imsiVO);
 			model.addAttribute("productVO", productVO);
 		}
-		*/
+		
 		return "shop/productOption";
 	}
+	
+	@ResponseBody
+	@PostMapping( "/categoryProductName")
+	public List<ProductVO> categoryProductNamePost(String mainName, String baseName, String subName) {
+		return shopService.getCategoryProductName(mainName, baseName, subName);
+	}
+	
+	//'옵션등록폼'에서 상품선택시에 해당상품의 옵션리스트를 가져와서 출력
+	@ResponseBody
+	@PostMapping("/productInfor")
+	public ProductVO productInforGet(String productName) {
+		return shopService.productInforGet(productName);
+	}
+	/*
+	@ResponseBody
+	@PostMapping("/getOptionList")
+	public List<DbOptionVO> getOptionListPost(int productIdx) {
+		return dbShopService.getOptionList(productIdx);
+	}
+	*/
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	// 상품 수정 폼
 	@GetMapping("/productUpdate")

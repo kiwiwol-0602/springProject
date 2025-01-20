@@ -258,4 +258,14 @@ public class ShopServiceImpl implements ShopService {
 		
 		return shopDAO.setProductDelete(idx);
 	}
+
+	@Override
+	public List<ProductVO> getCategoryProductName(String mainName, String baseName, String subName) {
+		return shopDAO.getCategoryProductName(mainName, baseName, subName);
+	}
+
+	@Override
+	public ProductVO productInforGet(String productName) {
+		return shopDAO.productInforGet(productName);
+	}
 }

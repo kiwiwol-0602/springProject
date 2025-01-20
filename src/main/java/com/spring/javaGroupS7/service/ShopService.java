@@ -36,5 +36,9 @@ public interface ShopService {
 
 	int setProductDelete(int idx);
 
+	List<ProductVO> getCategoryProductName(String mainName, String baseName, String subName);
+
+	ProductVO productInforGet(String productName);
+
 
 }

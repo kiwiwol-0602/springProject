@@ -63,21 +63,27 @@
 		AND categorybase.baseName = #{baseName}
 		AND categorysub.subName = #{subName};
 	</select>
-	<!--  
-	<select id="getCategoryProductNameOne" resultType="com.spring.javaGroupS.vo.ProductVO">
+	  
+	<select id="getCategoryProductNameOne" resultType="com.spring.javaGroupS7.vo.ProductVO">
     select * from product where productName = #{productName}; 
   </select>
   
-  <select id="getCategoryProductNameOneVO" resultType="com.spring.javaGroupS.vo.ProductVO">
-    select * from product where productCode = #{vo.productName}; 
+  <select id="getCategoryProductNameOneVO" resultType="com.spring.javaGroupS7.vo.ProductVO">
+    select * from product where productName = #{vo.productName} and productCode = #{vo.productCode}; 
   </select>
-	 -->
 	 
-	 <select id="getExistingContent" resultType="String">
-	 	select content from product where idx = #{idx};
+ 	<select id="getExistingContent" resultType="String">
+ 		select content from product where idx = #{idx};
+ 	</select>
+ 	
+ 	<select id="getCategoryProductName" resultType="com.spring.javaGroupS7.vo.ProductVO">
+  	select * from product
+  	where mainName=#{mainName} and baseName=#{baseName} and subName=#{subName};
+  </select>
+	 
+	 <select id="productInforGet" resultType="com.spring.javaGroupS7.vo.ProductVO">
+	 	select * from product where productName=#{productName} order by idx limit 1;
 	 </select>
-	 
-	 
 	 
 	 
 	 
