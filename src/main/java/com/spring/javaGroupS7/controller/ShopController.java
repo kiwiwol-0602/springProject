@@ -124,8 +124,8 @@ public class ShopController {
 	/*
 	@ResponseBody
 	@PostMapping("/getOptionList")
-	public List<DbOptionVO> getOptionListPost(int productIdx) {
-		return dbShopService.getOptionList(productIdx);
+	public List<OptionVO> optionListPost(int productIdx) {
+		return shopService.optionListPost(productIdx);
 	}
 	*/
 	
