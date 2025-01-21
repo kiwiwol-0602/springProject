@@ -34,5 +34,7 @@ public interface MemberDAO {
 
 	int setMemberDeleteOk(@Param("mid") String mid);
 
+	UserVO getUser(@Param("mid") String mid);
+
 
 }

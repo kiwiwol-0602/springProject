@@ -140,6 +140,136 @@
 			border-radius: 0 !important;
 			border: 1px solid black !important;
 		}
+	  #selectProductList {
+	    border: 1px solid #ccc;
+	    background-color: #f9f9f9;
+	    padding: 20px;
+	    border-radius: 0;
+	    margin-top: 20px;
+	    height: 100%;
+	    max-height: 360px;
+	  }
+
+  /* 옵션 레이어 스타일 */
+  .layer {
+ 		display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 0;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  /* 옵션명 스타일 */
+  .layer .col-4 {
+  	width: 40%!important;
+    font-weight: 400;
+    margin-right: 10px;
+    color: #333;
+    white-space: nowrap;
+    flex: 1;
+  }
+
+  /* 수량 입력 필드 스타일 */
+  .numBox {
+    width: 50px;
+    height: 40px;
+    padding: 5px;
+    margin: 0 5px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 0;
+  }
+
+  /* 가격 필드 스타일 */
+  #selectProductList .price {
+    width: 150px;
+    height: 40px;
+    padding: 5px;
+    text-align: right;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    background-color: #f0f0f0;
+  }
+
+  /* 삭제 버튼 스타일 */
+  .btn-outline-black {
+  	width: 50px;
+   	height: 40px; /* 수량 입력 필드와 동일한 높이 */
+    line-height: 1; /* 텍스트가 가운데 정렬되도록 */
+    border: 1px solid #0a0a0a;
+    background-color: #0a0a0a;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 0;
+    transition: background-color 0.3s ease;
+    margin-bottom: 3px;
+  }
+
+  .btn-outline-black:hover {
+    background-color: #fff;
+    color: #0a0a0a;
+    
+  }
+  .btn-black {
+  	width: 90%;
+   	height: 40px; /* 수량 입력 필드와 동일한 높이 */
+    line-height: 1; /* 텍스트가 가운데 정렬되도록 */
+    border: 1px solid #0a0a0a;
+    background-color: #fff;
+    color: #0a0a0a;
+    font-size: 15px;
+    border-radius: 0;
+    transition: background-color 0.3s ease;
+    margin-bottom: 3px;
+  }
+
+  .btn-black:hover {
+    background-color: #0a0a0a;
+    color: #fff;
+    
+  }
+    .btn-outline-gray {
+  	width: 30px;
+   	height: 30px; /* 수량 입력 필드와 동일한 높이 */
+    line-height: 15px; /* 텍스트가 가운데 정렬되도록 */
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #0a0a0a;
+    font-size: 12px;
+    border-radius: 0;
+    transition: background-color 0.3s ease;
+    margin-bottom: 3px;
+  }
+
+  .btn-outline-gray:hover {
+    background-color: #fff;
+    color: #0a0a0a;
+    
+  }
+
+  /* 옵션 선택 박스 스타일 */
+  #selectOption {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 0;
+    background-color: transparent;
+    margin-bottom: 20px;
+  }
+
+  /* 총 금액 필드 스타일 */
+  #totalPriceResult, #totalPrice {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    border: none;
+    background-color: transparent;
+    text-align: right;
+  }
 	</style>
 	<script type="text/javascript">
 	  function toggleLike(idx, btn) {
@@ -201,6 +331,124 @@
 	  	  defaultImg.style.display = 'block'; // 기본 이미지 표시
 	  	  hoverImg.style.display = 'none'; // Hover 이미지 숨기기
 	  	}
+	  	
+	  	 let idxArray = new Array();
+
+	     // 옵션박스에서, 옵션항목을 선택하였을때 처리하는 함수(고유번호/옵션명/콤마붙인가격)을 화면에 출력시켜주고 있다.
+	     $(function(){
+	       $("#selectOption").change(function(){
+	         let selectOption = $(this).val();		// (옵션값은 '옵션고유번호:옵션명_옵션가격' 형식으로 넘어오고 있다.)
+	         let idx = selectOption.substring(0,selectOption.indexOf(":"));
+	         let optionName = selectOption.substring(selectOption.indexOf(":")+1,selectOption.indexOf("_"));
+	         let optionPrice = selectOption.substring(selectOption.indexOf("_")+1);
+	         let commaPrice = numberWithCommas(optionPrice);
+
+	 				// 콤보상자에서 옵션선택시 수행처리하는 부분이다. 이미 선택한 옵션항목은 또다시 선택할수 없도록 처리했다.
+	         //if($("#layer"+idx).length == 0 && selectOption != "") {
+	         if($("#layer"+idx).length == 0) {
+	           idxArray[idx] = idx;
+	 					// numBox:수량, imsiPrice:콤마붙인 가격(수량변경처리적용됨), price:콤마없는옵션가격(수량변경처리적용됨), statePrice:상품의정상가격, optionIdx:옵션고유번호(단,기본품목은0이다.), optionName:옵션명, optionPrice:옵션원래정상가격
+	           let str = '';
+	           str += '<div class="layer row" id="layer'+idx+'"><div class="col-5">'+optionName+'</div><div class="col-7">';
+	           str += '<button type="button" class="btn-outline-gray" onclick="decreaseQuantity(' + idx + ')">-</button>';
+	           str += '<input type="number" class="text-center numBox" id="numBox'+idx+'" name="optionNum" onchange="numChange('+idx+')" value="1" min="1"/>';
+	           str += '<button type="button" class="btn-outline-gray" style="margin-right:10px;" onclick="increaseQuantity(' + idx + ')">+</button>';
+	           str += '<input type="text" id="imsiPrice'+idx+'" class="price" value="'+commaPrice+'" readonly />';
+	           str += '<input type="hidden" id="price'+idx+'" value="'+optionPrice+'"/> &nbsp;';
+	           str += '<input type="button" class="btn-outline-black" onclick="remove('+idx+')" value="삭제"/>';
+	           str += '<input type="hidden" name="statePrice" id="statePrice'+idx+'" value="'+optionPrice+'"/>';
+	           str += '<input type="hidden" name="optionIdx" value="'+idx+'"/>';
+	           str += '<input type="hidden" name="optionName" value="'+optionName+'"/>';
+	           str += '<input type="hidden" name="optionPrice" value="'+optionPrice+'"/>';
+	           str += '</div></div>';
+	           $("#selectProductList").append(str);	// 선택한 옵션항목을 아래 준비한공간(#product1)에 추가시켜주고 있다.
+	           onTotal();	// 옵션항목에 변경이 생긴다면 무조건 가격총합계를 재계산처리시키고 있다.
+	         }
+	         else {
+	           alert("이미 선택한 옵션입니다.");
+	         }
+	       });
+	     });
+	     
+	  // 수량 증가 함수
+		  	function increaseQuantity(idx) {
+		  	  let numBox = document.getElementById("numBox" + idx);
+		  	  numBox.value = parseInt(numBox.value) + 1;
+		  	  numChange(idx);  // 수량 변경 시 가격도 변경되도록 호출
+		  	}
+
+		  	// 수량 감소 함수
+		  	function decreaseQuantity(idx) {
+		  	  let numBox = document.getElementById("numBox" + idx);
+		  	  if (parseInt(numBox.value) > 1) {
+		  	    numBox.value = parseInt(numBox.value) - 1;
+		  	    numChange(idx);  // 수량 변경 시 가격도 변경되도록 호출
+		  	  }
+		  	}
+	 			
+	     // 등록(추가)시킨 옵션의 상품을 삭제처리하기
+	     function remove(idx) {
+	       $("div").remove("#layer"+idx);
+
+	       if($(".price").length) onTotal();
+	       else location.reload();
+	     }
+
+	 		// 상품의 총 금액을 (재)계산처리한다.
+	     function onTotal() {
+	       let total = 0;
+	       for(let i=0; i<idxArray.length; i++) {
+	         if($("#layer"+idxArray[i]).length != 0) {
+	           total +=  parseInt(document.getElementById("price"+idxArray[i]).value);
+	           document.getElementById("totalPriceResult").value = total;
+	         }
+	       }
+	       document.getElementById("totalPrice").value = numberWithCommas(total);
+	     }
+
+	 		// 수량을 변경시 처리하는 함수(콤마붙인가격과 콤마없는 가격을 함께 변경적용시켜준다.)
+	     function numChange(idx) {
+	       let price = document.getElementById("statePrice"+idx).value * document.getElementById("numBox"+idx).value;
+	       document.getElementById("imsiPrice"+idx).value = numberWithCommas(price);
+	       document.getElementById("price"+idx).value = price;
+	       onTotal();
+	     }
+	  	
+	     function numberWithCommas(x) {
+         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");
+       }
+	  	
+	 		 // 장바구니 호출시 수행하는 함수
+	     function cart() {
+	       if(document.getElementById("totalPrice").value==0) {
+	         alert("옵션을 선택해주세요");
+	         return false;
+	       }
+	       else {
+	    	   document.myform.action = "${ctp}/shop/productCart";
+	    	   document.myform.submit();
+	       }
+	     }
+
+	 		// 직접 주문하기
+	     function order() {
+	       let totalPrice = document.getElementById("totalPrice").value;
+	       if('${sMid}' == "") {
+	         alert("로그인 후 이용 가능합니다.");
+	         location.href = "${ctp}/member/memberLogin";
+	       }
+	       else if(totalPrice=="" || totalPrice==0) {
+	         alert("옵션을 선택해주세요");
+	         return false;
+	       }
+	       else {
+	         document.getElementById("flag").value = "order";
+	         document.myform.action = "${ctp}/shop/productOrder";
+	         document.myform.submit();
+	       }
+	     }
+	  	
+	  	
 			
   </script>
 </head>
@@ -227,25 +475,64 @@
 	      </div>
 	    </td>
 	    <td style="width: 50%; vertical-align: top; padding: 10px;">
-	        <h2 style="font-size: 1.8em;">${vo.productName}</h2>
-	        <p class="price" style="font-size: 1.4em; color: gray;"><fmt:formatNumber value="${vo.price}" pattern="#,##0"/> 원</p>
-        	<p class="discount" style="font-size: 1.2em; color: red;">${vo.discount}%</p>
-        	<p class="pay" style="font-size: 1.5em;"><fmt:formatNumber value="${vo.pay}" pattern="#,##0"/> 원</p>
-        	<select id="productOption" name="productOption" class="form-select" style="flex: 8;" required>
-						<option value="">옵션</option>
-						<option value=""></option>
+	      <h2 style="font-size: 1.8em;">${vo.productName}</h2>
+	      <div style="display: flex; align-items: center; margin-top: 20px;">
+				  <p class="price" style="font-size: 1.4em; color: gray; text-decoration: line-through; margin-right: 10px;">
+				    <fmt:formatNumber value="${vo.price}" pattern="#,##0"/> 원
+				  </p>
+				  <p class="discount" style="font-size: 1.2em; color: red; font-weight: bold;">
+				    ${vo.discount}%
+				  </p>
+				</div>
+	    	<p class="pay" style="font-size: 1.5em; margin-bottom: 30px;"><fmt:formatNumber value="${vo.pay}" pattern="#,##0"/> 원</p>
+	    	<form name="optionForm">
+		    	<select id="selectOption" name="productOption" class="form-select" style="flex: 8;" required>
+						<option value="">선택</option>
+						<c:forEach var="vo" items="${optionVOS}">
+		          <option value="${vo.idx}:${vo.optionName}_${vo.price}">${vo.optionName}</option>
+		        </c:forEach>
 					</select>
+				</form>
         	
-	        <button type="button" onclick="buy()" class="btn btn-outline-secondary">구매하기</button>
-	        <button type="button" onclick="cartCheck()" class="btn btn-outline-secondary">장바구니 담기</button><br/><br/><br/><br/>
-		      <div class="additional-info" style="padding: 20px; background-color: #fff; border: 1px solid #ddd;">
-		        <h3>배송 안내</h3>
-		        <p><font color="blue">* 1인 1개만 구매가 가능합니다. *</font></p>
-		        <p>전국 무료 배송 및 설치<br/>(제주도 및 울릉도 등 도서/산간 지역의 경우 택배상품만 온라인 주문 가능)</p>
-		        <hr>
-		        <h3>제품 사진 관련 안내</h3>
-		        <p>위의 사진들은 모니터에 따라 약간의 색상 차이가 발생될 수 있습니다.</p>
-		      </div>
+				<form name="myform" method="post">
+					<input type="hidden" name="mid" value="${sMid}"/>
+					<input type="hidden" name="productIdx" value="${vo.idx}"/>
+					<input type="hidden" name="productName" value="${vo.productName}"/>
+					<input type="hidden" name="price" value="${vo.pay}"/>
+					<input type="hidden" name="thumbnail" value="${vo.thumbnail}"/>
+					<input type="hidden" name="totalPrice" id="totalPriceResult"/>
+					<input type="hidden" name="flag" id="flag"/>
+				 
+					<div id="selectProductList"></div>	<!-- 앞의 콤보상자에서 선택한 옵션항목을 동적폼으로 출력처리하고 있다. -->
+				</form>
+        <hr/>
+        <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1% 20%">
+		    	<div class="text-left">
+			        <font size="4" color="black">총상품금액</font>
+			    </div>
+			    <p class="text-right">
+			        <b><input type="text" class="totalPrice text-right" id="totalPrice" style="font-size: 20px;" value="<fmt:formatNumber value='0' />" readonly />&nbsp;원</b>
+			    </p>
+				</div>
+      	<div style="width: 100%; display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+	        <button type="button" onclick="order()" class="btn-black" style="margin-right: 10px;">구매하기</button>
+	        <button type="button" onclick="cart()" class="btn-black">장바구니 담기</button>
+      	</div>
+	      
+	    </td>
+	  </tr>
+	  <tr>
+	    <td colspan="2" style="padding: 10px; text-align: center;">
+	    
+	    
+	      <div class="additional-info" style="width:65%; padding: 20px; margin:auto; background-color: #fff; border: 1px solid #ddd;">
+	        <h3>배송 안내</h3>
+	        <!-- <p><font color="blue">* 1인 1개만 구매가 가능합니다. *</font></p> -->
+	        <p>전국 무료 배송 및 설치<br/>(제주도 및 울릉도 등 도서/산간 지역의 경우 택배상품만 온라인 주문 가능)</p>
+	        <hr>
+	        <h3>제품 사진 관련 안내</h3>
+	        <p>위의 사진들은 모니터에 따라 약간의 색상 차이가 발생될 수 있습니다.</p>
+	      </div>
 	    </td>
 	  </tr>
 	  <!-- 보조 이미지 -->

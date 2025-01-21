@@ -85,6 +85,27 @@
 	 	select * from product where productName=#{productName} order by idx limit 1;
 	 </select>
 	 
+	 <select id="optionList" resultType="com.spring.javaGroupS7.vo.ProductOptionVO">
+	 	select * from productOption where productIdx = #{productIdx} order by optionName;
+	 </select>
+	 
+	 <select id="getOptionSame" resultType="int">
+    select count(*) from productOption where productIdx=#{productIdx} and optionName=#{optionName};
+  </select>
+	 
+	 <select id="getOption" resultType="com.spring.javaGroupS7.vo.ProductOptionVO">
+	 	select * from productOption where productIdx = #{productIdx} order by idx;
+	 </select>
+	 
+	 <select id="getCartOptionSearch" resultType="com.spring.javaGroupS7.vo.ProductCartVO">
+	 	select * from productCart where productName=#{productName} and optionName=#{optionName} and mid=#{mid};
+	 </select>
+	 
+	 <select id="getCartList" resultType="com.spring.javaGroupS7.vo.ProductCartVO">
+	 	select * from productCart where mid=#{mid} order by idx;;
+	 </select>
+	 
+	 
 	 
 	 
 	<!-- insert -->
@@ -97,6 +118,13 @@
 			);
 	</insert>
 	
+	<insert id="setOptionInput">
+    insert into productOption values (default,#{vo.optionName},#{vo.productIdx},#{vo.price});
+  </insert>
+	
+	<insert id="cartInput">
+    insert into productCart values (default,#{vo.mid},#{vo.productIdx},#{vo.productName},#{vo.price},#{vo.thumbnail},#{vo.optionIdx},#{vo.optionName},#{vo.optionPrice},#{vo.optionNum},#{vo.totalPrice},default);
+  </insert>
 	
 	<!-- update -->
 	
@@ -108,13 +136,23 @@
 		where idx = #{vo.idx};
 	</update>
 	
+	<update id="cartUpdate">
+    update productCart set optionNum=#{vo.optionNum},totalPrice=totalPrice+#{vo.totalPrice} 
+    where productName=#{vo.productName} and optionName=#{vo.optionName};
+  </update>
+	
 	
 	<!-- delete -->
 	<delete id="setProductDelete">
 		delete from product where idx = #{idx};
 	</delete>
 	
+	<delete id="setOptionDelete">
+		delete from productOption where idx = #{idx};
+	</delete>
 	
-	
+	<delete id="cartDelete">
+		delete from productCart where idx = #{idx}; 
+	</delete>
 
 </mapper>

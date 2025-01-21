@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.spring.javaGroupS7.vo.CategorySubVO;
+import com.spring.javaGroupS7.vo.ProductCartVO;
+import com.spring.javaGroupS7.vo.ProductOptionVO;
 import com.spring.javaGroupS7.vo.ProductVO;
 
 public interface ShopDAO {
@@ -45,5 +47,25 @@ public interface ShopDAO {
 	List<ProductVO> getCategoryProductName(@Param("mainName") String mainName, @Param("baseName") String baseName, @Param("subName") String subName);
 
 	ProductVO productInforGet(@Param("productName") String productName);
+
+	List<ProductOptionVO> optionList(@Param("productIdx") int productIdx);
+
+	int setOptionDelete(@Param("idx") int idx);
+
+	int getOptionSame(@Param("productIdx") int productIdx, @Param("optionName") String optionName);
+
+	int setOptionInput(@Param("vo") ProductOptionVO vo);
+
+	List<ProductOptionVO> getOption(@Param("productIdx") int idx);
+
+	ProductCartVO getCartOptionSearch(@Param("productName") String productName, @Param("optionName") String optionName, @Param("mid") String mid);
+
+	int cartUpdate(@Param("vo") ProductCartVO vo);
+
+	int cartInput(@Param("vo") ProductCartVO vo);
+
+	List<ProductCartVO> getCartList(@Param("mid") String mid);
+
+	String cartDelete(@Param("idx") int idx);
 
 }

@@ -38,6 +38,18 @@
 			font-weight: bold;
 			color: #2c3e50;
 		}
+		.optionDeleteA{
+			text-decoration: none;
+			font-size: 15px;
+			color: gray;
+			padding-top: 10px;
+		}
+		.optionDeleteA:hover{
+			text-decoration: none;
+			color: black;
+		}
+		
+		
 		.form-group {
 			margin-bottom: 30px;
 		}
@@ -89,6 +101,17 @@
 			border-bottom-color: white;
 			color: gray;
 		}
+		th {
+      text-align: center;
+      background-color: #eee;
+    }
+    .btn-gray {
+		    background-color: gray;
+		    color: white;
+		    padding: 5px 10px;
+		    text-decoration: none;
+		    border-radius: 0px;
+		}
 		
 		
 	</style>
@@ -96,7 +119,7 @@
   	'use strict';
     let cnt = 1;
     
-    /*
+    
     // 옵션항목 추가
     function addOption() {
     	let strOption = "";
@@ -109,7 +132,7 @@
     	strOption += '<input type="text" name="optionName" id="optionName'+cnt+'" class="form-control"/>';
     	strOption += '<div class="form-group">';
     	strOption += '상품옵션가격';
-    	strOption += '<input type="text" name="optionPrice" id="optionPrice'+cnt+'" class="form-control"/>';
+    	strOption += '<input type="text" name="price" id="price'+cnt+'" class="form-control"/>';
     	strOption += '</div>';
     	strOption += '</div>';
     	$("#optionType").append(strOption);
@@ -128,7 +151,7 @@
     			alert("빈칸 없이 상품 옵션명을 모두 등록하셔야 합니다");
     			return false;
     		}
-    		else if($("#t"+i).length != 0 && document.getElementById("optionPrice"+i).value=="") {
+    		else if($("#t"+i).length != 0 && document.getElementById("price"+i).value=="") {
     			alert("빈칸 없이 상품 옵션가격을 모두 등록하셔야 합니다");
     			return false;
     		}
@@ -137,7 +160,7 @@
     		alert("상품 옵션이름을 등록하세요");
     		return false;
     	}
-    	else if(document.getElementById("optionPrice").value=="") {
+    	else if(document.getElementById("price").value=="") {
     		alert("상품 옵션가격을 등록하세요");
     		return false;
     	}
@@ -149,7 +172,7 @@
     		myform.submit();
     	}
     }
-    */
+    
     function categoryMainChange() {
 		var mainName = document.getElementById("mainName").value;
 		$.ajax({
@@ -259,19 +282,19 @@
     function optoinShow(productIdx) {
     	$.ajax({
     		type : "post",
-    		url  : "${ctp}/shop/getOptionList",
+    		url  : "${ctp}/shop/optionList",
     		data : {productIdx : productIdx},
     		success:function(vos) {
     			let str = '';
     			if(vos.length != 0) {
-						str = "옵션 : / ";
+						str = '<div class="section-title" style="margin-bottom:5px;">등록된 옵션</div>  ';
 	    			for(let i=0; i<vos.length; i++) {
-	    				str += '<a href="javascript:optionDelete('+vos[i].idx+')">';
-							str += vos[i].optionName + "</a> / ";
+	    				str += '&nbsp;&nbsp;<a href="javascript:optionDelete('+vos[i].idx+')" class="optionDeleteA">';
+							str += vos[i].optionName + "</a>&nbsp;&nbsp;";
 	    			}
     			}
     			else {
-    				str = "<div class='text-center'><font color='red'>상품에 등록된 옵션이 없습니다.</font></div>";
+    				str = "<div class='text-center'><font color='#A31D1D'>상품에 등록된 옵션이 없습니다.</font></div>";
     			}
 					$("#optionDemo").html(str);
     		},
@@ -283,12 +306,12 @@
     
     // 옵션항목 삭제하기
     function optionDelete(idx) {
-    	let ans = confirm("현재 선택한 옵션을 삭제하시겠습니까?");
+    	let ans = confirm("선택한 옵션을 삭제하시겠습니까?");
     	if(!ans) return false;
     	
     	$.ajax({
     		type : "post",
-    		url  : "${ctp}/dbShop/optionDelete",
+    		url  : "${ctp}/shop/optionDelete",
     		data : {idx : idx},
     		success:function() {
     			alert("삭제되었습니다.");
@@ -305,12 +328,6 @@
 		  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		}
   </script>
-  <style>
-    th {
-      text-align: center;
-      background-color: #eee;
-    }
-  </style>
 </head>
 <body>
 <p><br/></p>
@@ -323,7 +340,7 @@
 				<div class="input-group" style="display: flex; gap: 20px;">
 					<!-- 대분류 -->
 					<div class="input-group" style="flex: 1;">
-						<input type="text" value="대분류" disabled class="form-control" style="text-align: center; flex: 2;">
+						<input type="text" value="대분류" disabled class="form-control" style="text-align: center; flex: 2; background-color: transparent;">
 						<select id="mainName" name="mainName" class="form-select" onchange="categoryMainChange()" style="flex: 8;" required>
 							<option value="">대분류</option>
 							<c:forEach var="mainVO" items="${mainVos}">
@@ -334,7 +351,7 @@
 					</div>
 					<!-- 중분류 -->
 					<div class="input-group" style="flex: 1;">
-						<input type="text" value="중분류" disabled class="form-control" style="text-align: center; flex: 2;">
+						<input type="text" value="중분류" disabled class="form-control" style="text-align: center; flex: 2; background-color: transparent;">
 						<select id="baseName" name="baseName" class="form-select" onchange="categoryBaseChange()" style="flex: 8;" required>
 							<option value="">중분류</option>
 							<c:if test="${!empty productVO}"><option value="${productVO.baseName}" selected>${productVO.baseName}</option></c:if>
@@ -342,7 +359,7 @@
 					</div>
 					<!-- 소분류 -->
 					<div class="input-group" style="flex: 1;">
-						<input type="text" value="소분류" disabled class="form-control" style="text-align: center; flex: 2;">
+						<input type="text" value="소분류" disabled class="form-control" style="text-align: center; flex: 2; background-color: transparent;">
 						<select id="subName" name="subName" class="form-select" onchange="categorySubChange()" style="flex: 8;" required>
 							<option value="">소분류</option>
 							<c:if test="${!empty productVO}"><option value="${productVO.subName}" selected>${productVO.subName}</option></c:if>
@@ -363,19 +380,24 @@
       <div id="demo"></div>
     </div>
     <hr/>
-    <font size="4"><b>상품옵션등록</b></font>&nbsp;&nbsp;
-    <input type="button" value="옵션박스추가하기" onclick="addOption()" class="btn btn-secondary btn-sm"/><br/>
+     <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+		    <font size="4"><b>상품옵션등록</b></font>
+		    <input type="button" value="옵션추가" onclick="addOption()" class="addOption blackLine-btn" style="width: 120px; font-size: 12px; text-align:center;"/>
+		</div>
+		<br/>
     <div class="form-group">
       <label for="optionName">상품옵션이름</label>
       <input type="text" name="optionName" id="optionName" class="form-control"/>
     </div>
     <div class="form-group">
-      <label for="optionPrice">상품옵션가격</label>
-      <input type="text" name="optionPrice" id="optionPrice" class="form-control"/>
+      <label for="price">상품옵션가격</label>
+      <input type="text" name="price" id="price" class="form-control"/>
     </div>
     <div id="optionType"></div>
     <hr/>
-    <div class='text-right'><input type="button" value="옵션등록" onclick="fCheck()" class="btn btn-primary"/></div>
+    <div style="display: flex; justify-content: center;">
+    	<input type="button" value="옵션등록" onclick="fCheck()" class="blackLine-btn" style="width: 600px; font-size: 20px; text-align:center; justify-content: center;"/>
+    </div>
     <input type="hidden" name="productIdx">
   </form>
 </div>

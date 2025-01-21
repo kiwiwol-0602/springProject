@@ -467,8 +467,6 @@ public class MemberController {
 	public String memberUpdatePost(Model model, HttpSession session, UserVO vo,
 			@RequestParam(defaultValue = "", required = false) MultipartFile fName
 		) {
-		System.out.println("vo : " + vo);
-		System.out.println("getPwd : " + vo.getPwd());
 		
 		int res = memberService.setMemberUpdate(vo, fName);
 		

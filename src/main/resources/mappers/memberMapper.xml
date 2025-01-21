@@ -7,6 +7,10 @@
 		select * from users where mid = #{mid};
 	</select>
 	
+	<select id="getUser" resultType="com.spring.javaGroupS7.vo.UserVO">
+		select * from users where mid = #{mid};
+	</select>
+	
 	<select id="getDuplicateEmailExist" resultType="Integer">
 		select count(*) > 0 from users where email = #{email};
 	</select>

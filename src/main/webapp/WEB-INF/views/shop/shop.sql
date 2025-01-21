@@ -98,6 +98,45 @@ create table products(
   foreign key(baseName) references categoryBase(baseName)
 );
 
+/* =========================== 상품 주문시에 사용되는 테이블(장바구니 / 주문 / 배송 / 이벤트 / 쿠폰 )===============================*/
+
+/* 장바구니 테이블 */
+create table productCart (
+  idx   int not null auto_increment,
+  mid		varchar(20) not null,						/* 장바구니를 사용한 사용자의 아이디 - 로그인한 회원 아이디 */
+  productIdx 	int not null,							/* 장바구니에 담은 상품의 고유번호 */
+  productName varchar(50) not null,			/* 장바구니에 담은 상품명 */
+  price		int not null,									/* 메인상품의 기본 가격 */
+  thumbnail		varchar(100) not null,		/* 서버에 저장된 상품의 메인 이미지 */
+  optionIdx		varchar(50)  not null,		/* 옵션의 고유번호 리스트(여러개가 될수 있기에 문자열 배열로 처리한다.) */
+  optionName	varchar(100)  not null,		/* 옵션명 리스트(여러개가 될수 있기에 문자열 배열로 처리한다.) */
+  optionPrice	varchar(100)  not null,		/* 옵션가격 리스트(여러개가 될수 있기에 문자열 배열로 처리한다.) */
+  optionNum		varchar(50)  not null,		/* 옵션수량 리스트(여러개가 될수 있기에 문자열 배열로 처리한다.) */
+  totalPrice	int not null,							/* 구매한 모든 항목(상품+옵션)에 따른 총 가격 */  
+  cartDate datetime default now() not null,	/* 장바구니에 상품을 담은 날짜 */
+  primary key(idx),
+  foreign key(mid) references member(mid) on update cascade on delete cascade
+);
+desc dbCart;
+
+/* 주문 테이블 */
+create table productOrder (
+  idx   int not null auto_increment,
+  orderIdx  varchar(15) not null,				/* 주문 고유번호(새로 만들어준다) */
+  mid		varchar(30) not null,						/* 주문한 사용자의 아이디 - 로그인한 회원 아이디 */
+  productIdx 	int not null,							/* 주문한 상품의 고유번호 */
+  productName varchar(50) not null,			/* 주문한 상품명 */
+  mainPrice		int not null,							/* 메인상품의 기본 가격 */
+  thumbnail		varchar(100) not null,		/* 서버에 저장된 상품의 메인 이미지 */
+  optionName	varchar(100)  not null,		/* 옵션명 리스트(여러개가 될수 있기에 문자열 배열로 처리한다.) */
+  optionPrice	varchar(100)  not null,		/* 옵션가격 리스트(여러개가 될수 있기에 문자열 배열로 처리한다.) */
+  optionNum		varchar(50)  not null,		/* 옵션수량 리스트(여러개가 될수 있기에 문자열 배열로 처리한다.) */
+  totalPrice	int not null,							/* 구매한 모든 항목(상품+옵션)에 따른 총 가격 */  
+  orderDate   datetime default now() not null, /* 실제 주문한 날짜 */
+  primary key(idx),
+  foreign key(mid) references users(mid) on update cascade on delete cascade,
+  foreign key(productIdx) references product(idx) on update cascade on delete restrict
+);
 
 
 

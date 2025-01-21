@@ -13,7 +13,8 @@ public class MessageController {
 	public String MessageGet(Model model,
 			@PathVariable String msgFlag,
 			@RequestParam(name="mid", defaultValue = "", required = false) String mid,
-			@RequestParam(name="idx", defaultValue = "0", required = false) int idx
+			@RequestParam(name="idx", defaultValue = "0", required = false) int idx,
+			@RequestParam(name="tempFlag", defaultValue = "", required = false) String tempFlag
 		) {
 		
 		if(msgFlag.equals("memberJoinOk")) {
@@ -71,6 +72,18 @@ public class MessageController {
 		else if(msgFlag.equals("adminLevelNo")) {
 			model.addAttribute("message", "접속 권한이 없습니다.");
 			model.addAttribute("url", "main");
+		}
+		else if(msgFlag.equals("optionInputOk")) {
+			model.addAttribute("message", "옵션항목이 등록되었습니다.");
+			model.addAttribute("url", "shop/productOption?productName="+tempFlag);
+		}
+		else if(msgFlag.equals("optionInputNo")) {
+			model.addAttribute("message", "옵션항목 등록 중 오류가 발생했습니다.");
+			model.addAttribute("url", "shop/productOption?productName="+tempFlag);
+		}
+		else if(msgFlag.equals("cartEmpty")) {
+			model.addAttribute("message", "장바구니에 상품을 담아주세요");
+			model.addAttribute("url", "shop/productCart");
 		}
 		
 		return "include/message";

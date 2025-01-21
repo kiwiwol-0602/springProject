@@ -66,9 +66,6 @@ public class MemberServiceImpl implements MemberService {
 		vo.setBirthday(birthday);
 		vo.setGender(gender);
 		
-		System.out.println("Birthday: " + vo.getBirthday());
-		System.out.println("Gender: " + vo.getGender());
-		
 		return memberDAO.setMemberJoin(vo);
 	}
 
@@ -180,9 +177,6 @@ public class MemberServiceImpl implements MemberService {
 		}
 		vo.setBirthday(birthday);
 		
-		
-		
-		System.out.println("service vo:" + vo);
 		return memberDAO.setMemberUpdate(vo);
 	}
 
@@ -195,6 +189,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int setMemberDeleteOk(String mid) {
 		return memberDAO.setMemberDeleteOk(mid);
+	}
+
+	@Override
+	public UserVO getUser(String mid) {
+		return memberDAO.getUser(mid);
 	}
 
 

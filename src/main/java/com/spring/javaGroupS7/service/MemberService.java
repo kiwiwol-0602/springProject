@@ -35,5 +35,7 @@ public interface MemberService {
 
 	int setMemberDeleteOk(String mid);
 
+	UserVO getUser(String mid);
+
 	
 }

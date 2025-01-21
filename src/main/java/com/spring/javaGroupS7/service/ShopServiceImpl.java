@@ -12,6 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.spring.javaGroupS7.common.JavaGroupProvide;
 import com.spring.javaGroupS7.dao.ShopDAO;
 import com.spring.javaGroupS7.vo.CategorySubVO;
+import com.spring.javaGroupS7.vo.ProductCartVO;
+import com.spring.javaGroupS7.vo.ProductOptionVO;
+import com.spring.javaGroupS7.vo.ProductOrderVO;
 import com.spring.javaGroupS7.vo.ProductVO;
 
 @Service
@@ -124,11 +127,7 @@ public class ShopServiceImpl implements ShopService {
 		String productCode = shopDAO.getProductCode(vo.getMainName(), vo.getBaseName(), vo.getSubName(), maxIdx);
 		vo.setProductCode(productCode);
 		
-		System.out.println("productCode : "+productCode);
-		System.out.println("productVO" + vo);
-		
 		res = shopDAO.setProductInput(vo);
-		
 		
 		return res;
 	}
@@ -164,7 +163,6 @@ public class ShopServiceImpl implements ShopService {
 				
 				javaGroupProvide.writeFile(file1, sFileName, savePath);
 				vo.setThumbnail(sFileName);
-				System.out.println("sFileName : "+sFileName);
 			}
 			else {
 				return res;
@@ -172,9 +170,6 @@ public class ShopServiceImpl implements ShopService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("vo.getThumbnail() : "+vo.getThumbnail());
-		
-		
 		
 		try {
 			if(!file2.isEmpty()) {
@@ -188,7 +183,6 @@ public class ShopServiceImpl implements ShopService {
 				
 				javaGroupProvide.writeFile(file2, sFileName, savePath);
 				vo.setTitleImg(sFileName);
-				System.out.println("sFileName : "+sFileName);
 			}
 			else {
 				return res;
@@ -196,37 +190,28 @@ public class ShopServiceImpl implements ShopService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("vo.getTitleImg() : "+vo.getTitleImg());
 		
 		//ckeditor img
 		String content = vo.getContent();
 		
-		System.out.println("content : "+content);
 		
 		if(content != null && !content.isEmpty()) {
 			String existingContent = shopDAO.getExistingContent(vo.getIdx());
-			System.out.println("existingContent : "+existingContent);
 			if(existingContent !=null && !existingContent.isEmpty()) {
 				List<String> existingImgs = javaGroupProvide.extractImagePaths(existingContent);
-				System.out.println("existingImgs : "+existingImgs);
 				for(String imgPath : existingImgs) {
 					javaGroupProvide.deleteFile(imgPath, "shop/product");
 				}
 			}
 			javaGroupProvide.imgCheck(content,"shop/product");
 			vo.setContent(content.replace("/data/ckeditor/", "/data/shop/product/"));
-			System.out.println("content : "+content);
 		}
 		
 		String display = vo.getDisplay();
-		System.out.println("display : "+display);
 		if(display == null || display.trim().isEmpty()) {
 			display = "OFF";
 		}
 		vo.setDisplay(display);
-		System.out.println("display : "+display);
-		
-		System.out.println("service productVO" + vo);
 		
 		res = shopDAO.setProductUpdate(vo);
 		
@@ -267,5 +252,67 @@ public class ShopServiceImpl implements ShopService {
 	@Override
 	public ProductVO productInforGet(String productName) {
 		return shopDAO.productInforGet(productName);
+	}
+
+	@Override
+	public List<ProductOptionVO> optionList(int productIdx) {
+		return shopDAO.optionList(productIdx);
+	}
+
+	@Override
+	public int setOptionDelete(int idx) {
+		return shopDAO.setOptionDelete(idx);
+	}
+
+	@Override
+	public int getOptionSame(int productIdx, String optionName) {
+		return shopDAO.getOptionSame(productIdx, optionName);
+	}
+
+	@Override
+	public int setOptionInput(ProductOptionVO vo) {
+		return shopDAO.setOptionInput(vo);
+	}
+
+	@Override
+	public List<ProductOptionVO> getOption(int idx) {
+		return shopDAO.getOption(idx);
+	}
+
+	@Override
+	public ProductCartVO getCartOptionSearch(String productName, String optionName, String mid) {
+		return shopDAO.getCartOptionSearch(productName, optionName, mid);
+	}
+
+	@Override
+	public int cartUpdate(ProductCartVO vo) {
+		return shopDAO.cartUpdate(vo);
+	}
+
+	@Override
+	public int cartInput(ProductCartVO vo) {
+		return shopDAO.cartInput(vo);
+	}
+
+	@Override
+	public List<ProductCartVO> getCartList(String mid) {
+		return shopDAO.getCartList(mid);
+	}
+
+	@Override
+	public String cartDelete(int idx) {
+		return shopDAO.cartDelete(idx);
+	}
+
+	@Override
+	public ProductOrderVO getOrderMaxIdx() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ProductCartVO getCartIdx(int parseInt) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

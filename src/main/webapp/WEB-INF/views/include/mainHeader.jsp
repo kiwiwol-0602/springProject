@@ -167,7 +167,7 @@ function logout() {
       </c:if>
        -->
       <a href="#" class="icon"><i class="fas fa-map-marker-alt"></i></a>
-      <a href="#" class="icon"><i class="fas fa-shopping-bag"></i></a>
+      <a href="${ctp}/shop/productCartList" class="icon"><i class="fas fa-shopping-bag"></i></a>
     </div>
   </header>
 </body>
