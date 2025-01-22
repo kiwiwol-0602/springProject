@@ -8,52 +8,7 @@
   <meta charset="UTF-8">
   <title>dbOrder.jsp</title>
   <jsp:include page="/WEB-INF/views/include/bs5.jsp"/>
-  <script>
-    $(document).ready(function(){
-      $(".nav-tabs a").click(function(){
-        $(this).tab('show');
-      });
-      $('.nav-tabs a').on('shown.bs.tab', function(event){
-        var x = $(event.target).text();         // active tab
-        var y = $(event.relatedTarget).text();  // previous tab
-      });
-    });
-    
-    // 결제하기
-    function order() {
-      var paymentCard = document.getElementById("paymentCard").value;
-      var payMethodCard = document.getElementById("payMethodCard").value;
-      var paymentBank = document.getElementById("paymentBank").value;
-      var payMethodBank = document.getElementById("payMethodBank").value;
-      if(paymentCard == "" && paymentBank == "") {
-        alert("결제방식과 결제번호를 입력하세요.");
-        return false;
-      }
-      if(paymentCard != "" && payMethodCard == "") {
-        alert("카드번호를 입력하세요.");
-        document.getElementById("payMethodCard").focus();
-        return false;
-      }
-      else if(paymentBank != "" && payMethodBank == "") {
-        alert("입금자명을 입력하세요.");
-        return false;
-      }
-      var ans = confirm("결재하시겠습니까?");
-      if(ans) {
-        if(paymentCard != "" && payMethodCard != "") {
-          document.getElementById("payment").value = "C"+paymentCard;
-          document.getElementById("payMethod").value = payMethodCard;
-        }
-        else {
-          document.getElementById("payment").value = "B"+paymentBank;
-          document.getElementById("payMethod").value = payMethodBank;
-        }
-        myform.action = "${ctp}/dbShop/payment";
-        myform.submit();
-      }
-    }
-
-  </script>
+ 
   <style>
     td, th {padding: 5px}
     body {
@@ -252,6 +207,59 @@
   }
   
   </style>
+  <script type="text/javascript">
+  	'use strict'
+  	function selectCoupon() {
+      // 모달을 띄움
+      $('#couponModal').modal('show');
+		}
+  	
+  	
+     $(document).ready(function(){
+       $(".nav-tabs a").click(function(){
+         $(this).tab('show');
+       });
+       $('.nav-tabs a').on('shown.bs.tab', function(event){
+         var x = $(event.target).text();         // active tab
+         var y = $(event.relatedTarget).text();  // previous tab
+       });
+     });
+     
+     // 결제하기
+     function order() {
+       var paymentCard = document.getElementById("paymentCard").value;
+       var payMethodCard = document.getElementById("payMethodCard").value;
+       var paymentBank = document.getElementById("paymentBank").value;
+       var payMethodBank = document.getElementById("payMethodBank").value;
+       if(paymentCard == "" && paymentBank == "") {
+         alert("결제방식과 결제번호를 입력하세요.");
+         return false;
+       }
+       if(paymentCard != "" && payMethodCard == "") {
+         alert("카드번호를 입력하세요.");
+         document.getElementById("payMethodCard").focus();
+         return false;
+       }
+       else if(paymentBank != "" && payMethodBank == "") {
+         alert("입금자명을 입력하세요.");
+         return false;
+       }
+       var ans = confirm("결재하시겠습니까?");
+       if(ans) {
+         if(paymentCard != "" && payMethodCard != "") {
+           document.getElementById("payment").value = "C"+paymentCard;
+           document.getElementById("payMethod").value = payMethodCard;
+         }
+         else {
+           document.getElementById("payment").value = "B"+paymentBank;
+           document.getElementById("payMethod").value = payMethodBank;
+         }
+         myform.action = "${ctp}/dbShop/payment";
+         myform.submit();
+       }
+     }
+
+   </script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
@@ -310,14 +318,20 @@
          </td>
         </tr>
        <tr>
-        <td>
-		  		<hr/>
+        <td colspan="3">
+		  		<hr style="width: 100%; margin: 0;" />
         </td>
       </tr>
       <%-- <input type="hidden" name="cartIdx" value="${idx}"/> --%>  <!-- 장바구니고유번호를 비롯한 주문된 상품의 정보들은 세션에 담겨있기에 굳이 따로 넘길필요없다. 즉 따로이 입력된 배송지 정보들만 넘긴다. -->
     </c:forEach>
   </table>
   <table style="margin:auto; width:90%">
+  	<tr>
+  		<td>
+  			<div>할인쿠폰</div>
+				<input type="button" class="btn btn-primary" id="couponSelectBtn" value="쿠폰 선택" onclick="selectCoupon()"/>
+  		</td>
+  	</tr>
   	<tr>
   		<td>
   			<div>주문금액</div>
@@ -332,10 +346,7 @@
   		<td>
 			  <div>
 		      <c:set var="orderTotalPrice" value="${orderTotalPrice + vo.totalPrice}"/>
-			    <b>총 주문(결재) 금액</b> : 상품가격(<fmt:formatNumber value="${orderTotalPrice}" pattern='#,###원'/>) +
-			                    배송비(<fmt:formatNumber value="${sOrderVos[0].baesong}" pattern='#,###원'/>) =
-			                    총 <font size="5" color="orange"><b><fmt:formatNumber value="${orderTotalPrice + sOrderVos[0].baesong}" pattern='#,###'/>
-			                    </b></font>원
+			    <b>총 주문(결재) 금액</b> : 원
 			  </div>
   		</td>
   	</tr>
@@ -408,6 +419,42 @@
 	  <input type="hidden" name="name" value="${sOrderVos[0].productName}"/>
 	  </div>
 	  </div>
+	  
+	  <!-- 쿠폰 선택 모달 -->
+<div class="modal fade" id="couponModal" tabindex="-1" aria-labelledby="couponModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="couponModalLabel">쿠폰 선택</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ul id="couponModalBody">
+        	<c:forEach var="userCoupon"	items="${userCouponVOS}" varStatus="">
+		        <li>
+			        <input type="radio" name="selectedCoupon" value="${userCoupon.idx}" id="coupon${userCoupon.idx}">
+			        <label for="coupon' + coupon.couponId + '">${userCoupon.couponName}(${userCoupon.userCouponCode}) 
+			        	- 할인 
+			        	<c:choose>
+							    <c:when test="${userCoupon.discountType eq 'percent'}">
+							      ${userCoupon.discount}%
+							    </c:when>
+							    <c:otherwise>
+							      ${userCoupon.discount}₩
+							    </c:otherwise>
+							  </c:choose>
+			        </label>
+		        </li>
+        	</c:forEach>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-primary" id="applyCouponBtn">쿠폰 적용</button>
+      </div>
+    </div>
+  </div>
+</div>
 </form>
 </div>
 <p><br/></p>

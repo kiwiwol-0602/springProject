@@ -118,7 +118,7 @@
 	 </select>
 	 
 	 <select id="getUserCouponList"  resultType="com.spring.javaGroupS7.vo.UserCouponsVO">
-	 	Select * from userCoupons where mid = #{mid};
+	 	Select uc.*, c.expirationDate, c.couponName, c.discountType, c.discount from userCoupons uc, coupons c where uc.couponIdx = c.idx and mid = #{mid};
 	 </select>
 	 
 	 

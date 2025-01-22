@@ -10,4 +10,12 @@ public class UserCouponsVO {
 	private String userCouponCode;
 	private String used;
 	private String usedDate;
+	
+	private String couponCode;
+	private String couponName;
+	private String discountType;
+	private int discount;
+	private int minOrderPay;
+	private String expirationDate;
+	private String active;
 }
