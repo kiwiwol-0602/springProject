@@ -6,9 +6,12 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.spring.javaGroupS7.vo.CategorySubVO;
+import com.spring.javaGroupS7.vo.CouponsVO;
 import com.spring.javaGroupS7.vo.ProductCartVO;
 import com.spring.javaGroupS7.vo.ProductOptionVO;
+import com.spring.javaGroupS7.vo.ProductOrderVO;
 import com.spring.javaGroupS7.vo.ProductVO;
+import com.spring.javaGroupS7.vo.UserCouponsVO;
 
 public interface ShopDAO {
 
@@ -66,6 +69,16 @@ public interface ShopDAO {
 
 	List<ProductCartVO> getCartList(@Param("mid") String mid);
 
-	String cartDelete(@Param("idx") int idx);
+	int cartDelete(@Param("idx") int idx);
+
+	ProductOrderVO getOrderMaxIdx();
+
+	ProductCartVO getCartIdx(int idx);
+
+	List<CouponsVO> getAllCoupons();
+
+	int setCouponInput(@Param("vo") CouponsVO vo);
+
+	List<UserCouponsVO> getUserCouponList(@Param("mid") String mid);
 
 }

@@ -85,6 +85,14 @@ public class MessageController {
 			model.addAttribute("message", "장바구니에 상품을 담아주세요");
 			model.addAttribute("url", "shop/productCart");
 		}
+		else if(msgFlag.equals("couponInputOk")) {
+			model.addAttribute("message", "쿠폰이 등록되었습니다.");
+			model.addAttribute("url", "shop/couponList");
+		}
+		else if(msgFlag.equals("couponInputNo")) {
+			model.addAttribute("message", "쿠폰 등록 중 오류가 발생했습니다.");
+			model.addAttribute("url", "shop/couponInput");
+		}
 		
 		return "include/message";
 	}

@@ -196,8 +196,8 @@
   
   <div style="margin-bottom: 100px;" class="input-group">
 		<div class="tab">
-			<a href="#">
-		  	<p class="talTitle">배송 현황</p>
+			<a href="${ctp}/shop/couponPage">
+		  	<p class="talTitle">쿠폰</p>
 		  	<div class="talContent">0</div>
 	  	</a>
 	  </div>

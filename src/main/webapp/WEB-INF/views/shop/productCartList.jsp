@@ -113,7 +113,8 @@
 			text-decoration: none !important;
     	color: gray !important;
 		}
-		 .btn-outline-black {
+		
+	 .btn-outline-black {
   	width: 80px;
    	height: 50px; /* 수량 입력 필드와 동일한 높이 */
     line-height: 1; /* 텍스트가 가운데 정렬되도록 */
@@ -129,8 +130,8 @@
   .btn-outline-black:hover {
     background-color: #0a0a0a;
     color: #fff;;
-    
   }
+  
   .totSubBox {
   	border: none;
   	background-color: transparent;
@@ -148,11 +149,11 @@
         type : "post",
         url  : "${ctp}/shop/cartDelete",
         data : {idx : idx},
-        success:function() {
+        success:function(res) {
           location.reload();
         },
         error : function() {
-        	alert("전송에러!");
+        	alert("전송에러");
         }
       });
     }
@@ -247,7 +248,7 @@
 <body>
   <jsp:include page="/WEB-INF/views/include/header.jsp" />
   <jsp:include page="/WEB-INF/views/include/nav.jsp"/>
-  <form name="myform" method="post">
+  <form name="myform" method="post" action="${ctp}/shop/productOrder">
     <div class="cart-container">
       <h2 style="font-family: 'Gyeonggi_Title_Medium'; font-size: 40px; margin-bottom: 30px;">장바구니</h2>
       <div class="cart-items">
@@ -285,7 +286,7 @@
             	</div>
             </div>
             <div>
-            		<button type="button" onClick="cartDelete(${vo.idx})" class="btn-outline-black">구매취소</button>
+            		<button type="button" onClick="cartDelete(${vo.idx})" class="btn-outline-black">삭제</button>
 				        <input type="hidden" name="checkItem" value="0" id="checkItem${vo.idx}"/>	<!-- 구매체크가 되지 않은 품목은 '0'으로, 체크된것은 '1'로 처리하고자 한다. -->
 				        <input type="hidden" name="idx" value="${vo.idx }"/>
 				        <input type="hidden" name="thumbnail" value="${vo.thumbnail}"/>

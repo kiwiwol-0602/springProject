@@ -97,8 +97,6 @@
 	<script type="text/javascript">
 		'use strict'
 		
-		
-		
 		function reverseCheck() {
 		    let checkboxes = document.querySelectorAll('input[name="productCheck"]');
 		    checkboxes.forEach(function(checkbox) {
@@ -162,7 +160,7 @@
   			<table style="width: 100%; margin-top: 40px;">
   				<tr style="width: 100%;">
       			<td class="left-align" style="justify-content: flex-start;">
-      			<a href="#" class="btn-edit" style="padding: 5px 20px;">옵션등록</a>
+      			<a href="${ctp}/shop/productOption" class="btn-edit" style="padding: 5px 20px;">옵션등록</a>
       			<a href="javascript:checkedProductDelete()" class="btn-delete" style="padding: 5px 20px;">상품삭제</a>
       			</td>
       			<td class="right-align" style="justify-content: flex-end; text-align: right;">

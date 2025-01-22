@@ -22,10 +22,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.spring.javaGroupS7.service.MemberService;
 import com.spring.javaGroupS7.service.ShopService;
 import com.spring.javaGroupS7.vo.CategorySubVO;
+import com.spring.javaGroupS7.vo.CouponsVO;
 import com.spring.javaGroupS7.vo.ProductCartVO;
 import com.spring.javaGroupS7.vo.ProductOptionVO;
 import com.spring.javaGroupS7.vo.ProductOrderVO;
 import com.spring.javaGroupS7.vo.ProductVO;
+import com.spring.javaGroupS7.vo.UserCouponsVO;
 import com.spring.javaGroupS7.vo.UserVO;
 
 
@@ -250,13 +252,14 @@ public class ShopController {
 		return "shop/productCartList";
 	}
 	
-	@PostMapping("cartDelete")
+	@ResponseBody
+	@PostMapping("/cartDelete")
 	public String cartDeleteGet(int idx) {
 		return shopService.cartDelete(idx) + "";
 	}
 	
-	@PostMapping("/productCartList")
-	public String productCartListPost(HttpServletRequest request, HttpSession session, Model model,
+	@PostMapping("/productOrder")
+	public String productOrderPost(HttpServletRequest request, HttpSession session, Model model,
 			@RequestParam(name="baesong", defaultValue="0", required=false) int baesong) {
 		
 		String mid = (String) session.getAttribute("sMid");
@@ -280,6 +283,8 @@ public class ShopController {
     for(String strIdx : idxChecked) {
     	cartVO = shopService.getCartIdx(Integer.parseInt(strIdx));
     	ProductOrderVO orderVO = new ProductOrderVO();
+    	System.out.println("orderVO : " + orderVO);
+    	
       orderVO.setProductIdx(cartVO.getProductIdx());
       orderVO.setProductName(cartVO.getProductName());
       orderVO.setMainPrice(cartVO.getPrice());
@@ -299,11 +304,47 @@ public class ShopController {
     
     session.setAttribute("sOrderVos", orderVos);
 
-    UserVO memberVO = memberService.getMemberIdCheck(mid);
-    model.addAttribute("memberVO", memberVO);
+    UserVO userVO = memberService.getMemberIdCheck(mid);
+    
+    List<UserCouponsVO> userCouponVOS = shopService.getUserCouponList(mid);
+    System.out.println("userCouponVOS"+userCouponVOS);
+    
+    
+    model.addAttribute("userVO", userVO);
+    model.addAttribute("userCouponVOS", userCouponVOS);
 		
 		
-		return "shop/dbOrder";
+		return "shop/productOrder";
+	}
+	
+	@GetMapping("/couponList")
+	public String couponListGet(Model model) {
+		 List<CouponsVO> vos = shopService.getAllCoupons();  // 모든 쿠폰 리스트를 가져옴
+     model.addAttribute("couponVOS", vos);  // "coupons"라는 이름으로 쿠폰 리스트를 모델에 저장
+		
+		return "shop/couponList";
+	}
+	
+	@GetMapping("/couponInput")
+	public String couponInputGet() {
+		return "shop/couponInput";
+	}
+	
+	@PostMapping("/couponInput")
+	public String couponInputPost(CouponsVO vo) {
+		int res= shopService.setCouponInput(vo);
+		System.out.println("CouponsVO"+vo);
+		
+		if(res != 0) return "redirect:/message/couponInputOk";
+		return "redirect:/message/couponInputNo?";
+	}
+	
+	@GetMapping("/couponPage")
+	public String couponPageGet(Model model) {
+		 List<CouponsVO> vos = shopService.getAllCoupons();
+     model.addAttribute("couponVOS", vos);  // 
+		
+		return "shop/couponPage";
 	}
 	
 }

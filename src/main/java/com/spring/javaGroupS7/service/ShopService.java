@@ -6,10 +6,12 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.javaGroupS7.vo.CategorySubVO;
+import com.spring.javaGroupS7.vo.CouponsVO;
 import com.spring.javaGroupS7.vo.ProductCartVO;
 import com.spring.javaGroupS7.vo.ProductOptionVO;
 import com.spring.javaGroupS7.vo.ProductOrderVO;
 import com.spring.javaGroupS7.vo.ProductVO;
+import com.spring.javaGroupS7.vo.UserCouponsVO;
 
 public interface ShopService {
 
@@ -61,11 +63,17 @@ public interface ShopService {
 
 	List<ProductCartVO> getCartList(String mid);
 
-	String cartDelete(int idx);
+	int cartDelete(int idx);
 
 	ProductOrderVO getOrderMaxIdx();
 
 	ProductCartVO getCartIdx(int parseInt);
+
+	List<CouponsVO> getAllCoupons();
+
+	int setCouponInput(CouponsVO vo);
+
+	List<UserCouponsVO> getUserCouponList(String mid);
 
 
 }

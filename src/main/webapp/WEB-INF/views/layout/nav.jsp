@@ -166,6 +166,7 @@ function toggleMenu(element) {
         <div class="w3-container">
             <h5 onclick="toggleMenu(this)">프로모션</h5>
         <div class="w3-bar-block">
+            <a href="${ctp}/shop/couponList" class="w3-bar-item w3-button">쿠폰</a>
             <a href="#" class="w3-bar-item w3-button">마케팅</a>
             <a href="#" class="w3-bar-item w3-button">이벤트</a>
         </div>

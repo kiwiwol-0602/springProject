@@ -12,10 +12,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.spring.javaGroupS7.common.JavaGroupProvide;
 import com.spring.javaGroupS7.dao.ShopDAO;
 import com.spring.javaGroupS7.vo.CategorySubVO;
+import com.spring.javaGroupS7.vo.CouponsVO;
 import com.spring.javaGroupS7.vo.ProductCartVO;
 import com.spring.javaGroupS7.vo.ProductOptionVO;
 import com.spring.javaGroupS7.vo.ProductOrderVO;
 import com.spring.javaGroupS7.vo.ProductVO;
+import com.spring.javaGroupS7.vo.UserCouponsVO;
 
 @Service
 public class ShopServiceImpl implements ShopService {
@@ -300,19 +302,42 @@ public class ShopServiceImpl implements ShopService {
 	}
 
 	@Override
-	public String cartDelete(int idx) {
+	public int cartDelete(int idx) {
 		return shopDAO.cartDelete(idx);
 	}
 
 	@Override
 	public ProductOrderVO getOrderMaxIdx() {
-		// TODO Auto-generated method stub
-		return null;
+		return shopDAO.getOrderMaxIdx();
 	}
 
 	@Override
-	public ProductCartVO getCartIdx(int parseInt) {
-		// TODO Auto-generated method stub
-		return null;
+	public ProductCartVO getCartIdx(int idx) {
+		return shopDAO.getCartIdx(idx);
+	}
+
+	@Override
+	public List<CouponsVO> getAllCoupons() {
+		return shopDAO.getAllCoupons();
+	}
+
+	@Override
+	public int setCouponInput(CouponsVO vo) {
+		String couponCode = vo.getCouponCode();
+		String randomCode = RandomStringUtils.randomAlphabetic(8);
+		
+		if(couponCode=="") {
+			couponCode = randomCode;
+		}
+		vo.setCouponCode(couponCode);
+		
+		System.out.println(couponCode);
+		
+		return shopDAO.setCouponInput(vo);
+	}
+
+	@Override
+	public List<UserCouponsVO> getUserCouponList(String mid) {
+		return shopDAO.getUserCouponList(mid);
 	}
 }

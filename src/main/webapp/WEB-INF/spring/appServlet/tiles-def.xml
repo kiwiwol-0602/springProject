@@ -32,5 +32,11 @@
  	<definition name="shop/productUpdate" extends="adminLayout">
  		<put-attribute name="body" value="/WEB-INF/views/shop/productUpdate.jsp" />
  	</definition>
+ 	<definition name="shop/couponList" extends="adminLayout">
+ 		<put-attribute name="body" value="/WEB-INF/views/shop/couponList.jsp" />
+ 	</definition>
+ 	<definition name="shop/couponInput" extends="adminLayout">
+ 		<put-attribute name="body" value="/WEB-INF/views/shop/couponInput.jsp" />
+ 	</definition>
  
  </tiles-definitions>

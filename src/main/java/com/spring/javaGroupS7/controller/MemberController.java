@@ -293,8 +293,12 @@ public class MemberController {
 		
 		int res = memberService.setMemberJoin(vo);
 		
-		if(res != 0) return "redirect:/message/memberJoinOk";
-		else return "redirect:/message/memberJoinNo";
+		if(res != 0) {
+			return "redirect:/message/memberJoinOk";
+		}
+		else {
+			return "redirect:/message/memberJoinNo";
+		}
 	}
 	
 	// 계정찾기

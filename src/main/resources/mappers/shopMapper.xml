@@ -105,6 +105,22 @@
 	 	select * from productCart where mid=#{mid} order by idx;;
 	 </select>
 	 
+	 <select id="getOrderMaxIdx" resultType="com.spring.javaGroupS7.vo.ProductOrderVO">
+	 	select max(idx) as maxIdx from productOrder;
+	 </select>
+	 
+	 <select id="getCartIdx" resultType="com.spring.javaGroupS7.vo.ProductCartVO">
+	 	Select * from productCart where idx = #{idx};
+	 </select>
+	 
+	 <select id="getAllCoupons" resultType="com.spring.javaGroupS7.vo.CouponsVO">
+	 	Select * from coupons;
+	 </select>
+	 
+	 <select id="getUserCouponList"  resultType="com.spring.javaGroupS7.vo.UserCouponsVO">
+	 	Select * from userCoupons where mid = #{mid};
+	 </select>
+	 
 	 
 	 
 	 
@@ -125,6 +141,16 @@
 	<insert id="cartInput">
     insert into productCart values (default,#{vo.mid},#{vo.productIdx},#{vo.productName},#{vo.price},#{vo.thumbnail},#{vo.optionIdx},#{vo.optionName},#{vo.optionPrice},#{vo.optionNum},#{vo.totalPrice},default);
   </insert>
+  
+  <insert id="setCouponInput">
+  	insert into coupons values (default,#{vo.couponCode},#{vo.couponName},#{vo.discountType},#{vo.discount},#{vo.minOrderPay},#{vo.expirationDate},#{vo.active});
+  </insert>
+  
+  
+  
+  
+  
+  
 	
 	<!-- update -->
 	
