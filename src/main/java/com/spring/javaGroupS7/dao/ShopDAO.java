@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.spring.javaGroupS7.vo.BaesongVO;
 import com.spring.javaGroupS7.vo.CategorySubVO;
 import com.spring.javaGroupS7.vo.CouponsVO;
 import com.spring.javaGroupS7.vo.ProductCartVO;
@@ -80,5 +81,19 @@ public interface ShopDAO {
 	int setCouponInput(@Param("vo") CouponsVO vo);
 
 	List<UserCouponsVO> getUserCouponList(@Param("mid") String mid);
+
+	CouponsVO getCouponInfo(@Param("idx") int idx);
+
+	UserCouponsVO getUsedUserCouponInfo(@Param("userCoIdx") int userCoIdx);
+
+	void setOrder(@Param("vo") ProductOrderVO vo);
+
+	void setCartDeleteAll(@Param("cartIdx") int cartIdx);
+
+	void setBaesong(@Param("baesongVO") BaesongVO baesongVO);
+
+	void setUserPointPlus(@Param("mid") String mid);
+
+	int getTotalBaesongOrder(@Param("orderIdx") String orderIdx);
 
 }

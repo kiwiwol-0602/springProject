@@ -498,7 +498,8 @@
 					<input type="hidden" name="mid" value="${sMid}"/>
 					<input type="hidden" name="productIdx" value="${vo.idx}"/>
 					<input type="hidden" name="productName" value="${vo.productName}"/>
-					<input type="hidden" name="price" value="${vo.pay}"/>
+					<input type="hidden" name="price" value="${vo.price}"/>
+					<input type="hidden" name="pay" value="${vo.pay}"/>
 					<input type="hidden" name="thumbnail" value="${vo.thumbnail}"/>
 					<input type="hidden" name="totalPrice" id="totalPriceResult"/>
 					<input type="hidden" name="flag" id="flag"/>

@@ -10,6 +10,7 @@ public class ProductCartVO {
 	private int productIdx;
 	private String productName;
 	private int price;
+	private int pay;
 	private String thumbnail;
 	private String optionIdx;
 	private String optionName;

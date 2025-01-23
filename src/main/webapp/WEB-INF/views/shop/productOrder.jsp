@@ -207,57 +207,143 @@
   }
   
   </style>
-  <script type="text/javascript">
-  	'use strict'
+	<script type="text/javascript">
+		'use strict'
+  	function calculateOrder() {
+    	let totalPrice = 0;
+	    let totalDiscount = 0;
+	    
+	    // 모든 옵션에 대해 계산
+	    document.querySelectorAll('[data-price]').forEach(function(item) {
+	      const price = parseFloat(item.getAttribute('data-price'));
+	      const quantity = parseInt(item.getAttribute('data-quantity'));
+	      const pay = parseFloat(item.getAttribute('data-pay'));
+	      
+	      // 주문금액: price * quantity
+	      totalPrice += price * quantity;
+	      
+	      // 할인금액: pay * quantity
+	      totalDiscount += (price-pay) * quantity;
+	    });
+	
+	    // 결과를 화면에 출력
+	    document.getElementById('orderTotalPrice').textContent = totalPrice.toLocaleString() + '원';
+	    document.getElementById('orderTotalPrice').value = totalPrice;
+	    
+	    document.getElementById('totalDiscount').textContent = totalDiscount.toLocaleString() + '원';
+	    document.getElementById('totalDiscount').value = totalDiscount;
+	    
+	    document.getElementById('totalPay').textContent = (totalPrice - totalDiscount).toLocaleString() + '원';
+	    document.getElementById('totalPay').value = (totalPrice - totalDiscount);
+		}
+		
+		// 페이지가 로드되면 계산 수행
+		window.onload = function() {
+    	calculateOrder();
+		}
+  	
   	function selectCoupon() {
-      // 모달을 띄움
-      $('#couponModal').modal('show');
+  	  // 모달을 띄움
+  	  $('#couponModal').modal('show');
 		}
   	
   	
-     $(document).ready(function(){
-       $(".nav-tabs a").click(function(){
-         $(this).tab('show');
-       });
-       $('.nav-tabs a').on('shown.bs.tab', function(event){
-         var x = $(event.target).text();         // active tab
-         var y = $(event.relatedTarget).text();  // previous tab
-       });
-     });
+  	$(document).ready(function(){
+		  $(".nav-tabs a").click(function(){
+		    $(this).tab('show');
+  	  });
+      $('.nav-tabs a').on('shown.bs.tab', function(event){
+		    var x = $(event.target).text();         // active tab
+        var y = $(event.relatedTarget).text();  // previous tab
+      });
+    });
+     
+		
+	  function couponDC(){
+				
+			const selectedCoupon = document.querySelector('input[name="selectedCoupon"]:checked');
+	    const couponIdx = selectedCoupon.dataset.couponidx;
+			const userCoIdx = selectedCoupon.value;
+	    const totalPay = document.getElementById('totalPay').value;
+	    const totalDiscount = document.getElementById('totalDiscount').value;
+	    alert(userCoIdx);
+	    
+			if (!selectedCoupon) {
+				alert('쿠폰을 선택해주세요.');
+			  return;
+			}
+			
+			$.ajax({
+			      type: 'POST',
+			      url: '${ctp}/shop/applyCoupon',
+			      data: {
+			    	  couponIdx: couponIdx,
+			    	  totalPay : totalPay,
+			    	  totalDiscount : totalDiscount,
+			    	  userCoIdx : userCoIdx
+			    	  
+			      },
+			      success: function(response) {
+			        if (response.success) {
+			          // 할인된 금액을 화면에 반영
+	    					
+			          $('#totalDiscount').text(response.newTotalDiscount.toLocaleString() + '원');
+			          $('#totalDiscount').val(response.newTotalDiscount);
+								$('#totalPay').text(response.newTotalPay.toLocaleString() + '원');
+								$('#totalPay').val(response.newTotalPay);
+			          $('#ucNameCode').val(response.ucName);
+			          
+			          // 모달 닫기
+			          $('#couponModal').modal('hide');
+			        } else {
+			          alert('쿠폰 적용에 실패했습니다.');
+			        }
+			      },
+			      error: function() {
+			        alert('서버 오류가 발생했습니다.');
+			      }
+			    });
+	  }
+     
+    function pointCheck(all){
+    	let allPoint = ${userVO.point};
+			let	point = document.getElementById("point").value;
+    	let totDiscount = document.getElementById("totalDiscount").value;
+    	let totPay = document.getElementById("totalPay").value;
+    	
+    	if(all){
+    		point = allPoint;  // 전액 사용시 보유 포인트를 사용
+        document.getElementById("point").value = point;  // 포인트 입력창에도 전액 사용한 값으로 업데이트
+    	}
+    	
+    	// 포인트가 결제 금액을 넘는지 체크 (넘으면 총 결제 금액까지만 적용)
+      if (Number(point) > Number(totPay)) {
+          point = totPay;  // 결제 금액보다 많은 포인트 사용을 방지
+      }
+  	
+  	
+    	$('#totalDiscount').text((Number(totDiscount)+Number(point)).toLocaleString() + '원');
+    	$('#totalDiscount').val((Number(totDiscount)+Number(point)));
+
+    	$('#totalPay').text((totPay-point).toLocaleString() + '원');
+    	$('#totalPay').val((totPay-point));
+    }
+     
+     
+     
+     
+     
+     
      
      // 결제하기
      function order() {
-       var paymentCard = document.getElementById("paymentCard").value;
-       var payMethodCard = document.getElementById("payMethodCard").value;
-       var paymentBank = document.getElementById("paymentBank").value;
-       var payMethodBank = document.getElementById("payMethodBank").value;
-       if(paymentCard == "" && paymentBank == "") {
-         alert("결제방식과 결제번호를 입력하세요.");
-         return false;
-       }
-       if(paymentCard != "" && payMethodCard == "") {
-         alert("카드번호를 입력하세요.");
-         document.getElementById("payMethodCard").focus();
-         return false;
-       }
-       else if(paymentBank != "" && payMethodBank == "") {
-         alert("입금자명을 입력하세요.");
-         return false;
-       }
        var ans = confirm("결재하시겠습니까?");
        if(ans) {
-         if(paymentCard != "" && payMethodCard != "") {
-           document.getElementById("payment").value = "C"+paymentCard;
-           document.getElementById("payMethod").value = payMethodCard;
-         }
-         else {
-           document.getElementById("payment").value = "B"+paymentBank;
-           document.getElementById("payMethod").value = payMethodBank;
-         }
-         myform.action = "${ctp}/dbShop/payment";
+         myform.action = "${ctp}/shop/payment";
          myform.submit();
        }
      }
+     
 
    </script>
 </head>
@@ -300,20 +386,25 @@
     		<td><p><br/>주문번호 : ${vo.orderIdx}</p></td>
     	</tr>
       <tr align="center">
-        <td><img src="${ctp}/product/${vo.thumbImg}" width="150px"/></td>
+        <td><img src="${ctp}/product/${vo.thumbnail}" width="150px"/></td>
         <td align="left">
           <p class="text-left">
             <span style="font-weight:bold; font-size: 18px;">${vo.productName}</span><br/>
 	          <c:set var="optionNames" value="${fn:split(vo.optionName,',')}"/>
-	          <c:set var="optionPrices" value="${fn:split(vo.optionPrice,',')}"/>
 	          <c:set var="optionNums" value="${fn:split(vo.optionNum,',')}"/>
+	          <c:set var="optionPrices" value="${fn:split(vo.optionPrice,',')}"/>
 	          <span>
-	            - 주문 옵션 내역 : 총 ${fn:length(optionNames)}개<br/>
+	            <br/>
 	            <c:forEach var="i" begin="1" end="${fn:length(optionNames)}">
-	              &nbsp; &nbsp;ㆍ ${optionNames[i-1]} / <fmt:formatNumber value="${optionPrices[i-1]}"/>원 / ${optionNums[i-1]}개<br/>
+	              &nbsp; &nbsp;ㆍ ${optionNames[i-1]}  &nbsp; ${optionNums[i-1]}개  &nbsp; <fmt:formatNumber value="${optionPrices[i-1]*optionNums[i-1]}"/>원<br/>
+	             <span data-price="${vo.price}" data-quantity="${optionNums[i-1]}" data-pay="${optionPrices[i-1]}"></span>
 	            </c:forEach>
+	            <br/>
 	          </span>
-	          <b><fmt:formatNumber value="${vo.totalPrice}" pattern='#,###원 ₩'/></b>
+	          <div style="text-align: right; margin-right: 20px; font-size: 13px;">
+		          (즉시 할인 적용)<br/>
+		          <b style="font-size: 18px;"><fmt:formatNumber value="${vo.totalPrice}" pattern='₩ #,###'/></b><br/>
+	          </div>
           </p>
          </td>
         </tr>
@@ -328,26 +419,41 @@
   <table style="margin:auto; width:90%">
   	<tr>
   		<td>
-  			<div>할인쿠폰</div>
-				<input type="button" class="btn btn-primary" id="couponSelectBtn" value="쿠폰 선택" onclick="selectCoupon()"/>
+  			<div>
+  				<span>할인쿠폰</span>
+					<div class="input-group">
+					<input type="text" class="form-control" id="ucNameCode" value=""/>
+        	<input type="button" class="btn btn-dark" id="couponSelectBtn" value="쿠폰 선택" onclick="selectCoupon()"/>
+					</div>
+  			</div>
   		</td>
   	</tr>
   	<tr>
   		<td>
-  			<div>주문금액</div>
+  			<div>
+  				<span>보유포인트 <font style="color: red; font-weight: bold;"><fmt:formatNumber value="${userVO.point}" pattern='#,###원'/></font></span>
+					<div class="input-group">
+					<input type="number" class="form-control" id="point" value="" onchange="pointCheck()"/>
+        	<input type="button" class="btn btn-dark" id="couponSelectBtn" value="전액사용" onclick="pointCheck(true)"/>
+					</div>
+  			</div>
+  		</td>
+  	</tr>
+  	<tr>
+  		<td>주문금액
+  			<div id="orderTotalPrice" style="text-align: right; font-weight: bold;">0원</div>
+  		</td>
+  	</tr>
+  	<tr>
+  		<td>할인금액
+  			<div id="totalDiscount" style="text-align: right; font-weight: bold;">0원</div>
   		</td>
   	</tr>
   	<tr>
   		<td>
-  			<div>할인금액</div>
-  		</td>
-  	</tr>
-  	<tr>
-  		<td>
-			  <div>
-		      <c:set var="orderTotalPrice" value="${orderTotalPrice + vo.totalPrice}"/>
-			    <b>총 주문(결재) 금액</b> : 원
-			  </div>
+  			<hr/>
+			  <div><b>총 주문(결재) 금액</b></div>
+		    <div id="totalPay" style="text-align: right; font-weight: bold;">0원</div>
   		</td>
   	</tr>
   </table>
@@ -370,7 +476,7 @@
     </div>
     
     <div class="user-information">
-      <div class="user-title">메일(결제메일주소)</div>
+      <div class="user-title">이메일</div>
       <div class="user-info">
         <input type="text" name="buyer_email" value="${userVO.email}" class="form-control" />
       </div>
@@ -387,10 +493,10 @@
       <div class="user-title">배송요청사항</div>
       <div class="user-info">
         <select name="message" class="form-select">
-          <option>부재중 경비실에 맡겨주세요.</option>
-          <option>빠른 배송 부탁합니다.</option>
-          <option>부재중 현관문 앞에 놓아주세요.</option>
-          <option>부재중 전달해주지 마세요.</option>
+          <option>문 앞에 놔주세요</option>
+          <option>경비실에 맡겨주세요</option>
+          <option>택배함에 넣어주세요</option>
+          <option>배송 전에 연락주세요</option>
         </select>
       </div>
     </div>
@@ -429,11 +535,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <ul id="couponModalBody">
-        	<c:forEach var="userCoupon"	items="${userCouponVOS}" varStatus="">
+        <ul id="couponModalBody" style="list-style-type: none;">
+        	<c:forEach var="userCoupon"	items="${userCouponVOS}" varStatus="st">
 		        <li>
-			        <input type="radio" name="selectedCoupon" value="${userCoupon.idx}" id="coupon${userCoupon.idx}">
-			        <label for="coupon' + coupon.couponId + '">${userCoupon.couponName}(${userCoupon.userCouponCode}) 
+			        <input type="radio" name="selectedCoupon" value="${userCoupon.idx}" id="coupon${userCoupon.idx}" data-couponIdx="${userCoupon.couponIdx}">
+			        <label for="coupon' + userCoupon.couponIdx + '">${userCoupon.couponName}(${userCoupon.userCouponCode}) 
 			        	- 할인 
 			        	<c:choose>
 							    <c:when test="${userCoupon.discountType eq 'percent'}">
@@ -450,7 +556,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-        <button type="button" class="btn btn-primary" id="applyCouponBtn">쿠폰 적용</button>
+        <button type="button" class="btn btn-primary" id="applyCouponBtn" onclick="couponDC()">쿠폰 적용</button>
+
+
       </div>
     </div>
   </div>

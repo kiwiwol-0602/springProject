@@ -3,7 +3,9 @@ package com.spring.javaGroupS7.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,8 +23,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.javaGroupS7.service.MemberService;
 import com.spring.javaGroupS7.service.ShopService;
+import com.spring.javaGroupS7.vo.BaesongVO;
 import com.spring.javaGroupS7.vo.CategorySubVO;
 import com.spring.javaGroupS7.vo.CouponsVO;
+import com.spring.javaGroupS7.vo.PayMentVO;
 import com.spring.javaGroupS7.vo.ProductCartVO;
 import com.spring.javaGroupS7.vo.ProductOptionVO;
 import com.spring.javaGroupS7.vo.ProductOrderVO;
@@ -283,12 +287,13 @@ public class ShopController {
     for(String strIdx : idxChecked) {
     	cartVO = shopService.getCartIdx(Integer.parseInt(strIdx));
     	ProductOrderVO orderVO = new ProductOrderVO();
-    	System.out.println("orderVO : " + orderVO);
     	
       orderVO.setProductIdx(cartVO.getProductIdx());
       orderVO.setProductName(cartVO.getProductName());
       orderVO.setMainPrice(cartVO.getPrice());
-      orderVO.setThumbImg(cartVO.getThumbnail());
+      orderVO.setPrice(cartVO.getPrice());
+      orderVO.setPay(cartVO.getPay());
+      orderVO.setThumbnail(cartVO.getThumbnail());
       orderVO.setOptionName(cartVO.getOptionName());
       orderVO.setOptionPrice(cartVO.getOptionPrice());
       orderVO.setOptionNum(cartVO.getOptionNum());
@@ -300,6 +305,7 @@ public class ShopController {
       orderVO.setMid(mid);
 
       orderVos.add(orderVO);
+      System.out.println("orderVO : " + orderVO);
     }
     
     session.setAttribute("sOrderVos", orderVos);
@@ -346,5 +352,126 @@ public class ShopController {
 		
 		return "shop/couponPage";
 	}
+	
+	//쿠폰적용
+	@ResponseBody
+	@PostMapping("/applyCoupon")
+	public Map<String, Object> applyCoupon( HttpSession session,
+			@RequestParam(name="couponIdx", defaultValue="0", required=false) int couponIdx,
+			@RequestParam(name="totalPay", defaultValue="0", required=false) int totalPay,
+			@RequestParam(name="totalDiscount", defaultValue="0", required=false) int totalDiscount,
+			@RequestParam(name="userCoIdx", defaultValue="0", required=false) int userCoIdx
+		){
+		String mid = (String) session.getAttribute("sMid");
+		UserCouponsVO userUCInfo = shopService.getUsedUserCouponInfo(userCoIdx);
+
+		Map<String, Object> response = new HashMap<>();
+		CouponsVO couponInfo = shopService.getCouponInfo(couponIdx);
+		// 쿠폰 상태 조회
+		if (!couponInfo.getActive().equals("ON")) {
+      response.put("success", false);
+      response.put("message", "유효하지 않은 쿠폰입니다.");
+      return response;
+		}
+		
+		// 쿠폰에 따른 할인 계산
+    int discountAmount = 0;
+    if ("percent".equals(couponInfo.getDiscountType())) {
+        discountAmount = (totalPay*couponInfo.getDiscount()) / 100;
+    } else {
+        discountAmount = couponInfo.getDiscount();
+    }
+    
+    // 할인 금액 적용 후 새로운 총 금액 계산
+    int newTotalPay = totalPay - discountAmount;
+    if (newTotalPay < 0) {
+    	newTotalPay = 0;  // 총 금액이 0원 이하로 내려가지 않도록 설정
+    }
+    
+    int newTotalDiscount = totalDiscount + discountAmount;
+    
+    String ucName = couponInfo.getCouponName()+"("+userUCInfo.getUserCouponCode()+")";
+    // 성공 응답 반환
+    response.put("success", true);
+    response.put("newTotalPay", newTotalPay);
+    response.put("newTotalDiscount", newTotalDiscount);
+    response.put("ucName", ucName);
+		
+		System.out.println(response);
+		return response;
+	}
+	
+	@PostMapping("/payment")
+	public String paymentPost(ProductOrderVO orderVO, PayMentVO payMentVO, BaesongVO baesongVO, HttpSession session, Model model) {
+		model.addAttribute("payMentVO", payMentVO);
+		
+		session.setAttribute("sPayMentVO", payMentVO);
+		session.setAttribute("sBaesongVO", baesongVO);
+		
+		return "shop/paymentOk";
+	}
+	
+	@GetMapping("/paymentResult")
+	public String paymentResultGet(HttpSession session, PayMentVO receivePayMentVO, Model model) {
+		List<ProductOrderVO> orderVos = (List<ProductOrderVO>) session.getAttribute("sOrderVos");
+		PayMentVO payMentVO = (PayMentVO) session.getAttribute("sPayMentVO");
+		BaesongVO baesongVO = (BaesongVO) session.getAttribute("sBaesongVO");
+		
+		session.removeAttribute("sBaesongVO");
+		
+		for(ProductOrderVO vo : orderVos) {
+			vo.setIdx(Integer.parseInt(vo.getOrderIdx().substring(8)));
+			vo.setOrderIdx(vo.getOrderIdx());
+			vo.setMid(vo.getMid());
+			
+			System.out.println(vo);
+			
+			shopService.setOrder(vo);
+			shopService.setCartDeleteAll(vo.getCartIdx());
+		}
+		
+		baesongVO.setOIdx(orderVos.get(0).getIdx());
+		baesongVO.setOrderIdx(orderVos.get(0).getOrderIdx());
+		baesongVO.setAddress(payMentVO.getBuyer_addr());
+		baesongVO.setTel(payMentVO.getBuyer_tel());
+		
+		int totalBaesongOrder = 0;
+		for(int i=0; i<orderVos.size(); i++) {
+			totalBaesongOrder += orderVos.get(i).getTotalPrice();
+		}
+		
+		if(totalBaesongOrder < 50000) baesongVO.setOrderTotalPrice(totalBaesongOrder + 3000);
+		else baesongVO.setOrderTotalPrice(totalBaesongOrder);
+		
+		shopService.setBaesong(baesongVO);
+		shopService.setUserPointPlus((int)(baesongVO.getOrderTotalPrice() * 0.01), orderVos.get(0).getMid());
+		
+		payMentVO.setImp_uid(receivePayMentVO.getImp_uid());
+		payMentVO.setMerchant_uid(receivePayMentVO.getMerchant_uid());
+		payMentVO.setPaid_amount(receivePayMentVO.getPaid_amount());
+		payMentVO.setApply_num(receivePayMentVO.getApply_num());
+		
+		session.setAttribute("sPayMentVO", payMentVO);
+		session.setAttribute("orderTotalPrice", baesongVO.getOrderTotalPrice());
+		
+		return "redirect:/message/paymentResultOk";
+	}
+	
+	@PostMapping("/paymentResultOk")
+	public String paymentResultOkGet(HttpSession session, Model model) {
+		List<ProductOrderVO> orderVos = (List<ProductOrderVO>) session.getAttribute("sOrderVos");
+		model.addAttribute("orderVos", orderVos);
+		session.removeAttribute("sOrderVos");
+		
+		int totalBaesongOrder = shopService.getTotalBaesongOrder(orderVos.get(orderVos.size()-1).getOrderIdx());
+		model.addAttribute("totalBaesongOrder", totalBaesongOrder);
+		
+		return "shop/paymentResult";
+	}
+	
+	
+	
+	
+	
 	
 }

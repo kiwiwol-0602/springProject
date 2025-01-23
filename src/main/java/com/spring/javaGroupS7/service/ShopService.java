@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.spring.javaGroupS7.vo.BaesongVO;
 import com.spring.javaGroupS7.vo.CategorySubVO;
 import com.spring.javaGroupS7.vo.CouponsVO;
 import com.spring.javaGroupS7.vo.ProductCartVO;
@@ -74,6 +75,20 @@ public interface ShopService {
 	int setCouponInput(CouponsVO vo);
 
 	List<UserCouponsVO> getUserCouponList(String mid);
+
+	CouponsVO getCouponInfo(int couponIdx);
+
+	UserCouponsVO getUsedUserCouponInfo(int userCoIdx);
+
+	void setOrder(ProductOrderVO vo);
+
+	void setCartDeleteAll(int cartIdx);
+
+	void setBaesong(BaesongVO baesongVO);
+
+	void setUserPointPlus(int point, String mid);
+
+	int getTotalBaesongOrder(String orderIdx);
 
 
 }

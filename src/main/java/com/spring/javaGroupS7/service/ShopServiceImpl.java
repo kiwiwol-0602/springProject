@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.javaGroupS7.common.JavaGroupProvide;
 import com.spring.javaGroupS7.dao.ShopDAO;
+import com.spring.javaGroupS7.vo.BaesongVO;
 import com.spring.javaGroupS7.vo.CategorySubVO;
 import com.spring.javaGroupS7.vo.CouponsVO;
 import com.spring.javaGroupS7.vo.ProductCartVO;
@@ -339,5 +340,40 @@ public class ShopServiceImpl implements ShopService {
 	@Override
 	public List<UserCouponsVO> getUserCouponList(String mid) {
 		return shopDAO.getUserCouponList(mid);
+	}
+
+	@Override
+	public CouponsVO getCouponInfo(int couponIdx) {
+		return shopDAO.getCouponInfo(couponIdx);
+	}
+
+	@Override
+	public UserCouponsVO getUsedUserCouponInfo(int userCoIdx) {
+		return shopDAO.getUsedUserCouponInfo(userCoIdx);
+	}
+
+	@Override
+	public void setOrder(ProductOrderVO vo) {
+		shopDAO.setOrder(vo);
+	}
+
+	@Override
+	public void setCartDeleteAll(int cartIdx) {
+		shopDAO.setCartDeleteAll(cartIdx);
+	}
+
+	@Override
+	public void setBaesong(BaesongVO baesongVO) {
+		shopDAO.setBaesong(baesongVO);
+	}
+
+	@Override
+	public void setUserPointPlus(int point, String mid) {
+		shopDAO.setUserPointPlus(mid);
+	}
+
+	@Override
+	public int getTotalBaesongOrder(String orderIdx) {
+		return shopDAO.getTotalBaesongOrder(orderIdx);
 	}
 }
