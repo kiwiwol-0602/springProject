@@ -92,7 +92,7 @@ public interface ShopDAO {
 
 	void setBaesong(@Param("baesongVO") BaesongVO baesongVO);
 
-	void setUserPointPlus(@Param("mid") String mid);
+	void setUserPointPlus(@Param("point") int point, @Param("mid") String mid);
 
 	int getTotalBaesongOrder(@Param("orderIdx") String orderIdx);
 

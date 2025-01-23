@@ -68,8 +68,8 @@
   <jsp:include page="/WEB-INF/views/include/header.jsp" />
   <jsp:include page="/WEB-INF/views/include/nav.jsp"/>
 <p><br/></p>
-<div class="container">
-  <p><img src="${ctp}/shop/payment.gif" width="200px"/></p>
+<div class="container" style="margin-top:10%">
+  <p><img src="${ctp}/images/shop/payment.gif" width="200px"/></p>
 </div>
 <p><br/></p>
 </body>

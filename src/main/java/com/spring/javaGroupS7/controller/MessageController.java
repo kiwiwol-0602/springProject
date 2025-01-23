@@ -93,6 +93,10 @@ public class MessageController {
 			model.addAttribute("message", "쿠폰 등록 중 오류가 발생했습니다.");
 			model.addAttribute("url", "shop/couponInput");
 		}
+		else if(msgFlag.equals("paymentResultOk")) {
+			model.addAttribute("message", "결재가 성공적으로 완료되었습니다.");
+			model.addAttribute("url", "shop/paymentResultOk");
+		}
 		
 		return "include/message";
 	}

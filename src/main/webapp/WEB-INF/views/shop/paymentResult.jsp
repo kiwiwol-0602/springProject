@@ -47,7 +47,7 @@
     <c:forEach var="vo" items="${orderVos}">
       <tr>
         <td style="text-align:center;">
-          <img src="${ctp}/product/${vo.thumbImg}" width="100px"/>
+          <img src="${ctp}/product/${vo.thumbnail}" width="100px"/>
         </td>
         <td style="text-align:center;"><br/>
           <p>주문번호 : ${vo.orderIdx}</p>

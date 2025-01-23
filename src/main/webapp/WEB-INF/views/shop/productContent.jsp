@@ -497,6 +497,7 @@
 				<form name="myform" method="post">
 					<input type="hidden" name="mid" value="${sMid}"/>
 					<input type="hidden" name="productIdx" value="${vo.idx}"/>
+					<input type="hidden" name="productCode" value="${vo.productCode}"/>
 					<input type="hidden" name="productName" value="${vo.productName}"/>
 					<input type="hidden" name="price" value="${vo.price}"/>
 					<input type="hidden" name="pay" value="${vo.pay}"/>

@@ -522,7 +522,7 @@
 	  <input type="hidden" name="payment" id="payment"/>
 	  <input type="hidden" name="payMethod" id="payMethod"/>
 	  
-	  <input type="hidden" name="name" value="${sOrderVos[0].productName}"/>
+	  <input type="hidden" name="productName" value="${sOrderVos[0].productName}"/>
 	  </div>
 	  </div>
 	  

@@ -22,7 +22,7 @@ public class BaesongVO {
 	private String orderDate;
 	private String productName;
 	private int mainPrice;
-	private String thumbImg;
+	private String thumbnail;
 	private String optionName;
 	private String optionPrice;
 	private String optionNum;

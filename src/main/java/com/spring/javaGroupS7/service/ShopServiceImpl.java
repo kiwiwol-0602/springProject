@@ -369,7 +369,7 @@ public class ShopServiceImpl implements ShopService {
 
 	@Override
 	public void setUserPointPlus(int point, String mid) {
-		shopDAO.setUserPointPlus(mid);
+		shopDAO.setUserPointPlus(point, mid);
 	}
 
 	@Override

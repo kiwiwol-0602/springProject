@@ -404,6 +404,7 @@ public class ShopController {
 	@PostMapping("/payment")
 	public String paymentPost(ProductOrderVO orderVO, PayMentVO payMentVO, BaesongVO baesongVO, HttpSession session, Model model) {
 		model.addAttribute("payMentVO", payMentVO);
+		System.out.println(payMentVO);
 		
 		session.setAttribute("sPayMentVO", payMentVO);
 		session.setAttribute("sBaesongVO", baesongVO);
@@ -443,7 +444,9 @@ public class ShopController {
 		if(totalBaesongOrder < 50000) baesongVO.setOrderTotalPrice(totalBaesongOrder + 3000);
 		else baesongVO.setOrderTotalPrice(totalBaesongOrder);
 		
+		System.out.println(baesongVO);
 		shopService.setBaesong(baesongVO);
+		System.out.println(baesongVO);
 		shopService.setUserPointPlus((int)(baesongVO.getOrderTotalPrice() * 0.01), orderVos.get(0).getMid());
 		
 		payMentVO.setImp_uid(receivePayMentVO.getImp_uid());
@@ -457,13 +460,17 @@ public class ShopController {
 		return "redirect:/message/paymentResultOk";
 	}
 	
-	@PostMapping("/paymentResultOk")
+	@GetMapping("/paymentResultOk")
 	public String paymentResultOkGet(HttpSession session, Model model) {
 		List<ProductOrderVO> orderVos = (List<ProductOrderVO>) session.getAttribute("sOrderVos");
 		model.addAttribute("orderVos", orderVos);
+		System.out.println("orderVos"+orderVos);
+		
 		session.removeAttribute("sOrderVos");
 		
 		int totalBaesongOrder = shopService.getTotalBaesongOrder(orderVos.get(orderVos.size()-1).getOrderIdx());
+		System.out.println("totalBaesongOrder"+totalBaesongOrder);
+		
 		model.addAttribute("totalBaesongOrder", totalBaesongOrder);
 		
 		return "shop/paymentResult";
