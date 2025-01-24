@@ -7,7 +7,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>paymentResult.jsp</title>
+  <title>구매내역</title>
   <jsp:include page="/WEB-INF/views/include/bs5.jsp"/>
   <script>
 	  function nWin(orderIdx) {
@@ -24,7 +24,7 @@
   <h2>결제내역</h2>
   <hr/>
   <p>주문 물품명 : ${sPayMentVO.name}</p>
-  <p>주문금액 : ${sPayMentVO.amount}(실제구매금액:${orderTotalPrice})</p>
+  <p>주문금액 : ${sPayMentVO.amount}(실제구매금액:${totalPrice})</p>
   <p>주문자 메일주소 : ${sPayMentVO.buyer_email}</p>
   <p>주문자 성명 : ${sPayMentVO.buyer_name}</p>
   <p>주문자 전화번호 : ${sPayMentVO.buyer_tel}</p>
@@ -51,11 +51,11 @@
         </td>
         <td style="text-align:center;"><br/>
           <p>주문번호 : ${vo.orderIdx}</p>
-          <p>총 주문액 : <fmt:formatNumber value="${vo.totalPrice}"/>원</p>
+          <p>총 주문액 : <fmt:formatNumber value="${vo.totalPay}"/>원</p>
           <p><input type="button" value="배송지정보" onclick="nWin('${vo.orderIdx}')"></p>
         </td>
         <td align="left">
-	        <p><br/>모델명 : <span style="color:orange;font-weight:bold;">${vo.productName}</span><br/> &nbsp; &nbsp; <fmt:formatNumber value="${vo.mainPrice}"/>원</p><br/>
+	        <p><br/>모델명 : <span style="color:orange;font-weight:bold;">${vo.productName}</span><br/> &nbsp; &nbsp; <fmt:formatNumber value="${vo.price}"/>원</p><br/>
 	        <c:set var="optionNames" value="${fn:split(vo.optionName,',')}"/>
 	        <c:set var="optionPrices" value="${fn:split(vo.optionPrice,',')}"/>
 	        <c:set var="optionNums" value="${fn:split(vo.optionNum,',')}"/>
@@ -73,7 +73,7 @@
   </table>
   <hr/>
   <div class="text-center">
-    구매한 상품 총 금액(배송비포함) : <fmt:formatNumber value="${totalBaesongOrder}"/>원
+    구매한 상품 총 금액(배송비포함) : <fmt:formatNumber value="${vo.totalPay}"/>원
   </div>
   <hr/>
   <p class="text-center">

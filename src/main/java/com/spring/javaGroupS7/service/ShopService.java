@@ -90,5 +90,9 @@ public interface ShopService {
 
 	int getTotalBaesongOrder(String orderIdx);
 
+	void setCouponUsed(String userCouponCode);
+
+	void setUserPointMinus(String mid, int point);
+
 
 }

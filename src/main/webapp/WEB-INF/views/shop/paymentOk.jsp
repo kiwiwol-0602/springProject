@@ -29,10 +29,6 @@
   			  var paySw = "no";
   		  	if(res.success){
 		        var msg = '결제가 완료되었습니다.';
-		        msg += '\n고유ID : ' + res.imp_uid;
-		        msg += '\n상점 거래ID : ' + res.merchant_uid;
-		        msg += '\n결제 금액 : ' + res.paid_amount;
-		        msg += '\n카드 승인번호 : ' + res.apply_num;
 		        paySw = 'ok';
   		  	}
   		  	else {
@@ -65,11 +61,8 @@
   </script>
 </head>
 <body>
-  <jsp:include page="/WEB-INF/views/include/header.jsp" />
-  <jsp:include page="/WEB-INF/views/include/nav.jsp"/>
 <p><br/></p>
 <div class="container" style="margin-top:10%">
-  <p><img src="${ctp}/images/shop/payment.gif" width="200px"/></p>
 </div>
 <p><br/></p>
 </body>

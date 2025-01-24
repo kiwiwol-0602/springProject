@@ -83,7 +83,7 @@ public class MessageController {
 		}
 		else if(msgFlag.equals("cartEmpty")) {
 			model.addAttribute("message", "장바구니에 상품을 담아주세요");
-			model.addAttribute("url", "shop/productCart");
+			model.addAttribute("url", "main");
 		}
 		else if(msgFlag.equals("couponInputOk")) {
 			model.addAttribute("message", "쿠폰이 등록되었습니다.");

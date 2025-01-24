@@ -105,7 +105,6 @@
 		  }
 		
 		function productDelete(idx) {
-			alert("idx : "+idx);
 			let ans = confirm("선택한 상품을 삭제하시겠습니까?");
 			if(!ans) return false;
 			
@@ -131,7 +130,6 @@
 		function checkedProductDelete() {
 			let checkedProducts = document.querySelectorAll('input[type="checkbox"]:checked');
 			let productIdxs = Array.from(checkedProducts).map(checkbox => checkbox.id.replace('productCheck', ''));
-			alert("productIdxs : "+productIdxs);
 			
 			$.ajax({
 				type : "post",

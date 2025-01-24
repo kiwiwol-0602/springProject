@@ -610,13 +610,9 @@ input[type="radio"] {
 	  	let maxSize = 1024 * 1024 * 20; 	// 저장파일 최대용량을 20MByte까지로 제한
 	  	let ext = fName.substring(fName.lastIndexOf(".")+1).toLowerCase();
 	  	
-	  	alert("fName:"+fName);
 	  	
 	  	if (fName != ""){
 		  	let fileSize = document.getElementById("fName").files[0].size;
-		  	
-		  	alert("fileSize :"+fileSize);
-		  	alert("ext :"+ext);
 		  	
 		  	if(fileSize > maxSize) {
 		  		alert("업로드할 파일의 최대용량은 20MByte 입니다.");

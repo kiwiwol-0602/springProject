@@ -96,4 +96,8 @@ public interface ShopDAO {
 
 	int getTotalBaesongOrder(@Param("orderIdx") String orderIdx);
 
+	void setCouponUsed(@Param("userCouponCode") String userCouponCode);
+
+	void setUserPointMinus(@Param("mid") String mid, @Param("point") int point);
+
 }

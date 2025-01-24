@@ -29,6 +29,11 @@ public class ProductVO {
 	private int baseCode;
 	private int subCode;
 	
+	private String optionName;
+  private String optionPrice;
+  private String optionNum;
+  private int totalPrice;
+	
 
 
 }

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -263,9 +262,9 @@ public class ShopController {
 	}
 	
 	@PostMapping("/productOrder")
-	public String productOrderPost(HttpServletRequest request, HttpSession session, Model model,
+	public String productOrderPost(HttpServletRequest request, HttpSession session, Model model, ProductVO productVO,
 			@RequestParam(name="baesong", defaultValue="0", required=false) int baesong) {
-		
+		System.out.println(productVO);
 		String mid = (String) session.getAttribute("sMid");
 		
 		// 주문한 상품에 대한 '주문 고유번호'를 만들어준다.
@@ -280,32 +279,53 @@ public class ShopController {
     
     // 장바구니에서 여러항목 구매시 체크된 항목만 넘어온다.
     String[] idxChecked = request.getParameterValues("idxChecked");
-
+    
     ProductCartVO cartVO = new ProductCartVO();
     List<ProductOrderVO> orderVos = new ArrayList<ProductOrderVO>();
     
-    for(String strIdx : idxChecked) {
-    	cartVO = shopService.getCartIdx(Integer.parseInt(strIdx));
-    	ProductOrderVO orderVO = new ProductOrderVO();
-    	
-      orderVO.setProductIdx(cartVO.getProductIdx());
-      orderVO.setProductName(cartVO.getProductName());
-      orderVO.setMainPrice(cartVO.getPrice());
-      orderVO.setPrice(cartVO.getPrice());
-      orderVO.setPay(cartVO.getPay());
-      orderVO.setThumbnail(cartVO.getThumbnail());
-      orderVO.setOptionName(cartVO.getOptionName());
-      orderVO.setOptionPrice(cartVO.getOptionPrice());
-      orderVO.setOptionNum(cartVO.getOptionNum());
-      orderVO.setTotalPrice(cartVO.getTotalPrice());
-      orderVO.setCartIdx(cartVO.getIdx());
-      orderVO.setBaesong(baesong);
-
-      orderVO.setOrderIdx(orderIdx); 
-      orderVO.setMid(mid);
-
-      orderVos.add(orderVO);
-      System.out.println("orderVO : " + orderVO);
+    if (idxChecked == null || idxChecked.length == 0) {
+    	cartVO = shopService.getCartIdx(idx);
+  		ProductOrderVO orderVO = new ProductOrderVO();
+  		
+  		orderVO.setProductIdx(productVO.getIdx());
+  		orderVO.setProductName(productVO.getProductName());
+  		orderVO.setPrice(productVO.getPrice());
+  		orderVO.setPay(productVO.getPay());
+  		orderVO.setThumbnail(productVO.getThumbnail());
+  		orderVO.setOptionName(productVO.getOptionName());
+  		orderVO.setOptionPrice(productVO.getOptionPrice());
+  		orderVO.setOptionNum(productVO.getOptionNum());
+  		orderVO.setTotalPrice(productVO.getTotalPrice());
+  		orderVO.setBaesong(baesong);
+  		
+  		orderVO.setOrderIdx(orderIdx); 
+  		orderVO.setMid(mid);
+  		
+  		orderVos.add(orderVO);
+    } 
+    else {
+    	for(String strIdx : idxChecked) {
+    		cartVO = shopService.getCartIdx(Integer.parseInt(strIdx));
+    		System.out.println(cartVO);
+    		ProductOrderVO orderVO = new ProductOrderVO();
+    		
+    		orderVO.setProductIdx(cartVO.getProductIdx());
+    		orderVO.setProductName(cartVO.getProductName());
+    		orderVO.setPrice(cartVO.getPrice());
+    		orderVO.setPay(cartVO.getPay());
+    		orderVO.setThumbnail(cartVO.getThumbnail());
+    		orderVO.setOptionName(cartVO.getOptionName());
+    		orderVO.setOptionPrice(cartVO.getOptionPrice());
+    		orderVO.setOptionNum(cartVO.getOptionNum());
+    		orderVO.setTotalPrice(cartVO.getTotalPrice());
+    		orderVO.setCartIdx(cartVO.getIdx());
+    		orderVO.setBaesong(baesong);
+    		
+    		orderVO.setOrderIdx(orderIdx); 
+    		orderVO.setMid(mid);
+    		System.out.println(orderVO);
+    		orderVos.add(orderVO);
+    	}
     }
     
     session.setAttribute("sOrderVos", orderVos);
@@ -313,7 +333,6 @@ public class ShopController {
     UserVO userVO = memberService.getMemberIdCheck(mid);
     
     List<UserCouponsVO> userCouponVOS = shopService.getUserCouponList(mid);
-    System.out.println("userCouponVOS"+userCouponVOS);
     
     
     model.addAttribute("userVO", userVO);
@@ -339,7 +358,6 @@ public class ShopController {
 	@PostMapping("/couponInput")
 	public String couponInputPost(CouponsVO vo) {
 		int res= shopService.setCouponInput(vo);
-		System.out.println("CouponsVO"+vo);
 		
 		if(res != 0) return "redirect:/message/couponInputOk";
 		return "redirect:/message/couponInputNo?";
@@ -391,22 +409,25 @@ public class ShopController {
     int newTotalDiscount = totalDiscount + discountAmount;
     
     String ucName = couponInfo.getCouponName()+"("+userUCInfo.getUserCouponCode()+")";
+    String ucCode = userUCInfo.getUserCouponCode();
     // 성공 응답 반환
     response.put("success", true);
     response.put("newTotalPay", newTotalPay);
     response.put("newTotalDiscount", newTotalDiscount);
     response.put("ucName", ucName);
-		
-		System.out.println(response);
+    response.put("ucCode", ucCode);
+    
 		return response;
 	}
 	
 	@PostMapping("/payment")
 	public String paymentPost(ProductOrderVO orderVO, PayMentVO payMentVO, BaesongVO baesongVO, HttpSession session, Model model) {
-		model.addAttribute("payMentVO", payMentVO);
-		System.out.println(payMentVO);
+		payMentVO.setName(orderVO.getProductName());
+		baesongVO.setName(payMentVO.getBuyer_name());
 		
+		model.addAttribute("payMentVO", payMentVO);
 		session.setAttribute("sPayMentVO", payMentVO);
+		
 		session.setAttribute("sBaesongVO", baesongVO);
 		
 		return "shop/paymentOk";
@@ -415,17 +436,50 @@ public class ShopController {
 	@GetMapping("/paymentResult")
 	public String paymentResultGet(HttpSession session, PayMentVO receivePayMentVO, Model model) {
 		List<ProductOrderVO> orderVos = (List<ProductOrderVO>) session.getAttribute("sOrderVos");
+		ProductOrderVO buyOrderVO = (ProductOrderVO) session.getAttribute("sBuyOrderVO");
 		PayMentVO payMentVO = (PayMentVO) session.getAttribute("sPayMentVO");
 		BaesongVO baesongVO = (BaesongVO) session.getAttribute("sBaesongVO");
 		
 		session.removeAttribute("sBaesongVO");
 		
+		String ucCode=baesongVO.getUserCouponCode();
+		int usPoint=baesongVO.getPoint();
+		int IndividualPrice = 0;
+		int IndividualPay = 0;
+		
+		System.out.println("ucCode"+ucCode);
+		System.out.println("usPoint"+usPoint);
+		
 		for(ProductOrderVO vo : orderVos) {
 			vo.setIdx(Integer.parseInt(vo.getOrderIdx().substring(8)));
 			vo.setOrderIdx(vo.getOrderIdx());
 			vo.setMid(vo.getMid());
+			IndividualPrice = vo.getTotalPrice();
 			
-			System.out.println(vo);
+			if(!ucCode.equals("")) {
+				String idx[] = ucCode.split("-");
+				System.out.println("idx[1]"+idx[1]);
+				UserCouponsVO couponVO = shopService.getUsedUserCouponInfo(Integer.parseInt(idx[1]));
+				System.out.println("couponVO"+couponVO);
+				
+				// 쿠폰에 따른 할인 계산
+		    int discountAmount = 0;
+		    if ("percent".equals(couponVO.getDiscountType())) {
+		        discountAmount = (IndividualPrice*couponVO.getDiscount()) / 100;
+		    } else {
+		        discountAmount = couponVO.getDiscount();
+		    }
+		    IndividualPrice = IndividualPrice-discountAmount;
+				//IndividualPrice = IndividualPrice - (IndividualPrice * (couponVO.getDiscount() / 100));
+				System.out.println(IndividualPrice);
+			}
+			vo.setTotalPrice(IndividualPrice);
+			System.out.println(IndividualPrice);
+			
+			if(usPoint!=0) {
+				IndividualPay = IndividualPrice - (Math.round((float)usPoint / orderVos.size()));
+			}
+			vo.setTotalPay(IndividualPay);
 			
 			shopService.setOrder(vo);
 			shopService.setCartDeleteAll(vo.getCartIdx());
@@ -441,13 +495,22 @@ public class ShopController {
 			totalBaesongOrder += orderVos.get(i).getTotalPrice();
 		}
 		
-		if(totalBaesongOrder < 50000) baesongVO.setOrderTotalPrice(totalBaesongOrder + 3000);
-		else baesongVO.setOrderTotalPrice(totalBaesongOrder);
+		if(totalBaesongOrder < 50000) baesongVO.setTotalPay(totalBaesongOrder + 3000);
+		else baesongVO.setTotalPay(totalBaesongOrder);
 		
-		System.out.println(baesongVO);
 		shopService.setBaesong(baesongVO);
-		System.out.println(baesongVO);
-		shopService.setUserPointPlus((int)(baesongVO.getOrderTotalPrice() * 0.01), orderVos.get(0).getMid());
+		
+		//쿠폰 사용함으로 변경
+		shopService.setCouponUsed(baesongVO.getUserCouponCode());
+		
+		//사용포인트 빼기
+		shopService.setUserPointMinus(baesongVO.getMid(), baesongVO.getPoint());
+		
+		// 포인트 적립
+		shopService.setUserPointPlus((int)(baesongVO.getTotalPay() * 0.01), orderVos.get(0).getMid());
+		
+		
+		
 		
 		payMentVO.setImp_uid(receivePayMentVO.getImp_uid());
 		payMentVO.setMerchant_uid(receivePayMentVO.getMerchant_uid());
@@ -455,7 +518,7 @@ public class ShopController {
 		payMentVO.setApply_num(receivePayMentVO.getApply_num());
 		
 		session.setAttribute("sPayMentVO", payMentVO);
-		session.setAttribute("orderTotalPrice", baesongVO.getOrderTotalPrice());
+		session.setAttribute("orderTotalPrice", baesongVO.getTotalPay());
 		
 		return "redirect:/message/paymentResultOk";
 	}
@@ -464,12 +527,10 @@ public class ShopController {
 	public String paymentResultOkGet(HttpSession session, Model model) {
 		List<ProductOrderVO> orderVos = (List<ProductOrderVO>) session.getAttribute("sOrderVos");
 		model.addAttribute("orderVos", orderVos);
-		System.out.println("orderVos"+orderVos);
 		
 		session.removeAttribute("sOrderVos");
 		
 		int totalBaesongOrder = shopService.getTotalBaesongOrder(orderVos.get(orderVos.size()-1).getOrderIdx());
-		System.out.println("totalBaesongOrder"+totalBaesongOrder);
 		
 		model.addAttribute("totalBaesongOrder", totalBaesongOrder);
 		

@@ -7,7 +7,7 @@ public class BaesongVO {
   private int idx;
   private int oIdx;
   private String orderIdx;
-  private int orderTotalPrice;
+  private int totalPay;
   private String mid;
   private String name;
   private String address;
@@ -21,10 +21,14 @@ public class BaesongVO {
 	private int productIdx;
 	private String orderDate;
 	private String productName;
-	private int mainPrice;
 	private String thumbnail;
 	private String optionName;
 	private String optionPrice;
 	private String optionNum;
 	private int totalPrice;
+	private int totalDiscount;
+	private String userCouponCode;
+	private int point;
+	
+	
 }

@@ -227,8 +227,8 @@
 	    });
 	
 	    // 결과를 화면에 출력
-	    document.getElementById('orderTotalPrice').textContent = totalPrice.toLocaleString() + '원';
-	    document.getElementById('orderTotalPrice').value = totalPrice;
+	    document.getElementById('totalPrice').textContent = totalPrice.toLocaleString() + '원';
+	    document.getElementById('totalPrice').value = totalPrice;
 	    
 	    document.getElementById('totalDiscount').textContent = totalDiscount.toLocaleString() + '원';
 	    document.getElementById('totalDiscount').value = totalDiscount;
@@ -266,7 +266,6 @@
 			const userCoIdx = selectedCoupon.value;
 	    const totalPay = document.getElementById('totalPay').value;
 	    const totalDiscount = document.getElementById('totalDiscount').value;
-	    alert(userCoIdx);
 	    
 			if (!selectedCoupon) {
 				alert('쿠폰을 선택해주세요.');
@@ -289,9 +288,12 @@
 	    					
 			          $('#totalDiscount').text(response.newTotalDiscount.toLocaleString() + '원');
 			          $('#totalDiscount').val(response.newTotalDiscount);
+			          
 								$('#totalPay').text(response.newTotalPay.toLocaleString() + '원');
 								$('#totalPay').val(response.newTotalPay);
+								
 			          $('#ucNameCode').val(response.ucName);
+			          $('#userCouponCode').val(response.ucCode);
 			          
 			          // 모달 닫기
 			          $('#couponModal').modal('hide');
@@ -330,11 +332,6 @@
     }
      
      
-     
-     
-     
-     
-     
      // 결제하기
      function order() {
        var ans = confirm("결재하시겠습니까?");
@@ -366,13 +363,9 @@
 	  <div class="information">
 	    <div class="user-details">
 	      <span class="Name">${userVO.name}</span>
-	      <input type="hidden" name="name" id="name" value="${userVO.name}"/>
 	      <span class="Id">${userVO.mid}</span>
-	      <input type="hidden" name="cusMid" id="cusMid" value="${userVO.mid}"/>
 	      <span class="coupons">쿠폰(${fn:length(userCouponVOS)})</span>
-	      <input type="hidden" name="cusMid" id="cusMid" value="${userVO.mid}"/>
 	      <span class="point">포인트(${userVO.point})</span>
-	      <input type="hidden" name="cusMid" id="cusMid" value="${userVO.mid}"/>
 	    </div>
 	  </div>
 	  
@@ -380,7 +373,6 @@
     <!-- 상품 정보 영역 (왼쪽, 6 비율) -->
     <div class="col-7">
     <table class="text-center" style="margin:auto; width:90%">
-    	<c:set var="orderTotalPrice" value="0"/>
     	<c:forEach var="vo" items="${sOrderVos}">
     	<tr>
     		<td><p><br/>주문번호 : ${vo.orderIdx}</p></td>
@@ -424,6 +416,7 @@
 					<div class="input-group">
 					<input type="text" class="form-control" id="ucNameCode" value=""/>
         	<input type="button" class="btn btn-dark" id="couponSelectBtn" value="쿠폰 선택" onclick="selectCoupon()"/>
+        	<input type="hidden" id="userCouponCode" name="userCouponCode"/>
 					</div>
   			</div>
   		</td>
@@ -433,7 +426,7 @@
   			<div>
   				<span>보유포인트 <font style="color: red; font-weight: bold;"><fmt:formatNumber value="${userVO.point}" pattern='#,###원'/></font></span>
 					<div class="input-group">
-					<input type="number" class="form-control" id="point" value="" onchange="pointCheck()"/>
+					<input type="number" class="form-control" id="point" name="point" value="0" onchange="pointCheck()"/>
         	<input type="button" class="btn btn-dark" id="couponSelectBtn" value="전액사용" onclick="pointCheck(true)"/>
 					</div>
   			</div>
@@ -441,19 +434,19 @@
   	</tr>
   	<tr>
   		<td>주문금액
-  			<div id="orderTotalPrice" style="text-align: right; font-weight: bold;">0원</div>
+  			<div><input type="number" id="totalPrice" name="totalPrice" style="text-align: right; font-weight: bold;"/></div>
   		</td>
   	</tr>
   	<tr>
   		<td>할인금액
-  			<div id="totalDiscount" style="text-align: right; font-weight: bold;">0원</div>
+  			<div><input type="number" id="totalDiscount" name="totalDiscount" style="text-align: right; font-weight: bold;"></div>
   		</td>
   	</tr>
   	<tr>
   		<td>
   			<hr/>
 			  <div><b>총 주문(결재) 금액</b></div>
-		    <div id="totalPay" style="text-align: right; font-weight: bold;">0원</div>
+		    <div><input type="number" id="totalPay" name="totalPay" style="text-align: right; font-weight: bold;"></div>
   		</td>
   	</tr>
   </table>
@@ -515,13 +508,10 @@
      </div>
     </div>
   </div>
-		<input type="hidden" name="orderVos" value="${orderVos}"/>
 	  <input type="hidden" name="orderIdx" value="${orderIdx}"/>
-	  <input type="hidden" name="orderTotalPrice" value="${orderTotalPrice}"/>
 	  <input type="hidden" name="mid" value="${sMid}"/>
 	  <input type="hidden" name="payment" id="payment"/>
 	  <input type="hidden" name="payMethod" id="payMethod"/>
-	  
 	  <input type="hidden" name="productName" value="${sOrderVos[0].productName}"/>
 	  </div>
 	  </div>
@@ -539,7 +529,7 @@
         	<c:forEach var="userCoupon"	items="${userCouponVOS}" varStatus="st">
 		        <li>
 			        <input type="radio" name="selectedCoupon" value="${userCoupon.idx}" id="coupon${userCoupon.idx}" data-couponIdx="${userCoupon.couponIdx}">
-			        <label for="coupon' + userCoupon.couponIdx + '">${userCoupon.couponName}(${userCoupon.userCouponCode}) 
+			        <label for="coupon${userCoupon.idx}">${userCoupon.couponName}(${userCoupon.userCouponCode}) 
 			        	- 할인 
 			        	<c:choose>
 							    <c:when test="${userCoupon.discountType eq 'percent'}">

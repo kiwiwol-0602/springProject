@@ -332,8 +332,6 @@ public class ShopServiceImpl implements ShopService {
 		}
 		vo.setCouponCode(couponCode);
 		
-		System.out.println(couponCode);
-		
 		return shopDAO.setCouponInput(vo);
 	}
 
@@ -375,5 +373,15 @@ public class ShopServiceImpl implements ShopService {
 	@Override
 	public int getTotalBaesongOrder(String orderIdx) {
 		return shopDAO.getTotalBaesongOrder(orderIdx);
+	}
+
+	@Override
+	public void setCouponUsed(String userCouponCode) {
+		shopDAO.setCouponUsed(userCouponCode);
+	}
+
+	@Override
+	public void setUserPointMinus(String mid, int point) {
+		shopDAO.setUserPointMinus(mid, point);
 	}
 }

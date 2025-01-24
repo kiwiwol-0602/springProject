@@ -289,7 +289,7 @@
 					    }
 						},
 						error: function() {
-							alert("안됨");
+							alert("전송오류");
 						}
         });
 	  }
@@ -496,6 +496,7 @@
         	
 				<form name="myform" method="post">
 					<input type="hidden" name="mid" value="${sMid}"/>
+					<input type="hidden" name="idx" value="${vo.idx}"/>
 					<input type="hidden" name="productIdx" value="${vo.idx}"/>
 					<input type="hidden" name="productCode" value="${vo.productCode}"/>
 					<input type="hidden" name="productName" value="${vo.productName}"/>

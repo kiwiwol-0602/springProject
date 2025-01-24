@@ -118,7 +118,9 @@
 	 </select>
 	 
 	 <select id="getUserCouponList"  resultType="com.spring.javaGroupS7.vo.UserCouponsVO">
-	 	select uc.*, c.expirationDate, c.couponName, c.discountType, c.discount from userCoupons uc, coupons c where uc.couponIdx = c.idx and mid = #{mid};
+	 	select uc.*, c.expirationDate, c.couponName, c.discountType, c.discount 
+	 		from userCoupons uc, coupons c 
+	 		where uc.couponIdx = c.idx and mid = #{mid} and uc.used != 'used';
 	 </select>
 	 
 	 <select id="getCouponInfo" resultType="com.spring.javaGroupS7.vo.CouponsVO">
@@ -130,8 +132,8 @@
 	 </select>
 	 
 	 <select id="getTotalBaesongOrder" resultType="int">
-    select orderTotalPrice from baesong where orderIdx = #{orderIdx};
-  </select>
+    select totalPay from baesong where orderIdx = #{orderIdx};
+   </select>
 	 
 	 
 	 
@@ -160,11 +162,11 @@
   </insert>
   
   <insert id="setOrder">
-  	insert into productOrder values (default,#{vo.orderIdx},#{vo.mid},#{vo.productIdx},#{vo.productName},#{vo.price},#{vo.pay},#{vo.thumbnail},#{vo.optionName},#{vo.optionPrice},#{vo.optionNum},#{vo.totalPrice},default);
+  	insert into productOrder values (default,#{vo.orderIdx},#{vo.mid},#{vo.productIdx},#{vo.productName},#{vo.price},#{vo.pay},#{vo.thumbnail},#{vo.optionName},#{vo.optionPrice},#{vo.optionNum},#{vo.totalPrice},#{vo.totalPay},default);
   </insert>
   
   <insert id="setBaesong">
-    insert into baesong values (default,#{baesongVO.oIdx},#{baesongVO.orderIdx},#{baesongVO.orderTotalPrice},#{baesongVO.mid},#{baesongVO.name},#{baesongVO.address},#{baesongVO.tel},#{baesongVO.message},#{baesongVO.payment},#{baesongVO.payMethod},default);
+    insert into baesong values (default,#{baesongVO.oIdx},#{baesongVO.orderIdx},#{baesongVO.totalPay},#{baesongVO.mid},#{baesongVO.name},#{baesongVO.address},#{baesongVO.tel},#{baesongVO.message},#{baesongVO.payment},#{baesongVO.payMethod},default);
   </insert>
   
   
@@ -191,10 +193,17 @@
     where productName=#{vo.productName} and optionName=#{vo.optionName};
   </update>
   
+  <update id="setUserPointMinus">
+    update users set point = point - #{point} where mid = #{mid};
+  </update>
+  
   <update id="setUserPointPlus">
     update users set point = point + #{point} where mid = #{mid};
   </update>
   
+  <update id="setCouponUsed">
+  	update userCoupons set used = 'used', usedDate = now() where userCouponCode = #{userCouponCode};
+  </update>
   
   
   

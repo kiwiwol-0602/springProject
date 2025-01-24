@@ -18,4 +18,6 @@ public class ProductCartVO {
 	private String optionNum;
 	private int totalPrice;
 	private String cartDate;
+	
+	private String userCouponCode;
 }
