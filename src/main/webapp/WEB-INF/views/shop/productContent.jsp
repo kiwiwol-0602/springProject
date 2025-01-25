@@ -343,29 +343,30 @@
 	         let optionPrice = selectOption.substring(selectOption.indexOf("_")+1);
 	         let commaPrice = numberWithCommas(optionPrice);
 
-	 				// 콤보상자에서 옵션선택시 수행처리하는 부분이다. 이미 선택한 옵션항목은 또다시 선택할수 없도록 처리했다.
-	         //if($("#layer"+idx).length == 0 && selectOption != "") {
-	         if($("#layer"+idx).length == 0) {
-	           idxArray[idx] = idx;
-	 					// numBox:수량, imsiPrice:콤마붙인 가격(수량변경처리적용됨), price:콤마없는옵션가격(수량변경처리적용됨), statePrice:상품의정상가격, optionIdx:옵션고유번호(단,기본품목은0이다.), optionName:옵션명, optionPrice:옵션원래정상가격
-	           let str = '';
-	           str += '<div class="layer row" id="layer'+idx+'"><div class="col-5">'+optionName+'</div><div class="col-7">';
-	           str += '<button type="button" class="btn-outline-gray" onclick="decreaseQuantity(' + idx + ')">-</button>';
-	           str += '<input type="number" class="text-center numBox" id="numBox'+idx+'" name="optionNum" onchange="numChange('+idx+')" value="1" min="1"/>';
-	           str += '<button type="button" class="btn-outline-gray" style="margin-right:10px;" onclick="increaseQuantity(' + idx + ')">+</button>';
-	           str += '<input type="text" id="imsiPrice'+idx+'" class="price" value="'+commaPrice+'" readonly />';
-	           str += '<input type="hidden" id="price'+idx+'" value="'+optionPrice+'"/> &nbsp;';
-	           str += '<input type="button" class="btn-outline-black" onclick="remove('+idx+')" value="삭제"/>';
-	           str += '<input type="hidden" name="statePrice" id="statePrice'+idx+'" value="'+optionPrice+'"/>';
-	           str += '<input type="hidden" name="optionIdx" value="'+idx+'"/>';
-	           str += '<input type="hidden" name="optionName" value="'+optionName+'"/>';
-	           str += '<input type="hidden" name="optionPrice" value="'+optionPrice+'"/>';
-	           str += '</div></div>';
-	           $("#selectProductList").append(str);	// 선택한 옵션항목을 아래 준비한공간(#product1)에 추가시켜주고 있다.
-	           onTotal();	// 옵션항목에 변경이 생긴다면 무조건 가격총합계를 재계산처리시키고 있다.
+	      // 이미 선택된 옵션이 있을 경우 기존 옵션을 삭제하고 새 옵션으로 교체
+	         if ($(".layer").length > 0) {
+	           $(".layer").remove(); // 기존 선택된 옵션 삭제
 	         }
-	         else {
-	           alert("이미 선택한 옵션입니다.");
+
+	         // 새로운 옵션을 추가하는 부분
+	         if (selectOption != "") {
+	           idxArray[idx] = idx;
+	           let str = '';
+	           str += '<div class="layer row" id="layer' + idx + '"><div class="col-5">' + optionName + '</div><div class="col-7">';
+	           str += '<button type="button" class="btn-outline-gray" onclick="decreaseQuantity(' + idx + ')">-</button>';
+	           str += '<input type="number" class="text-center numBox" id="numBox' + idx + '" name="optionNum" onchange="numChange(' + idx + ')" value="1" min="1"/>';
+	           str += '<button type="button" class="btn-outline-gray" style="margin-right:10px;" onclick="increaseQuantity(' + idx + ')">+</button>';
+	           str += '<input type="text" id="imsiPrice' + idx + '" class="price" value="' + commaPrice + '" readonly />';
+	           str += '<input type="hidden" id="price' + idx + '" value="' + optionPrice + '"/> &nbsp;';
+	           str += '<input type="button" class="btn-outline-black" onclick="remove(' + idx + ')" value="삭제"/>';
+	           str += '<input type="hidden" name="statePrice" id="statePrice' + idx + '" value="' + optionPrice + '"/>';
+	           str += '<input type="hidden" name="optionIdx" value="' + idx + '"/>';
+	           str += '<input type="hidden" name="optionName" value="' + optionName + '"/>';
+	           str += '<input type="hidden" name="optionPrice" value="' + optionPrice + '"/>';
+	           str += '</div></div>';
+	           $("#selectProductList").append(str); // 선택한 옵션을 추가
+
+	           onTotal(); // 총합 계산
 	         }
 	       });
 	     });

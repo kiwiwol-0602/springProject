@@ -365,7 +365,7 @@
 	      <span class="Name">${userVO.name}</span>
 	      <span class="Id">${userVO.mid}</span>
 	      <span class="coupons">쿠폰(${fn:length(userCouponVOS)})</span>
-	      <span class="point">포인트(${userVO.point})</span>
+	      <span class="point">포인트(<fmt:formatNumber value="${userVO.point}" pattern="#,##0"/>원)</span>
 	    </div>
 	  </div>
 	  
@@ -494,13 +494,6 @@
       </div>
     </div>
     
-    <div class="user-information">
-      <div class="user-title">실제 결제금액</div>
-      <div class="user-info">
-        <input type="text" name="amount" value="10" class="form-control" readonly />
-      </div>
-    </div>
-    
     <div class="tab-content">
       <button type="button" class="btn-outline-black" onClick="order()">결제하기</button><%-- 
       <button type="button" class="btn btn-info" onclick="location.href='${ctp}/dbShop/dbCartList';">장바구니보기</button> &nbsp;
@@ -512,6 +505,7 @@
 	  <input type="hidden" name="mid" value="${sMid}"/>
 	  <input type="hidden" name="payment" id="payment"/>
 	  <input type="hidden" name="payMethod" id="payMethod"/>
+	  <input type="hidden" name="amount" value="10"/>
 	  <input type="hidden" name="productName" value="${sOrderVos[0].productName}"/>
 	  </div>
 	  </div>

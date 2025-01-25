@@ -264,7 +264,6 @@ public class ShopController {
 	@PostMapping("/productOrder")
 	public String productOrderPost(HttpServletRequest request, HttpSession session, Model model, ProductVO productVO,
 			@RequestParam(name="baesong", defaultValue="0", required=false) int baesong) {
-		System.out.println(productVO);
 		String mid = (String) session.getAttribute("sMid");
 		
 		// 주문한 상품에 대한 '주문 고유번호'를 만들어준다.
@@ -306,7 +305,6 @@ public class ShopController {
     else {
     	for(String strIdx : idxChecked) {
     		cartVO = shopService.getCartIdx(Integer.parseInt(strIdx));
-    		System.out.println(cartVO);
     		ProductOrderVO orderVO = new ProductOrderVO();
     		
     		orderVO.setProductIdx(cartVO.getProductIdx());
@@ -323,7 +321,6 @@ public class ShopController {
     		
     		orderVO.setOrderIdx(orderIdx); 
     		orderVO.setMid(mid);
-    		System.out.println(orderVO);
     		orderVos.add(orderVO);
     	}
     }
@@ -447,8 +444,6 @@ public class ShopController {
 		int IndividualPrice = 0;
 		int IndividualPay = 0;
 		
-		System.out.println("ucCode"+ucCode);
-		System.out.println("usPoint"+usPoint);
 		
 		for(ProductOrderVO vo : orderVos) {
 			vo.setIdx(Integer.parseInt(vo.getOrderIdx().substring(8)));
@@ -458,9 +453,7 @@ public class ShopController {
 			
 			if(!ucCode.equals("")) {
 				String idx[] = ucCode.split("-");
-				System.out.println("idx[1]"+idx[1]);
 				UserCouponsVO couponVO = shopService.getUsedUserCouponInfo(Integer.parseInt(idx[1]));
-				System.out.println("couponVO"+couponVO);
 				
 				// 쿠폰에 따른 할인 계산
 		    int discountAmount = 0;
@@ -471,10 +464,8 @@ public class ShopController {
 		    }
 		    IndividualPrice = IndividualPrice-discountAmount;
 				//IndividualPrice = IndividualPrice - (IndividualPrice * (couponVO.getDiscount() / 100));
-				System.out.println(IndividualPrice);
 			}
 			vo.setTotalPrice(IndividualPrice);
-			System.out.println(IndividualPrice);
 			
 			if(usPoint!=0) {
 				IndividualPay = IndividualPrice - (Math.round((float)usPoint / orderVos.size()));
@@ -484,12 +475,14 @@ public class ShopController {
 			shopService.setOrder(vo);
 			shopService.setCartDeleteAll(vo.getCartIdx());
 		}
+		System.out.println("baesongVO 초기"+baesongVO);
 		
+		//for(baesongVO : orderVos) {
 		baesongVO.setOIdx(orderVos.get(0).getIdx());
 		baesongVO.setOrderIdx(orderVos.get(0).getOrderIdx());
 		baesongVO.setAddress(payMentVO.getBuyer_addr());
 		baesongVO.setTel(payMentVO.getBuyer_tel());
-		
+		//}
 		int totalBaesongOrder = 0;
 		for(int i=0; i<orderVos.size(); i++) {
 			totalBaesongOrder += orderVos.get(i).getTotalPrice();
@@ -498,7 +491,10 @@ public class ShopController {
 		if(totalBaesongOrder < 50000) baesongVO.setTotalPay(totalBaesongOrder + 3000);
 		else baesongVO.setTotalPay(totalBaesongOrder);
 		
+		System.out.println("baesongVO 셋전"+baesongVO);
 		shopService.setBaesong(baesongVO);
+		
+		System.out.println("baesongVO 셋후"+baesongVO);
 		
 		//쿠폰 사용함으로 변경
 		shopService.setCouponUsed(baesongVO.getUserCouponCode());
