@@ -374,7 +374,7 @@ public class ShopController {
 	public Map<String, Object> applyCoupon( HttpSession session,
 			@RequestParam(name="couponIdx", defaultValue="0", required=false) int couponIdx,
 			@RequestParam(name="totalPay", defaultValue="0", required=false) int totalPay,
-			@RequestParam(name="totalDiscount", defaultValue="0", required=false) int totalDiscount,
+			//@RequestParam(name="totalDiscount", defaultValue="0", required=false) int totalDiscount,
 			@RequestParam(name="userCoIdx", defaultValue="0", required=false) int userCoIdx
 		){
 		String mid = (String) session.getAttribute("sMid");
@@ -403,7 +403,7 @@ public class ShopController {
     	newTotalPay = 0;  // 총 금액이 0원 이하로 내려가지 않도록 설정
     }
     
-    int newTotalDiscount = totalDiscount + discountAmount;
+    int newTotalDiscount = discountAmount;
     
     String ucName = couponInfo.getCouponName()+"("+userUCInfo.getUserCouponCode()+")";
     String ucCode = userUCInfo.getUserCouponCode();
@@ -441,70 +441,82 @@ public class ShopController {
 		
 		String ucCode=baesongVO.getUserCouponCode();
 		int usPoint=baesongVO.getPoint();
-		int IndividualPrice = 0;
-		int IndividualPay = 0;
+		int individualPrice = 0;
+		int individualPay = 0;
 		
 		
 		for(ProductOrderVO vo : orderVos) {
-			vo.setIdx(Integer.parseInt(vo.getOrderIdx().substring(8)));
+		  vo.setIdx(Integer.parseInt(vo.getOrderIdx().substring(8)));
 			vo.setOrderIdx(vo.getOrderIdx());
 			vo.setMid(vo.getMid());
-			IndividualPrice = vo.getTotalPrice();
+			individualPrice = vo.getTotalPrice();
 			
 			if(!ucCode.equals("")) {
 				String idx[] = ucCode.split("-");
 				UserCouponsVO couponVO = shopService.getUsedUserCouponInfo(Integer.parseInt(idx[1]));
 				
 				// 쿠폰에 따른 할인 계산
-		    int discountAmount = 0;
-		    if ("percent".equals(couponVO.getDiscountType())) {
-		        discountAmount = (IndividualPrice*couponVO.getDiscount()) / 100;
-		    } else {
-		        discountAmount = couponVO.getDiscount();
-		    }
-		    IndividualPrice = IndividualPrice-discountAmount;
-				//IndividualPrice = IndividualPrice - (IndividualPrice * (couponVO.getDiscount() / 100));
+				if (couponVO != null) {
+			    int discountAmount = 0;
+			    if ("percent".equals(couponVO.getDiscountType())) {
+			        discountAmount = (individualPrice*couponVO.getDiscount()) / 100;
+			    } 
+			    else {
+			        discountAmount = couponVO.getDiscount();
+			    }
+			    individualPrice = individualPrice-discountAmount;
+					//individualPrice = individualPrice - (individualPrice * (couponVO.getDiscount() / 100));
+				}
 			}
-			vo.setTotalPrice(IndividualPrice);
+			vo.setTotalPrice(individualPrice);
 			
 			if(usPoint!=0) {
-				IndividualPay = IndividualPrice - (Math.round((float)usPoint / orderVos.size()));
+				individualPay = individualPrice - Math.round((float)usPoint / orderVos.size());
 			}
-			vo.setTotalPay(IndividualPay);
+			else {
+        individualPay = individualPrice;
+			}
+			vo.setTotalPay(individualPay);
 			
 			shopService.setOrder(vo);
 			shopService.setCartDeleteAll(vo.getCartIdx());
 		}
 		System.out.println("baesongVO 초기"+baesongVO);
 		
-		//for(baesongVO : orderVos) {
-		baesongVO.setOIdx(orderVos.get(0).getIdx());
-		baesongVO.setOrderIdx(orderVos.get(0).getOrderIdx());
-		baesongVO.setAddress(payMentVO.getBuyer_addr());
-		baesongVO.setTel(payMentVO.getBuyer_tel());
-		//}
-		int totalBaesongOrder = 0;
-		for(int i=0; i<orderVos.size(); i++) {
-			totalBaesongOrder += orderVos.get(i).getTotalPrice();
+		//쿠폰 사용함으로 변경
+		if (!ucCode.equals("")) {
+      shopService.setCouponUsed(baesongVO.getUserCouponCode());
 		}
 		
-		if(totalBaesongOrder < 50000) baesongVO.setTotalPay(totalBaesongOrder + 3000);
-		else baesongVO.setTotalPay(totalBaesongOrder);
-		
-		System.out.println("baesongVO 셋전"+baesongVO);
-		shopService.setBaesong(baesongVO);
-		
-		System.out.println("baesongVO 셋후"+baesongVO);
-		
-		//쿠폰 사용함으로 변경
-		shopService.setCouponUsed(baesongVO.getUserCouponCode());
-		
 		//사용포인트 빼기
-		shopService.setUserPointMinus(baesongVO.getMid(), baesongVO.getPoint());
+		if (usPoint != 0) {
+      shopService.setUserPointMinus(baesongVO.getMid(), usPoint);
+		}
 		
 		// 포인트 적립
 		shopService.setUserPointPlus((int)(baesongVO.getTotalPay() * 0.01), orderVos.get(0).getMid());
 		
+		int totalBaesongOrder = 0;
+		for(int i =0; i<orderVos.size(); i++) {
+			totalBaesongOrder += orderVos.get(i).getTotalPrice();
+		}
+		System.out.println(orderVos);
+		for(int i =0; i<orderVos.size(); i++) {
+		BaesongVO newBaesongVO = new BaesongVO();
+		
+    newBaesongVO.setOIdx((orderVos.get(i).getIdx())+i);
+		newBaesongVO.setOrderIdx(orderVos.get(i).getOrderIdx());
+		newBaesongVO.setTotalPay(totalBaesongOrder);
+		newBaesongVO.setMid(baesongVO.getMid());
+		newBaesongVO.setName(baesongVO.getName());
+		newBaesongVO.setAddress(payMentVO.getBuyer_addr());
+		newBaesongVO.setTel(payMentVO.getBuyer_tel());
+		newBaesongVO.setMessage(baesongVO.getMessage());
+		
+		System.out.println("newBaesongVO"+newBaesongVO);
+		shopService.setBaesong(newBaesongVO);
+		System.out.println("newBaesongVO 셋후"+newBaesongVO);
+		}
 		
 		
 		
@@ -525,11 +537,11 @@ public class ShopController {
 		model.addAttribute("orderVos", orderVos);
 		
 		session.removeAttribute("sOrderVos");
-		
+		/*
 		int totalBaesongOrder = shopService.getTotalBaesongOrder(orderVos.get(orderVos.size()-1).getOrderIdx());
 		
 		model.addAttribute("totalBaesongOrder", totalBaesongOrder);
-		
+		*/
 		return "shop/paymentResult";
 	}
 	

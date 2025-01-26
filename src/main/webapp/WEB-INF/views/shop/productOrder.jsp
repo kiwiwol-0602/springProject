@@ -227,14 +227,13 @@
 	    });
 	
 	    // 결과를 화면에 출력
-	    document.getElementById('totalPrice').textContent = totalPrice.toLocaleString() + '원';
 	    document.getElementById('totalPrice').value = totalPrice;
 	    
-	    document.getElementById('totalDiscount').textContent = totalDiscount.toLocaleString() + '원';
 	    document.getElementById('totalDiscount').value = totalDiscount;
+	    document.getElementById('originalDiscount').value = totalDiscount;
 	    
-	    document.getElementById('totalPay').textContent = (totalPrice - totalDiscount).toLocaleString() + '원';
 	    document.getElementById('totalPay').value = (totalPrice - totalDiscount);
+	    document.getElementById('originalTotalPay').value = (totalPrice - totalDiscount);
 		}
 		
 		// 페이지가 로드되면 계산 수행
@@ -258,78 +257,88 @@
       });
     });
      
-		
-	  function couponDC(){
-				
-			const selectedCoupon = document.querySelector('input[name="selectedCoupon"]:checked');
-	    const couponIdx = selectedCoupon.dataset.couponidx;
-			const userCoIdx = selectedCoupon.value;
-	    const totalPay = document.getElementById('totalPay').value;
-	    const totalDiscount = document.getElementById('totalDiscount').value;
-	    
-			if (!selectedCoupon) {
-				alert('쿠폰을 선택해주세요.');
-			  return;
-			}
-			
-			$.ajax({
-			      type: 'POST',
-			      url: '${ctp}/shop/applyCoupon',
-			      data: {
-			    	  couponIdx: couponIdx,
-			    	  totalPay : totalPay,
-			    	  totalDiscount : totalDiscount,
-			    	  userCoIdx : userCoIdx
-			    	  
-			      },
-			      success: function(response) {
-			        if (response.success) {
-			          // 할인된 금액을 화면에 반영
-	    					
-			          $('#totalDiscount').text(response.newTotalDiscount.toLocaleString() + '원');
-			          $('#totalDiscount').val(response.newTotalDiscount);
-			          
-								$('#totalPay').text(response.newTotalPay.toLocaleString() + '원');
-								$('#totalPay').val(response.newTotalPay);
-								
-			          $('#ucNameCode').val(response.ucName);
-			          $('#userCouponCode').val(response.ucCode);
-			          
-			          // 모달 닫기
-			          $('#couponModal').modal('hide');
-			        } else {
-			          alert('쿠폰 적용에 실패했습니다.');
-			        }
-			      },
-			      error: function() {
-			        alert('서버 오류가 발생했습니다.');
-			      }
-			    });
-	  }
-     
-    function pointCheck(all){
-    	let allPoint = ${userVO.point};
-			let	point = document.getElementById("point").value;
-    	let totDiscount = document.getElementById("totalDiscount").value;
-    	let totPay = document.getElementById("totalPay").value;
-    	
-    	if(all){
-    		point = allPoint;  // 전액 사용시 보유 포인트를 사용
-        document.getElementById("point").value = point;  // 포인트 입력창에도 전액 사용한 값으로 업데이트
-    	}
-    	
-    	// 포인트가 결제 금액을 넘는지 체크 (넘으면 총 결제 금액까지만 적용)
-      if (Number(point) > Number(totPay)) {
-          point = totPay;  // 결제 금액보다 많은 포인트 사용을 방지
-      }
   	
-  	
-    	$('#totalDiscount').text((Number(totDiscount)+Number(point)).toLocaleString() + '원');
-    	$('#totalDiscount').val((Number(totDiscount)+Number(point)));
+  	function couponDC() {
+  	    // 선택된 쿠폰 가져오기
+  	    const selectedCoupon = document.querySelector('input[name="selectedCoupon"]:checked');
+  	    if (!selectedCoupon) {
+  	        alert('쿠폰을 선택해주세요.');
+  	        return;
+  	    }
 
-    	$('#totalPay').text((totPay-point).toLocaleString() + '원');
-    	$('#totalPay').val((totPay-point));
-    }
+  	    const couponIdx = selectedCoupon.dataset.couponidx;
+  	    const userCoIdx = selectedCoupon.value;
+
+  	    // 원래 총 결제 금액 (변경 전의 금액)
+  	    let originalTotalPay = document.getElementById('originalTotalPay').value;
+  	    let originalDiscount = document.getElementById('originalDiscount').value;
+
+  	    // 현재 적용된 할인 금액을 가져옴
+  	    let totalDiscountElement = document.getElementById('totalDiscount');
+  	    let currentDiscount = parseFloat(totalDiscountElement.value);
+
+  	    // 기존 할인 제거: 기존 할인 금액을 원래 금액에서 뺀 것을 복구
+  	    let totalPayElement = document.getElementById('totalPay');
+  	    let totalPay = originalTotalPay + currentDiscount;
+
+  	    // 새로운 쿠폰 할인 적용
+  	    $.ajax({
+  	        type: 'POST',
+  	        url: '${ctp}/shop/applyCoupon',
+  	        data: {
+  	            couponIdx: couponIdx,
+  	            totalPay: originalTotalPay, // 원래 금액을 서버로 보냄
+  	            userCoIdx: userCoIdx
+  	        },
+  	        success: function (response) {
+  	            if (response.success) {
+  	                // 서버에서 새 쿠폰 할인 금액을 가져와 반영
+  	                let newTotalDiscount = response.newTotalDiscount;
+
+  	                // 새 할인 금액으로 총 결제 금액 다시 계산
+  	                totalPay = originalTotalPay - newTotalDiscount;
+
+  	                // 새로운 할인 금액 반영
+  	                $('#totalDiscount').val(Number(newTotalDiscount)+Number(originalDiscount));
+  	                $('#totalPay').val(totalPay);
+
+  	                // 쿠폰 정보 업데이트
+  	                $('#ucNameCode').val(response.ucName);
+  	                $('#userCouponCode').val(response.ucCode);
+
+  	                // 모달 닫기
+  	                $('#couponModal').modal('hide');
+  	            } else {
+  	                alert('쿠폰 적용에 실패했습니다.');
+  	            }
+  	        },
+  	        error: function () {
+  	            alert('서버 오류가 발생했습니다.');
+  	        }
+  	    });
+  	}
+ 
+function pointCheck(all){
+	let allPoint = ${userVO.point};
+		let	point = document.getElementById("point").value;
+	let totDiscount = document.getElementById("totalDiscount").value;
+	let totPay = document.getElementById("totalPay").value;
+	
+	if(all){
+		point = allPoint;  // 전액 사용시 보유 포인트를 사용
+    document.getElementById("point").value = point;  // 포인트 입력창에도 전액 사용한 값으로 업데이트
+	}
+	
+	// 포인트가 결제 금액을 넘는지 체크 (넘으면 총 결제 금액까지만 적용)
+  if (Number(point) > Number(totPay)) {
+      point = totPay;  // 결제 금액보다 많은 포인트 사용을 방지
+  }
+	
+	
+	$('#totalDiscount').val((Number(totDiscount)+Number(point)));
+
+	$('#totalPay').val((totPay-point));
+}
      
      
      // 결제하기
@@ -507,6 +516,8 @@
 	  <input type="hidden" name="payMethod" id="payMethod"/>
 	  <input type="hidden" name="amount" value="10"/>
 	  <input type="hidden" name="productName" value="${sOrderVos[0].productName}"/>
+	  <input type="hidden" name="originalTotalPay" id="originalTotalPay"/>
+	  <input type="hidden" name="originalDiscount" id="originalDiscount"/>
 	  </div>
 	  </div>
 	  
