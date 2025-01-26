@@ -100,4 +100,10 @@ public interface ShopDAO {
 
 	void setUserPointMinus(@Param("mid") String mid, @Param("point") int point);
 
+	ProductOrderVO getOrderDetail(@Param("idx") int idx);
+
+	BaesongVO getBaesongDetail(@Param("orderIdx") String orderIdx);
+
+	void setStatusSelectCheck(@Param("idx") int idx, @Param("statusSelect") String statusSelect);
+
 }

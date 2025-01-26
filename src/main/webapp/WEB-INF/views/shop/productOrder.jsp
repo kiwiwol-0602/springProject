@@ -316,30 +316,41 @@
   	            alert('서버 오류가 발생했습니다.');
   	        }
   	    });
-  	}
+  		}
  
-function pointCheck(all){
-	let allPoint = ${userVO.point};
-		let	point = document.getElementById("point").value;
-	let totDiscount = document.getElementById("totalDiscount").value;
-	let totPay = document.getElementById("totalPay").value;
+		let myPoint = ${userVO.point};
+  	function pointCheck(all) {
+  	    // 보유 포인트
+  	    let allPoint = myPoint; 
+  	    // 입력된 포인트 값
+  	    let point = document.getElementById("point").value;
+  	    // 현재 할인 금액
+  	    let totDiscount = document.getElementById("totalDiscount").value;
+  	    // 현재 결제 금액
+  	    let totPay = document.getElementById("totalPay").value;
+				
+  	    if(myPoint>=point){
+	  	    if (all) {
+	  	        point = allPoint;  
+	  	        document.getElementById("point").value = point;  // 포인트 입력창에도 업데이트
+	  	    }
+	  	    if (Number(point) > Number(totPay)) {
+	  	        point = totPay;  // 결제 금액보다 많은 포인트 사용을 방지
+	  	        document.getElementById("point").value = point;  // 포인트 입력창에도 업데이트
+	  	    }
+	  	    let newDiscount = Number(totDiscount) + Number(point);
+	  	    let newTotalPay = Number(totPay) - Number(point);
+	  	  	myPoint = myPoint-point;
 	
-	if(all){
-		point = allPoint;  // 전액 사용시 보유 포인트를 사용
-    document.getElementById("point").value = point;  // 포인트 입력창에도 전액 사용한 값으로 업데이트
-	}
-	
-	// 포인트가 결제 금액을 넘는지 체크 (넘으면 총 결제 금액까지만 적용)
-  if (Number(point) > Number(totPay)) {
-      point = totPay;  // 결제 금액보다 많은 포인트 사용을 방지
-  }
-	
-	
-	$('#totalDiscount').val((Number(totDiscount)+Number(point)));
-
-	$('#totalPay').val((totPay-point));
-}
-     
+	  	    // 업데이트된 값 반영
+	  	    $('#totalDiscount').val(newDiscount);
+	  	    $('#originalDiscount').val(newDiscount);
+	  	    $('#totalPay').val(newTotalPay);
+	  	    $('#originalTotalPay').val(newTotalPay);
+  	    	
+  	    }
+  		}
+			     
      
      // 결제하기
      function order() {
@@ -435,7 +446,7 @@ function pointCheck(all){
   			<div>
   				<span>보유포인트 <font style="color: red; font-weight: bold;"><fmt:formatNumber value="${userVO.point}" pattern='#,###원'/></font></span>
 					<div class="input-group">
-					<input type="number" class="form-control" id="point" name="point" value="0" onchange="pointCheck()"/>
+					<input type="number" class="form-control" style="text-align: right;" id="point" name="point" value="0" onchange="pointCheck()"/>
         	<input type="button" class="btn btn-dark" id="couponSelectBtn" value="전액사용" onclick="pointCheck(true)"/>
 					</div>
   			</div>
@@ -443,19 +454,19 @@ function pointCheck(all){
   	</tr>
   	<tr>
   		<td>주문금액
-  			<div><input type="number" id="totalPrice" name="totalPrice" style="text-align: right; font-weight: bold;"/></div>
+  			<div><input type="number" id="totalPrice" name="totalPrice" class="form-control" style="text-align: right; font-weight: bold;"/></div>
   		</td>
   	</tr>
   	<tr>
   		<td>할인금액
-  			<div><input type="number" id="totalDiscount" name="totalDiscount" style="text-align: right; font-weight: bold;"></div>
+  			<div><input type="number" id="totalDiscount" name="totalDiscount"  class="form-control" style="text-align: right; font-weight: bold;"></div>
   		</td>
   	</tr>
   	<tr>
   		<td>
   			<hr/>
 			  <div><b>총 주문(결재) 금액</b></div>
-		    <div><input type="number" id="totalPay" name="totalPay" style="text-align: right; font-weight: bold;"></div>
+		    <div><input type="number" id="totalPay" name="totalPay" class="form-control" style="text-align: right; font-weight: bold;"></div>
   		</td>
   	</tr>
   </table>

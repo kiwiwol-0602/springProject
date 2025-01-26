@@ -4,85 +4,167 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="ctp" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <title>구매내역</title>
   <jsp:include page="/WEB-INF/views/include/bs5.jsp"/>
-  <script>
-	  function nWin(orderIdx) {
-	  	var url = "${ctp}/dbShop/dbOrderBaesong?orderIdx="+orderIdx;
-	  	window.open(url,"dbOrderBaesong","width=350px,height=400px");
+  <style type="text/css">
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f7fc;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .orderDetail {
+      max-width: 77%;
+      margin: 15% auto 10% auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 40px;
+    }
+    table {
+	    margin: 0 auto; /* 가로로 테이블을 가운데 정렬 */
+	    border-collapse: collapse; /* 테두리 간격 없애기 */
+	    width: 80%; /* 원하는 넓이로 설정 */
 	  }
+
+    .section-title {
+      margin-top: 30px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #2c3e50;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+    }
+
+    .detail td {
+      padding: 10px;
+      vertical-align: top;
+    }
+
+    .detail img {
+      border-radius: 5px;
+      transition: transform 0.2s;
+    }
+
+    .price {
+      color: #e74c3c;
+      font-weight: bold;
+    }
+
+    .line-through {
+      text-decoration: line-through;
+      color: #aaa;
+    }
+
+    .order-summary {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 20px;
+      text-align: center;
+      font-size: 20px;
+    }
+
+    .order-summary .total {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    .order-info {
+      color: #7f8c8d;
+    }
+
+    .order-info div {
+      margin-bottom: 10px;
+    }
+    
+    .btn-black {
+  	width: 400px;
+   	height: 60px; /* 수량 입력 필드와 동일한 높이 */
+    line-height: 1; /* 텍스트가 가운데 정렬되도록 */
+    border: 1px solid #0a0a0a;
+    background-color: #fff;
+    color: #0a0a0a;
+    font-size: 20px;
+    border-radius: 0;
+    transition: background-color 0.3s ease;
+    margin-bottom: 3px;
+  }
+
+  .btn-black:hover {
+    background-color: #0a0a0a;
+    color: #fff;
+    
+  }
+  </style>
+  <script>
+    function nWin(orderIdx) {
+      var url = "${ctp}/dbShop/dbOrderBaesong?orderIdx=" + orderIdx;
+      window.open(url, "dbOrderBaesong", "width=350px,height=400px");
+    }
   </script>
 </head>
 <body>
   <jsp:include page="/WEB-INF/views/include/header.jsp" />
   <jsp:include page="/WEB-INF/views/include/nav.jsp"/>
-<p><br></p>
-<div class="container">
-  <h2>결제내역</h2>
-  <hr/>
-  <p>주문 물품명 : ${sPayMentVO.name}</p>
-  <p>주문금액 : ${sPayMentVO.amount}(실제구매금액:${totalPrice})</p>
-  <p>주문자 메일주소 : ${sPayMentVO.buyer_email}</p>
-  <p>주문자 성명 : ${sPayMentVO.buyer_name}</p>
-  <p>주문자 전화번호 : ${sPayMentVO.buyer_tel}</p>
-  <p>주문자 주소 : ${sPayMentVO.buyer_addr}</p>
-  <p>주문자 우편번호 : ${sPayMentVO.buyer_postcode}</p>
-  <p>결제 고유ID : ${sPayMentVO.imp_uid}</p>
-  <p>결제 상점 거래 ID : ${sPayMentVO.merchant_uid}</p>
-  <p>결제 금액 : ${sPayMentVO.paid_amount}</p>
-  <p>카드 승인번호 : ${sPayMentVO.apply_num}</p>
-  <hr/>
-  <h2 class="text-center">주문완료</h2>
-  <hr/>
-  <table class="table table-bordered">
-    <tr style="text-align:center;background-color:#ccc;">
-      <th>상품이미지</th>
-      <th>주문일시</th>
-      <th>주문내역</th>
-      <th>비고</th>
-    </tr>
-    <c:forEach var="vo" items="${orderVos}">
+  <div class="orderDetail">
+    <h1>주문 상세 정보</h1>
+    <table class="detail">
       <tr>
-        <td style="text-align:center;">
-          <img src="${ctp}/product/${vo.thumbnail}" width="100px"/>
+        <td colspan="2">
+          <div class="order-info">
+            <div>주문일자 : ${fn:substring(orderVO.orderDate, 0, 19)}</div>
+            <div>주문번호 : ${orderVO.orderIdx}</div>
+          </div>
         </td>
-        <td style="text-align:center;"><br/>
-          <p>주문번호 : ${vo.orderIdx}</p>
-          <p>총 주문액 : <fmt:formatNumber value="${vo.totalPay}"/>원</p>
-          <p><input type="button" value="배송지정보" onclick="nWin('${vo.orderIdx}')"></p>
-        </td>
-        <td align="left">
-	        <p><br/>모델명 : <span style="color:orange;font-weight:bold;">${vo.productName}</span><br/> &nbsp; &nbsp; <fmt:formatNumber value="${vo.price}"/>원</p><br/>
-	        <c:set var="optionNames" value="${fn:split(vo.optionName,',')}"/>
-	        <c:set var="optionPrices" value="${fn:split(vo.optionPrice,',')}"/>
-	        <c:set var="optionNums" value="${fn:split(vo.optionNum,',')}"/>
-	        <p>
-	          - 주문 내역
-	          <c:if test="${fn:length(optionNames) > 1}">(옵션 ${fn:length(optionNames)-1}개 포함)</c:if><br/>
-	          <c:forEach var="i" begin="1" end="${fn:length(optionNames)}">
-	            &nbsp; &nbsp; ㆍ ${optionNames[i-1]} / <fmt:formatNumber value="${optionPrices[i-1]}"/>원 / ${optionNums[i-1]}개<br/>
-	          </c:forEach> 
-	        </p>
-	      </td>
-        <td style="text-align:center;"><br/><font color="blue">결제완료</font><br/>(배송준비중)</td>
       </tr>
-    </c:forEach>
-  </table>
-  <hr/>
-  <div class="text-center">
-    구매한 상품 총 금액(배송비포함) : <fmt:formatNumber value="${vo.totalPay}"/>원
+      <tr><td colspan="2" class="section-title">주문상품</td></tr>
+      <tr><td colspan="2" style="text-align:left; font-weight: bold; color: #2c3e50;">결제완료</td></tr>
+      <c:forEach var="vo" items="${orderVos}">
+        <tr>
+          <td style="text-align:center;">
+            <img src="${ctp}/product/${vo.thumbnail}" width="150px"/>
+          </td>
+          <td style="text-align:left; width: 400px; padding: auto;">
+            <div><span style="color:black; font-weight:bold;">${vo.productName}</span><br/></div>
+            <div>${vo.optionName} / ${vo.optionNum}개</div>
+            <c:if test="${vo.totalPrice != vo.totalPay}">
+              <div class="line-through"><fmt:formatNumber value="${vo.totalPrice}"/>원</div>
+            </c:if>
+            <div class="price"><fmt:formatNumber value="${vo.totalPay}"/>원</div>
+          </td>
+        </tr>
+      </c:forEach>
+      <tr><td colspan="2"><div class="section-title">배송지</div></td></tr>
+      <tr>
+        <td colspan="2">
+          <div><b>${baesongVO.name}</b>(${baesongVO.mid})</div>
+          <div>${baesongVO.tel}</div>
+          <div><b>${baesongVO.address}</b></div>
+        </td>
+      </tr>
+    </table>
+    <div class="order-summary" sty>
+      구매한 상품 총 금액(배송비 포함) : <b><fmt:formatNumber value="${baesongVO.totalPay}"/></b>원
+    </div>
+    <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+      <button type="button" onclick="location.href='${ctp}/shop/shopMainList?categoryName=mainName&category=Jewelry';" class="btn-black" style="margin-right: 10px;">계속 쇼핑하기</button>
+      <button type="button" onclick="location.href='${ctp}/shop/myOrder';" class="btn-black">구매내역 보기</button>
+  	</div>
   </div>
-  <hr/>
-  <p class="text-center">
-    <a href="${ctp}/dbShop/dbProductList" class="btn btn-success">계속쇼핑하기</a> &nbsp;
-    <a href="${ctp}/dbShop/dbMyOrder" class="btn btn-primary">구매내역보기</a>
-  </p>
-  <hr/>
-</div>
-<br/>
-<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 </body>
 </html>

@@ -384,4 +384,27 @@ public class ShopServiceImpl implements ShopService {
 	public void setUserPointMinus(String mid, int point) {
 		shopDAO.setUserPointMinus(mid, point);
 	}
+
+	@Override
+	public ProductOrderVO getOrderDetail(int idx) {
+		return shopDAO.getOrderDetail(idx);
+	}
+
+	@Override
+	public BaesongVO getBaesongDetail(String orderIdx) {
+		return shopDAO.getBaesongDetail(orderIdx);
+	}
+
+	@Override
+	public String setStatusSelectCheck(String statusSelect, String idxSelectArray) {
+		String res = "0";
+		String[] idxSelectArrays = idxSelectArray.split("/");
+		
+		for(String idx : idxSelectArrays) {
+			shopDAO.setStatusSelectCheck(Integer.parseInt(idx), statusSelect);
+			res = "1";
+		}
+		
+		return res;
+	}
 }

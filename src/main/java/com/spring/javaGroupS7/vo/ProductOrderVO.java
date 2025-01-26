@@ -16,7 +16,7 @@ public class ProductOrderVO {
   private String optionPrice;
   private String optionNum;
   private int totalPay;
-  private int orderDate;
+  private String orderDate;
   
   private int cartIdx;  // 장바구니 고유번호.
   private int maxIdx;   // 주문번호를 구하기위한 기존 최대 비밀번호필드
@@ -24,6 +24,10 @@ public class ProductOrderVO {
   private String userCouponCode;
   private int totalPrice;
   private int point;
+  
+  private String name;
+  private String address;
+  private String orderStatus;
   
 
   

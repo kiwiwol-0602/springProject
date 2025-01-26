@@ -135,6 +135,13 @@
     select totalPay from baesong where orderIdx = #{orderIdx};
    </select>
 	 
+	 <select id="getOrderDetail" resultType="com.spring.javaGroupS7.vo.ProductOrderVO">
+	 	select * from productOrder where idx = #{idx};
+	 </select>
+	 
+	 <select id="getBaesongDetail" resultType="com.spring.javaGroupS7.vo.BaesongVO">
+	 	select * from baesong where orderIdx = #{orderIdx} limit 1;
+	 </select>
 	 
 	 
 	 
@@ -203,6 +210,10 @@
   
   <update id="setCouponUsed">
   	update userCoupons set used = 'used', usedDate = now() where userCouponCode = #{userCouponCode};
+  </update>
+  
+  <update id="setStatusSelectCheck">
+  	update baesong set orderStatus = #{statusSelect} where oIdx = #{idx};
   </update>
   
   

@@ -55,8 +55,26 @@ public class AdminController {
 			@RequestParam(defaultValue = "1") int pag,
 			@RequestParam(defaultValue = "10") int pageSize
 		) {
-		pageProcess.totRecCnt(model, pag, pageSize, "product", "");
+		pageProcess.totRecCnt(model, pag, pageSize, "product", "admin");
 		return "admin/productList";
 	}
+	
+	@GetMapping("/orderList")
+	public String orderListGet(Model model,
+			@RequestParam(defaultValue = "1") int pag,
+			@RequestParam(defaultValue = "10") int pageSize
+			) {
+		pageProcess.totRecCnt(model, pag, pageSize, "productOrder", "admin");
+		return "admin/orderList";
+	}
+	
+	@ResponseBody
+	@PostMapping("/statusSelectCheck")
+	public String statusSelectCheckPost(String statusSelect, String idxSelectArray) {
+		System.out.println(statusSelect);
+		System.out.println(idxSelectArray);
+		return shopService.setStatusSelectCheck(statusSelect, idxSelectArray);
+	}
+	
 	
 }

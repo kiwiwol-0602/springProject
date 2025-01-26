@@ -94,5 +94,11 @@ public interface ShopService {
 
 	void setUserPointMinus(String mid, int point);
 
+	ProductOrderVO getOrderDetail(int idx);
+
+	BaesongVO getBaesongDetail(String orderIdx);
+
+	String setStatusSelectCheck(String statusSelect, String idxSelectArray);
+
 
 }

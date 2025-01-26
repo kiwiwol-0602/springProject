@@ -481,7 +481,6 @@ public class ShopController {
 			shopService.setOrder(vo);
 			shopService.setCartDeleteAll(vo.getCartIdx());
 		}
-		System.out.println("baesongVO 초기"+baesongVO);
 		
 		//쿠폰 사용함으로 변경
 		if (!ucCode.equals("")) {
@@ -500,7 +499,6 @@ public class ShopController {
 		for(int i =0; i<orderVos.size(); i++) {
 			totalBaesongOrder += orderVos.get(i).getTotalPrice();
 		}
-		System.out.println(orderVos);
 		for(int i =0; i<orderVos.size(); i++) {
 		BaesongVO newBaesongVO = new BaesongVO();
 		
@@ -513,12 +511,8 @@ public class ShopController {
 		newBaesongVO.setTel(payMentVO.getBuyer_tel());
 		newBaesongVO.setMessage(baesongVO.getMessage());
 		
-		System.out.println("newBaesongVO"+newBaesongVO);
 		shopService.setBaesong(newBaesongVO);
-		System.out.println("newBaesongVO 셋후"+newBaesongVO);
 		}
-		
-		
 		
 		payMentVO.setImp_uid(receivePayMentVO.getImp_uid());
 		payMentVO.setMerchant_uid(receivePayMentVO.getMerchant_uid());
@@ -534,7 +528,14 @@ public class ShopController {
 	@GetMapping("/paymentResultOk")
 	public String paymentResultOkGet(HttpSession session, Model model) {
 		List<ProductOrderVO> orderVos = (List<ProductOrderVO>) session.getAttribute("sOrderVos");
+		ProductOrderVO orderVO = shopService.getOrderDetail(orderVos.get(0).getIdx());
+		BaesongVO baesongVO = shopService.getBaesongDetail(orderVO.getOrderIdx());
+		System.out.println(orderVos);
+		System.out.println(orderVO);
+		System.out.println(baesongVO);
 		model.addAttribute("orderVos", orderVos);
+		model.addAttribute("orderVO", orderVO);
+		model.addAttribute("baesongVO", baesongVO);
 		
 		session.removeAttribute("sOrderVos");
 		/*
