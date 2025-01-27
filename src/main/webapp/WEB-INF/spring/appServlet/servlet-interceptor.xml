@@ -30,6 +30,23 @@
 				<exclude-mapping path="/member/inforCheck"/>
 				<exclude-mapping path="/member/emailSendOk"/>
 				<exclude-mapping path="/shop/shopMainList"/>
+				<exclude-mapping path="/shop/mainName/*"/>
+				<exclude-mapping path="/shop/baseName/*"/>
+				<exclude-mapping path="/shop/Bags/*"/>
+				<exclude-mapping path="/shop/Bracelets/*"/>
+				<exclude-mapping path="/shop/Earrings/*"/>
+				<exclude-mapping path="/shop/EngagementRings/*"/>
+				<exclude-mapping path="/shop/Necklaces/*"/>
+				<exclude-mapping path="/shop/Rings/*"/>
+				<exclude-mapping path="/shop/Watches/*"/>
+				<exclude-mapping path="/shop/LeatherGoods/*"/>
+				<exclude-mapping path="/shop/Accessories/*"/>
+				<exclude-mapping path="/shop/Fragrances/*"/>
+				<exclude-mapping path="/shop/HighPerfumery/*"/>
+				<exclude-mapping path="/shop/ScentedCandle/*"/>
+				<exclude-mapping path="/shop/Stationery/*"/>
+				<exclude-mapping path="/shop/Home/*"/>
+				<exclude-mapping path="/shop/WeddingBands/*"/>
         <exclude-mapping path="/shop/productContent"/>
         
 				<beans:ref bean="level1Interceptor" />

@@ -7,19 +7,27 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.spring.javaGroupS7.service.ShopService;
+import com.spring.javaGroupS7.vo.ProductVO;
+
 @Controller
 public class HomeController {
+	
+	@Autowired
+	ShopService shopService;
 
     private String getCurrentServerTime(Locale locale) {
         Date date = new Date();
@@ -35,7 +43,13 @@ public class HomeController {
 
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String main(Locale locale, Model model) {
+    		List<ProductVO> vos = shopService.getProductList("baseName", "Rings", "Jewelry");
+    		List<ProductVO> Bvos = shopService.getProductList("baseName", "Bracelets", "Jewelry");
+    		
         model.addAttribute("serverTime", getCurrentServerTime(locale));
+        model.addAttribute("vos", vos);
+        model.addAttribute("Bvos", Bvos);
+        
         return "main";
     }
     
