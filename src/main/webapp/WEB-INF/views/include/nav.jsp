@@ -309,19 +309,6 @@
 	  	<a href="javascript:selectCategory('mainName','Jewelry')" class="main-menu">Jewelry</a>
 	  	<div class="sub-menu">
 	  		<hr/>
-	  		<!--  
-	      <div class="subMenu-section">
-	        <h4>All Collections</h4>
-	        <ul class="detail-menu">
-	          <li><a href="#">LOVE</a></li>
-	          <li><a href="#">저스트 앵 끌루</a></li>
-	          <li><a href="#">트리니티</a></li>
-	          <li><a href="#">팬더</a></li>
-	          <li><a href="#">그랑 드 카페</a></li>
-	          <li><a href="#">클래쉬</a></li>
-	        </ul>
-	      </div>
-	      -->
 	      <!-- Bracelets -->
 	      <div class="subMenu-section">
 	        <h4 onclick="selectCategory('baseName','Bracelets','Jewelry')">Bracelets</h4>
@@ -331,7 +318,7 @@
   			    </div>
 	          <li>
 	          	<a href="javascript:selectCategory('subName','LOVE','Bracelets')">
-	          	<div><img src="${ctp}/shop/Bracelets/love.jpg" width="200px" height="200px;"></div>
+	          	<div><img src="${ctp}/shop/Bracelets/LOVE.jpg" width="200px" height="200px;"></div>
 	          	<div>LOVE</div>
 	          	</a>
 	          </li>
@@ -355,37 +342,37 @@
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','클래쉬','Bracelets')">
-		          <div><img src="${ctp}/shop/Bracelets/love.jpg" width="200px" height="200px;"></div>
+		          <div><img src="${ctp}/shop/Bracelets/클래쉬.jpg" width="200px" height="200px;"></div>
 	          		<div>클래쉬</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','다이아몬드','Bracelets')">
-		          <div><img src="${ctp}/shop/Bracelets/love.jpg" width="200px" height="200px;"></div>
+		          <div><img src="${ctp}/shop/Bracelets/다이아몬드.jpg" width="200px" height="200px;"></div>
 	          		<div>다이아몬드</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','다무르','Bracelets')">
-		          <div><img src="${ctp}/shop/Bracelets/love.jpg" width="200px" height="200px;"></div>
+		          <div><img src="${ctp}/shop/Bracelets/다무르.jpg" width="200px" height="200px;"></div>
 	          		<div>다무르</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','에크루','Bracelets')">
-		          	<div><img src="${ctp}/shop/Bracelets/love.jpg" width="200px" height="200px;"></div>
+		          	<div><img src="${ctp}/shop/Bracelets/에크루.jpg" width="200px" height="200px;"></div>
 	          		<div>에크루</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','링크','Bracelets')">
-		          	<div><img src="${ctp}/shop/Bracelets/love.jpg" width="200px" height="200px;"></div>
+		          	<div><img src="${ctp}/shop/Bracelets/링크.jpg" width="200px" height="200px;"></div>
 	          		<div>링크</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','칵투스','Bracelets')">
-		          	<div><img src="${ctp}/shop/Bracelets/love.jpg" width="200px" height="200px;"></div>
+		          	<div><img src="${ctp}/shop/Bracelets/칵투스.jpg" width="200px" height="200px;"></div>
 	          		<div>칵투스</div>
 	          	</a>
 	          </li>
@@ -405,67 +392,67 @@
   			    </div>
 	          <li>
 	          	<a href="javascript:selectCategory('subName','LOVE','Rings')">
-	          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+	          	<div><img src="${ctp}/shop/Rings/LOVE.jpg" width="200px" height="200px;"></div>
 	          	<div>LOVE</div>
 	          	</a>
 	          </li>
 	          <li>
 	          	<a href="javascript:selectCategory('subName','저스트앵끌루','Rings')">
-	          		<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+	          		<div><img src="${ctp}/shop/Rings/저스트앵끌루.jpg" width="200px" height="200px;"></div>
 	          		<div>저스트앵끌루</div>
 	          	</a>
 	          </li>
 	          <li>
 	          	<a href="javascript:selectCategory('subName','트리니티','Rings')">
-	         			<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+	         			<div><img src="${ctp}/shop/Rings/트리니티.jpg" width="200px" height="200px;"></div>
 	          		<div>트리니티</div>
 	          	</a>
 	          </li>
 	          <li>
 	          	<a href="javascript:selectCategory('subName','클래쉬','Rings')">
-	          		<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+	          		<div><img src="${ctp}/shop/Rings/클래쉬.jpg" width="200px" height="200px;"></div>
 	          		<div>클래쉬</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','팬더','Rings')">
-		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          <div><img src="${ctp}/shop/Rings/팬더.jpg" width="200px" height="200px;"></div>
 	          		<div>팬더</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','그랑드카페','Rings')">
-		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          <div><img src="${ctp}/shop/Rings/그랑드카페.jpg" width="200px" height="200px;"></div>
 	          		<div>그랑드카페</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','다이아몬드','Rings')">
-		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          <div><img src="${ctp}/shop/Rings/다이아몬드.jpg" width="200px" height="200px;"></div>
 	          		<div>다이아몬드</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','에크루','Rings')">
-		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          	<div><img src="${ctp}/shop/Rings/에크루.jpg" width="200px" height="200px;"></div>
 	          		<div>에크루</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','마이용팬더','Rings')">
-		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          	<div><img src="${ctp}/shop/Rings/마이용팬더.jpg" width="200px" height="200px;"></div>
 	          		<div>마이용팬더</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','파우나앤플로라','Rings')">
-		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          	<div><img src="${ctp}/shop/Rings/파우나앤플로라.jpg" width="200px" height="200px;"></div>
 	          		<div>파우나앤플로라</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','레베를랭고','Rings')">
-		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          	<div><img src="${ctp}/shop/Rings/레베를랭고.jpg" width="200px" height="200px;"></div>
 	          		<div>레베를랭고</div>
 	          	</a>
 	          </li>
@@ -486,79 +473,79 @@
   			    </div>
 	          <li>
 	          	<a href="javascript:selectCategory('subName','LOVE','Necklaces')">
-	          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+	          	<div><img src="${ctp}/shop/Necklaces/LOVE.jpg" width="200px" height="200px;"></div>
 	          	<div>LOVE</div>
 	          	</a>
 	          </li>
 	          <li>
 	          	<a href="javascript:selectCategory('subName','저스트앵끌루','Necklaces')">
-	          		<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+	          		<div><img src="${ctp}/shop/Necklaces/저스트앵끌루.jpg" width="200px" height="200px;"></div>
 	          		<div>저스트앵끌루</div>
 	          	</a>
 	          </li>
 	          <li>
 	          	<a href="javascript:selectCategory('subName','클래쉬','Necklaces')">
-	         			<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+	         			<div><img src="${ctp}/shop/Necklaces/클래쉬.jpg" width="200px" height="200px;"></div>
 	          		<div>클래쉬</div>
 	          	</a>
 	          </li>
 	          <li>
 	          	<a href="javascript:selectCategory('subName','팬더','Necklaces')">
-	          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+	          	<div><img src="${ctp}/shop/Necklaces/팬더.jpg" width="200px" height="200px;"></div>
 	          		<div>팬더</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','아그라프','Necklaces')">
-		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          <div><img src="${ctp}/shop/Necklaces/아그라프.jpg" width="200px" height="200px;"></div>
 	          		<div>아그라프</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','C끌떼','Necklaces')">
-		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          <div><img src="${ctp}/shop/Necklaces/C끌떼.jpg" width="200px" height="200px;"></div>
 	          		<div>C끌떼</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','다이아몬드','Necklaces')">
-		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          <div><img src="${ctp}/shop/Necklaces/다이아몬드.jpg" width="200px" height="200px;"></div>
 	          		<div>다이아몬드</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','트리니티','Necklaces')">
-		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          	<div><img src="${ctp}/shop/Necklaces/트리니티.jpg" width="200px" height="200px;"></div>
 	          		<div>트리니티</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','그랑드카페','Necklaces')">
-		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          	<div><img src="${ctp}/shop/Necklaces/그랑드카페.jpg" width="200px" height="200px;"></div>
 	          		<div>그랑드카페</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','다무르','Necklaces')">
-		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          	<div><img src="${ctp}/shop/Necklaces/다무르.jpg" width="200px" height="200px;"></div>
 	          		<div>다무르</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','레베를랭고','Necklaces')">
-		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          	<div><img src="${ctp}/shop/Necklaces/레베를랭고.jpg" width="200px" height="200px;"></div>
 	          		<div>레베를랭고</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','파우나앤플로라','Necklaces')">
-		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          	<div><img src="${ctp}/shop/Necklaces/파우나앤플로라.jpg" width="200px" height="200px;"></div>
 	          		<div>파우나앤플로라</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','링크','Necklaces')">
-		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          	<div><img src="${ctp}/shop/Necklaces/링크.jpg" width="200px" height="200px;"></div>
 	          		<div>링크</div>
 	          	</a>
 	          </li>
@@ -580,67 +567,67 @@
   			    </div>
 	          <li>
 	          	<a href="javascript:selectCategory('subName','LOVE','Earrings')">
-	          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+	          	<div><img src="${ctp}/shop/Earrings/LOVE.jpg" width="200px" height="200px;"></div>
 	          	<div>LOVE</div>
 	          	</a>
 	          </li>
 	          <li>
 	          	<a href="javascript:selectCategory('subName','저스트앵끌루','Earrings')">
-	          		<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+	          		<div><img src="${ctp}/shop/Earrings/저스트앵끌루.jpg" width="200px" height="200px;"></div>
 	          		<div>저스트앵끌루</div>
 	          	</a>
 	          </li>
 	          <li>
 	          	<a href="javascript:selectCategory('subName','트리니티','Earrings')">
-	         			<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+	         			<div><img src="${ctp}/shop/Earrings/트리니티.jpg" width="200px" height="200px;"></div>
 	          		<div>트리니티</div>
 	          	</a>
 	          </li>
 	          <li>
 	          	<a href="javascript:selectCategory('subName','클래쉬','Earrings')">
-	          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+	          	<div><img src="${ctp}/shop/Earrings/클래쉬.jpg" width="200px" height="200px;"></div>
 	          		<div>클래쉬</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','팬더','Earrings')">
-		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          <div><img src="${ctp}/shop/Earrings/팬더.jpg" width="200px" height="200px;"></div>
 	          		<div>팬더</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','그랑드카페','Earrings')">
-		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          <div><img src="${ctp}/shop/Earrings/그랑드카페.jpg" width="200px" height="200px;"></div>
 	          		<div>그랑드카페</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','다이아몬드','Earrings')">
-		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          <div><img src="${ctp}/shop/Earrings/다이아몬드.jpg" width="200px" height="200px;"></div>
 	          		<div>다이아몬드</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','C끌떼','Earrings')">
-		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          	<div><img src="${ctp}/shop/Earrings/C끌떼.jpg" width="200px" height="200px;"></div>
 	          		<div>C끌떼</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','칵투스','Earrings')">
-		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          	<div><img src="${ctp}/shop/Earrings/칵투스.jpg" width="200px" height="200px;"></div>
 	          		<div>칵투스</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','다무르','Earrings')">
-		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          	<div><img src="${ctp}/shop/Earrings/다무르.jpg" width="200px" height="200px;"></div>
 	          		<div>다무르</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','파우나앤플로라','Earrings')">
-		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          	<div><img src="${ctp}/shop/Earrings/파우나앤플로라.jpg" width="200px" height="200px;"></div>
 	          		<div>파우나앤플로라</div>
 	          	</a>
 	          </li>
@@ -662,40 +649,41 @@
   			    </div>
 	          <li>
 	          	<a href="javascript:selectCategory('subName','LOVE','Engagement rings')">
-	          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+	          	<div><img src="${ctp}/shop/EngagementRings/LOVE.jpg" width="200px" height="200px;"></div>
 	          	<div>LOVE</div>
 	          	</a>
 	          </li>
 	          <li>
 	          	<a href="javascript:selectCategory('subName','솔리테어','Engagement rings')">
-	          		<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+	          		<div><img src="${ctp}/shop/EngagementRings/솔리테어.jpg" width="200px" height="200px;"></div>
 	          		<div>솔리테어</div>
 	          	</a>
 	          </li>
 	          <li>
 	          	<a href="javascript:selectCategory('subName','에땅셀','Engagement rings')">
-	         			<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+	         			<div><img src="${ctp}/shop/EngagementRings/에땅셀.jpg" width="200px" height="200px;"></div>
 	          		<div>에땅셀</div>
 	          	</a>
 	          </li>
 	          <li>
 	          	<a href="javascript:selectCategory('subName','발레린','Engagement rings')">
-	          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
-	          		<div>발레린</div>
+	          	<div><img src="${ctp}/shop/EngagementRings/발레린.jpg" width="200px" height="200px;"></div>
+	          	<div>발레린</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','데스티네','Engagement rings')">
-		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
-	          		<div>데스티네</div>
+		          <div><img src="${ctp}/shop/EngagementRings/데스티네.jpg" width="200px" height="200px;"></div>
+	          	<div>데스티네</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','트리니티루반','Engagement rings')">
-		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
-	          		<div>트리니티루반</div>
+		          <div><img src="${ctp}/shop/EngagementRings/트리니티루반.jpg" width="200px" height="200px;"></div>
+	          	<div>트리니티루반</div>
 	          	</a>
 	          </li>
+	          
             <div class="pagination-controls">
 	            <button class="pagination-button next-button" onclick="goToNextPage('.engagementRings')"> &gt; </button>
 		        </div>
@@ -714,61 +702,61 @@
   			    </div>
 	          <li>
 	          	<a href="javascript:selectCategory('subName','LOVE','Wedding bands')">
-	          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
-	          	<div>LOVE</div>
+	          		<div><img src="${ctp}/shop/WeddingBands/LOVE.jpg" width="200px" height="200px;"></div>
+	          		<div>LOVE</div>
 	          	</a>
 	          </li>
 	          <li>
 	          	<a href="javascript:selectCategory('subName','솔리테어','Wedding bands')">
-	          		<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+	          		<div><img src="${ctp}/shop/WeddingBands/솔리테어.jpg" width="200px" height="200px;"></div>
 	          		<div>솔리테어</div>
 	          	</a>
 	          </li>
 	          <li>
 	          	<a href="javascript:selectCategory('subName','C끌떼','Wedding bands')">
-	         			<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+	         			<div><img src="${ctp}/shop/WeddingBands/C끌떼.jpg" width="200px" height="200px;"></div>
 	          		<div>C끌떼</div>
 	          	</a>
 	          </li>
 	          <li>
 	          	<a href="javascript:selectCategory('subName','에땅셀','Wedding bands')">
-	          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
-	          		<div>에땅셀</div>
+		          	<div><img src="${ctp}/shop/WeddingBands/에땅셀.jpg" width="200px" height="200px;"></div>
+		          	<div>에땅셀</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','다무르','Wedding bands')">
-		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
-	          		<div>다무르</div>
+			          <div><img src="${ctp}/shop/WeddingBands/다무르.jpg" width="200px" height="200px;"></div>
+		          	<div>다무르</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','데스티네','Wedding bands')">
-		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
-	          		<div>데스티네</div>
+			          <div><img src="${ctp}/shop/WeddingBands/데스티네.jpg" width="200px" height="200px;"></div>
+		          	<div>데스티네</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','트리니티루반','Wedding bands')">
-		          <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          	<div><img src="${ctp}/shop/WeddingBands/트리니티루반.jpg" width="200px" height="200px;"></div>
 	          		<div>트리니티루반</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','발레린','Wedding bands')">
-		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          	<div><img src="${ctp}/shop/WeddingBands/발레린.jpg" width="200px" height="200px;"></div>
 	          		<div>발레린</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','루이방돔','Wedding bands')">
-		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          	<div><img src="${ctp}/shop/WeddingBands/루이방돔.jpg" width="200px" height="200px;"></div>
 	          		<div>루이방돔</div>
 	          	</a>
 	          </li>
 	          <li>
 		          <a href="javascript:selectCategory('subName','마이용팬더','Wedding bands')">
-		          	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+		          	<div><img src="${ctp}/shop/WeddingBands/마이용팬더.jpg" width="200px" height="200px;"></div>
 	          		<div>마이용팬더</div>
 	          	</a>
 	          </li>
@@ -796,67 +784,67 @@
 						</div>
 						<li>
 							<a href="javascript:selectCategory('subName','탱크','Watches')">
-							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+							<div><img src="${ctp}/shop/Watches/탱크.jpg" width="200px" height="200px;"></div>
 							<div>탱크</div>
 							</a>
 						</li>
 						<li>
 							<a href="javascript:selectCategory('subName','베누아','Watches')">
-								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+								<div><img src="${ctp}/shop/Watches/베누아.jpg" width="200px" height="200px;"></div>
 								<div>베누아</div>
 							</a>
 						</li>
 						<li>
 							<a href="javascript:selectCategory('subName','팬더','Watches')">
-								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+								<div><img src="${ctp}/shop/Watches/팬더.jpg" width="200px" height="200px;"></div>
 								<div>팬더</div>
 							</a>
 						</li>
 						<li>
 							<a href="javascript:selectCategory('subName','발롱','Watches')">
-							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+							<div><img src="${ctp}/shop/Watches/발롱.jpg" width="200px" height="200px;"></div>
 								<div>발롱</div>
 							</a>
 						</li>
 						<li>
 						  <a href="javascript:selectCategory('subName','산토스','Watches')">
-						  <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+						  <div><img src="${ctp}/shop/Watches/산토스.jpg" width="200px" height="200px;"></div>
 								<div>산토스</div>
 							</a>
 						</li>
 						<li>
 						  <a href="javascript:selectCategory('subName','롱드','Watches')">
-						  <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+						  <div><img src="${ctp}/shop/Watches/롱드.jpg" width="200px" height="200px;"></div>
 								<div>롱드</div>
 							</a>
 						</li>
 						<li>
 						  <a href="javascript:selectCategory('subName','파샤','Watches')">
-						  <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+						  <div><img src="${ctp}/shop/Watches/파샤.jpg" width="200px" height="200px;"></div>
 								<div>파샤</div>
 							</a>
 						</li>
 						<li>
 						  <a href="javascript:selectCategory('subName','프리베','Watches')">
-						  	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+						  	<div><img src="${ctp}/shop/Watches/프리베.jpg" width="200px" height="200px;"></div>
 								<div>프리베</div>
 							</a>
 						</li>
 						<li>
 						  <a href="javascript:selectCategory('subName','리플렉션','Watches')">
-						  	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+						  	<div><img src="${ctp}/shop/Watches/리플렉션.jpg" width="200px" height="200px;"></div>
 								<div>리플렉션</div>
 							</a>
 						</li>
 						<li>
 						  <a href="javascript:selectCategory('subName','팬더','Watches')">
-						  	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+						  	<div><img src="${ctp}/shop/Watches/팬더주얼리.jpg" width="200px" height="200px;"></div>
 								<div>팬더</div>
 							</a>
 						</li>
 						<li>
 						  <a href="javascript:selectCategory('subName','클래쉬','Watches')">
-						  	<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+						  	<div><img src="${ctp}/shop/Watches/클래쉬.jpg" width="200px" height="200px;"></div>
 								<div>클래쉬</div>
 							</a>
 						</li>
@@ -884,38 +872,38 @@
 						</div>
 						<li>
 							<a href="javascript:selectCategory('subName','핸드백','Bags')">
-							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+							<div><img src="${ctp}/shop/Bags/핸드백.jpg" width="200px" height="200px;"></div>
 							<div>핸드백</div>
 							</a>
 						</li>
 						<li>
 							<a href="javascript:selectCategory('subName','숄더백','Bags')">
-								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+								<div><img src="${ctp}/shop/Bags/숄더백.jpg" width="200px" height="200px;"></div>
 								<div>숄더백</div>
 							</a>
 						</li>
 						<li>
 							<a href="javascript:selectCategory('subName','토트백','Bags')">
-								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+								<div><img src="${ctp}/shop/Bags/토트백.jpg" width="200px" height="200px;"></div>
 								<div>토트백</div>
 							</a>
 						</li>
 						<li>
 							<a href="javascript:selectCategory('subName','미니백','Bags')">
-							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+							<div><img src="${ctp}/shop/Bags/미니백.jpg" width="200px" height="200px;"></div>
 								<div>미니백</div>
 							</a>
 						</li>
 						<li>
 						  <a href="javascript:selectCategory('subName','이브닝백','Bags')">
-						  <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+						  <div><img src="${ctp}/shop/Bags/이브닝백.jpg" width="200px" height="200px;"></div>
 								<div>이브닝백</div>
 							</a>
 						</li>
 						<li>
-						  <a href="javascript:selectCategory('subName','비지니스백','Bags')">
-						  <div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
-								<div>비지니스백</div>
+						  <a href="javascript:selectCategory('subName','비즈니스백','Bags')">
+						  <div><img src="${ctp}/shop/Bags/비즈니스백.jpg" width="200px" height="200px;"></div>
+								<div>비즈니스백</div>
 							</a>
 						</li>
 						<div class="pagination-controls">
@@ -923,8 +911,6 @@
 			      </div>
 	  			</ul>
   			</div>
-		
-
 
 				<!-- Leather goods -->
 	  		<div class="subMenu-section">
@@ -935,25 +921,19 @@
 						</div>
 						<li>
 							<a href="javascript:selectCategory('subName','벨트','Leather goods')">
-							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+							<div><img src="${ctp}/shop/LeatherGoods/벨트.jpg" width="200px" height="200px;"></div>
 							<div>벨트</div>
 							</a>
 						</li>
 						<li>
 							<a href="javascript:selectCategory('subName','카드홀더','Leather goods')">
-								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+								<div><img src="${ctp}/shop/LeatherGoods/카드홀더.jpg" width="200px" height="200px;"></div>
 								<div>카드홀더</div>
 							</a>
 						</li>
 						<li>
-							<a href="javascript:selectCategory('subName','키케이스','Leather goods')">
-								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
-								<div>키케이스</div>
-							</a>
-						</li>
-						<li>
 							<a href="javascript:selectCategory('subName','지갑','Leather goods')">
-							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+							<div><img src="${ctp}/shop/LeatherGoods/지갑.jpg" width="200px" height="200px;"></div>
 								<div>지갑</div>
 							</a>
 						</li>
@@ -973,37 +953,37 @@
 						</div>
 						<li>
 							<a href="javascript:selectCategory('subName','커프링크스','Accessories')">
-							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+							<div><img src="${ctp}/shop/Accessories/커프링크스.jpg" width="200px" height="200px;"></div>
 							<div>커프링크스</div>
 							</a>
 						</li>
 						<li>
 							<a href="javascript:selectCategory('subName','스카프','Accessories')">
-								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+								<div><img src="${ctp}/shop/Accessories/스카프.jpg" width="200px" height="200px;"></div>
 								<div>스카프</div>
 							</a>
 						</li>
 						<li>
 							<a href="javascript:selectCategory('subName','키링','Accessories')">
-								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+								<div><img src="${ctp}/shop/Accessories/키링.jpg" width="200px" height="200px;"></div>
 								<div>키링</div>
 							</a>
 						</li>
 						<li>
 							<a href="javascript:selectCategory('subName','머니클립','Accessories')">
-							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+							<div><img src="${ctp}/shop/Accessories/머니클립.jpg" width="200px" height="200px;"></div>
 								<div>머니클립</div>
 							</a>
 						</li>
 						<li>
 							<a href="javascript:selectCategory('subName','라이터','Accessories')">
-							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+							<div><img src="${ctp}/shop/Accessories/라이터.jpg" width="200px" height="200px;"></div>
 								<div>라이터</div>
 							</a>
 						</li>
 						<li>
 							<a href="javascript:selectCategory('subName','선글라스','Accessories')">
-							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+							<div><img src="${ctp}/shop/Accessories/선글라스.jpg" width="200px" height="200px;"></div>
 								<div>선글라스</div>
 							</a>
 						</li>
@@ -1030,31 +1010,31 @@
 						</div>
 						<li>
 							<a href="javascript:selectCategory('subName','라펜더','Fragrances')">
-							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+							<div><img src="${ctp}/shop/Fragrances/라펜더.jpg" width="200px" height="200px;"></div>
 							<div>라펜더</div>
 							</a>
 						</li>
 						<li>
 							<a href="javascript:selectCategory('subName','파샤','Fragrances')">
-								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+								<div><img src="${ctp}/shop/Fragrances/파샤.jpg" width="200px" height="200px;"></div>
 								<div>파샤</div>
 							</a>
 						</li>
 						<li>
 							<a href="javascript:selectCategory('subName','베제볼레','Fragrances')">
-								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+								<div><img src="${ctp}/shop/Fragrances/베제볼레.jpg" width="200px" height="200px;"></div>
 								<div>베제볼레</div>
 							</a>
 						</li>
 						<li>
 							<a href="javascript:selectCategory('subName','데클라라시옹','Fragrances')">
-							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+							<div><img src="${ctp}/shop/Fragrances/데클라라시옹.jpg" width="200px" height="200px;"></div>
 								<div>데클라라시옹</div>
 							</a>
 						</li>
 						<li>
 							<a href="javascript:selectCategory('subName','리비에르','Fragrances')">
-							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+							<div><img src="${ctp}/shop/Fragrances/리비에르.jpg" width="200px" height="200px;"></div>
 								<div>리비에르</div>
 							</a>
 						</li>
@@ -1074,25 +1054,25 @@
 						</div>
 						<li>
 							<a href="javascript:selectCategory('subName','레제르','High Perfumery')">
-							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+							<div><img src="${ctp}/shop/HighPerfumery/레제르.jpg" width="200px" height="200px;"></div>
 							<div>레제르</div>
 							</a>
 						</li>
 						<li>
 							<a href="javascript:selectCategory('subName','보야제즈','High Perfumery')">
-								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+								<div><img src="${ctp}/shop/HighPerfumery/보야제즈.jpg" width="200px" height="200px;"></div>
 								<div>보야제즈</div>
 							</a>
 						</li>
 						<li>
 							<a href="javascript:selectCategory('subName','레줴퓌르','High Perfumery')">
-								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+								<div><img src="${ctp}/shop/HighPerfumery/레줴퓌르.jpg" width="200px" height="200px;"></div>
 								<div>레줴퓌르</div>
 							</a>
 						</li>
 						<li>
 							<a href="javascript:selectCategory('subName','레네쎄세르아','High Perfumery')">
-							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+							<div><img src="${ctp}/shop/HighPerfumery/레네쎄세르아.jpg" width="200px" height="200px;"></div>
 								<div>레네쎄세르아</div>
 							</a>
 						</li>
@@ -1109,7 +1089,7 @@
 					<ul class="detail-menu scentedCandle">
 						<li>
 							<a href="javascript:selectCategory('subName','레제크랭','Scented Candle')">
-							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+							<div><img src="${ctp}/shop/ScentedCandle/레제크랭.jpg" width="200px" height="200px;"></div>
 							<div>레제크랭</div>
 							</a>
 						</li>
@@ -1135,13 +1115,13 @@
 						</div>
 						<li>
 							<a href="javascript:selectCategory('subName','필기구','Stationery')">
-							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+							<div><img src="${ctp}/shop/Stationery/필기구.jpg" width="200px" height="200px;"></div>
 							<div>필기구</div>
 							</a>
 						</li>
 						<li>
 							<a href="javascript:selectCategory('subName','노트북','Stationery')">
-								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+								<div><img src="${ctp}/shop/Stationery/노트북.jpg" width="200px" height="200px;"></div>
 								<div>노트북</div>
 							</a>
 						</li>
@@ -1161,37 +1141,31 @@
 						</div>
 						<li>
 							<a href="javascript:selectCategory('subName','쿠션','Home')">
-							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+							<div><img src="${ctp}/shop/Home/쿠션.jpg" width="200px" height="200px;"></div>
 							<div>쿠션</div>
 							</a>
 						</li>
 						<li>
-							<a href="javascript:selectCategory('subName','블랭킷','Home')">
-								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
-								<div>블랭킷</div>
-							</a>
-						</li>
-						<li>
 							<a href="javascript:selectCategory('subName','테이블웨어','Home')">
-								<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+								<div><img src="${ctp}/shop/Home/테이블웨어.jpg" width="200px" height="200px;"></div>
 								<div>테이블웨어</div>
 							</a>
 						</li>
 						<li>
 							<a href="javascript:selectCategory('subName','오브제','Home')">
-							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+							<div><img src="${ctp}/shop/Home/오브제.jpg" width="200px" height="200px;"></div>
 								<div>오브제</div>
 							</a>
 						</li>
 						<li>
 							<a href="javascript:selectCategory('subName','게임','Home')">
-							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+							<div><img src="${ctp}/shop/Home/게임.jpg" width="200px" height="200px;"></div>
 								<div>게임</div>
 							</a>
 						</li>
 						<li>
 							<a href="javascript:selectCategory('subName','베이비기프트','Home')">
-							<div><img src="${ctp}/shop/bracelets/love.jpg" width="200px" height="200px;"></div>
+							<div><img src="${ctp}/shop/Home/베이비기프트.jpg" width="200px" height="200px;"></div>
 								<div>베이비기프트</div>
 							</a>
 						</li>
@@ -1202,8 +1176,6 @@
   			</div>		  	
 	    </div>
 	  </li>
-	  
-	  
 	  
 	  <li class="nav-item">
 	  	<a href="#" class="main-menu">Archive</a>

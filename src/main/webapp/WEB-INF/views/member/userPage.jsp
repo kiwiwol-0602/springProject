@@ -228,6 +228,8 @@
   </div>
   <a href="javascript:memberDelete()" class="MemberDelete">회원탈퇴</a>
 </div>
-<%-- <jsp:include page="/include/footer.jsp"/> --%>
+<footer>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
+</footer>
 </body>
 </html>

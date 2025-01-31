@@ -200,11 +200,13 @@
       		</tr>
   			</table>
 				<div class="searchProduct" style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; padding: 20px 0;">
-			    <form name="searchForm" method="get" style="width: 100%;">
+			    <form name="searchForm" method="get" action="${ctp}/admin/orderSearchList" style="width: 100%;">
 			        <div class="input-group">
 			            <select name="search" id="search" class="form-select" onchange="cursorMove()" style="border-radius:0;  width: 16%">
-			                <option value="product">주문번호</option>
-			                <option value="categoryName">상품명</option>
+			                <option value="orderIdx">주문번호</option>
+			                <option value="name">주문자</option>
+			                <option value="productName">상품명</option>
+			                <option value="orderStatus">주문상태</option>
 			            </select>
 			            <input type="text" name="searchString" id="searchString" class="form-control" required placeholder="검색어를 입력하세요" style="width: 73%"/>
 			            <input type="submit" value="검색" class="btn btn-secondary btn-sm" style="width: 9.5%"/>
@@ -234,16 +236,16 @@
 							<c:forEach var="vo" items="${vos}" varStatus="st">
 						 	 <tr style="word-break: break-all;">
 		            	<td style="width: 50px;"><input type="checkbox" name="orderCheck" id="orderCheck${vo.idx}" value="${vo.idx}" /></td>
-		              <td style="width: 70px;">${vo.idx}</td>
+		              <td style="width: 80px;">${vo.idx}</td>
 		              <td style="word-break: break-all; width: 110px;">${vo.orderIdx}</td>
-		              <td style="word-break: break-all; width: 100px;">${fn:substring(vo.orderDate,0,19)}</td>
-		              <td style="word-break: break-all; width: 110px;">${vo.name}</td>
+		              <td style="word-break: break-all; width: 90px;">${fn:substring(vo.orderDate,0,19)}</td>
+		              <td style="word-break: break-all; width: 100px;">${vo.name}</td>
 		              <td style="word-break: break-all; width: 240px;">${vo.productName}</td>
 		              <td style="word-break: break-all; width: 110px;">${vo.optionName}</td>
 		              <td style="word-break: break-all; width: 70px;">${vo.optionNum}</td>
 		              <td style="width: 110px;"><fmt:formatNumber value="${vo.optionPrice * vo.optionNum}" pattern="#,##0"/>원</td>
 		              <td style="width: 110px;"><fmt:formatNumber value="${vo.totalPay}" pattern="#,##0"/>원</td>
-		              <td style="width: 60px;">${vo.orderStatus}</td>
+		              <td style="width: 80px;">${vo.orderStatus}</td>
 		              <td style="width: 90px;">
 		                <div style="padding-bottom: 10px;"><a href="${ctp}/shop/productUpdate?idx=${vo.idx}" class="btn-edit">수정</a></div>
 		                <div><a href="javascript:productDelete(${vo.idx})" class="btn-delete">삭제</a></div>

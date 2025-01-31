@@ -159,12 +159,43 @@
   		transition: .5s ease;
   	}
 
-		  	
+		  h6 {
+			position: fixed;
+			right: 1rem;
+			bottom: -100px;
+			transition: 0.7s ease;
+		}
+		h6.on {
+			opacity: 0.8;
+			cursor: pointer;
+			bottom: 15px;
+			z-index: 10;
+		}	
 		  	
   	
   	
   </style>
   <script type="text/javascript">
+  $(window).scroll(function(){
+	  if($(this).scrollTop() > 100){
+	     $("#topBtn").addClass("on");
+	  }
+	  else{
+	     $("#topBtn").removeClass("on");
+	  }
+	  $("#topBtn").click(function() {
+				window.scrollTo({top:0, behavior: "smooth"});	
+			});
+		});
+		
+			$(window).scroll(function(){
+			  if($(this).scrollTop() > 300){
+			     $("#mainSidebar").addClass("on");
+			  }
+			  else{
+			     $("#mainSidebar").removeClass("on");
+			  }
+			});
   </script>
 </head>
 <body>
@@ -218,5 +249,12 @@
 			</div>
 		</div>
 	</section>
+	
+	<!-- 위로가기 버튼 -->
+	  <h6 id="topBtn" class="text-right mr-3"><font color="#af9e84"><i class="fa-solid fa-circle-chevron-up fa-2x"></i></font></h6>
+	  
+	<footer>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
+</footer>
 </body>
 </html>

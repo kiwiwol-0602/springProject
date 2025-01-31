@@ -59,6 +59,17 @@ public class AdminController {
 		return "admin/productList";
 	}
 	
+	@GetMapping("/productSearchList")
+	public String productSearchListGet(Model model,
+			@RequestParam("search") String search,
+			@RequestParam(defaultValue = "") String searchString,
+			@RequestParam(defaultValue = "1") int pag,
+			@RequestParam(defaultValue = "10") int pageSize
+			) {
+		pageProcess.totRecCntSearchList(model, pag, pageSize, "product", "admin", search, searchString);
+		return "admin/productSearchList";
+	}
+	
 	@GetMapping("/orderList")
 	public String orderListGet(Model model,
 			@RequestParam(defaultValue = "1") int pag,
@@ -68,12 +79,37 @@ public class AdminController {
 		return "admin/orderList";
 	}
 	
+	@GetMapping("/orderSearchList")
+	public String orderSearchListGet(Model model,
+			@RequestParam("search") String search,
+			@RequestParam(defaultValue = "") String searchString,
+			@RequestParam(defaultValue = "1") int pag,
+			@RequestParam(defaultValue = "10") int pageSize
+			) {
+		if(search.equals("name")||search.equals("orderStatus")) {
+			pageProcess.totRecCntSearchList(model, pag, pageSize, "baesong", "admin", search, searchString);
+		}
+		pageProcess.totRecCntSearchList(model, pag, pageSize, "order", "admin", search, searchString);
+		return "admin/productSearchList";
+	}
+	
 	@ResponseBody
 	@PostMapping("/statusSelectCheck")
 	public String statusSelectCheckPost(String statusSelect, String idxSelectArray) {
 		System.out.println(statusSelect);
 		System.out.println(idxSelectArray);
 		return shopService.setStatusSelectCheck(statusSelect, idxSelectArray);
+	}
+	
+	@ResponseBody
+	@PostMapping("/productState")
+	//public String productStatePost(String productIdxs, String state, String flag) {
+		public String productStatePost(@RequestParam("productIdxs") int[] productIdxs, String state, String flag) {
+		int res = 0;
+		 for (int productIdx : productIdxs) {
+		  	res += shopService.setProductState(productIdx,state, flag);
+		  }
+		return res+"";
 	}
 	
 	

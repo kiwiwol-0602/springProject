@@ -106,4 +106,6 @@ public interface ShopDAO {
 
 	void setStatusSelectCheck(@Param("idx") int idx, @Param("statusSelect") String statusSelect);
 
+	int setProductState(@Param("productIdx") int productIdx, @Param("state") String state, @Param("flag") String flag);
+
 }

@@ -194,7 +194,7 @@
   			<table style="width: 100%; margin-top: 40px;">
   				<tr style="width: 100%;">
       			<td class="left-align" style="justify-content: flex-start;">
-      			<a href="${ctp}/shop/productOption" class="btn-edit" style="padding: 5px 20px;">옵션등록</a>
+      			<a href="${ctp}/admin/productList" class="btn-edit" style="padding: 5px 20px;">전체보기</a>
       			<a href="javascript:checkedProductDelete()" class="btn-delete" style="padding: 5px 20px;">상품삭제</a>
       			</td>
       			<td class="right-align" style="justify-content: flex-end; text-align: right;">
@@ -209,14 +209,14 @@
 			    <form name="searchForm" method="get" action="${ctp}/admin/productSearchList" style="width: 100%;">
 			        <div class="input-group">
 			            <select name="search" id="search" class="form-select" onchange="cursorMove()" style="border-radius:0;  width: 16%">
-			                <option value="productName">상품명</option>
-			                <option value="mainName">대분류명</option>
-			                <option value="baseName">중분류명</option>
-			                <option value="subName">소분류명</option>
-			                <option value="status">판매상태</option>
-			                <option value="display">진열상태</option>
+			                <option value="productName" <c:if test="${search eq 'productName'}"  >selected</c:if>>상품명</option>
+			                <option value="mainName" <c:if test="${search eq 'mainName'}"  >selected</c:if>>대분류명</option>
+			                <option value="baseName" <c:if test="${search eq 'baseName'}"  >selected</c:if>>중분류명</option>
+			                <option value="subName" <c:if test="${search eq 'subName'}"  >selected</c:if>>소분류명</option>
+			                <option value="status" <c:if test="${search eq 'status'}"  >selected</c:if>>판매상태</option>
+			                <option value="display" <c:if test="${search eq 'display'}"  >selected</c:if>>진열상태</option>
 			            </select>
-			            <input type="text" name="searchString" id="searchString" class="form-control" required placeholder="검색어를 입력하세요" style="width: 73%"/>
+			            <input type="text" name="searchString" id="searchString" class="form-control" value="${searchString}" required placeholder="검색어를 입력하세요" style="width: 73%"/>
 			            <input type="submit" value="검색" class="btn btn-secondary btn-sm" style="width: 9.5%"/>
 			            <input type="hidden" name="pag" value="${pag}" />
 			            <input type="hidden" name="pageSize" value="${pageSize}" />
@@ -267,14 +267,14 @@
         
         <div class="text-center" style="margin-top: 20px;">
   <ul class="pagination justify-content-center">
-	  <c:if test="${pag > 1}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/admin/productList?pageSize=${pageSize}&pag=1">첫페이지</a></li></c:if>
-	  <c:if test="${curBlock > 0}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/admin/productList?pageSize=${pageSize}&pag=${(curBlock-1)*blockSize + 1}">이전블록</a></li></c:if>
+	  <c:if test="${pag > 1}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/admin/productSearchList?search=${search}&searchString=${searchString}&pageSize=${pageSize}&pag=1">첫페이지</a></li></c:if>
+	  <c:if test="${curBlock > 0}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/admin/productSearchList?search=${search}&searchString=${searchString}&pageSize=${pageSize}&pag=${(curBlock-1)*blockSize + 1}">이전블록</a></li></c:if>
 	  <c:forEach var="i" begin="${(curBlock*blockSize)+1}" end="${(curBlock*blockSize) + blockSize}" varStatus="st">
-	    <c:if test="${i <= totPage && i == pag}"><li class="page-item active"><a class="page-link bg-secondary border-secondary" href="${ctp}/admin/productList?pageSize=${pageSize}&pag=${i}">${i}</a></li></c:if>
-	    <c:if test="${i <= totPage && i != pag}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/admin/productList?pageSize=${pageSize}&pag=${i}">${i}</a></li></c:if>
+	    <c:if test="${i <= totPage && i == pag}"><li class="page-item active"><a class="page-link bg-secondary border-secondary" href="${ctp}/admin/productSearchList?search=${search}&searchString=${searchString}&pageSize=${pageSize}&pag=${i}">${i}</a></li></c:if>
+	    <c:if test="${i <= totPage && i != pag}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/admin/productSearchList?search=${search}&searchString=${searchString}&pageSize=${pageSize}&pag=${i}">${i}</a></li></c:if>
 	  </c:forEach>
-	  <c:if test="${curBlock < lastBlock}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/admin/productList?pageSize=${pageSize}&pag=${(curBlock+1)*blockSize+1}">다음블록</a></li></c:if>
-	  <c:if test="${pag < totPage}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/admin/productList?pageSize=${pageSize}&pag=${totPage}">마지막페이지</a></li></c:if>
+	  <c:if test="${curBlock < lastBlock}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/admin/productSearchList?search=${search}&searchString=${searchString}&pageSize=${pageSize}&pag=${(curBlock+1)*blockSize+1}">다음블록</a></li></c:if>
+	  <c:if test="${pag < totPage}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/admin/productSearchList?search=${search}&searchString=${searchString}&pageSize=${pageSize}&pag=${totPage}">마지막페이지</a></li></c:if>
   </ul>
 </div>
 	</div>

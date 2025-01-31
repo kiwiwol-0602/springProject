@@ -100,5 +100,7 @@ public interface ShopService {
 
 	String setStatusSelectCheck(String statusSelect, String idxSelectArray);
 
+	int setProductState(int productIdx, String state, String flag);
+
 
 }

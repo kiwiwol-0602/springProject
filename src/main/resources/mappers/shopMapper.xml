@@ -216,6 +216,10 @@
   	update baesong set orderStatus = #{statusSelect} where oIdx = #{idx};
   </update>
   
+  <update id="setProductState">
+		update product set ${state} = #{flag} where idx = #{productIdx};
+	</update>
+  
   
   
 	

@@ -1,0 +1,105 @@
+@charset "UTF-8";
+
+	/* 여기에 스타일을 추가할 수 있습니다 */
+	footer {
+	  display: grid;
+    grid-template-rows: 1fr 10rem auto;
+    grid-template-areas: "main" "." "footer";
+    overflow-x: hidden;
+    background: white;
+    min-height: 100vh;
+    font-family: 'Open Sans', sans-serif;
+	}
+	
+	.footer {
+    z-index: 1;
+    --footer-background: #003161;
+    display: grid;
+    position: relative;
+    grid-area: footer;
+    min-height: 12rem;
+}
+	
+	.footer .bubbles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1rem;
+    background: var(--footer-background);
+    filter: url("#blob");
+}
+
+.footer .bubbles .bubble {
+    position: absolute;
+    left: var(--position, 50%);
+    background: var(--footer-background);
+    border-radius: 100%;
+    animation: bubble-size var(--time, 4s) ease-in infinite var(--delay, 0s),
+               bubble-move var(--time, 4s) ease-in infinite var(--delay, 0s);
+    transform: translate(-50%, 100%);
+}
+
+.footer .content {
+ z-index: 2;	
+  display: flex; /* 그리드 대신 flex로 변경하여 좌우로 나뉘는 현상 방지 */
+  flex-direction: column;
+  flex-wrap: wrap; /* 내용이 너무 길어지면 다음 줄로 넘어가도록 설정 */
+  justify-content: flex-start; /* 내용 전체를 왼쪽 정렬 */
+  padding: 2rem;
+  background: var(--footer-background);
+}
+
+.footer .content a, p {
+    color: #F5F7FA;
+    text-decoration: none;
+}
+
+.footer .content b {
+    color: white;
+}
+
+.footer .content p {
+    margin: 0;
+    font-size: 0.75rem;
+}
+
+.footer .content > div {
+    display: flex;
+	  flex-direction: row; /* column에서 row로 변경하여 가로 정렬 */
+	  justify-content: flex-start; /* 항목들을 왼쪽으로 정렬 */
+	  gap: 1rem; /* 각 항목 간의 간격 추가 */
+}
+
+.footer .content > div > div {
+    margin: 0.25rem 0;
+}
+
+.footer .content .image {
+    align-self: center;
+    width: 4rem;
+    height: 4rem;
+    margin: 0.25rem 0;
+    background-size: cover;
+    background-position: center;
+}
+
+@keyframes bubble-size {
+    0%, 75% {
+        width: var(--size, 4rem);
+        height: var(--size, 4rem);
+    }
+    100% {
+        width: 0rem;
+        height: 0rem;
+    }
+}
+
+@keyframes bubble-move {
+    0% {
+        bottom: -4rem;
+    }
+    100% {
+        bottom: var(--distance, 10rem);
+    }
+}

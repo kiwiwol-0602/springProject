@@ -310,19 +310,6 @@
 	  	<a href="javascript:selectCategory('mainName','Jewelry')" class="main-menu">Jewelry</a>
 	  	<div class="sub-menu">
 	  		<hr/>
-	  		<!--  
-	      <div class="subMenu-section">
-	        <h4>All Collections</h4>
-	        <ul class="detail-menu">
-	          <li><a href="#">LOVE</a></li>
-	          <li><a href="#">저스트 앵 끌루</a></li>
-	          <li><a href="#">트리니티</a></li>
-	          <li><a href="#">팬더</a></li>
-	          <li><a href="#">그랑 드 카페</a></li>
-	          <li><a href="#">클래쉬</a></li>
-	        </ul>
-	      </div>
-	      -->
 	      <!-- Bracelets -->
 	      <div class="subMenu-section">
 	        <h4 onclick="selectCategory('baseName','Bracelets','Jewelry')">Bracelets</h4>
@@ -922,8 +909,6 @@
 	  			</ul>
   			</div>
 		
-
-
 				<!-- Leather goods -->
 	  		<div class="subMenu-section">
 					<h4 onclick="selectCategory('baseName','Leather goods', 'Bags and Accessories')">Leather goods</h4>
@@ -1188,8 +1173,6 @@
   			</div>		  	
 	    </div>
 	  </li>
-	  
-	  
 	  
 	  <li class="nav-item">
 	  	<a href="#" class="main-menu">Archive</a>

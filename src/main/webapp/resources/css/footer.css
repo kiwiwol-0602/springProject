@@ -1,0 +1,107 @@
+@charset "UTF-8";
+/* footerStyle.css */
+
+footer {
+  font-family: 'GmarketSansMedium';
+  overflow: hidden; /* 세로, 가로 모두 스크롤을 숨김 */
+  background-color: white;
+  color:gray;
+  padding: 1.5%;
+  height: 370px;
+  justify-content: center; /* 자식 요소들을 수평 중앙 정렬 */
+  align-items: center; /* 자식 요소들을 수직 중앙 정렬 */
+  
+}
+
+footer::-webkit-scrollbar {
+  display: none; /* 푸터에서 스크롤바 숨기기 */
+}
+/*
+hr.footer-hr {
+    border: 0;
+    height: 1.5px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.75), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
+    margin: 0;
+    margin-bottom: 10px;
+}
+*/
+
+.footer-content{
+	width: 82%;
+	margin: 0 auto;
+	justify-content: center; /* 자식 요소들을 수평 중앙 정렬 */
+  align-items: center; /* 자식 요소들을 수직 중앙 정렬 */
+
+}
+.left-col {
+    text-align: left;
+    padding-left: 15%; 
+}
+
+.middle-col {
+		padding-left: 9%; 
+		padding-right: 7%; 
+}
+
+.title-link {
+    color:gray;
+    font-size: 18px;
+}
+
+.input-group.contact-info {
+    margin-top: 10px;
+}
+.phone-number {
+    color:gray;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.business-hours {
+    color: gray;
+    font-size: 14px;
+    padding-top: 2px;
+}
+
+.input-group-append.text-gray.pt-2.info-list {
+    font-size: 12px;
+}
+
+.info-list ul {
+    padding-top: 10px;
+    color: gray;
+    font-size: 13px;
+}
+
+a {
+    text-decoration: none; /* 기본 밑줄 제거 */
+    color: inherit; /* 부모의 색상 상속 */
+    transition: color 0.3s ease-in-out; /* 색상 변화에 부드러운 전환 효과 */
+}
+
+a:hover {
+    text-decoration: none; /* 마우스를 올려도 밑줄 제거 유지 */
+    color: inherit; /* 부모 색상 유지 */
+}
+
+.menu-link {
+    color: gray; /* 링크의 기본 색상 */
+    text-decoration: none; /* 밑줄 제거 */
+    font-weight: light;
+    font-size: 13px;
+}
+
+.menu-link:hover {
+    text-decoration: none; /* 호버 시 밑줄 제거 */
+    color: gray; /* 색상 유지 */
+}
+.foot {
+    text-align: left;
+    font-size: 12px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.foot div {
+    font-size: 12px;
+}

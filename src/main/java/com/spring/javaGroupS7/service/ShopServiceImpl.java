@@ -407,4 +407,9 @@ public class ShopServiceImpl implements ShopService {
 		
 		return res;
 	}
+
+	@Override
+	public int setProductState(int productIdx, String state, String flag) {
+		return shopDAO.setProductState(productIdx, state, flag);
+	}
 }

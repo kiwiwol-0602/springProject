@@ -5,6 +5,7 @@
 	<select id="getTotRecCnt" resultType="int">
         select count(*) from ${type}
         <if test='type == "user" and user != "admin"'> where userDel != 'OK'</if>;
+        <if test='type == "product" and user != "admin"'> where display != 'OFF'</if>;
     </select>
     
    <select id="List" resultType="map">
@@ -12,9 +13,23 @@
        <if test='type == "productOrder" and user == "admin"'>,b.name, b.address, b.orderStatus </if>
        from ${type}
        <if test='type == "user" and user != "admin"'>where userDel != 'OK'</if>
+       <if test='type == "product" and user != "admin"'> where display != 'OFF'</if>
        <if test='type == "productOrder" and user == "admin"'>p left join baesong b on p.idx = b.oIdx order by p.idx desc</if>
        limit #{startIndexNo}, #{pageSize}
    </select>
+   
+   <select id="getTotRecCntSearch" resultType="int">
+		select count(*) from ${type} where ${part} like concat("%", #{searchString}, "%");
+	</select>
+   
+   
+   
+   <select id="SearchList" resultType="map">
+		select *
+		from ${type}
+		where ${search} like concat("%",#{searchString},"%") 
+		order by idx desc limit #{startIndexNo},#{pageSize};	
+	</select>
 
 
 
