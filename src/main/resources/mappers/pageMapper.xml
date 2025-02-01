@@ -19,16 +19,20 @@
    </select>
    
    <select id="getTotRecCntSearch" resultType="int">
-		select count(*) from ${type} where ${part} like concat("%", #{searchString}, "%");
+		select count(*)
+		from ${type} t
+			<if test='type == "productOrder" and user == "admin"'>left join baesong b on t.idx = b.oIdx</if>
+		where ${part} like concat("%", #{searchString}, "%");
 	</select>
-   
-   
-   
+
    <select id="SearchList" resultType="map">
-		select *
-		from ${type}
+		select t.*
+			<if test='type == "productOrder" and user == "admin"'>,b.name, b.address, b.orderStatus </if> 
+		from ${type} t
+			<if test='type == "productOrder" and user == "admin"'>left join baesong b on t.idx = b.oIdx</if>
 		where ${search} like concat("%",#{searchString},"%") 
-		order by idx desc limit #{startIndexNo},#{pageSize};	
+		order by idx desc 
+		limit #{startIndexNo},#{pageSize};	
 	</select>
 
 

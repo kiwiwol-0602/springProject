@@ -198,11 +198,11 @@
 		<div class="tab">
 			<a href="${ctp}/shop/couponPage">
 		  	<p class="talTitle">쿠폰</p>
-		  	<div class="talContent">0</div>
+		  	<div class="talContent">${couponCnt}</div>
 	  	</a>
 	  </div>
 		<div class="tab">
-	    <a href="FurnitureShoppingList.fu">
+	    <a href="${ctp}/shop/productCartList">
 		  	<p class="talTitle">장바구니</p>
 		  	<div class="talContent">${cartCnt}</div>
 	  	</a>

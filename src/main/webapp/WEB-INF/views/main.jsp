@@ -774,11 +774,11 @@ imgSlide .carousel-inner {
   
   .productArea .new> :nth-child(3) {
     position: absolute;
-    top: 50%;
+    top: 48%;
     left: 50%;
     transform: translate(-50%, -40%);
     width: 350px;
-    height: 220px;
+    height: 180px;
     text-align: center;
     padding: 0.6rem 0; 
     background: rgba(0, 0, 0, 0.25);
@@ -1043,176 +1043,135 @@ h6 {
 	</script>
 </head>
 <body>
-<header>
-  <div class="timer">
-  	<div class="close-button">×</div>
-    <div id="timer"></div>
-    <div class="deliveryInfo">Place your order by February 13 at 2 PM delivery by February 14. <a href="#" style="color: white;">Learn More </a></div>
-  </div>
-	<jsp:include page="/WEB-INF/views/include/mainHeader.jsp" />
-	<jsp:include page="/WEB-INF/views/include/mainNav.jsp"/>
-</header>
-<main role="main">
-<div class="main_area">
-	<div class="swiper">
-		<div class="swiper-wrapper">
-			<div class="swiper-slide">
-				<div class="mainImgCrop">
-					<img src="${ctp}/images/main/main1.jpg" alt="Slide 1" />
+
+	<header>
+	  <div class="timer">
+	  	<div class="close-button">×</div>
+	    <div id="timer"></div>
+	    <div class="deliveryInfo">Place your order by February 13 at 2 PM delivery by February 14. <a href="#" style="color: white;">Learn More </a></div>
+	  </div>
+		<jsp:include page="/WEB-INF/views/include/mainHeader.jsp" />
+		<jsp:include page="/WEB-INF/views/include/mainNav.jsp"/>
+	</header>
+	
+	<main role="main">
+	<div class="main_area">
+		<div class="swiper">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<div class="mainImgCrop">
+						<img src="${ctp}/images/main/main1.jpg" alt="Slide 1" />
+					</div>
 				</div>
+				<div class="swiper-slide">
+					<div class="mainImgCrop">
+						<img src="${ctp}/images/main/main2.jpg" alt="Slide 2" />
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<div class="mainImgCrop">
+						<img src="${ctp}/images/main/main3.jpg" alt="Slide 3" />
+					</div>
+					</div>
+				</div> 
 			</div>
-			<div class="swiper-slide">
-				<div class="mainImgCrop">
-					<img src="${ctp}/images/main/main2.jpg" alt="Slide 2" />
-				</div>
+			<div class="mainText">
+				<div style="font-family: 'SF_HambakSnow';">COLLECTION</div>
+				<div style="font-family: 'Gyeonggi_Batang_Regular';">루미, 하이엔드 주얼리의 세계로 초대</div>
 			</div>
-			<div class="swiper-slide">
-				<div class="mainImgCrop">
-					<img src="${ctp}/images/main/main3.jpg" alt="Slide 3" />
+			<div class="imgSlide" style="padding: 5% 50px;">
+				<div class="container-fluid">
+				  <div class="row">
+				    <div class="col-xs-12 col-sm-12 col-md-12">
+				      <div class="carousel carousel-showmanymoveone slide" id="itemslider">
+				        <div class="carousel-inner">
+									<c:forEach var="vo" items="${vos}" varStatus="st">
+										<c:if test="${st.index == 0}">
+						          <div class="item active">
+						            <div class="col-xs-12 col-sm-6 col-md-2">
+						              <a href="${ctp}/shop/productContent?idx=${vo.idx}"><img src="${ctp}/product/${vo.thumbnail}"></a>
+						            </div>
+						          </div>
+					          </c:if>
+										<c:if test="${st.index > 0 && st.index < 4}">
+						          <div class="item">
+						            <div class="col-xs-12 col-sm-6 col-md-2">
+						              <a href="${ctp}/shop/productContent?idx=${vo.idx}"><img src="${ctp}/product/${vo.thumbnail}"></a>
+						            </div>
+						          </div>
+					          </c:if>
+									</c:forEach>
+				        </div>
+				        <div id="slider-control">
+					        <a class="left carousel-control" href="#itemslider" data-slide="prev"><i class="fa-solid fa-angle-left" style="font-size: 40px!important;"></i></a>
+					        <a class="right carousel-control" href="#itemslider" data-slide="next"><i class="fa-solid fa-angle-right" style="font-size: 40px!important;"></i></a>
+				     	  </div>
+			      	</div>
+				    </div>
+				  </div>
 				</div>
-				</div>
-			</div> 
-		</div>
-		
-		<div class="mainText">
-			<div style="font-family: 'SF_HambakSnow';">COLLECTION</div>
-			<div style="font-family: 'Gyeonggi_Batang_Regular';">루미, 하이엔드 주얼리의 세계로 초대</div>
-		</div>
-		<div class="imgSlide" style="padding: 5% 50px;">
-			<div class="container-fluid">
-			  <div class="row">
-			    <div class="col-xs-12 col-sm-12 col-md-12">
-			      <div class="carousel carousel-showmanymoveone slide" id="itemslider">
-			        <div class="carousel-inner">
-								<c:forEach var="vo" items="${vos}" varStatus="st">
-									<c:if test="${st.index == 0}">
-					          <div class="item active">
-					            <div class="col-xs-12 col-sm-6 col-md-2">
-					              <a href="${ctp}/shop/productContent?idx=${vo.idx}"><img src="${ctp}/product/${vo.thumbnail}"></a>
-					            </div>
-					          </div>
-				          </c:if>
-									<c:if test="${st.index > 0 && st.index < 4}">
-					          <div class="item">
-					            <div class="col-xs-12 col-sm-6 col-md-2">
-					              <a href="${ctp}/shop/productContent?idx=${vo.idx}"><img src="${ctp}/product/${vo.thumbnail}"></a>
-					            </div>
-					          </div>
-				          </c:if>
-								</c:forEach>
-			        </div>
-			        <div id="slider-control">
-			        <a class="left carousel-control" href="#itemslider" data-slide="prev"><i class="fa-solid fa-angle-left" style="font-size: 40px!important;"></i></a>
-			        <a class="right carousel-control" href="#itemslider" data-slide="next"><i class="fa-solid fa-angle-right" style="font-size: 40px!important;"></i></a>
-			      </div>
-			      </div>
-			    </div>
-			  </div>
-			</div>
+			</div>	
 		</div>	
-</div>	
-	
-	<div class="productArea" >
-	  <article class="gender" style="padding-top: 100px;">
-    <!-- 
-    <div>
-    <h3>Shop All</h3>
-      <h5>모든 세대를 아우르는 편안함, GIORDANO</h5>
-      <span class="solid">—</span>
-    </div>
-    -->
-    <section>
-    
-    <div onclick="selectCategory('baseName','Necklaces','Jewelry')">
-      <!-- <h1>Earrings</h1> -->
-    </div>
 
-    <!--last child-->
-
-    <div>
-       <div onclick="selectCategory('baseName','Engagement rings','Jewelry')">
-         <!-- <h1>Engagement rings</h1> -->
-       </div>
- 
-       <div onclick="selectCategory('baseName','Rings','Jewelry')">
-        <!-- <h1>Wedding bands</h1> -->
-      </div>
-   </div>
- </section> 
- </article>
+		<div class="productArea" >
+		  <article class="gender" style="padding-top: 100px;">
+	    	<section>
+			    <div onclick="selectCategory('baseName','Necklaces','Jewelry')"></div>
+		   		<div>
+		      	<div onclick="selectCategory('baseName','Engagement rings','Jewelry')"></div>
+		      	<div onclick="selectCategory('baseName','Rings','Jewelry')"></div>
+		   		</div>
+	 			</section> 
+ 			</article>
+			<article class="best">
+				<div class="prodList">
+ 					<h3>Best Products</h3>
+	       	<span class="solid">—</span>
+					<div class="container">
+						<div class="frame">
+						  <div class="card-list">
+						  	<c:forEach var="vo" items="${Bvos}" varStatus="st">
+						  		<c:if test="${st.index > 0 && st.index < 10}">
+								    <div class="card"><a href="${ctp}/shop/productContent?idx=${vo.idx}"><img src="${ctp}/product/${vo.thumbnail}"></a>
+								    	<h5>${vo.productName}</h5>
+								      <span>${vo.pay}</span><small>${vo.price}</small>
+										</div>
+									</c:if>
+								</c:forEach>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		  <article class="new"  style="margin-bottom: 100px; padding-bottom: 100px;">
+		  	<div>
+		    	<h3>New Arraivals</h3>
+		      <span class="solid">—</span>
+		    </div>
+		    <div class="new-flex">
+			    <div>
+			     <section>
+			      <div></div> 
+			      </section>
+			    </div>
+		    	<div>
+			      <section>
+			      	<div></div>
+			      </section>
+		  		</div>
+				</div>
+	    	<div>
+      		<p>사람의 가치관이나 생각,<br>새로운 시대의 숨결<br>우리가 생각하는 라이프<br><br>2025년 2월, 새로운 감성을 담은<br>컬렉션을 만나보세요.<br></p>
+    		</div>
+			</article>
+		</div>	
+	</main >
 	
-	
-	
-	
-	
-	
-	
-	
-<article class="best">
-  
-<div class="prodList">
-  <h3>Best Products</h3>
-       <span class="solid">—</span>
-      
-<div class="container">
-<div class="frame">
-  <div class="card-list">
-  	<c:forEach var="vo" items="${Bvos}" varStatus="st">
-  		<c:if test="${st.index > 0 && st.index < 10}">
-	    <div class="card"><a href="${ctp}/shop/productContent?idx=${vo.idx}"><img src="${ctp}/product/${vo.thumbnail}"></a>
-	    <h5>${vo.productName}</h5>
-	      <span>${vo.pay}</span><small>${vo.price}</small>
-			</div>
-			</c:if>
-		</c:forEach>
-</div>
-</div>
-</div>
-</div>
-</article>
-  
-  
-  
-
-  
-  
-  
-  <article class="new"  style="margin-bottom: 100px; padding-bottom: 100px;">
-    <div>
-    <h3>New Arraivals</h3>
-      <span class="solid">—</span>
-    </div>
-
-    <div class="new-flex">
-    <div>
-     <section>
-      <div>
-      </div> 
-      </section>
-    </div>
-    
-    <div>
-      <section>
-      <div>
-      </div>
-      </section>
-  </div>
-    </div>
-    
-    <div>
-      <!-- <h4>W-LUMI COLLECTION</h4> -->
-      <p>사람의 가치관이나 생각,<br>새로운 시대의 숨결<br>우리가 생각하는 라이프<br><br>2025년 2월, 새로운 감성을 담은<br>컬렉션을 만나보세요.<br></p>
-      <!-- <button>라인업 만나보기 ></button> -->
-    </div>
-  </article>
-  </div>	
-</main >
-
-<!-- 위로가기 버튼 -->
-	  <h6 id="topBtn" class="text-right mr-3"><font color="#af9e84"><i class="fa-solid fa-circle-chevron-up fa-2x"></i></font></h6>
+	<!-- 위로가기 버튼 -->
+	<h6 id="topBtn" class="text-right mr-3"><font color="#758694"><i class="fa-solid fa-circle-chevron-up fa-2x"></i></font></h6>
 	  
-<footer>
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
-</footer>
+	<footer>
+		<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
+	</footer>
 </body>
 </html>

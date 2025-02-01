@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.javaGroupS7.common.JavaGroupProvide;
 import com.spring.javaGroupS7.service.MemberService;
+import com.spring.javaGroupS7.service.ShopService;
 import com.spring.javaGroupS7.vo.UserVO;
 
 @Controller
@@ -32,6 +33,9 @@ public class MemberController {
 	
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	ShopService shopService;
 	
 	@Autowired
 	JavaGroupProvide javaGroupProvide;
@@ -401,7 +405,15 @@ public class MemberController {
 	public String userPageGet(Model model, HttpSession session) {
 		String mid = (String) session.getAttribute("sMid");
 		UserVO vo = memberService.getMemberIdCheck(mid);
+		
+		int couponCnt = shopService.getUserCouponList(mid).size();
+		int cartCnt = shopService.getCartList(mid).size();
+		//int orderListCnt = shopService.getOrderList(mid).size();
+		
+		
 		model.addAttribute("vo", vo);
+		model.addAttribute("couponCnt", couponCnt);
+		model.addAttribute("cartCnt", cartCnt);
 		
 		return "member/userPage";
 	}

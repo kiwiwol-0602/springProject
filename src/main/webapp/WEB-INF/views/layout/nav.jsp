@@ -146,9 +146,9 @@ function toggleMenu(element) {
         <div class="w3-container">
             <h5 onclick="toggleMenu(this)">주문 및 판매관리</h5>
         <div class="w3-bar-block">
-            <a href="${ctp}/admin/orderList" class="w3-bar-item w3-button">주문</a>
-            <a href="#" class="w3-bar-item w3-button">배송</a>
-            <a href="#" class="w3-bar-item w3-button">판매</a>
+            <a href="${ctp}/admin/orderList" class="w3-bar-item w3-button">주문관리</a>
+            <a href="#" class="w3-bar-item w3-button">배송관리</a>
+            <a href="${ctp}/admin/saleStatistics" class="w3-bar-item w3-button">판매통계</a>
             <a href="#" class="w3-bar-item w3-button">정산</a>
         </div>
         </div>

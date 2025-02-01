@@ -86,11 +86,13 @@ public class AdminController {
 			@RequestParam(defaultValue = "1") int pag,
 			@RequestParam(defaultValue = "10") int pageSize
 			) {
+		
 		if(search.equals("name")||search.equals("orderStatus")) {
-			pageProcess.totRecCntSearchList(model, pag, pageSize, "baesong", "admin", search, searchString);
+			pageProcess.totRecCntSearchList(model, pag, pageSize, "productOrder", "admin", "b."+search, searchString);
 		}
-		pageProcess.totRecCntSearchList(model, pag, pageSize, "order", "admin", search, searchString);
-		return "admin/productSearchList";
+		
+		pageProcess.totRecCntSearchList(model, pag, pageSize, "productOrder", "admin", search, searchString);
+		return "admin/orderSearchList";
 	}
 	
 	@ResponseBody
@@ -110,6 +112,15 @@ public class AdminController {
 		  	res += shopService.setProductState(productIdx,state, flag);
 		  }
 		return res+"";
+	}
+	
+	@GetMapping("/saleStatistics")
+	public String saleStatisticsGet(Model model,
+			@RequestParam(defaultValue = "1") int pag,
+			@RequestParam(defaultValue = "10") int pageSize
+			) {
+		//pageProcess.totRecCnt(model, pag, pageSize, "productOrder", "admin");
+		return "admin/saleStatistics";
 	}
 	
 	

@@ -192,6 +192,7 @@
 			        </div>
       			</td>
       			<td class="right-align" style="justify-content: flex-end; text-align: right;">
+      			<a href="${ctp}/admin/productList" class="btn-edit" style="padding: 5px 20px;">전체보기</a>
       			<a href="#" class="btn-gray" style="">취소</a>
       			<a href="#" class="btn-gray" style="">교환</a>
       			<a href="#" class="btn-gray" style="">반품</a>
@@ -200,13 +201,15 @@
       		</tr>
   			</table>
 				<div class="searchProduct" style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; padding: 20px 0;">
-			    <form name="searchForm" method="get" style="width: 100%;">
+			    <form name="searchForm" method="get" action="${ctp}/admin/orderSearchList" style="width: 100%;">
 			        <div class="input-group">
 			            <select name="search" id="search" class="form-select" onchange="cursorMove()" style="border-radius:0;  width: 16%">
-			                <option value="product">주문번호</option>
-			                <option value="categoryName">상품명</option>
+			                <option value="orderIdx" <c:if test="${search eq 'orderIdx'}">selected</c:if>>주문번호</option>
+			                <option value="name" <c:if test="${search eq 'name'}">selected</c:if>>주문자</option>
+			                <option value="productName" <c:if test="${search eq 'productName'}">selected</c:if>>상품명</option>
+			                <option value="orderStatus" <c:if test="${search eq 'orderStatus'}">selected</c:if>>주문상태</option>
 			            </select>
-			            <input type="text" name="searchString" id="searchString" class="form-control" required placeholder="검색어를 입력하세요" style="width: 73%"/>
+			            <input type="text" name="searchString" id="searchString" value="${searchString}" class="form-control" required placeholder="검색어를 입력하세요" style="width: 73%"/>
 			            <input type="submit" value="검색" class="btn btn-secondary btn-sm" style="width: 9.5%"/>
 			            <input type="hidden" name="pag" value="${pag}" />
 			            <input type="hidden" name="pageSize" value="${pageSize}" />
@@ -234,16 +237,16 @@
 							<c:forEach var="vo" items="${vos}" varStatus="st">
 						 	 <tr style="word-break: break-all;">
 		            	<td style="width: 50px;"><input type="checkbox" name="orderCheck" id="orderCheck${vo.idx}" value="${vo.idx}" /></td>
-		              <td style="width: 70px;">${vo.idx}</td>
+		              <td style="width: 80px;">${vo.idx}</td>
 		              <td style="word-break: break-all; width: 110px;">${vo.orderIdx}</td>
-		              <td style="word-break: break-all; width: 100px;">${fn:substring(vo.orderDate,0,19)}</td>
-		              <td style="word-break: break-all; width: 110px;">${vo.name}</td>
+		              <td style="word-break: break-all; width: 90px;">${fn:substring(vo.orderDate,0,19)}</td>
+		              <td style="word-break: break-all; width: 100px;">${vo.name}</td>
 		              <td style="word-break: break-all; width: 240px;">${vo.productName}</td>
 		              <td style="word-break: break-all; width: 110px;">${vo.optionName}</td>
 		              <td style="word-break: break-all; width: 70px;">${vo.optionNum}</td>
 		              <td style="width: 110px;"><fmt:formatNumber value="${vo.optionPrice * vo.optionNum}" pattern="#,##0"/>원</td>
 		              <td style="width: 110px;"><fmt:formatNumber value="${vo.totalPay}" pattern="#,##0"/>원</td>
-		              <td style="width: 60px;">${vo.orderStatus}</td>
+		              <td style="width: 80px;">${vo.orderStatus}</td>
 		              <td style="width: 90px;">
 		                <div style="padding-bottom: 10px;"><a href="${ctp}/shop/productUpdate?idx=${vo.idx}" class="btn-edit">수정</a></div>
 		                <div><a href="javascript:productDelete(${vo.idx})" class="btn-delete">삭제</a></div>
@@ -255,14 +258,14 @@
         
         <div class="text-center" style="margin-top: 20px;">
   <ul class="pagination justify-content-center">
-	  <c:if test="${pag > 1}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/admin/orderList?pageSize=${pageSize}&pag=1">첫페이지</a></li></c:if>
-	  <c:if test="${curBlock > 0}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/admin/orderList?pageSize=${pageSize}&pag=${(curBlock-1)*blockSize + 1}">이전블록</a></li></c:if>
+	  <c:if test="${pag > 1}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/admin/orderSearchList?search=${search}&searchString=${searchString}&pageSize=${pageSize}&pag=1">첫페이지</a></li></c:if>
+	  <c:if test="${curBlock > 0}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/admin/orderSearchList?search=${search}&searchString=${searchString}&pageSize=${pageSize}&pag=${(curBlock-1)*blockSize + 1}">이전블록</a></li></c:if>
 	  <c:forEach var="i" begin="${(curBlock*blockSize)+1}" end="${(curBlock*blockSize) + blockSize}" varStatus="st">
-	    <c:if test="${i <= totPage && i == pag}"><li class="page-item active"><a class="page-link bg-secondary border-secondary" href="${ctp}/admin/orderList?pageSize=${pageSize}&pag=${i}">${i}</a></li></c:if>
-	    <c:if test="${i <= totPage && i != pag}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/admin/orderList?pageSize=${pageSize}&pag=${i}">${i}</a></li></c:if>
+	    <c:if test="${i <= totPage && i == pag}"><li class="page-item active"><a class="page-link bg-secondary border-secondary" href="${ctp}/admin/orderSearchList?search=${search}&searchString=${searchString}&pageSize=${pageSize}&pag=${i}">${i}</a></li></c:if>
+	    <c:if test="${i <= totPage && i != pag}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/admin/orderSearchList?search=${search}&searchString=${searchString}&pageSize=${pageSize}&pag=${i}">${i}</a></li></c:if>
 	  </c:forEach>
-	  <c:if test="${curBlock < lastBlock}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/admin/orderList?pageSize=${pageSize}&pag=${(curBlock+1)*blockSize+1}">다음블록</a></li></c:if>
-	  <c:if test="${pag < totPage}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/admin/orderList?pageSize=${pageSize}&pag=${totPage}">마지막페이지</a></li></c:if>
+	  <c:if test="${curBlock < lastBlock}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/admin/orderSearchList?search=${search}&searchString=${searchString}&pageSize=${pageSize}&pag=${(curBlock+1)*blockSize+1}">다음블록</a></li></c:if>
+	  <c:if test="${pag < totPage}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/admin/orderSearchList?search=${search}&searchString=${searchString}&pageSize=${pageSize}&pag=${totPage}">마지막페이지</a></li></c:if>
   </ul>
 </div>
 	</div>

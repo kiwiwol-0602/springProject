@@ -223,7 +223,7 @@
 						<c:if test="${categoryName eq 'mainName'}">
 							<li class="main-category"><a href="javascript:selectCategory('baseName','${csVOS.baseName}','${csVOS.mainName}')">${csVOS.baseName}</a></li>
 						</c:if>
-						<c:if test="${categoryName eq 'baseName'}">
+						<c:if test="${categoryName eq 'baseName'|| categoryName eq 'subName'}">
 							<li class="sub-category"><a href="javascript:selectCategory('subName','${csVOS.subName}','${csVOS.baseName}')">${csVOS.subName}</a></li>
 						</c:if>
 					</c:forEach>

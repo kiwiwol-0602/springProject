@@ -209,12 +209,12 @@
 			    <form name="searchForm" method="get" action="${ctp}/admin/productSearchList" style="width: 100%;">
 			        <div class="input-group">
 			            <select name="search" id="search" class="form-select" onchange="cursorMove()" style="border-radius:0;  width: 16%">
-			                <option value="productName" <c:if test="${search eq 'productName'}"  >selected</c:if>>상품명</option>
-			                <option value="mainName" <c:if test="${search eq 'mainName'}"  >selected</c:if>>대분류명</option>
-			                <option value="baseName" <c:if test="${search eq 'baseName'}"  >selected</c:if>>중분류명</option>
-			                <option value="subName" <c:if test="${search eq 'subName'}"  >selected</c:if>>소분류명</option>
-			                <option value="status" <c:if test="${search eq 'status'}"  >selected</c:if>>판매상태</option>
-			                <option value="display" <c:if test="${search eq 'display'}"  >selected</c:if>>진열상태</option>
+			                <option value="productName" <c:if test="${search eq 'productName'}">selected</c:if>>상품명</option>
+			                <option value="mainName" <c:if test="${search eq 'mainName'}">selected</c:if>>대분류명</option>
+			                <option value="baseName" <c:if test="${search eq 'baseName'}">selected</c:if>>중분류명</option>
+			                <option value="subName" <c:if test="${search eq 'subName'}">selected</c:if>>소분류명</option>
+			                <option value="status" <c:if test="${search eq 'status'}">selected</c:if>>판매상태</option>
+			                <option value="display" <c:if test="${search eq 'display'}">selected</c:if>>진열상태</option>
 			            </select>
 			            <input type="text" name="searchString" id="searchString" class="form-control" value="${searchString}" required placeholder="검색어를 입력하세요" style="width: 73%"/>
 			            <input type="submit" value="검색" class="btn btn-secondary btn-sm" style="width: 9.5%"/>
