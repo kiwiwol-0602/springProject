@@ -17,4 +17,6 @@ public interface EventService {
 
 	int setCoponDownload(String mid, String couponCode, UserCouponsVO vo);
 
+	String setEventActiveChangePost(int idx, String variable);
+
 }

@@ -35,6 +35,10 @@
 	
 	<!-- update -->
 	
+	<update id="setEventActiveChangePost">
+	  update events set active = #{variable} where idx = #{idx};
+	</update>
+	
 	
 
 </mapper>

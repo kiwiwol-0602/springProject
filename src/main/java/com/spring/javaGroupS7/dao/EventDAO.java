@@ -22,4 +22,6 @@ public interface EventDAO {
 
 	int setCoponDownload(@Param("vo") UserCouponsVO vo);
 
+	int setEventActiveChangePost(@Param("idx") int idx, @Param("variable") String variable);
+
 }

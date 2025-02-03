@@ -82,4 +82,9 @@ public class EventServiceImpl implements EventService {
 		
 		return eventDAO.setCoponDownload(vo);
 	}
+
+	@Override
+	public String setEventActiveChangePost(int idx, String variable) {
+		return eventDAO.setEventActiveChangePost(idx, variable)+"";
+	}
 }

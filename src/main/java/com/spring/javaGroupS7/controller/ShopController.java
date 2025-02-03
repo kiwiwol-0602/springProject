@@ -361,9 +361,10 @@ public class ShopController {
 	}
 	
 	@GetMapping("/couponPage")
-	public String couponPageGet(Model model) {
-		 List<CouponsVO> vos = shopService.getAllCoupons();
-     model.addAttribute("couponVOS", vos);  // 
+	public String couponPageGet(Model model, HttpSession session) {
+		String mid = (String) session.getAttribute("sMid");
+		List<UserCouponsVO> vos = shopService.getUserCouponList(mid);
+    model.addAttribute("couponVOS", vos);  // 
 		
 		return "shop/couponPage";
 	}

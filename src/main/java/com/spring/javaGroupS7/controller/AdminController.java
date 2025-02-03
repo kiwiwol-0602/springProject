@@ -150,5 +150,31 @@ public class AdminController {
 		return "redirect:/message/eventInputNO";
 	}
 	
+	@ResponseBody
+	@PostMapping("/eventActiveChange")
+	public String eventActiveChangePost(String variable, 
+			@RequestParam(defaultValue = "") String idxSelectArray,
+			@RequestParam(defaultValue = "0") int idx
+		) {
+		String res = "0";
+		
+		System.out.println("idxSelectArray"+idxSelectArray);
+		System.out.println("idx"+idx);
+		
+		if(!idxSelectArray.isEmpty()) {
+			String[] idxSelectArrays = idxSelectArray.split("/");
+			for(String arrayIdx : idxSelectArrays) {
+				eventServise.setEventActiveChangePost(Integer.parseInt(arrayIdx), variable);
+				res = "1";
+			}
+		}
+		else {
+			eventServise.setEventActiveChangePost(idx, variable);
+			res = "1";
+		}
+		
+		return res;
+	}
+	
 	
 }
