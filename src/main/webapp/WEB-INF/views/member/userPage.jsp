@@ -208,9 +208,9 @@
 	  	</a>
 	  </div>
 		<div class="tab">
-	    <a href="BuyList.fu?mid=${vo.mid}">
+	    <a href="${ctp}/shop/orderList">
 		  	<p class="talTitle">구매 내역</p>
-		  	<div class="talContent">${BuyListCnt}</div>
+		  	<div class="talContent">${recentoOrderCnt}(${orderListCnt})</div>
 	  	</a>
 	  </div>
   </div>

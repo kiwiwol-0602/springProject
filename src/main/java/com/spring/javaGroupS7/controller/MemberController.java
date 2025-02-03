@@ -408,12 +408,15 @@ public class MemberController {
 		
 		int couponCnt = shopService.getUserCouponList(mid).size();
 		int cartCnt = shopService.getCartList(mid).size();
-		//int orderListCnt = shopService.getOrderList(mid).size();
+		int orderListCnt = shopService.getOrderList(mid).size();
+		int recentoOrderCnt = shopService.getRecentOrderList(mid).size();
 		
 		
 		model.addAttribute("vo", vo);
 		model.addAttribute("couponCnt", couponCnt);
 		model.addAttribute("cartCnt", cartCnt);
+		model.addAttribute("orderListCnt", orderListCnt);
+		model.addAttribute("recentoOrderCnt", recentoOrderCnt);
 		
 		return "member/userPage";
 	}

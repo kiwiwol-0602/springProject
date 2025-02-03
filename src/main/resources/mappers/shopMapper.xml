@@ -143,6 +143,30 @@
 	 	select * from baesong where orderIdx = #{orderIdx} limit 1;
 	 </select>
 	 
+	 <select id="getOrderList" resultType="com.spring.javaGroupS7.vo.ProductOrderVO">
+	 	select p.* ,b.name, b.address, b.orderStatus 
+	 	from productOrder p 
+	 		left join baesong b on p.idx = b.oIdx
+	 	where p.mid = #{mid}
+		order by idx desc;
+	 </select>
+	 
+	 <select id="getRecentOrderList" resultType="com.spring.javaGroupS7.vo.ProductOrderVO">
+	 	select * from productOrder 
+	 		where mid = #{mid} 
+	 		and orderDate >= DATE_SUB(NOW(), INTERVAL 7 DAY);
+	 </select>
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 	 
 	 
 	 
@@ -175,6 +199,7 @@
   <insert id="setBaesong">
     insert into baesong values (default,#{baesongVO.oIdx},#{baesongVO.orderIdx},#{baesongVO.totalPay},#{baesongVO.mid},#{baesongVO.name},#{baesongVO.address},#{baesongVO.tel},#{baesongVO.message},#{baesongVO.payment},#{baesongVO.payMethod},default);
   </insert>
+  
   
   
   

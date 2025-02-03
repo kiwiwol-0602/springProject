@@ -18,4 +18,7 @@ public class UserCouponsVO {
 	private int minOrderPay;
 	private String expirationDate;
 	private String active;
+	
+	private int maxIdx;
+	
 }

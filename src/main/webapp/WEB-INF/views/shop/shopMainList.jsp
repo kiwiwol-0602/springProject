@@ -31,6 +31,11 @@
   		color: #102770;
   		font-family: 'GowunDodum-Regular';
   	}
+  	
+  	.mainList .container .channel a{
+  		color: #102770;
+  		text-decoration: none;
+  	}
   	.mainList .container .title img {
   		width: 100%;
   		height: 600px;
@@ -134,6 +139,7 @@
   		margin-top: 10px;
   		margin-bottom: 5px;;
   		padding: 0 10%;
+  		color: #333;
   	}
   	.mainList .container .itemList .card .text button{
   		background-color: black;
@@ -205,9 +211,18 @@
 		<div class="container">
 			<div class="channel">
 				<div>
-					<c:if test="${categoryName eq 'mainName'}">Home > ${categorySuvVO.mainName}</c:if>
-					<c:if test="${categoryName eq 'baseName'}">Home > ${categorySuvVO.mainName} > ${categorySuvVO.baseName}</c:if>
-					<c:if test="${categoryName eq 'subName'}">Home > ${categorySuvVO.mainName} > ${categorySuvVO.baseName} > ${categorySuvVO.subName}</c:if>
+					<c:if test="${categoryName eq 'mainName'}"><a href="${ctp}/main">Home</a> > 
+						<a href="javascript:selectCategory('mainName','${categorySuvVO.mainName}')"> ${categorySuvVO.mainName}</a>
+					</c:if>
+					<c:if test="${categoryName eq 'baseName'}">Home > 
+						<a href="javascript:selectCategory('mainName','${categorySuvVO.mainName}')"> ${categorySuvVO.mainName}</a> > 
+						<a href="javascript:selectCategory('baseName','${categorySuvVO.baseName}','${categorySuvVO.mainName}')">${categorySuvVO.baseName}</a>
+					</c:if>
+					<c:if test="${categoryName eq 'subName'}">Home > 
+						<a href="javascript:selectCategory('mainName','${categorySuvVO.mainName}')"> ${categorySuvVO.mainName}</a> > 
+						<a href="javascript:selectCategory('baseName','${categorySuvVO.baseName}','${categorySuvVO.mainName}')">${categorySuvVO.baseName}</a> > 
+						<a href="javascript:selectCategory('subName','${categorySuvVO.subName}','${categorySuvVO.baseName}')">${categorySuvVO.subName}</a>
+					</c:if>
 				</div>
 			</div>
 			<div class="title">
@@ -251,7 +266,7 @@
 	</section>
 	
 	<!-- 위로가기 버튼 -->
-	  <h6 id="topBtn" class="text-right mr-3"><font color="#af9e84"><i class="fa-solid fa-circle-chevron-up fa-2x"></i></font></h6>
+	  <h6 id="topBtn" class="text-right mr-3"><font color="#758694"><i class="fa-solid fa-circle-chevron-up fa-2x"></i></font></h6>
 	  
 	<footer>
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"/>

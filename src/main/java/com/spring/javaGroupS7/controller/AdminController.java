@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.javaGroupS7.pagination.PageProcess;
 import com.spring.javaGroupS7.service.AdminService;
+import com.spring.javaGroupS7.service.EventService;
 import com.spring.javaGroupS7.service.MemberService;
 import com.spring.javaGroupS7.service.ShopService;
+import com.spring.javaGroupS7.vo.EventsVO;
 import com.spring.javaGroupS7.vo.ProductVO;
 import com.spring.javaGroupS7.vo.UserVO;
 
@@ -30,6 +33,8 @@ public class AdminController {
 	MemberService memberService;
 	@Autowired
 	ShopService shopService;
+	@Autowired
+	EventService eventServise;
 	@Autowired
 	PageProcess pageProcess;
 	
@@ -121,6 +126,28 @@ public class AdminController {
 			) {
 		//pageProcess.totRecCnt(model, pag, pageSize, "productOrder", "admin");
 		return "admin/saleStatistics";
+	}
+	
+	@GetMapping("/eventList")
+	public String eventListGet(Model model) {
+		List<EventsVO> vos = eventServise.getEventList();
+		System.out.println(vos);
+		model.addAttribute("vos", vos);
+		
+		return "admin/eventList";
+	}
+	
+	@GetMapping("/eventInput")
+	public String eventInputGet() {
+		return "admin/eventInput";
+	}
+	
+	@PostMapping("/eventInput")
+	public String eventInputPost(MultipartFile file1, EventsVO vo) {
+		int res = eventServise.setEventInput(file1,  vo);
+		
+		if(res != 0) return "redirect:/message/eventInputOk";
+		return "redirect:/message/eventInputNO";
 	}
 	
 	

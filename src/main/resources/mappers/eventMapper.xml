@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.javaGroupS7.dao.EventDAO">
+	
+	<!-- select -->
+	<select id="getEventList" resultType="com.spring.javaGroupS7.vo.EventsVO">
+	 	select * from events;
+	 </select>
+	 
+	<select id="getEventInfo" resultType="com.spring.javaGroupS7.vo.EventsVO">
+	 	select * from events where idx = #{idx};
+	 </select>
+	 
+	 <select id="getUserCouponMaxIdx" resultType="com.spring.javaGroupS7.vo.UserCouponsVO">
+	 	select max(idx) as maxIdx from userCoupons;
+	 </select>
+	 
+	 <select id="getCouponInfo" resultType="com.spring.javaGroupS7.vo.CouponsVO">
+	 	select * from coupons where couponCode = #{couponCode};
+	 </select>
+	 
+	<!-- insert -->
+	<insert id="setEventInput">
+		insert into events value 
+			(
+				default,#{vo.title},#{vo.subTitle},#{vo.thumbnail},#{vo.content},#{vo.startDate},#{vo.endDate},
+				#{vo.active},#{vo.couponCode}
+			);
+	</insert>
+	
+	 <insert id="setCoponDownload">
+  	insert into userCoupons values (default,#{vo.couponIdx},#{vo.mid},#{vo.userCouponCode},#{vo.couponName},#{vo.discountType},#{vo.discount},default,default);
+  </insert>
+	
+	
+	<!-- update -->
+	
+	
+
+</mapper>

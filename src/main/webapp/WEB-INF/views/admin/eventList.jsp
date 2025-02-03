@@ -9,7 +9,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="ctp/main/favicon.png">
-	<title>쿠폰등록 | LUMI</title>
+	<title>이벤트 | LUMI</title>
   <jsp:include page="/WEB-INF/views/include/bs5.jsp" />
 	<jsp:include page="/WEB-INF/views/include/fonts.jsp" />
   <style>
@@ -105,47 +105,47 @@
 </head>
 <body>
 <div class="couponListAdmin">
-	<h2>쿠폰 발급 및 관리</h2>
+	<h2>이벤트 관리</h2>
 	<!-- 쿠폰 리스트 테이블 -->
 	<table style="width: 100%; margin-top: 40px;">
 		<tr style="width: 100%;">
 			<td class="left-align" style="justify-content: flex-start;">
-			<a href="${ctp}/shop/couponInput" class="btn-edit" style="padding: 5px 20px;">쿠폰등록</a>
+			<a href="${ctp}/admin/eventInput" class="btn-edit" style="padding: 5px 20px;">이벤트등록</a>
 			</td>
 			<td class="right-align" style="justify-content: flex-end; text-align: right;">
-			<a href="#" class="btn-gray" style="">쿠폰상태 ON</a>
-			<a href="#" class="btn-gray" style="">쿠폰상태 OFF</a>
+			<a href="#" class="btn-gray" style="">이벤트상태 ON</a>
+			<a href="#" class="btn-gray" style="">이벤트상태 OFF</a>
 			</td>
 		</tr>
 	</table>
 	<table class="couponList" id="couponList">
 		<tr>
 			<th><input type="checkbox" id="allCheck" onclick="reverseCheck()"/></th>
-	    <th>쿠폰코드</th>
-	    <th>쿠폰명</th>
-	    <th>할인유형</th>
-	    <th>할인값</th>
-	    <th>최소주문금액</th>
+	    <th></th>
+	    <th>제목</th>
+	    <th>부제목</th>
+	    <th>시작일</th>
 	    <th>만료일</th>
-	    <th>쿠폰상태</th>
+	    <th>쿠폰코드</th>
+	    <th>이벤트상태</th>
 	    <th>관리</th>
 		</tr>
-		<c:forEach var="vo" items="${couponVOS}" varStatus="st">
+		<c:forEach var="vo" items="${vos}" varStatus="st">
 			<tr style="word-break: break-all;">
 				<td style="width: 50px;"><input type="checkbox" name="couponCheck" id="couponCheck${vo.idx}" value="${vo.idx}" /></td>
-			  <td style="width: 110px;">${vo.couponCode}</td>
-			  <td style="word-break: break-all; width: 240px;">${vo.couponName}</td>
-			  <td style="word-break: break-all; width: 110px;">${vo.discountType}</td>
-			  <td style="word-break: break-all; width: 110px;">${vo.discount}</td>
-			  <td style="width: 110px;"><fmt:formatNumber value="${vo.minOrderPay}" pattern="#,##0"/>원</td>
-			  <td style="width: 100px;">${fn:substring(vo.expirationDate,0,10)}</td>
-			  <td style="width: 60px;">${vo.active}</td>
-			  <td style="width: 90px;">
+			  <td style="width: 70px; margin: 0; padding: 10px 0"><img src="${ctp}/event/${vo.thumbnail}" alt="Thumbnail" class="default-img" width="150px;"></td>
+			  <td style="word-break: break-all; width: 150px;">${vo.title}</td>
+			  <td style="word-break: break-all; width: 200px;">${vo.subTitle}</td>
+			  <td style="width: 70px;">${fn:substring(vo.startDate,0,10)}</td>
+			  <td style="width: 70px;">${fn:substring(vo.endDate,0,10)}</td>
+			  <td style="width: 100px;">${vo.couponCode}</td>
+			  <td style="width: 50px;">${vo.active}</td>
+			  <td style="width: 50px;">
 			  	<c:if test="${vo.active eq 'ON'}">
-			  		<a href="#" class="btn-gray" style="">쿠폰상태 OFF</a>
+			  		<a href="#" class="btn-gray" style="">OFF</a>
 			  	</c:if>
 			  	<c:if test="${!(vo.active eq 'ON')}">
-			  		<a href="#" class="btn-gray" style="">쿠폰상태 ON</a>
+			  		<a href="#" class="btn-gray" style="">ON</a>
 			  	</c:if>
 		  	</td>
 			</tr>

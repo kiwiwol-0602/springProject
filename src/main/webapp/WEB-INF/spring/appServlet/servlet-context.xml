@@ -25,6 +25,7 @@
 	<resources mapping="/data/**" location="/resources/data/" />
 	<resources mapping="/member/**" location="/resources/data/member/" />
 	<resources mapping="/product/**" location="/resources/data/shop/product/" />
+	<resources mapping="/event/**" location="/resources/data/shop/event/" />
 	
 	<resources mapping="/images/**" location="/resources/images/" />
 	<resources mapping="/main/**" location="/resources/images/main/" />

@@ -1179,7 +1179,27 @@
 	  	<div class="sub-menu">
 	  	<hr/>
 	      <div class="subMenu-section">
-	      </div>
+					<h4 onclick="location.href='${ctp}/event/eventList'">EVENT</h4>
+					<ul class="detail-menu scentedCandle">
+						<li>
+							<a href="javascript:selectCategory('subName','레제크랭','Scented Candle')">
+							<div><img src="${ctp}/shop/ScentedCandle/레제크랭.jpg" width="200px" height="200px;"></div>
+							<div>EVENT</div>
+							</a>
+						</li>
+	  			</ul>
+  			</div>		  		  	
+	      <div class="subMenu-section">
+					<h4 onclick="">MEGAZINE</h4>
+					<ul class="detail-menu scentedCandle">
+						<li>
+							<a href="javascript:selectCategory('subName','레제크랭','Scented Candle')">
+							<div><img src="${ctp}/shop/ScentedCandle/레제크랭.jpg" width="200px" height="200px;"></div>
+							<div>MEGAZINE</div>
+							</a>
+						</li>
+	  			</ul>
+  			</div>		  		  	
 	    </div>
 	  </li>
 	</ul>

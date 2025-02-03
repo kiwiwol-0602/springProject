@@ -14,6 +14,7 @@ import com.spring.javaGroupS7.dao.ShopDAO;
 import com.spring.javaGroupS7.vo.BaesongVO;
 import com.spring.javaGroupS7.vo.CategorySubVO;
 import com.spring.javaGroupS7.vo.CouponsVO;
+import com.spring.javaGroupS7.vo.EventsVO;
 import com.spring.javaGroupS7.vo.ProductCartVO;
 import com.spring.javaGroupS7.vo.ProductOptionVO;
 import com.spring.javaGroupS7.vo.ProductOrderVO;
@@ -412,4 +413,16 @@ public class ShopServiceImpl implements ShopService {
 	public int setProductState(int productIdx, String state, String flag) {
 		return shopDAO.setProductState(productIdx, state, flag);
 	}
+
+	@Override
+	public List<ProductOrderVO> getOrderList(String mid) {
+		return shopDAO.getOrderList(mid);
+	}
+
+	@Override
+	public List<ProductOrderVO> getRecentOrderList(String mid) {
+		return shopDAO.getRecentOrderList(mid);
+	}
+
+	
 }

@@ -93,10 +93,18 @@ public class MessageController {
 			model.addAttribute("message", "쿠폰 등록 중 오류가 발생했습니다.");
 			model.addAttribute("url", "shop/couponInput");
 		}
-		else if(msgFlag.equals("paymentResultOk")) {
-			model.addAttribute("message", "결재가 성공적으로 완료되었습니다.");
-			model.addAttribute("url", "shop/paymentResultOk");
+		else if(msgFlag.equals("eventInputOk")) {
+			model.addAttribute("message", "이벤트가 등록되었습니다.");
+			model.addAttribute("url", "admin/eventList");
 		}
+		else if(msgFlag.equals("eventInputNo")) {
+			model.addAttribute("message", "이벤트 등록 중 오류가 발생했습니다.");
+			model.addAttribute("url", "admin/eventInput");
+		}
+//		else if(msgFlag.equals("paymentResultOk")) {
+//			model.addAttribute("message", "결제가 완료되었습니다.");
+//			model.addAttribute("url", "shop/paymentResultOk");
+//		}
 		
 		return "include/message";
 	}

@@ -574,7 +574,7 @@
 	</table>
 		
 		<!-- 위로가기 버튼 -->
-	  <h6 id="topBtn" class="text-right mr-3"><font color="#af9e84"><i class="fa-solid fa-circle-chevron-up fa-2x"></i></font></h6>
+	  <h6 id="topBtn" class="text-right mr-3"><font color="#758694"><i class="fa-solid fa-circle-chevron-up fa-2x"></i></font></h6>
   </div>
 	<%-- <jsp:include page="/WEB-INF/views/include/footer.jsp"/> --%>
 	<footer>

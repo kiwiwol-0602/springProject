@@ -315,6 +315,7 @@
         <input type="hidden" name="idxArray" id="idxArray" value="">
       </div>
     </div>
-  </form>   
+  </form>
+  <jsp:include page="/WEB-INF/views/include/footer.jsp"/>   
 </body>
 </html>

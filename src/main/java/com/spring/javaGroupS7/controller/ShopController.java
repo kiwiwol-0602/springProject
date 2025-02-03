@@ -522,7 +522,7 @@ public class ShopController {
 		session.setAttribute("sPayMentVO", payMentVO);
 		session.setAttribute("orderTotalPrice", baesongVO.getTotalPay());
 		
-		return "redirect:/message/paymentResultOk";
+		return "redirect:/shop/paymentResultOk";
 	}
 	
 	@GetMapping("/paymentResultOk")
@@ -546,7 +546,17 @@ public class ShopController {
 		return "shop/paymentResult";
 	}
 	
-	
+	@GetMapping("/orderList")
+	public String orderListGet(HttpSession session, Model model) {
+		String mid = (String) session.getAttribute("sMid");
+		
+		List<ProductOrderVO> vos = shopService.getOrderList(mid);
+		System.out.println(vos);
+		model.addAttribute("vos",vos);
+		model.addAttribute("mid",mid);
+		
+		return "shop/orderList";
+	}
 	
 	
 	

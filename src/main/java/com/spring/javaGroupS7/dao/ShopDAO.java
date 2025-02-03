@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.spring.javaGroupS7.vo.BaesongVO;
 import com.spring.javaGroupS7.vo.CategorySubVO;
 import com.spring.javaGroupS7.vo.CouponsVO;
+import com.spring.javaGroupS7.vo.EventsVO;
 import com.spring.javaGroupS7.vo.ProductCartVO;
 import com.spring.javaGroupS7.vo.ProductOptionVO;
 import com.spring.javaGroupS7.vo.ProductOrderVO;
@@ -107,5 +108,13 @@ public interface ShopDAO {
 	void setStatusSelectCheck(@Param("idx") int idx, @Param("statusSelect") String statusSelect);
 
 	int setProductState(@Param("productIdx") int productIdx, @Param("state") String state, @Param("flag") String flag);
+
+	List<ProductOrderVO> getOrderList(@Param("mid") String mid);
+
+	List<ProductOrderVO> getRecentOrderList(@Param("mid") String mid);
+
+	List<EventsVO> getEventList();
+
+	int setEventInput(@Param("vo") EventsVO vo);
 
 }
