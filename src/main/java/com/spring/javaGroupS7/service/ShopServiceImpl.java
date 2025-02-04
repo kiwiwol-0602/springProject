@@ -424,5 +424,10 @@ public class ShopServiceImpl implements ShopService {
 		return shopDAO.getRecentOrderList(mid);
 	}
 
+	@Override
+	public int setOrderStatusChange(int idx, String state) {
+		return shopDAO.setOrderStatusChange(idx, state);
+	}
+
 	
 }

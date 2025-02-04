@@ -244,6 +244,10 @@
   <update id="setProductState">
 		update product set ${state} = #{flag} where idx = #{productIdx};
 	</update>
+	
+	<update id="setOrderStatusChange">
+  	update baesong set orderStatus = #{state} where oIdx = #{idx};
+  </update>
   
   
   

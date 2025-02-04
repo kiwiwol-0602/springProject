@@ -90,6 +90,31 @@
       cursor: pointer;
     }
 	</style>
+	<script type="text/javascript">
+		function statusChange(idx, state) {
+			
+			alert(idx);
+			alert(state);
+			
+			
+			$.ajax({
+				type : "post",
+				url  : "${ctp}/shop/orderStatusChange",
+				data: {
+					idx		: idx,
+					state : state
+				}, 
+		    success: function(res) {
+	        alert(state+" 신청했습니다.");
+	        location.reload();
+		    },
+		    error: function() {
+		        alert("전송오류");
+		    }
+			});
+		}
+	
+	</script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
@@ -115,7 +140,9 @@
 	          		<c:if test="${vo.orderStatus eq '교환및환불'}"><div style="color: red; font-weight: bold; font-size: 20px;">${vo.orderStatus}</div></c:if>
             	</div>
             	<div style="text-align: right;">
-	              <button type="button" onClick="cartDelete(${vo.idx})" class="btn btn-outline-danger btn-sm">교환 및 환불</button>
+            		<c:if test="${!(vo.orderStatus eq '구매확정' || vo.orderStatus eq '교환및환불')}">
+	              	<button type="button" onClick="statusChange(${vo.idx},'교환및환불')" class="btn btn-outline-danger btn-sm">교환 및 환불</button>
+	              </c:if>
             	</div>
               <div class="input-group" style="text-align: center; margin-top: 15px;">
              		<div class="company input-group-prepend">${vo.orderIdx}</div>
@@ -145,7 +172,7 @@
           <div style="width: 100%; text-align: center; margin-top: 10px;">
           	<c:if test="${!(vo.orderStatus eq '구매확정')}">
           		<button type="button" onClick="" class="btn btn-warning" style="width: 30%; height: 45px; color:white;">배송조회</button>
-          		<button type="button" onClick="" class="btn btn-primary" style="width: 30%; height: 45px;">구매확정</button>
+          		<button type="button" onClick="statusChange(${vo.idx},'구매확정')" class="btn btn-primary" style="width: 30%; height: 45px;">구매확정</button>
           	</c:if>
           	<c:if test="${vo.orderStatus eq '구매확정'}">
           		<button type="button" onClick="location.href='${ctp}/shop/productContent?idx=${vo.productIdx}'" class="btn btn-primary" style="width: 30%; height: 45px;">재구매</button>

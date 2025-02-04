@@ -13,224 +13,263 @@
 	<jsp:include page="/WEB-INF/views/include/fonts.jsp" />
   <meta name="description" content="This is an example dashboard created using build-in elements and components.">
   <meta name="msapplication-tap-highlight" content="no">
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style type="text/css">
+  	.stats-container {
+  display: flex;
+  
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.stat-box {
+  width: 22%;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.stat-box .icon {
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.stat-box .data h3 {
+  font-size: 36px;
+  margin: 0;
+  color: white;
+}
+
+.stat-box .data h4 {
+  font-size: 16px;
+  color: white;
+  margin: 5px 0 0;
+}
+
+.stat-box.red {
+  background-color: #f44336;
+  color: white;
+}
+
+.stat-box.blue {
+  background-color: #2196F3;
+  color: white;
+}
+
+.stat-box.teal {
+  background-color: #009688;
+  color: white;
+}
+
+.stat-box.orange {
+  background-color: #FF9800;
+  color: white;
+}
+
+.calendar a{
+ color: black;
+ text-decoration: none;
+}
+
+/* 메세지 관리 레이아웃 */
+.message{
+	width: 100%;
+	display: flex; 
+	flex-direction: row;
+	
+}
+    #leftWindow {
+      width: 30%;
+      height: 485px;
+      background-color: #ddd;
+      overflow: auto;
+      padding: 10px;
+      text-align: left;
+    }
+
+    #rightWindow {
+      width: 70%;
+      height: 485px;
+      background-color: #eee;
+      overflow: auto;
+      padding: 10px;
+      text-align: left;
+    }
+
+    #footerMargin {
+      clear: both;
+      margin: 10px;
+    }
+  
+  </style>
+  <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth', // 기본 보기 (월간)
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                  },
+                  // 서버에서 일정을 불러오는 Ajax 요청
+                  events: function(fetchInfo, successCallback, failureCallback) {
+								    $.ajax({
+							        url: '${ctp}/admin/loadSchedule',
+							        method: 'GET',
+							        success: function(data) {
+						            // 서버에서 받은 데이터를 FullCalendar에 맞는 형식으로 변환
+						            var events = data.map(function(event) {
+				                	let endD = new Date(event.endDate);
+					                endD.setDate(endD.getDate() + 1);
+					                return {
+				                    title: event.title,
+				                    start: event.startDate, // startDate는 서버에서 반환된 날짜 필드명
+				                    end: endD.toISOString().split('T')[0] || event.startDate, // endDate가 없으면 startDate와 동일하게 처리
+				                    allDay: true
+					                };
+						            });
+						            successCallback(events); // FullCalendar에 이벤트 전달
+							        },
+							        error: function(error) {
+						            failureCallback(error); // 실패 시 처리
+						            alert('일정을 불러오는 중 오류가 발생했습니다.');
+							        }
+								    });
+									},
+                  // 날짜 클릭 이벤트 핸들러
+                  dateClick: function(info) {
+								    var title = prompt('일정 제목을 입력하세요:');
+								    if (title) {
+							        var endDate = prompt('종료 날짜를 입력하세요 (형식: YYYY-MM-DD):');
+							        
+							        // 종료 날짜가 입력되지 않으면 시작 날짜와 동일하게 설정
+							        if (!endDate) {
+						            endDate = info.dateStr;
+							        }
+							        
+							        $.ajax({
+							            url: '${ctp}/admin/saveSchedule',
+							            method: 'POST',
+							            data: {
+						                title: title,
+						                startDate: info.dateStr,
+						                endDate: endDate
+							            },
+							            success: function(res) {
+						                let endD = new Date(endDate);
+						                endD.setDate(endD.getDate() + 1);
+						                calendar.addEvent({
+					                    title: title,
+					                    start: info.dateStr,
+					                    end: endD.toISOString().split('T')[0],
+					                    allDay: true
+						                });
+						                alert('일정이 저장되었습니다.');
+							            },
+							            error: function(error) {
+						                alert('일정을 저장하는 중 오류가 발생했습니다.');
+							            }
+							        });
+								    }
+								    else {
+							        alert('일정 등록 중 오류가 발생했습니다.');
+								    }
+									}
+                });
+
+
+            calendar.render(); // 캘린더 렌더링
+        });
+    </script>
 </head>
 <body>
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-top:43px;">
-
- <!-- Header -->
- <!--  
-  <header class="w3-container">
-    <h5><b><i class="fa fa-dashboard"></i> My Dashboard</b></h5>
-  </header>
-	-->
-  <div class="w3-row-padding w3-margin-bottom">
-    <div class="w3-quarter">
-      <div class="w3-container w3-red w3-padding-16">
-        <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
-        <div class="w3-right">
-          <h3>52</h3>
-        </div>
-        <div class="w3-clear"></div>
-        <h4>Messages</h4>
-      </div>
-    </div>
-    <div class="w3-quarter">
-      <div class="w3-container w3-blue w3-padding-16">
-        <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
-        <div class="w3-right">
-          <h3>99</h3>
-        </div>
-        <div class="w3-clear"></div>
-        <h4>Views</h4>
-      </div>
-    </div>
-    <div class="w3-quarter">
-      <div class="w3-container w3-teal w3-padding-16">
-        <div class="w3-left"><i class="fa fa-share-alt w3-xxxlarge"></i></div>
-        <div class="w3-right">
-          <h3>23</h3>
-        </div>
-        <div class="w3-clear"></div>
-        <h4>Shares</h4>
-      </div>
-    </div>
-    <div class="w3-quarter">
-      <div class="w3-container w3-orange w3-text-white w3-padding-16">
-        <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
-        <div class="w3-right">
-          <h3>50</h3>
-        </div>
-        <div class="w3-clear"></div>
-        <h4>Users</h4>
-      </div>
-    </div>
+<div style="width: 95%; margin: 2% auto; display: flex;">
+  <!-- 달력 영역 (70% 공간) -->
+  <div style="width: 70%; margin-right: 2%;">
+    <div id="calendar" class="calendar" style="width: 100%;"></div>
   </div>
-
-  <div class="w3-panel">
-    <div class="w3-row-padding" style="margin:0 -16px">
-      <div class="w3-third">
-        <h5>Regions</h5>
-        <img src="/w3images/region.jpg" style="width:100%" alt="Google Regional Map">
-      </div>
-      <div class="w3-twothird">
-        <h5>Feeds</h5>
-        <table class="w3-table w3-striped w3-white">
-          <tr>
-            <td><i class="fa fa-user w3-text-blue w3-large"></i></td>
-            <td>New record, over 90 views.</td>
-            <td><i>10 mins</i></td>
-          </tr>
-          <tr>
-            <td><i class="fa fa-bell w3-text-red w3-large"></i></td>
-            <td>Database error.</td>
-            <td><i>15 mins</i></td>
-          </tr>
-          <tr>
-            <td><i class="fa fa-users w3-text-yellow w3-large"></i></td>
-            <td>New record, over 40 users.</td>
-            <td><i>17 mins</i></td>
-          </tr>
-          <tr>
-            <td><i class="fa fa-comment w3-text-red w3-large"></i></td>
-            <td>New comments.</td>
-            <td><i>25 mins</i></td>
-          </tr>
-          <tr>
-            <td><i class="fa fa-bookmark w3-text-blue w3-large"></i></td>
-            <td>Check transactions.</td>
-            <td><i>28 mins</i></td>
-          </tr>
-          <tr>
-            <td><i class="fa fa-laptop w3-text-red w3-large"></i></td>
-            <td>CPU overload.</td>
-            <td><i>35 mins</i></td>
-          </tr>
-          <tr>
-            <td><i class="fa fa-share-alt w3-text-green w3-large"></i></td>
-            <td>New shares.</td>
-            <td><i>39 mins</i></td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
-  <hr>
-  <div class="w3-container">
-    <h5>General Stats</h5>
-    <p>New Visitors</p>
-    <div class="w3-grey">
-      <div class="w3-container w3-center w3-padding w3-green" style="width:25%">+25%</div>
-    </div>
-
-    <p>New Users</p>
-    <div class="w3-grey">
-      <div class="w3-container w3-center w3-padding w3-orange" style="width:50%">50%</div>
-    </div>
-
-    <p>Bounce Rate</p>
-    <div class="w3-grey">
-      <div class="w3-container w3-center w3-padding w3-red" style="width:75%">75%</div>
-    </div>
-  </div>
-  <hr>
-
-  <div class="w3-container">
-    <h5>Countries</h5>
-    <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
-      <tr>
-        <td>United States</td>
-        <td>65%</td>
-      </tr>
-      <tr>
-        <td>UK</td>
-        <td>15.7%</td>
-      </tr>
-      <tr>
-        <td>Russia</td>
-        <td>5.6%</td>
-      </tr>
-      <tr>
-        <td>Spain</td>
-        <td>2.1%</td>
-      </tr>
-      <tr>
-        <td>India</td>
-        <td>1.9%</td>
-      </tr>
-      <tr>
-        <td>France</td>
-        <td>1.5%</td>
-      </tr>
-    </table><br>
-    <button class="w3-button w3-dark-grey">More Countries  <i class="fa fa-arrow-right"></i></button>
-  </div>
-  <hr>
-  <div class="w3-container">
-    <h5>Recent Users</h5>
-    <ul class="w3-ul w3-card-4 w3-white">
-      <li class="w3-padding-16">
-        <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-        <span class="w3-xlarge">Mike</span><br>
-      </li>
-      <li class="w3-padding-16">
-        <img src="/w3images/avatar5.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-        <span class="w3-xlarge">Jill</span><br>
-      </li>
-      <li class="w3-padding-16">
-        <img src="/w3images/avatar6.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-        <span class="w3-xlarge">Jane</span><br>
-      </li>
-    </ul>
-  </div>
-  <hr>
-
-  <div class="w3-container">
-    <h5>Recent Comments</h5>
-    <div class="w3-row">
-      <div class="w3-col m2 text-center">
-        <img class="w3-circle" src="/w3images/avatar3.png" style="width:96px;height:96px">
-      </div>
-      <div class="w3-col m10 w3-container">
-        <h4>John <span class="w3-opacity w3-medium">Sep 29, 2014, 9:12 PM</span></h4>
-        <p>Keep up the GREAT work! I am cheering for you!! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br>
-      </div>
-    </div>
-
-    <div class="w3-row">
-      <div class="w3-col m2 text-center">
-        <img class="w3-circle" src="/w3images/avatar1.png" style="width:96px;height:96px">
-      </div>
-      <div class="w3-col m10 w3-container">
-        <h4>Bo <span class="w3-opacity w3-medium">Sep 28, 2014, 10:15 PM</span></h4>
-        <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br>
-      </div>
-    </div>
-  </div>
-  <br>
-  <div class="w3-container w3-dark-grey w3-padding-32">
-    <div class="w3-row">
-      <div class="w3-container w3-third">
-        <h5 class="w3-bottombar w3-border-green">Demographic</h5>
-        <p>Language</p>
-        <p>Country</p>
-        <p>City</p>
-      </div>
-      <div class="w3-container w3-third">
-        <h5 class="w3-bottombar w3-border-red">System</h5>
-        <p>Browser</p>
-        <p>OS</p>
-        <p>More</p>
-      </div>
-      <div class="w3-container w3-third">
-        <h5 class="w3-bottombar w3-border-orange">Target</h5>
-        <p>Users</p>
-        <p>Active</p>
-        <p>Geo</p>
-        <p>Interests</p>
-      </div>
-    </div>
-  </div>
+  
+  <!-- 고객 탈퇴신청, 주문건수, 교환환불 등의 칸 (30% 공간) -->
+  <div style="width: 30%; display: flex; flex-direction: column; justify-content: space-between;">
+    <div class="stats-container">
+    	<div class="stat-box orange">
+	      <div class="icon"><i class="fa-solid fa-user-plus"></i></div>
+	      <div class="data">
+	        <h3>50</h3>
+	        <h4>신규회원</h4>
+	      </div>
+	    </div>
+	    <div class="stat-box teal">
+	      <div class="icon"><i class="fa-solid fa-user-xmark"></i></div>
+	      <div class="data">
+	        <h3>52</h3>
+	        <h4>탈퇴신청</h4>
+	      </div>
+	    </div>
+	    <div class="stat-box blue">
+	      <div class="icon"><i class="fa-solid fa-box"></i></div>
+	      <div class="data">
+	        <h3>99</h3>
+	        <h4>주문건수</h4>
+	      </div>
+	    </div>
+	    <div class="stat-box red">
+	      <div class="icon"><i class="fa-solid fa-truck-ramp-box"></i></div>
+	      <div class="data">
+	        <h3>23</h3>
+	        <h4>교환환불</h4>
+	      </div>
+	    </div>
+	  </div>
+  <br/>
+  <div class="message">
+	  <div id="leftWindow">
+	      <p><br/></p>
+	      <p><a href="webMessage?mSw=0" class="text-dark link-primary link-underline-opacity-0 link-underline-opacity-75-hover">메세지작성</a></p>
+	      <p><a href="webMessage?mSw=1&mFlag=1" class="text-dark link-primary link-underline-opacity-0 link-underline-opacity-75-hover">받은메세지</a></p>
+	      <p><a href="webMessage?mSw=2&mFlag=2" class="text-dark link-primary link-underline-opacity-0 link-underline-opacity-75-hover">새메세지</a></p>
+	      <p><a href="webMessage?mSw=3&mFlag=3" class="text-dark link-primary link-underline-opacity-0 link-underline-opacity-75-hover">보낸메세지</a></p>
+	      <p><a href="webMessage?mSw=4&mFlag=4" class="text-dark link-primary link-underline-opacity-0 link-underline-opacity-75-hover">수신확인</a></p>
+	    </div>
+	
+	    <div id="rightWindow">
+	      <p>
+	        <c:if test="${mSw == 0}">
+	          <h3>메세지 작성</h3>
+	          <%-- <jsp:include page="" /> --%>
+	        </c:if>
+	        <c:if test="${mSw == 1}">
+	          <h3>받은메세지</h3>
+	          <%-- <jsp:include page="" /> --%>
+	        </c:if>
+	        <c:if test="${mSw == 2}">
+	          <h3>새메세지</h3>
+	          <%-- <jsp:include page="" /> --%>
+	        </c:if>
+	        <c:if test="${mSw == 3}">
+	          <h3>보낸메세지</h3>
+	          <%-- <jsp:include page="" /> --%>
+	        </c:if>
+	        <c:if test="${mSw == 6}">
+	          <h3>메세지 내용보기</h3>
+	          <%-- <jsp:include page="" /> --%>
+	        </c:if>
+	      </p>
+	    </div>
+		</div>
+	</div>
 </div>
-
+</body>
+</body>
 </html>

@@ -107,4 +107,6 @@ public interface ShopService {
 
 	List<ProductOrderVO> getRecentOrderList(String mid);
 
+	int setOrderStatusChange(int idx, String state);
+
 }

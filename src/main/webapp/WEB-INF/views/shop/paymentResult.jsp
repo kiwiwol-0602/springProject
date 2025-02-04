@@ -162,7 +162,7 @@
       구매한 상품 총 금액(배송비 포함) : <b><fmt:formatNumber value="${baesongVO.totalPay}"/></b>원
     </div>
     <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
-      <button type="button" onclick="location.href='${ctp}/shop/shopMainList?categoryName=mainName&category=Jewelry';" class="btn-black" style="margin-right: 10px;">계속 쇼핑하기</button>
+      <button type="button" onclick="location.href='${ctp}/main';" class="btn-black" style="margin-right: 10px;">계속 쇼핑하기</button>
       <button type="button" onclick="location.href='${ctp}/shop/myOrder';" class="btn-black">구매내역 보기</button>
   	</div>
   </div>

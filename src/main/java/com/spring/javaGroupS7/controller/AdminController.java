@@ -1,11 +1,14 @@
 package com.spring.javaGroupS7.controller;
 
+import java.awt.Event;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,13 +18,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.javaGroupS7.pagination.PageProcess;
 import com.spring.javaGroupS7.service.AdminService;
 import com.spring.javaGroupS7.service.EventService;
 import com.spring.javaGroupS7.service.MemberService;
 import com.spring.javaGroupS7.service.ShopService;
+import com.spring.javaGroupS7.vo.BaesongVO;
 import com.spring.javaGroupS7.vo.EventsVO;
+import com.spring.javaGroupS7.vo.ProductOrderVO;
 import com.spring.javaGroupS7.vo.ProductVO;
+import com.spring.javaGroupS7.vo.ScheduleVO;
 import com.spring.javaGroupS7.vo.UserVO;
 
 @Controller
@@ -115,13 +122,13 @@ public class AdminController {
 		return res+"";
 	}
 	
-	@GetMapping("/saleStatistics")
+	@GetMapping("/saleChart")
 	public String saleStatisticsGet(Model model,
 			@RequestParam(defaultValue = "1") int pag,
 			@RequestParam(defaultValue = "10") int pageSize
 			) {
 		//pageProcess.totRecCnt(model, pag, pageSize, "productOrder", "admin");
-		return "admin/saleStatistics";
+		return "admin/saleChart";
 	}
 	
 	@GetMapping("/eventList")
@@ -168,5 +175,46 @@ public class AdminController {
 		return res;
 	}
 	
+	@GetMapping("/userChart")
+	public String userChartGet(Model model) {
+		// 많이 방문한 사람
+		List<UserVO> visitCntVOS = adminService.getVisitCnt();
+		model.addAttribute("visitCntVOS", visitCntVOS);
+		
+		List<ProductOrderVO> orderCntVOS = adminService.getOrderCnt();
+		model.addAttribute("orderCntVOS", orderCntVOS);
+		
+		return "admin/userChart";
+	}
+	
+	@ResponseBody
+	@PostMapping("/saveSchedule")
+	public String saveSchedulePost(
+			@RequestParam String title,
+			@RequestParam String startDate,
+			@RequestParam(defaultValue = "") String endDate
+			) {
+    
+    return adminService.setSaveSchedule(title, startDate, endDate)+"";
+	}
+	
+	@ResponseBody
+	@GetMapping("/loadSchedule")
+	public List<ScheduleVO> loadSchedulePost() {
+    List<ScheduleVO> scheduleVOS = adminService.getLoadSchedule();
+
+    //model.addAttribute("scheduleVO", scheduleVO);
+    
+    return scheduleVOS;
+	}
+	
+	@GetMapping("/refundList")
+	public String refundListGet(Model model
+			) {
+		List<BaesongVO> vos = adminService.getRefundList();
+		model.addAttribute("vos",vos);
+		
+		return "admin/refundList";
+	}
 	
 }

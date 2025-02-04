@@ -3,8 +3,38 @@
 <mapper namespace="com.spring.javaGroupS7.dao.AdminDAO">
 	
 	<!-- select -->
+	<select id="getVisitCnt" resultType="com.spring.javaGroupS7.vo.UserVO">
+		select * from users where level != 0 order by visitCnt desc limit 5;
+	</select>
+	
+	<select id="getOrderCnt" resultType="com.spring.javaGroupS7.vo.ProductOrderVO">
+		SELECT u.name, o.mid, COUNT(o.mid) AS totOrderCnt
+		FROM productOrder o
+		LEFT JOIN users u ON o.mid = u.mid
+		WHERE u.level != 0
+		GROUP BY o.mid, u.name
+		ORDER BY totOrderCnt DESC
+		LIMIT 5;
+	</select>
+	
+	<select id="getLoadSchedule" resultType="com.spring.javaGroupS7.vo.ScheduleVO">
+		SELECT * FROM schedule;
+	</select>
+	
+	<select id="getRefundList" resultType="com.spring.javaGroupS7.vo.BaesongVO">
+       select b.*,p.productName, p.orderDate, p.optionName, p.optionNum
+       from baesong b
+       left join productOrder p on p.idx = b.oIdx 
+       where orderStatus = '교환및환불'
+       order by b.idx desc
+   </select>
+	
+	
 	 
 	<!-- insert -->
+	<insert id="setSaveSchedule">
+		insert into schedule values (default, #{title}, #{startDate}<if test="endDate != '' and endDate != null">, #{endDate}</if>);
+	</insert>
 	
 	<!-- update -->
 	

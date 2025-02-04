@@ -9,12 +9,14 @@
     </select>
     
    <select id="List" resultType="map">
-       select *
+       select t.*
        <if test='type == "productOrder" and user == "admin"'>,b.name, b.address, b.orderStatus </if>
-       from ${type}
+       <if test='type == "baesong" and user == "admin"'>,p.productName, p.orderDate, p.optionName, p.optionNum</if>
+       from ${type} t
+       <if test='type == "productOrder" and user == "admin"'> left join baesong b on t.idx = b.oIdx order by t.idx desc</if>
+       <if test='type == "baesong" and user == "admin"'>left join productOrder p on p.idx = t.oIdx order by t.idx desc</if>
        <if test='type == "user" and user != "admin"'>where userDel != 'OK'</if>
        <if test='type == "product" and user != "admin"'> where display != 'OFF'</if>
-       <if test='type == "productOrder" and user == "admin"'>p left join baesong b on p.idx = b.oIdx order by p.idx desc</if>
        limit #{startIndexNo}, #{pageSize}
    </select>
    

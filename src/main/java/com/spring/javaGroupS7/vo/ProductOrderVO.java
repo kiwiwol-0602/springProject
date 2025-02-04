@@ -29,6 +29,7 @@ public class ProductOrderVO {
   private String address;
   private String orderStatus;
   
+  private int totOrderCnt;
 
   
   

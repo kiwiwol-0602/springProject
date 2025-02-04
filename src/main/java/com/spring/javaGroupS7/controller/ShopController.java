@@ -555,6 +555,14 @@ public class ShopController {
 		return "shop/orderList";
 	}
 	
+	@ResponseBody
+	@PostMapping("/orderStatusChange")
+	public String orderStatusChange(@RequestParam int idx, @RequestParam String state) {
+		System.out.println(idx);
+		System.out.println(state);
+		return shopService.setOrderStatusChange(idx,state)+"";
+	}
+	
 	
 	
 	

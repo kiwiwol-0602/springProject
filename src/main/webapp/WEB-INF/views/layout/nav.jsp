@@ -128,7 +128,7 @@ function toggleMenu(element) {
             <h5 onclick="toggleMenu(this)">회원관리</h5>
 	        <div class="w3-bar-block">
 	            <a href="${ctp}/admin/userList" class="w3-bar-item w3-button">회원리스트</a>
-	            <a href="#" class="w3-bar-item w3-button">접속통계</a>
+	            <a href="${ctp}/admin/userChart" class="w3-bar-item w3-button">접속통계</a>
         	</div>
         </div>
 
@@ -147,9 +147,8 @@ function toggleMenu(element) {
             <h5 onclick="toggleMenu(this)">주문 및 판매관리</h5>
         <div class="w3-bar-block">
             <a href="${ctp}/admin/orderList" class="w3-bar-item w3-button">주문관리</a>
-            <a href="#" class="w3-bar-item w3-button">배송관리</a>
-            <a href="${ctp}/admin/saleStatistics" class="w3-bar-item w3-button">판매통계</a>
-            <a href="#" class="w3-bar-item w3-button">정산</a>
+            <a href="${ctp}/admin/refundList" class="w3-bar-item w3-button">교환 및 환불관리</a>
+            <a href="${ctp}/admin/saleChart" class="w3-bar-item w3-button">판매통계</a>
         </div>
         </div>
 
@@ -157,7 +156,6 @@ function toggleMenu(element) {
         <div class="w3-container">
             <h5 onclick="toggleMenu(this)">커뮤니티</h5>
         <div class="w3-bar-block">
-            <a href="#" class="w3-bar-item w3-button">게시물</a>
             <a href="#" class="w3-bar-item w3-button">문의</a>
         </div>
         </div>

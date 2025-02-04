@@ -117,4 +117,6 @@ public interface ShopDAO {
 
 	int setEventInput(@Param("vo") EventsVO vo);
 
+	int setOrderStatusChange(@Param("idx") int idx, @Param("state") String state);
+
 }
