@@ -120,7 +120,7 @@
 	 <select id="getUserCouponList"  resultType="com.spring.javaGroupS7.vo.UserCouponsVO">
 	 	select uc.*, c.expirationDate, c.minOrderPay
 	 		from userCoupons uc, coupons c 
-	 		where uc.couponIdx = c.idx and mid = #{mid} and uc.used != 'used';
+	 		where uc.couponIdx = c.idx and mid = #{mid} and uc.used != 'used' and c.active = 'ON';
 	 </select>
 	 
 	 <select id="getCouponInfo" resultType="com.spring.javaGroupS7.vo.CouponsVO">

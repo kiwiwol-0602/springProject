@@ -60,17 +60,17 @@
     font-size: 25px;
   }
   
-	.dropdown-container {
+	.header .dropdown-container {
 	  position: relative;
 	  z-index: 1100; /* 드롭다운 메뉴가 다른 콘텐츠 위로 오도록 설정 */
 	}
 	
 	/* 드롭다운 메뉴를 포함한 부모 요소에 hover 시 메뉴가 보이게 설정 */
-	.dropdown-container:hover .dropdown-menu {
+	.header .dropdown-container:hover .dropdown-menu {
 	  display: block;
 	}
 	
-	.dropdown-menu {
+	.header .dropdown-menu {
 	  display: none;
 	  position: absolute;
 	  top: 100%; /* 아이콘 바로 아래로 */
@@ -83,7 +83,7 @@
 	  z-index: 1000; /* 드롭다운 메뉴가 다른 요소 위로 나오도록 설정 */
 	}
 	
-	.myMenu-item {
+	.header .myMenu-item {
 	  padding: 10px 15px;
 	  color: #333;
 	  cursor: pointer;
@@ -92,7 +92,7 @@
 	  display: block;
 	}
 	
-	.myMenu-item:hover {
+	.header .myMenu-item:hover {
 	  background-color: #f1f1f1;
 	}
 
@@ -127,7 +127,7 @@ function logout() {
   <header class="header">
     <!-- 왼쪽 메뉴 -->
     <div class="menu-left">
-      <a href="#">Contact Us</a>
+      <a href="${ctp}/shared/introduction">Contact Us</a>
       <a href="#">Services</a>
     </div>
     <!-- 중앙 로고 -->

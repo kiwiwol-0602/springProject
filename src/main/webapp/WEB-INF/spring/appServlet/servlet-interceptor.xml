@@ -8,10 +8,16 @@
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 		
 		<!-- Interceptor 설정 -->
+		<beans:bean id="AllInterceptor" class="com.spring.javaGroupS7.interceptor.AllInterceptor" />
 		<beans:bean id="level0Interceptor" class="com.spring.javaGroupS7.interceptor.Level0Interceptor" />
 		<beans:bean id="level1Interceptor" class="com.spring.javaGroupS7.interceptor.Level1Interceptor" />
 		
 		<interceptors>
+			<!-- 모든 사용자 -->
+			<interceptor>
+				<mapping path="/**/"/>
+				<beans:ref bean="AllInterceptor" />
+			</interceptor>
 		
 			<!-- 준회원 / 비회원 -->
 			<interceptor>
@@ -21,6 +27,8 @@
 				<exclude-mapping path="/member/memberLogin"/>
 				<exclude-mapping path="/member/kakaoLogin"/>
 				<exclude-mapping path="/member/memberJoin"/>
+				
+				
 				<exclude-mapping path="/member/findId"/>
 				<exclude-mapping path="/member/memberIdDuplicationCheck"/>
 				<exclude-mapping path="/member/memberEmailCheck"/>

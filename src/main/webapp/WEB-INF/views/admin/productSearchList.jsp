@@ -153,9 +153,6 @@
 		function checkedProductState(state,flag) {
 			let checkedProducts = document.querySelectorAll('input[type="checkbox"]:checked');
 			let productIdxs = Array.from(checkedProducts).map(checkbox => checkbox.id.replace('productCheck', ''));
-			alert(productIdxs);
-			alert(state);
-			alert(flag);
 			$.ajax({
 				type : "post",
 				url  : "${ctp}/admin/productState",

@@ -125,9 +125,6 @@
     			variable : variable,
     			idxSelectArray : idxSelectArray
     	}
-    	alert(variable);
-    	alert(idxSelectArray);
-	    	
 	    	
 			$.ajax({
 				type : "post",
@@ -153,9 +150,6 @@
     			variable : variable,
     			idx : idx
     	}
-    	alert(variable);
-    	alert(idx);
-	    	
 	    	
 			$.ajax({
 				type : "post",

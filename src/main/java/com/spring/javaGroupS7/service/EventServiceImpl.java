@@ -1,6 +1,7 @@
 package com.spring.javaGroupS7.service;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ public class EventServiceImpl implements EventService {
 	JavaGroupProvide javaGroupProvide;
 	
 	@Override
-	public List<EventsVO> getEventList() {
-		return eventDAO.getEventList();
+	public List<EventsVO> getEventList(String user) {
+		return eventDAO.getEventList(user);
 	}
 
 	@Override
@@ -68,10 +69,8 @@ public class EventServiceImpl implements EventService {
 		
 		int maxIdx = 1;
 		UserCouponsVO maxVO = eventDAO.getUserCouponMaxIdx();
-		System.out.println(maxVO);
 		if(maxVO != null) {
 			maxIdx = maxVO.getMaxIdx()+1;
-			System.out.println(maxIdx);
 		}
 		vo.setUserCouponCode(couponCode+"-"+maxIdx);
 		vo.setMid(mid);
@@ -86,5 +85,15 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public String setEventActiveChangePost(int idx, String variable) {
 		return eventDAO.setEventActiveChangePost(idx, variable)+"";
+	}
+
+	@Override
+	public void updateActiveStatus(LocalDate today) {
+		eventDAO.updateActiveStatus(today);
+	}
+
+	@Override
+	public void updateCouponStatus(LocalDate today) {
+		eventDAO.updateCouponStatus(today);
 	}
 }

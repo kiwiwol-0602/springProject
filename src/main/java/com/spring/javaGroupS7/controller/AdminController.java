@@ -39,10 +39,8 @@ public class AdminController {
 	PageProcess pageProcess;
 	
 	@GetMapping("/admin")
-	public String adminGet(Model model, HttpSession session) {
-		String mid = (String) session.getAttribute("sMid");
-		UserVO vo = memberService.getMemberIdCheck(mid);
-		model.addAttribute("adminVO",vo);
+	public String adminGet() {
+		
 		return "admin/admin";
 	}
 	
@@ -103,8 +101,6 @@ public class AdminController {
 	@ResponseBody
 	@PostMapping("/statusSelectCheck")
 	public String statusSelectCheckPost(String statusSelect, String idxSelectArray) {
-		System.out.println(statusSelect);
-		System.out.println(idxSelectArray);
 		return shopService.setStatusSelectCheck(statusSelect, idxSelectArray);
 	}
 	
@@ -130,8 +126,7 @@ public class AdminController {
 	
 	@GetMapping("/eventList")
 	public String eventListGet(Model model) {
-		List<EventsVO> vos = eventServise.getEventList();
-		System.out.println(vos);
+		List<EventsVO> vos = eventServise.getEventList("admin");
 		model.addAttribute("vos", vos);
 		
 		return "admin/eventList";
@@ -157,9 +152,6 @@ public class AdminController {
 			@RequestParam(defaultValue = "0") int idx
 		) {
 		String res = "0";
-		
-		System.out.println("idxSelectArray"+idxSelectArray);
-		System.out.println("idx"+idx);
 		
 		if(!idxSelectArray.isEmpty()) {
 			String[] idxSelectArrays = idxSelectArray.split("/");

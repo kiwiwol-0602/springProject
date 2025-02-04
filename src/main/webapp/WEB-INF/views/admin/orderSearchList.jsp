@@ -146,9 +146,6 @@
 	    			idxSelectArray : idxSelectArray
 	    	}
 	    	
-	    	alert("statusSelect"+statusSelect)
-	    	alert("idxSelectArray"+idxSelectArray)
-			
 			$.ajax({
 				type : "post",
 				url  : "${ctp}/admin/statusSelectCheck",

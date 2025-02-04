@@ -310,7 +310,7 @@
 			</div>
 			<hr>
 			<button type="button" class="blackLine-btn" onclick="fCheck()">이벤트 등록</button>
-			<input type="hidden" name="active" value="ON"/>
+			<input type="hidden" name="active" value="OFF"/>
 		</div>
 	</form>
 </body>

@@ -18,7 +18,7 @@
   }
   .contain {
       max-width: 900px;
-      margin: 13% auto auto auto;
+      margin: 11% auto 5% auto;
      background-color: #fff;
       border-radius: 10px;
       padding: 30px;

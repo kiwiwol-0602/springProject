@@ -97,7 +97,6 @@
 		
 		function couponDownload() {
 			let couponCode = '${vo.couponCode}';
-			alert(couponCode);
 			
 			$.ajax({
 				type : "post",

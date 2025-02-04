@@ -25,7 +25,7 @@ public class EventController {
 	
 	@GetMapping("/eventList")
 	public String eventListGet(Model model) {
-		List<EventsVO> vos = eventServise.getEventList();
+		List<EventsVO> vos = eventServise.getEventList("user");
 		model.addAttribute("vos",vos);
 		return "event/eventList";
 	}

@@ -1178,19 +1178,32 @@
 	  </li>
 	  
 	  <li class="nav-item">
-	  	<a href="#" class="main-menu">Archive</a>
+	  	<a href="${ctp}/event/eventList" class="main-menu">EVENT</a>
 	  	<div class="sub-menu">
 	  	<hr/>
 	      <div class="subMenu-section">
-	      </div>
+					<h4 onclick="location.href='${ctp}/event/eventList'">EVENT</h4>
+					<ul class="detail-menu scentedCandle">
+						<c:forEach var="vo" items="${eventVOS}" varStatus="st">
+			  			<c:if test="${st.index < 5}">
+			  				<li>
+									<a href="${ctp}/event/eventContent?idx=${vo.idx}">
+										<div><img src="${ctp}/event/${vo.thumbnail}" width="200px" height="200px;"></div>
+										<div>${vo.title}</div>
+									</a>
+								</li>
+							</c:if>
+						</c:forEach>
+	  			</ul>
+  			</div>		  		  	
 	    </div>
 	  </li>
 	</ul>
+	
 	<div class="nav-icons">
   	<i class="fas fa-search"></i>
 	</div>
 </div>
-
 
 </body>
 </html>

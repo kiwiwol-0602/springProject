@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -334,7 +335,7 @@ imgSlide .carousel-inner {
 }
 
 .productArea span {
-  font-size: 0.9rem;
+  font-size: 1.2rem;
 }
 
 .productArea a:link {
@@ -359,7 +360,7 @@ imgSlide .carousel-inner {
 }
 
 .productArea small {
-  font-size: 0.7rem;
+  font-size: 1rem;
   line-height: 0.9rem;
   color: #999;
 }
@@ -1134,7 +1135,8 @@ h6 {
 						  		<c:if test="${st.index > 0 && st.index < 10}">
 								    <div class="card"><a href="${ctp}/shop/productContent?idx=${vo.idx}"><img src="${ctp}/product/${vo.thumbnail}"></a>
 								    	<h5>${vo.productName}</h5>
-								      <span>${vo.pay}</span><small>${vo.price}</small>
+								      <small><fmt:formatNumber value="${vo.price}" pattern="#,##0"/>원</small>
+								      <span><fmt:formatNumber value="${vo.pay}" pattern="#,##0"/>원</span>
 										</div>
 									</c:if>
 								</c:forEach>

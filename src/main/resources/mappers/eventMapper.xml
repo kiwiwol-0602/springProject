@@ -4,7 +4,8 @@
 	
 	<!-- select -->
 	<select id="getEventList" resultType="com.spring.javaGroupS7.vo.EventsVO">
-	 	select * from events;
+	 	select * from events
+	 	<if test="user!='admin'">where active != 'OFF'</if>;
 	 </select>
 	 
 	<select id="getEventInfo" resultType="com.spring.javaGroupS7.vo.EventsVO">
@@ -37,6 +38,19 @@
 	
 	<update id="setEventActiveChangePost">
 	  update events set active = #{variable} where idx = #{idx};
+	</update>
+	
+	<update id="updateActiveStatus">
+		update events set active = 
+			case
+				when startDate &lt;= #{today} and endDate &gt;= #{today} then 'ON'
+				when endDate &lt; #{today} then 'OFF'
+				else active
+			end
+	</update>
+	
+	<update id="updateCouponStatus">
+		update coupons set active = 'OFF' where expirationDate &lt; #{today};
 	</update>
 	
 	

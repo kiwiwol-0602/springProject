@@ -531,9 +531,6 @@ public class ShopController {
 		List<ProductOrderVO> orderVos = (List<ProductOrderVO>) session.getAttribute("sOrderVos");
 		ProductOrderVO orderVO = shopService.getOrderDetail(orderVos.get(0).getIdx());
 		BaesongVO baesongVO = shopService.getBaesongDetail(orderVO.getOrderIdx());
-		System.out.println(orderVos);
-		System.out.println(orderVO);
-		System.out.println(baesongVO);
 		model.addAttribute("orderVos", orderVos);
 		model.addAttribute("orderVO", orderVO);
 		model.addAttribute("baesongVO", baesongVO);
@@ -552,7 +549,6 @@ public class ShopController {
 		String mid = (String) session.getAttribute("sMid");
 		
 		List<ProductOrderVO> vos = shopService.getOrderList(mid);
-		System.out.println(vos);
 		model.addAttribute("vos",vos);
 		model.addAttribute("mid",mid);
 		

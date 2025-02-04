@@ -32,12 +32,12 @@
 		.image-container {
 		  position: relative; /* 이미지를 겹칠 컨테이너 설정 */
 		  width: 100%;
-		  height: 100%; /* 이미지 높이 */
+		  height: 600px; /* 이미지 높이 */
 		  overflow: hidden; /* 이미지가 영역을 넘지 않도록 설정 */
 		}
 		
 		.image-container img {
-		  width: 100%;
+		  width: 90%;
 		  height: 100%;
 		  object-fit: cover; /* 이미지를 컨테이너에 맞게 조정 */
 		}
@@ -461,7 +461,11 @@
 	  <!-- 이미지와 제품 정보 -->
 	  <tr>
 	  	<td style="padding: 10px;">
-				<div>Home > ${vo.mainName} > ${vo.baseName} > ${vo.subName}</div>
+				<div style="font-size: 20px; padding-bottom: 15px;" >Home >
+						<a href="javascript:selectCategory('mainName','${vo.mainName}')"> ${vo.mainName}</a> > 
+						<a href="javascript:selectCategory('baseName','${vo.baseName}','${vo.mainName}')">${vo.baseName}</a> > 
+						<a href="javascript:selectCategory('subName','${vo.subName}','${vo.baseName}')">${vo.subName}</a>
+				</div>
 	  	</td>
 	  </tr>
 	  <tr>
