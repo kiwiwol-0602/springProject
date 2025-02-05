@@ -40,4 +40,34 @@ public class AdminServiceImpl implements AdminService {
 	public List<BaesongVO> getRefundList() {
 		return adminDAO.getRefundList();
 	}
+
+	@Override
+	public int getNewUserCnt() {
+		return adminDAO.getNewUserCnt();
+	}
+
+	@Override
+	public int getLeaveUserCnt() {
+		return adminDAO.getLeaveUserCnt();
+	}
+
+	@Override
+	public int getNewOrderCnt() {
+		return adminDAO.getNewOrderCnt();
+	}
+
+	@Override
+	public int getRefundCnt() {
+		return adminDAO.getRefundCnt();
+	}
+
+	@Override
+	public List<ProductOrderVO> getProductCnt() {
+		return adminDAO.getProductCnt();
+	}
+
+	@Override
+	public int getMonthlySales() {
+		return adminDAO.getMonthlySales();
+	}
 }

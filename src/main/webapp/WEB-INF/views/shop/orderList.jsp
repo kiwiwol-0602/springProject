@@ -184,6 +184,8 @@
         </c:forEach>
       </div>
 	</div>
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
+	<footer>
+		<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
+	</footer>
 </body>
 </html>

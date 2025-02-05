@@ -22,13 +22,51 @@
 	</select>
 	
 	<select id="getRefundList" resultType="com.spring.javaGroupS7.vo.BaesongVO">
-       select b.*,p.productName, p.orderDate, p.optionName, p.optionNum
-       from baesong b
-       left join productOrder p on p.idx = b.oIdx 
-       where orderStatus = '교환및환불'
-       order by b.idx desc
-   </select>
+	   select b.*,p.productName, p.orderDate, p.optionName, p.optionNum
+	   from baesong b
+	   left join productOrder p on p.idx = b.oIdx 
+	   where orderStatus = '교환및환불'
+	   order by b.idx desc
+  </select>
+   
+  <select id="getNewUserCnt" resultType="Integer">
+		SELECT COUNT(*) 
+		FROM users 
+		WHERE joinDay >= DATE_SUB(NOW(), INTERVAL 7 DAY);
+	</select>
 	
+  <select id="getLeaveUserCnt" resultType="Integer">
+		SELECT COUNT(*) 
+		FROM users 
+		WHERE userDel = 'OK';
+	</select>
+	
+  <select id="getNewOrderCnt" resultType="Integer">
+		SELECT COUNT(*) 
+		FROM baesong 
+		WHERE orderStatus = '결제완료';
+	</select>
+	
+  <select id="getRefundCnt" resultType="Integer">
+		SELECT COUNT(*) 
+		FROM baesong 
+		WHERE orderStatus = '교환및환불';
+	</select>
+		
+	<select id="getProductCnt" resultType="com.spring.javaGroupS7.vo.ProductOrderVO">
+		SELECT p.productName, COUNT(o.productIdx) AS totOrderCnt
+		FROM productOrder o
+		LEFT JOIN product p ON o.productIdx = p.idx
+		GROUP BY o.productIdx, p.productName
+		ORDER BY totOrderCnt DESC
+		LIMIT 5;
+	</select>
+	
+	<select id="getMonthlySales" resultType="int">
+		SELECT SUM(o.totalPay) AS monthlySales
+    FROM productOrder o
+    WHERE YEAR(o.orderDate) = YEAR(NOW()) AND MONTH(o.orderDate) = MONTH(NOW()); 
+	</select>
 	
 	 
 	<!-- insert -->

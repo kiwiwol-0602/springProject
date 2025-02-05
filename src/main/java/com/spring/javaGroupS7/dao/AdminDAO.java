@@ -21,4 +21,16 @@ public interface AdminDAO {
 
 	List<BaesongVO> getRefundList();
 
+	int getNewUserCnt();
+
+	int getLeaveUserCnt();
+
+	int getNewOrderCnt();
+
+	int getRefundCnt();
+
+	List<ProductOrderVO> getProductCnt();
+
+	int getMonthlySales();
+
 }

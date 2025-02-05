@@ -203,31 +203,31 @@
   <!-- 고객 탈퇴신청, 주문건수, 교환환불 등의 칸 (30% 공간) -->
   <div style="width: 30%; display: flex; flex-direction: column; justify-content: space-between;">
     <div class="stats-container">
-    	<div class="stat-box orange">
+    	<div class="stat-box orange" onclick="location.href='${ctp}/admin/userList'">
 	      <div class="icon"><i class="fa-solid fa-user-plus"></i></div>
 	      <div class="data">
-	        <h3>50</h3>
+	        <h3>${newUserCnt}</h3>
 	        <h4>신규회원</h4>
 	      </div>
 	    </div>
-	    <div class="stat-box teal">
+	    <div class="stat-box teal" onclick="location.href='${ctp}/admin/userList?level=99'">
 	      <div class="icon"><i class="fa-solid fa-user-xmark"></i></div>
 	      <div class="data">
-	        <h3>52</h3>
+	        <h3>${leaveUserCnt}</h3>
 	        <h4>탈퇴신청</h4>
 	      </div>
 	    </div>
-	    <div class="stat-box blue">
+	    <div class="stat-box blue" onclick="location.href='${ctp}/admin/orderList'">
 	      <div class="icon"><i class="fa-solid fa-box"></i></div>
 	      <div class="data">
-	        <h3>99</h3>
+	        <h3>${newOrderCnt}</h3>
 	        <h4>주문건수</h4>
 	      </div>
 	    </div>
-	    <div class="stat-box red">
+	    <div class="stat-box red" onclick="location.href='${ctp}/admin/refundList'">
 	      <div class="icon"><i class="fa-solid fa-truck-ramp-box"></i></div>
 	      <div class="data">
-	        <h3>23</h3>
+	        <h3>${refundCnt}</h3>
 	        <h4>교환환불</h4>
 	      </div>
 	    </div>
@@ -236,34 +236,34 @@
   <div class="message">
 	  <div id="leftWindow">
 	      <p><br/></p>
-	      <p><a href="webMessage?mSw=0" class="text-dark link-primary link-underline-opacity-0 link-underline-opacity-75-hover">메세지작성</a></p>
-	      <p><a href="webMessage?mSw=1&mFlag=1" class="text-dark link-primary link-underline-opacity-0 link-underline-opacity-75-hover">받은메세지</a></p>
-	      <p><a href="webMessage?mSw=2&mFlag=2" class="text-dark link-primary link-underline-opacity-0 link-underline-opacity-75-hover">새메세지</a></p>
-	      <p><a href="webMessage?mSw=3&mFlag=3" class="text-dark link-primary link-underline-opacity-0 link-underline-opacity-75-hover">보낸메세지</a></p>
-	      <p><a href="webMessage?mSw=4&mFlag=4" class="text-dark link-primary link-underline-opacity-0 link-underline-opacity-75-hover">수신확인</a></p>
+	      <p><a href="${ctp}/webMessage/webMessage?mSw=0" class="text-dark link-primary link-underline-opacity-0 link-underline-opacity-75-hover">메세지작성</a></p>
+	      <p><a href="${ctp}/webMessage/webMessage?mSw=1&mFlag=1" class="text-dark link-primary link-underline-opacity-0 link-underline-opacity-75-hover">받은메세지</a></p>
+	      <p><a href="${ctp}/webMessage/webMessage?mSw=2&mFlag=2" class="text-dark link-primary link-underline-opacity-0 link-underline-opacity-75-hover">새메세지</a></p>
+	      <p><a href="${ctp}/webMessage/webMessage?mSw=3&mFlag=3" class="text-dark link-primary link-underline-opacity-0 link-underline-opacity-75-hover">보낸메세지</a></p>
+	      <p><a href="${ctp}/webMessage/webMessage?mSw=4&mFlag=4" class="text-dark link-primary link-underline-opacity-0 link-underline-opacity-75-hover">수신확인</a></p>
 	    </div>
 	
 	    <div id="rightWindow">
 	      <p>
 	        <c:if test="${mSw == 0}">
 	          <h3>메세지 작성</h3>
-	          <%-- <jsp:include page="" /> --%>
+	          <jsp:include page="${ctp}/webMessage/wmInput" />
 	        </c:if>
 	        <c:if test="${mSw == 1}">
 	          <h3>받은메세지</h3>
-	          <%-- <jsp:include page="" /> --%>
+	          <jsp:include page="${ctp}/webMessage/wmList" />
 	        </c:if>
 	        <c:if test="${mSw == 2}">
 	          <h3>새메세지</h3>
-	          <%-- <jsp:include page="" /> --%>
+	          <jsp:include page="${ctp}/webMessage/wmList" />
 	        </c:if>
 	        <c:if test="${mSw == 3}">
 	          <h3>보낸메세지</h3>
-	          <%-- <jsp:include page="" /> --%>
+	          <jsp:include page="${ctp}/webMessage/wmList" />
 	        </c:if>
 	        <c:if test="${mSw == 6}">
 	          <h3>메세지 내용보기</h3>
-	          <%-- <jsp:include page="" /> --%>
+	          <jsp:include page="${ctp}/webMessage/wmContent" />
 	        </c:if>
 	      </p>
 	    </div>

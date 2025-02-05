@@ -46,7 +46,16 @@ public class AdminController {
 	PageProcess pageProcess;
 	
 	@GetMapping("/admin")
-	public String adminGet() {
+	public String adminGet(Model model) {
+		int newUserCnt = adminService.getNewUserCnt();
+		int leaveUserCnt = adminService.getLeaveUserCnt();
+		int newOrderCnt = adminService.getNewOrderCnt();
+		int refundCnt = adminService.getRefundCnt();
+		
+		model.addAttribute("newUserCnt", newUserCnt);
+		model.addAttribute("leaveUserCnt", leaveUserCnt);
+		model.addAttribute("newOrderCnt", newOrderCnt);
+		model.addAttribute("refundCnt", refundCnt);
 		
 		return "admin/admin";
 	}
@@ -123,11 +132,14 @@ public class AdminController {
 	}
 	
 	@GetMapping("/saleChart")
-	public String saleStatisticsGet(Model model,
-			@RequestParam(defaultValue = "1") int pag,
-			@RequestParam(defaultValue = "10") int pageSize
-			) {
-		//pageProcess.totRecCnt(model, pag, pageSize, "productOrder", "admin");
+	public String saleChartGet(Model model) {
+		
+		List<ProductOrderVO> productCntVOS = adminService.getProductCnt();
+		model.addAttribute("productCntVOS", productCntVOS);
+		
+		int monthlySales = adminService.getMonthlySales();
+		model.addAttribute("monthlySales", monthlySales);
+		
 		return "admin/saleChart";
 	}
 	

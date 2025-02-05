@@ -128,7 +128,7 @@ function logout() {
     <!-- 왼쪽 메뉴 -->
     <div class="menu-left">
       <a href="${ctp}/shared/introduction">Contact Us</a>
-      <a href="#">Services</a>
+      <a href="${ctp}/webMessage/webMessage">Services</a>
     </div>
     <!-- 중앙 로고 -->
     <div class="logo">
@@ -136,36 +136,13 @@ function logout() {
     </div>
     <!-- 오른쪽 메뉴 -->
     <div class="menu-right">
-      <a href="#" class="icon"><i class="far fa-heart"></i></a>
       <c:if test="${empty sMid}">
       	<a href="${ctp}/member/memberLogin" class="icon"><i class="far fa-user"></i></a>
       </c:if>
       <c:if test="${!empty sMid}">
      		<a href="javascript:logout()" class="icon" title="Logout"><i class="fa-solid fa-user"></i></a>
      		<a href="${ctp}/member/userPage" class="icon" title="MyPage"><i class="fa-regular fa-file-lines"></i></a>
-     		
-     		<!-- 
-     		<c:if test="${sLevel == 0}">
-     			<a href="#" class="icon" title="MyPage"><i class="fa-regular fa-file-lines"></i></a>
-     		</c:if>
-     		<c:if test="${sLevel == 1}">
-     			<a href="${ctp}/member/userPage" class="icon" title="MyPage"><i class="fa-regular fa-file-lines"></i></a>
-     		</c:if>
-     		 -->
       </c:if>
-      <!-- 하위
-      <c:if test="${!empty sMid}">
-	      	<div class="dropdown-container">
-	      	<div class="icon">
-	        	<i class="fa-solid fa-user"></i>
-	    		</div>
-			    <div class="dropdown-menu">
-		        <a href="#" class="myMenu-item">마이페이지</a>
-		        <a href="${ctp}/member/memberLogout" class="myMenu-item">로그아웃</a>
-			    </div>
-		    </div>
-      </c:if>
-       -->
       <a href="#" class="icon"><i class="fas fa-map-marker-alt"></i></a>
       <a href="${ctp}/shop/productCartList" class="icon"><i class="fas fa-shopping-bag"></i></a>
     </div>
