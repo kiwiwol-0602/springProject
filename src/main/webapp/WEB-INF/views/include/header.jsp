@@ -122,7 +122,7 @@ function logout() {
     <!-- 왼쪽 메뉴 -->
     <div class="menu-left">
       <a href="${ctp}/shared/introduction">Contact Us</a>
-      <a href="#">Services</a>
+      <a href="${ctp}/webMessage/webMessage">Services</a>
     </div>
     <!-- 중앙 로고 -->
     <div class="logo">

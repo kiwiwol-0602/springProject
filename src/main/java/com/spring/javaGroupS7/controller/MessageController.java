@@ -14,6 +14,7 @@ public class MessageController {
 			@PathVariable String msgFlag,
 			@RequestParam(name="mid", defaultValue = "", required = false) String mid,
 			@RequestParam(name="idx", defaultValue = "0", required = false) int idx,
+			@RequestParam(name="idx", defaultValue = "0", required = false) int mSw,
 			@RequestParam(name="tempFlag", defaultValue = "", required = false) String tempFlag
 		) {
 		
@@ -101,10 +102,38 @@ public class MessageController {
 			model.addAttribute("message", "이벤트 등록 중 오류가 발생했습니다.");
 			model.addAttribute("url", "admin/eventInput");
 		}
-//		else if(msgFlag.equals("paymentResultOk")) {
-//			model.addAttribute("message", "결제가 완료되었습니다.");
-//			model.addAttribute("url", "shop/paymentResultOk");
-//		}
+		else if(msgFlag.equals("wmMemberIdNo")) {
+			model.addAttribute("message", "아이디를 확인하세요.");
+			model.addAttribute("url", "webMessage/webMessage?mSw=0");
+		}
+		else if(msgFlag.equals("wmInputOk")) {
+			model.addAttribute("message", "메세지를 보냈습니다.");
+			model.addAttribute("url", "webMessage/webMessage?mSw=1");
+		}
+		else if(msgFlag.equals("wmInputNo")) {
+			model.addAttribute("message", "메세지 전송 중 오류가 발생했습니다.");
+			model.addAttribute("url", "webMessage/webMessage?mSw=0");
+		}
+		else if(msgFlag.equals("wmMessageDeleteOk")) {
+			model.addAttribute("message", "휴지통으로 이동 되었습니다.");
+			model.addAttribute("url", "webMessage/webMessage?mSw="+mSw);
+		}
+		else if(msgFlag.equals("wmMessageDeleteNo")) {
+			model.addAttribute("message", "휴지통으로 이동 중 오류가 발생했습니다.");
+			model.addAttribute("url", "webMessage/webMessage?mSw="+mSw);
+		}
+		else if(msgFlag.equals("wmMessageResetOk")) {
+			model.addAttribute("message", "메세지를 삭제하였습니다.");
+			model.addAttribute("url", "webMessage/webMessage?mSw=1");
+		}
+		else if(msgFlag.equals("wmMessageResetNo")) {
+			model.addAttribute("message", "메세지 삭제 중 오류가 발생했습니다.");
+			model.addAttribute("url", "webMessage/webMessage?mSw=5");
+		}
+		else if(msgFlag.equals("wmMessageEmpty")) {
+			model.addAttribute("message", "휴지통이 비어 있습니다.");
+			model.addAttribute("url", "webMessage/webMessage?mSw=5");
+		}
 		
 		return "include/message";
 	}

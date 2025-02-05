@@ -378,11 +378,11 @@
 		
 		.spinner-overlay {
 	    position: fixed;
-	    top: -21.8%;
+	    top: -20%;
 	    left: 0;
 	    width: 100%;
 	    height: 650px;
-	    background-color: rgba(0, 0, 0, 0.2); 
+	    background-color: transparent; 
 	    display: flex;
 	    justify-content: center;
 	    align-items: center;
@@ -934,7 +934,7 @@
 	                        <i class="input-icon uil uil-user"></i>
 	                      </div>  
 	                      <div class="form-group mt-4">
-	                        <input type="password" name="pwd" id="pwd" value="q123" class="form-style" placeholder="비밀번호를 입력하세요" autocomplete="off">
+	                        <input type="password" name="pwd" id="pwd" class="form-style" placeholder="비밀번호를 입력하세요" autocomplete="off">
 	                        <i class="input-icon uil uil-lock-alt"></i>
 	                      </div>
 	                      <div class="form-group my-3" style="text-align: right; color: #a6a6a6;">

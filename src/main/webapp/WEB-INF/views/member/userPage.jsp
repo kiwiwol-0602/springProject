@@ -215,16 +215,16 @@
 	  </div>
   </div>
   
-  <div class="section-title">나의 문의</div>
-  <div class="section">
-    <a href="#"><i class="fa-regular fa-newspaper"></i> 상담 신청 현황</a>
-    <a href="#"><i class="fa-regular fa-newspaper"></i> 상품 문의 현황</a>
-  </div>
   <div class="section-title">나의 쇼핑</div>
   <div class="section">
     <a href="#"><i class="fa-solid fa-heart"></i> 관심 목록</a>
     <a href="#"><i class="fa-solid fa-magnifying-glass"></i> 최근 본 내역</a>
     <a href="#"><i class="fa-regular fa-newspaper"></i> 나의 후기</a>
+  </div>
+  <div class="section-title">나의 문의</div>
+  <div class="section">
+    <a href="#"><i class="fa-regular fa-newspaper"></i> 상품 문의 현황</a>
+    <a href="#"><i class="fa-regular fa-newspaper"></i> 방문 예약 현황</a>
   </div>
   <a href="javascript:memberDelete()" class="MemberDelete">회원탈퇴</a>
 </div>

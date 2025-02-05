@@ -19,7 +19,7 @@
     }
 
     .orderDetail {
-      max-width: 77%;
+      max-width: 70%;
       margin: 15% auto 10% auto;
       background-color: #fff;
       padding: 30px;
