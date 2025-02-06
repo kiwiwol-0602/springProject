@@ -29,6 +29,6 @@ public interface AdminService {
 
 	List<ProductOrderVO> getProductCnt();
 
-	int getMonthlySales();
+	long getMonthlySales();
 
 }

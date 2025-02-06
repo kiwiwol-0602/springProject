@@ -112,85 +112,84 @@
   
   </style>
   <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth', // 기본 보기 (월간)
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                  },
-                  // 서버에서 일정을 불러오는 Ajax 요청
-                  events: function(fetchInfo, successCallback, failureCallback) {
-								    $.ajax({
-							        url: '${ctp}/admin/loadSchedule',
-							        method: 'GET',
-							        success: function(data) {
-						            // 서버에서 받은 데이터를 FullCalendar에 맞는 형식으로 변환
-						            var events = data.map(function(event) {
-				                	let endD = new Date(event.endDate);
-					                endD.setDate(endD.getDate() + 1);
-					                return {
-				                    title: event.title,
-				                    start: event.startDate, // startDate는 서버에서 반환된 날짜 필드명
-				                    end: endD.toISOString().split('T')[0] || event.startDate, // endDate가 없으면 startDate와 동일하게 처리
-				                    allDay: true
-					                };
-						            });
-						            successCallback(events); // FullCalendar에 이벤트 전달
-							        },
-							        error: function(error) {
-						            failureCallback(error); // 실패 시 처리
-						            alert('일정을 불러오는 중 오류가 발생했습니다.');
-							        }
-								    });
-									},
-                  // 날짜 클릭 이벤트 핸들러
-                  dateClick: function(info) {
-								    var title = prompt('일정 제목을 입력하세요:');
-								    if (title) {
-							        var endDate = prompt('종료 날짜를 입력하세요 (형식: YYYY-MM-DD):');
-							        
-							        // 종료 날짜가 입력되지 않으면 시작 날짜와 동일하게 설정
-							        if (!endDate) {
-						            endDate = info.dateStr;
-							        }
-							        
-							        $.ajax({
-							            url: '${ctp}/admin/saveSchedule',
-							            method: 'POST',
-							            data: {
-						                title: title,
-						                startDate: info.dateStr,
-						                endDate: endDate
-							            },
-							            success: function(res) {
-						                let endD = new Date(endDate);
-						                endD.setDate(endD.getDate() + 1);
-						                calendar.addEvent({
-					                    title: title,
-					                    start: info.dateStr,
-					                    end: endD.toISOString().split('T')[0],
-					                    allDay: true
-						                });
-						                alert('일정이 저장되었습니다.');
-							            },
-							            error: function(error) {
-						                alert('일정을 저장하는 중 오류가 발생했습니다.');
-							            }
-							        });
-								    }
-								    else {
-							        alert('일정 등록 중 오류가 발생했습니다.');
-								    }
-									}
-                });
-
-
-            calendar.render(); // 캘린더 렌더링
+  	document.addEventListener('DOMContentLoaded', function() {
+    	var calendarEl = document.getElementById('calendar');
+	
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+	      initialView: 'dayGridMonth', // 기본 보기 (월간)
+	      headerToolbar: {
+	          left: 'prev,next today',
+	          center: 'title',
+	          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+	        },
+          // 서버에서 일정을 불러오는 Ajax 요청
+          events: function(fetchInfo, successCallback, failureCallback) {
+				    $.ajax({
+			        url: '${ctp}/admin/loadSchedule',
+			        method: 'GET',
+			        success: function(data) {
+		            // 서버에서 받은 데이터를 FullCalendar에 맞는 형식으로 변환
+		            var events = data.map(function(event) {
+                	let endD = new Date(event.endDate);
+	                endD.setDate(endD.getDate() + 1);
+	                return {
+                    title: event.title,
+                    start: event.startDate,
+                    end: endD.toISOString().split('T')[0] || event.startDate,
+                    allDay: true
+	                };
+		            });
+		            successCallback(events);
+			        },
+			        error: function(error) {
+		            failureCallback(error);
+		            alert('일정을 불러오는 중 오류가 발생했습니다.');
+			        }
+				    });
+					},
+          // 날짜 클릭 이벤트 핸들러
+          dateClick: function(info) {
+				    var title = prompt('일정 제목을 입력하세요:');
+				    if (title) {
+			        var endDate = prompt('종료 날짜를 입력하세요 (형식: YYYY-MM-DD):');
+			        
+			        // 종료 날짜가 입력되지 않으면 시작 날짜와 동일하게 설정
+			        if (!endDate) {
+		            endDate = info.dateStr;
+			        }
+			        
+			        $.ajax({
+			            url: '${ctp}/admin/saveSchedule',
+			            method: 'POST',
+			            data: {
+		                title: title,
+		                startDate: info.dateStr,
+		                endDate: endDate
+			            },
+			            success: function(res) {
+		                let endD = new Date(endDate);
+		                endD.setDate(endD.getDate() + 1);
+		                calendar.addEvent({
+	                    title: title,
+	                    start: info.dateStr,
+	                    end: endD.toISOString().split('T')[0],
+	                    allDay: true
+		                });
+		                alert('일정이 저장되었습니다.');
+			            },
+			            error: function(error) {
+		                alert('일정을 저장하는 중 오류가 발생했습니다.');
+			            }
+			        });
+				    }
+				    else {
+			        alert('일정 등록 중 오류가 발생했습니다.');
+				    }
+					}
         });
+	
+	      calendar.render(); // 캘린더 렌더링
+	    });
     </script>
 </head>
 <body>

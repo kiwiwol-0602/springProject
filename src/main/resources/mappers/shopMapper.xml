@@ -175,8 +175,7 @@
 		insert into product value 
 			(
 				#{vo.idx},#{vo.productCode},#{vo.productName},#{vo.subName},#{vo.subCode},#{vo.baseName},#{vo.mainName},
-				#{vo.price},#{vo.discount},#{vo.pay},#{vo.thumbnail},#{vo.titleImg},#{vo.fName},
-				#{vo.fSName},#{vo.fSize},#{vo.content},default,default,default,default,default
+				#{vo.price},#{vo.discount},#{vo.pay},#{vo.thumbnail},#{vo.titleImg},#{vo.content},default,default,default,default,default
 			);
 	</insert>
 	
@@ -197,7 +196,7 @@
   </insert>
   
   <insert id="setBaesong">
-    insert into baesong values (default,#{baesongVO.oIdx},#{baesongVO.orderIdx},#{baesongVO.totalPay},#{baesongVO.mid},#{baesongVO.name},#{baesongVO.address},#{baesongVO.tel},#{baesongVO.message},#{baesongVO.payment},#{baesongVO.payMethod},default);
+    insert into baesong values (default,#{baesongVO.oIdx},#{baesongVO.orderIdx},#{baesongVO.totalPay},#{baesongVO.mid},#{baesongVO.name},#{baesongVO.address},#{baesongVO.tel},#{baesongVO.message},#{baesongVO.refund},default);
   </insert>
   
   

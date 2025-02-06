@@ -31,6 +31,6 @@ public interface AdminDAO {
 
 	List<ProductOrderVO> getProductCnt();
 
-	int getMonthlySales();
+	long getMonthlySales();
 
 }

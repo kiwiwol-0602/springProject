@@ -93,10 +93,6 @@
 	<script type="text/javascript">
 		function statusChange(idx, state) {
 			
-			alert(idx);
-			alert(state);
-			
-			
 			$.ajax({
 				type : "post",
 				url  : "${ctp}/shop/orderStatusChange",
@@ -170,14 +166,16 @@
             </div>
           </div>
           <div style="width: 100%; text-align: center; margin-top: 10px;">
-          	<c:if test="${!(vo.orderStatus eq '구매확정')}">
+          	<c:if test="${!(vo.orderStatus eq '구매확정') && !(vo.orderStatus eq '교환및환불')}">
           		<button type="button" onClick="" class="btn btn-warning" style="width: 30%; height: 45px; color:white;">배송조회</button>
           		<button type="button" onClick="statusChange(${vo.idx},'구매확정')" class="btn btn-primary" style="width: 30%; height: 45px;">구매확정</button>
           	</c:if>
-          	<c:if test="${vo.orderStatus eq '구매확정'}">
+          	<c:if test="${vo.orderStatus eq '구매확정' || vo.orderStatus eq '교환및환불' }">
           		<button type="button" onClick="location.href='${ctp}/shop/productContent?idx=${vo.productIdx}'" class="btn btn-primary" style="width: 30%; height: 45px;">재구매</button>
           	</c:if>
+          	<c:if test="${!(vo.orderStatus eq '교환및환불')}">
           		<button type="button" onClick="" class="btn btn-success" style="width: 30%; height: 45px;">리뷰작성</button>
+          	</c:if>
           </div>
           <hr/>
           <div style="margin-bottom: 50px;"></div>

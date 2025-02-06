@@ -120,7 +120,10 @@
       </div>
       <div class="mb-3">
         <label for="receiveId" class="form-label">받는 사람</label>
-        <input type="text" id="receiveId" name="receiveId" value="admin" readonly class="form-control" />
+        <input type="text" id="receiveId" name="receiveId" 
+    			<c:if test="${sMid != 'admin'}"> value="admin" readonly </c:if> 
+					<c:if test="${sMid == 'admin'}"> value="${param.receiveId}" </c:if> 
+       	 class="form-control" />
       </div>
       <div class="mb-3">
         <label for="title" class="form-label">메세지 제목</label>

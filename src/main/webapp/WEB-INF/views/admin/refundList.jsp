@@ -243,8 +243,6 @@
 			              <td style="width: 110px;"><fmt:formatNumber value="${vo.totalPay}" pattern="#,##0"/>원</td>
 			              <td style="width: 80px;">${vo.orderStatus}</td>
 			              <td style="width: 90px;">
-			                <div style="padding-bottom: 10px;"><a href="${ctp}/shop/productUpdate?idx=${vo.idx}" class="btn-edit">수정</a></div>
-			                <div><a href="javascript:productDelete(${vo.idx})" class="btn-delete">삭제</a></div>
 			              </td>
 			            </tr>
 		            </c:if>

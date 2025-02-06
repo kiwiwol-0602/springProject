@@ -13,8 +13,7 @@ public class BaesongVO {
   private String address;
   private String tel;
   private String message;
-  private String payment;
-  private String payMethod;
+  private String refund;
   private String orderStatus;
   
   // 아래는 주문테이블에서 사용된 필드리스트이다.

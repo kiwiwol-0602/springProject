@@ -62,7 +62,7 @@
 		LIMIT 5;
 	</select>
 	
-	<select id="getMonthlySales" resultType="int">
+	<select id="getMonthlySales" resultType="long">
 		SELECT SUM(o.totalPay) AS monthlySales
     FROM productOrder o
     WHERE YEAR(o.orderDate) = YEAR(NOW()) AND MONTH(o.orderDate) = MONTH(NOW()); 

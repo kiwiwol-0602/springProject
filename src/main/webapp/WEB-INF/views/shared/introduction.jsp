@@ -138,8 +138,6 @@
 		
 				// 마커가 지도 위에 표시되도록 설정합니다
 				marker.setMap(map);
-		
-				
 			</script>
 			<div style="font-size: 18px; font-family: 'Gyeonggi_Batang_Regular'; margin-top: 2%;">
 	    	<div style="font-weight: bold; font-size: 22px; margin-bottom: 1%">LUMI 청주점</div>

@@ -137,7 +137,7 @@ public class AdminController {
 		List<ProductOrderVO> productCntVOS = adminService.getProductCnt();
 		model.addAttribute("productCntVOS", productCntVOS);
 		
-		int monthlySales = adminService.getMonthlySales();
+		long monthlySales = adminService.getMonthlySales();
 		model.addAttribute("monthlySales", monthlySales);
 		
 		return "admin/saleChart";

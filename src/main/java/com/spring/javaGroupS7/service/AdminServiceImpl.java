@@ -67,7 +67,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int getMonthlySales() {
+	public long getMonthlySales() {
 		return adminDAO.getMonthlySales();
 	}
 }

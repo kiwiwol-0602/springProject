@@ -163,7 +163,7 @@
     </div>
     <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
       <button type="button" onclick="location.href='${ctp}/main';" class="btn-black" style="margin-right: 10px;">계속 쇼핑하기</button>
-      <button type="button" onclick="location.href='${ctp}/shop/myOrder';" class="btn-black">구매내역 보기</button>
+      <button type="button" onclick="location.href='${ctp}/shop/orderList';" class="btn-black">구매내역 보기</button>
   	</div>
   </div>
 </body>
