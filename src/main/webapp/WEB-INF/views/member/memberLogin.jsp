@@ -870,7 +870,7 @@
 		}
 		
 		// 카카오 로그인앱키
-		window.Kakao.init("02003676fd9fe28582391f95cd3ddcff");
+		window.Kakao.init("");
 
 		function kakaoLogin() {
 			let spin = "<div class='spinner-overlay'><div class='spinner-border'></div></div>";

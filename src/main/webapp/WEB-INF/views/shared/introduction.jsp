@@ -118,7 +118,7 @@
 	    </div>
     </div>
 			<div id="map" style="width:50%; height:500px; text-align: center; margin: 3% auto 0 auto;" ></div>
-			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=02003676fd9fe28582391f95cd3ddcff"></script>
+			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey="></script>
 			<script>
 				var container = document.getElementById('map');
 				var options = {

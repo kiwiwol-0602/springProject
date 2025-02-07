@@ -102,12 +102,12 @@
 </style>
 <script type="text/javascript">
 
-window.Kakao.init("02003676fd9fe28582391f95cd3ddcff");
+window.Kakao.init("");
 function logout() {
 	  const accessToken = Kakao.Auth.getAccessToken();
 	  if(accessToken) {
 		  Kakao.Auth.logout(function() {
-			  window.location.href = "https://kauth.kakao.com/oauth/logout?client_id=02003676fd9fe28582391f95cd3ddcff&logout_redirect_uri=http://localhost:9090/javaGroupS7/member/memberLogout";
+			  window.location.href = "https://kauth.kakao.com/oauth/logout?client_id=&logout_redirect_uri=http://localhost:9090/javaGroupS7/member/memberLogout";
 		  });
 	  }
 	  else{
